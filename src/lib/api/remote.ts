@@ -36,7 +36,7 @@ import type {
 const isBackendConfigured = (): boolean => {
   // Check if API_BASE_URL is set and not localhost (for production)
   const baseUrl = API_BASE_URL;
-  return baseUrl && !baseUrl.includes('localhost');
+    return !!baseUrl && !baseUrl.includes("localhost");
 };
 
 // ============================================
