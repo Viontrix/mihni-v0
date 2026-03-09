@@ -1,16 +1,16 @@
 "use client";
 
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { 
-  Check, 
-  Crown, 
-  Building2, 
-  School, 
-  User, 
-  Zap, 
+import {
+  Check,
+  Crown,
+  Building2,
+  School,
+  User,
+  Zap,
   ArrowLeft,
   Users,
   Shield,
@@ -23,79 +23,44 @@ import {
   Image,
   X,
   BarChart3,
-  FileText
+  FileText,
 } from 'lucide-react';
-import { unifiedPlans, featureComparison, getYearlySavings } from '@/lib/entitlements/plans';
+import { unifiedPlans, featureComparison, getYearlySavings, formatStorage } from '@/lib/entitlements/plans';
 import { ROUTES, getPaymentUrl, type PlanId } from '@/lib/routes';
 
-// Plan Card Animation Components - Exact v50 Style for Free Plan
 const FreePlanVisual = () => (
   <div className="relative w-full h-28 flex items-center justify-center">
-    {/* Stacked Cards Container with subtle float animation */}
-    <motion.div 
-      className="relative"
-      animate={{ 
-        y: [0, -4, 0],
-      }}
-      transition={{ 
-        duration: 4, 
-        repeat: Infinity, 
-        ease: 'easeInOut' 
-      }}
-    >
-      {/* Back card (3rd layer) - most transparent/blurred */}
+    <motion.div className="relative" animate={{ y: [0, -4, 0] }} transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}>
       <motion.div
         className="absolute w-[52px] h-[68px] rounded-xl bg-white/40 dark:bg-white/10 backdrop-blur-sm border border-gray-200/50 dark:border-gray-600/30 shadow-sm"
-        style={{
-          top: -12,
-          right: -16,
-          transform: 'rotate(8deg)',
-          zIndex: 1,
-        }}
+        style={{ top: -12, right: -16, transform: 'rotate(8deg)', zIndex: 1 }}
         initial={{ opacity: 0, x: -10 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: 0.1 }}
       />
-      
-      {/* Middle card (2nd layer) - medium transparency */}
       <motion.div
         className="absolute w-[52px] h-[68px] rounded-xl bg-white/60 dark:bg-white/20 backdrop-blur-sm border border-gray-200/60 dark:border-gray-600/40 shadow-sm"
-        style={{
-          top: -6,
-          right: -8,
-          transform: 'rotate(4deg)',
-          zIndex: 2,
-        }}
+        style={{ top: -6, right: -8, transform: 'rotate(4deg)', zIndex: 2 }}
         initial={{ opacity: 0, x: -8 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: 0.2 }}
       />
-      
-      {/* Front card (1st layer) - slight transparency */}
       <motion.div
         className="absolute w-[52px] h-[68px] rounded-xl bg-white/80 dark:bg-white/30 backdrop-blur-sm border border-gray-200/70 dark:border-gray-600/50 shadow-sm"
-        style={{
-          top: 0,
-          right: 0,
-          zIndex: 3,
-        }}
+        style={{ top: 0, right: 0, zIndex: 3 }}
         initial={{ opacity: 0, x: -4 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ delay: 0.3 }}
       />
-      
-      {/* Main card with "10" and "قوالب" */}
       <motion.div
         className="relative w-[52px] h-[68px] rounded-xl bg-white dark:bg-[#1B2D2B]/80 border border-gray-200 dark:border-gray-700 shadow-md flex flex-col items-center justify-center z-10"
-        style={{
-          boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
-        }}
+        style={{ boxShadow: '0 4px 20px rgba(0,0,0,0.08)' }}
         initial={{ scale: 0.9, opacity: 0 }}
         animate={{ scale: 1, opacity: 1 }}
         transition={{ delay: 0.4, type: 'spring', stiffness: 200 }}
       >
-        <span className="text-2xl font-bold text-gray-400 dark:text-gray-500">10</span>
-        <span className="text-[10px] text-gray-400 dark:text-gray-500 mt-0.5">قوالب</span>
+        <span className="text-2xl font-bold text-gray-400 dark:text-gray-500">3</span>
+        <span className="text-[10px] text-gray-400 dark:text-gray-500 mt-0.5">مشاريع</span>
       </motion.div>
     </motion.div>
   </div>
@@ -103,11 +68,7 @@ const FreePlanVisual = () => (
 
 const ProPlanVisual = () => (
   <div className="relative w-full h-28 flex items-center justify-center">
-    <motion.div 
-      className="relative"
-      animate={{ rotate: [0, 5, -5, 0] }}
-      transition={{ duration: 4, repeat: Infinity }}
-    >
+    <motion.div className="relative" animate={{ rotate: [0, 5, -5, 0] }} transition={{ duration: 4, repeat: Infinity }}>
       <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center shadow-lg">
         <Crown className="w-8 h-8 text-white" />
       </div>
@@ -134,7 +95,7 @@ const ProPlanVisual = () => (
 const BusinessPlanVisual = () => (
   <div className="relative w-full h-28 flex items-center justify-center">
     <motion.div className="relative">
-      <motion.div 
+      <motion.div
         className="w-14 h-14 rounded-xl bg-gradient-to-br from-blue-500 to-cyan-500 flex items-center justify-center shadow-lg"
         animate={{ scale: [1, 1.05, 1] }}
         transition={{ duration: 2, repeat: Infinity }}
@@ -146,7 +107,7 @@ const BusinessPlanVisual = () => (
           key={i}
           className="absolute w-6 h-6 rounded-md bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center"
           style={{ top: '50%', left: '50%' }}
-          animate={{ 
+          animate={{
             x: Math.cos((i * 90 * Math.PI) / 180) * 35 - 12,
             y: Math.sin((i * 90 * Math.PI) / 180) * 35 - 12,
           }}
@@ -165,34 +126,27 @@ const EnterprisePlanVisual = () => (
         <motion.div
           key={i}
           className={`w-7 h-7 rounded-lg flex items-center justify-center ${
-            i === 4 
-              ? 'bg-gradient-to-br from-amber-500 to-orange-500' 
-              : 'bg-amber-100 dark:bg-amber-900/20'
+            i === 4 ? 'bg-gradient-to-br from-amber-500 to-orange-500' : 'bg-amber-100 dark:bg-amber-900/20'
           }`}
           initial={{ opacity: 0, scale: 0 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: i * 0.05, type: 'spring' }}
         >
-          {i === 4 ? (
-            <Building2 className="w-4 h-4 text-white" />
-          ) : (
-            <Users className="w-3 h-3 text-amber-400" />
-          )}
+          {i === 4 ? <Building2 className="w-4 h-4 text-white" /> : <Users className="w-3 h-3 text-amber-400" />}
         </motion.div>
       ))}
     </div>
-    <motion.div 
+    <motion.div
       className="absolute -top-2 -right-2 px-2 py-0.5 bg-amber-500 text-white text-[10px] font-bold rounded-full"
       initial={{ scale: 0 }}
       animate={{ scale: 1 }}
       transition={{ delay: 0.5, type: 'spring' }}
     >
-      ∞
+      500
     </motion.div>
   </div>
 );
 
-// Map plan icons to visual components
 const planVisuals: Record<string, React.FC> = {
   free: FreePlanVisual,
   pro: ProPlanVisual,
@@ -200,7 +154,6 @@ const planVisuals: Record<string, React.FC> = {
   enterprise: EnterprisePlanVisual,
 };
 
-// Map plan icons to lucide icons
 const planIcons: Record<string, React.ElementType> = {
   free: User,
   pro: Crown,
@@ -209,19 +162,22 @@ const planIcons: Record<string, React.ElementType> = {
 };
 
 export default function Pricing() {
-  const [isYearly, setIsYearly] = useState(true);
+  const [billing, setBilling] = useState<'monthly' | 'yearly'>('yearly');
   const [showAllFeatures, setShowAllFeatures] = useState(false);
-  
+
   const visibleFeatures = showAllFeatures ? featureComparison : featureComparison.slice(0, 6);
+  const isYearly = billing === 'yearly';
+
+  const savingsLabel = useMemo(() => {
+    const pro = unifiedPlans.find((p) => p.id === 'pro');
+    return pro ? `وفّر ${getYearlySavings(pro.id).percentage}%` : 'وفّر';
+  }, []);
 
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
-      },
+      transition: { staggerChildren: 0.1, delayChildren: 0.2 },
     },
   };
 
@@ -230,21 +186,19 @@ export default function Pricing() {
     visible: {
       opacity: 1,
       y: 0,
-      transition: {
-        duration: 0.5,
-        ease: 'easeOut' as const,
-      },
+      transition: { duration: 0.5, ease: 'easeOut' as const },
     },
   };
 
   return (
-    <section id="pricing" className="py-24 bg-gradient-to-b from-white via-[#F8FAF9] to-white dark:from-[#0D1B1A] dark:via-[#152B26] dark:to-[#0D1B1A] relative overflow-hidden">
-      {/* Background Effects */}
+    <section
+      id="pricing"
+      className="py-24 bg-gradient-to-b from-white via-[#F8FAF9] to-white dark:from-[#0D1B1A] dark:via-[#152B26] dark:to-[#0D1B1A] relative overflow-hidden"
+    >
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-green-primary/5 rounded-full blur-[100px]" />
       <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-green-teal/5 rounded-full blur-[80px]" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -252,28 +206,27 @@ export default function Pricing() {
           transition={{ duration: 0.5 }}
           className="text-center mb-12"
         >
-          <motion.div 
+          <motion.div
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-primary/10 text-green-primary dark:text-green-light text-sm font-semibold mb-6"
             whileHover={{ scale: 1.02 }}
           >
             <Crown className="w-4 h-4" />
             خطط الاشتراك
           </motion.div>
-          
+
           <h2 className="text-4xl sm:text-5xl font-bold text-green-dark dark:text-white mb-4">
             اختر خطتك المناسبة
           </h2>
-          
+
           <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-8">
-            باقات مرنة تناسب جميع الاحتياجات، من الاستخدام الشخصي إلى المؤسسات الكبيرة
+            نفس التصميم الحالي مع باقات أوضح وحدود تجارية أقوى تناسب السوق السعودي وتزيد التحويل للاشتراك
           </p>
 
-          {/* Billing Toggle */}
           <div className="inline-flex items-center gap-2 p-1.5 bg-white dark:bg-[#1B2D2B] rounded-xl shadow-lg border border-green-primary/10">
             <button
-              onClick={() => setIsYearly(false)}
+              onClick={() => setBilling('monthly')}
               className={`px-6 py-2.5 rounded-lg text-sm font-semibold transition-all ${
-                !isYearly
+                billing === 'monthly'
                   ? 'bg-gradient-to-r from-green-primary to-green-teal text-white shadow-md'
                   : 'text-gray-500 hover:text-green-primary'
               }`}
@@ -281,24 +234,19 @@ export default function Pricing() {
               شهري
             </button>
             <button
-              onClick={() => setIsYearly(true)}
+              onClick={() => setBilling('yearly')}
               className={`px-6 py-2.5 rounded-lg text-sm font-semibold transition-all flex items-center gap-2 ${
-                isYearly
+                billing === 'yearly'
                   ? 'bg-gradient-to-r from-green-primary to-green-teal text-white shadow-md'
                   : 'text-gray-500 hover:text-green-primary'
               }`}
             >
               سنوي
-              {isYearly && (
-                <span className="px-2 py-0.5 bg-white/20 rounded-full text-xs">
-                  وفّر 30%
-                </span>
-              )}
+              {isYearly && <span className="px-2 py-0.5 bg-white/20 rounded-full text-xs">{savingsLabel}</span>}
             </button>
           </div>
         </motion.div>
 
-        {/* Pricing Cards - Reading from unifiedPlans */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -311,16 +259,11 @@ export default function Pricing() {
             const Icon = planIcons[plan.id];
             const price = isYearly ? plan.yearlyPrice : plan.monthlyPrice;
             const savings = getYearlySavings(plan.id);
-            
+
             return (
-              <motion.div
-                key={plan.id}
-                variants={itemVariants}
-                className={`relative ${plan.popular ? 'lg:-mt-4 lg:mb-4' : ''}`}
-              >
-                {/* Popular Badge */}
+              <motion.div key={plan.id} variants={itemVariants} className={`relative ${plan.popular ? 'lg:-mt-4 lg:mb-4' : ''}`}>
                 {plan.popular && (
-                  <motion.div 
+                  <motion.div
                     className="absolute -top-3 left-1/2 -translate-x-1/2 z-20"
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
@@ -341,46 +284,48 @@ export default function Pricing() {
                       : 'bg-white dark:bg-[#1B2D2B] border border-gray-100 dark:border-gray-800 hover:border-green-primary/30 shadow-lg hover:shadow-xl'
                   }`}
                 >
-                  {/* Visual Preview */}
                   <div className="p-4 border-b border-gray-100 dark:border-gray-800">
                     <VisualComponent />
                   </div>
 
-                  {/* Plan Header */}
                   <div className="p-5 text-center">
                     <div className={`w-12 h-12 mx-auto rounded-xl bg-gradient-to-br ${plan.color} flex items-center justify-center mb-3 shadow-md`}>
                       <Icon className="w-6 h-6 text-white" />
                     </div>
-                    <h3 className="text-lg font-bold text-green-dark dark:text-white mb-1">
-                      {plan.nameAr}
-                    </h3>
-                    <p className="text-xs text-gray-500 dark:text-gray-400">
-                      {plan.description}
-                    </p>
+                    <h3 className="text-lg font-bold text-green-dark dark:text-white mb-1">{plan.nameAr}</h3>
+                    <p className="text-xs text-gray-500 dark:text-gray-400">{plan.description}</p>
                   </div>
 
-                  {/* Price */}
                   <div className="px-5 pb-5 text-center border-b border-gray-100 dark:border-gray-800">
                     <div className="flex items-baseline justify-center gap-1">
                       {price === 0 ? (
                         <span className="text-3xl font-bold text-green-dark dark:text-white">مجاني</span>
                       ) : (
                         <>
-                          <span className="text-3xl font-bold text-green-dark dark:text-white">
-                            {price}
-                          </span>
+                          <span className="text-3xl font-bold text-green-dark dark:text-white">{price}</span>
                           <span className="text-gray-500 dark:text-gray-400 text-sm">ريال/شهر</span>
                         </>
                       )}
                     </div>
                     {price > 0 && isYearly && savings.percentage > 0 && (
-                      <p className="text-xs text-green-primary mt-1 font-medium">
-                        وفّر {savings.percentage}% سنوياً
-                      </p>
+                      <p className="text-xs text-green-primary mt-1 font-medium">تدفع سنويًا وتوفّر {savings.percentage}%</p>
                     )}
+                    <div className="mt-3 grid grid-cols-3 gap-2 text-[11px]">
+                      <div className="rounded-lg bg-gray-50 dark:bg-[#152B26] p-2">
+                        <div className="font-bold text-green-dark dark:text-white">{plan.maxSavedProjects}</div>
+                        <div className="text-gray-500">مشروع</div>
+                      </div>
+                      <div className="rounded-lg bg-gray-50 dark:bg-[#152B26] p-2">
+                        <div className="font-bold text-green-dark dark:text-white">{plan.maxRunsPerDay}</div>
+                        <div className="text-gray-500">تشغيل/يوم</div>
+                      </div>
+                      <div className="rounded-lg bg-gray-50 dark:bg-[#152B26] p-2">
+                        <div className="font-bold text-green-dark dark:text-white">{formatStorage(plan.storageGB)}</div>
+                        <div className="text-gray-500">تخزين</div>
+                      </div>
+                    </div>
                   </div>
 
-                  {/* Features */}
                   <div className="flex-1 px-5 py-4 space-y-2">
                     <ul className="space-y-2">
                       {plan.features.included.map((feature, idx) => (
@@ -392,7 +337,7 @@ export default function Pricing() {
                         </li>
                       ))}
                     </ul>
-                    
+
                     {plan.features.notIncluded.length > 0 && (
                       <>
                         <div className="border-t border-gray-100 dark:border-gray-800 my-2" />
@@ -410,13 +355,14 @@ export default function Pricing() {
                     )}
                   </div>
 
-                  {/* CTA Button */}
                   <div className="p-5 pt-0">
-                    <Link href={
-                      plan.id === 'free' 
-                        ? ROUTES.START
-                        : getPaymentUrl({ plan: plan.id as PlanId, billing: isYearly ? 'yearly' : 'monthly', from: 'pricing' })
-                    }>
+                    <Link
+                      href={
+                        plan.id === 'free'
+                          ? ROUTES.START
+                          : getPaymentUrl({ plan: plan.id as PlanId, billing, from: 'pricing' })
+                      }
+                    >
                       <Button
                         className={`w-full py-4 rounded-xl font-bold text-sm transition-all ${
                           plan.popular || plan.id === 'enterprise'
@@ -438,7 +384,6 @@ export default function Pricing() {
           })}
         </motion.div>
 
-        {/* Feature Comparison Table */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -464,39 +409,22 @@ export default function Pricing() {
                     <tr key={idx} className="border-b border-gray-100 dark:border-gray-800 last:border-0 hover:bg-green-primary/5 transition-colors">
                       <td className="p-4 text-xs font-medium text-gray-700 dark:text-gray-300">{row.feature}</td>
                       <td className="p-4 text-center">
-                        {typeof row.free === 'boolean' ? (
-                          row.free ? <Check className="w-4 h-4 text-green-primary mx-auto" /> : <span className="text-gray-300">—</span>
-                        ) : (
-                          <span className="text-xs text-gray-600 dark:text-gray-400">{row.free}</span>
-                        )}
+                        {typeof row.free === 'boolean' ? row.free ? <Check className="w-4 h-4 text-green-primary mx-auto" /> : <span className="text-gray-300">—</span> : <span className="text-xs text-gray-600 dark:text-gray-400">{row.free}</span>}
                       </td>
                       <td className="p-4 text-center bg-green-primary/5">
-                        {typeof row.pro === 'boolean' ? (
-                          row.pro ? <Check className="w-4 h-4 text-green-primary mx-auto" /> : <span className="text-gray-300">—</span>
-                        ) : (
-                          <span className="text-xs text-green-600 font-medium">{row.pro}</span>
-                        )}
+                        {typeof row.pro === 'boolean' ? row.pro ? <Check className="w-4 h-4 text-green-primary mx-auto" /> : <span className="text-gray-300">—</span> : <span className="text-xs text-green-600 font-medium">{row.pro}</span>}
                       </td>
                       <td className="p-4 text-center">
-                        {typeof row.business === 'boolean' ? (
-                          row.business ? <Check className="w-4 h-4 text-blue-500 mx-auto" /> : <span className="text-gray-300">—</span>
-                        ) : (
-                          <span className="text-xs text-blue-600 font-medium">{row.business}</span>
-                        )}
+                        {typeof row.business === 'boolean' ? row.business ? <Check className="w-4 h-4 text-blue-500 mx-auto" /> : <span className="text-gray-300">—</span> : <span className="text-xs text-blue-600 font-medium">{row.business}</span>}
                       </td>
                       <td className="p-4 text-center">
-                        {typeof row.enterprise === 'boolean' ? (
-                          row.enterprise ? <Check className="w-4 h-4 text-amber-500 mx-auto" /> : <span className="text-gray-300">—</span>
-                        ) : (
-                          <span className="text-xs text-amber-600 font-medium">{row.enterprise}</span>
-                        )}
+                        {typeof row.enterprise === 'boolean' ? row.enterprise ? <Check className="w-4 h-4 text-amber-500 mx-auto" /> : <span className="text-gray-300">—</span> : <span className="text-xs text-amber-600 font-medium">{row.enterprise}</span>}
                       </td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
-            {/* Show More/Less Button */}
             <div className="p-4 border-t border-gray-100 dark:border-gray-800 text-center">
               <button
                 onClick={() => setShowAllFeatures(!showAllFeatures)}
@@ -518,7 +446,6 @@ export default function Pricing() {
           </div>
         </motion.div>
 
-        {/* Trust Badges */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -550,7 +477,7 @@ export default function Pricing() {
               </motion.div>
             ))}
           </div>
-          
+
           <p className="text-gray-500 dark:text-gray-400 text-xs mt-6 text-center">
             جميع الأسعار بالريال السعودي (SAR) وتشمل الضريبة المضافة
           </p>

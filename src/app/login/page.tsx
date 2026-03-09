@@ -3,40 +3,168 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
-import { Briefcase, Eye, EyeOff, Mail, Lock } from 'lucide-react';
+import {
+  Briefcase,
+  Eye,
+  EyeOff,
+  Mail,
+  Lock,
+  ArrowLeft,
+  Loader2,
+} from 'lucide-react';
 import { ROUTES } from '@/lib/routes';
+<<<<<<< ours
+<<<<<<< ours
+<<<<<<< ours
+<<<<<<< ours
+<<<<<<< ours
+import { supabase } from '@/lib/supabase';
+=======
+import { supabase } from '@/lib/supabase/client';
+>>>>>>> theirs
+=======
+import { supabase } from '@/lib/supabase/client';
+>>>>>>> theirs
+=======
+import { supabase } from '@/lib/supabase/client';
+>>>>>>> theirs
+=======
+import { supabase } from '@/lib/supabase/client';
+>>>>>>> theirs
+=======
+import { supabase } from '@/lib/supabase/client';
+>>>>>>> theirs
 
 export default function LoginPage() {
-  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
+<<<<<<< ours
+<<<<<<< ours
+<<<<<<< ours
+<<<<<<< ours
+<<<<<<< ours
+  const [loading, setLoading] = useState(false);
+
+=======
+  const [errorMessage, setErrorMessage] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+>>>>>>> theirs
+=======
+  const [errorMessage, setErrorMessage] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+>>>>>>> theirs
+=======
+  const [errorMessage, setErrorMessage] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+>>>>>>> theirs
+=======
+  const [errorMessage, setErrorMessage] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+>>>>>>> theirs
+=======
+  const [errorMessage, setErrorMessage] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+>>>>>>> theirs
   const [formData, setFormData] = useState({
     email: '',
     password: '',
     remember: false,
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+<<<<<<< ours
+<<<<<<< ours
+<<<<<<< ours
+<<<<<<< ours
+<<<<<<< ours
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    // تسجيل الدخول (mock)
+
+    if (!formData.email || !formData.password) {
+      alert('يرجى إدخال البريد الإلكتروني وكلمة المرور');
+      return;
+    }
+
+    try {
+      setLoading(true);
+
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: formData.email.trim(),
+        password: formData.password,
+      });
+
+      if (error) {
+        alert(error.message);
+        return;
+      }
+
+      if (!data.session) {
+        alert('تم تسجيل الدخول لكن لم يتم إنشاء session.');
+        return;
+      }
+
+      localStorage.setItem(
+        'mihni-manual-session',
+        JSON.stringify({
+          access_token: data.session.access_token,
+          refresh_token: data.session.refresh_token,
+        })
+      );
+
+      await supabase.auth.setSession({
+        access_token: data.session.access_token,
+        refresh_token: data.session.refresh_token,
+      });
+
+      window.location.href = ROUTES.DASHBOARD;
+    } catch (err: any) {
+      alert(err?.message || 'حدث خطأ أثناء تسجيل الدخول');
+    } finally {
+      setLoading(false);
+    }
+=======
+=======
+>>>>>>> theirs
+=======
+>>>>>>> theirs
+=======
+>>>>>>> theirs
+=======
+>>>>>>> theirs
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setErrorMessage('');
+    setIsSubmitting(true);
+
+    const { error } = await supabase.auth.signInWithPassword({
+      email: formData.email,
+      password: formData.password,
+    });
+
+    setIsSubmitting(false);
+
+    if (error) {
+      setErrorMessage(error.message);
+      return;
+    }
+
     router.push(ROUTES.DASHBOARD);
+>>>>>>> theirs
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-hero dark:bg-gradient-dark-hero relative overflow-hidden py-8">
-      {/* Background Pattern */}
       <div className="absolute inset-0 pattern-grid opacity-50" />
-      
-      {/* Floating Shapes */}
-      <div className="absolute top-20 right-[10%] w-64 h-64 rounded-full bg-green-primary/5 blur-3xl animate-float" />
-      <div className="absolute bottom-20 left-[10%] w-80 h-80 rounded-full bg-green-teal/5 blur-3xl animate-float" style={{ animationDelay: '2s' }} />
 
-      <div className="relative z-10 w-full max-w-md px-4">
-        {/* Logo */}
+      <div className="absolute top-20 right-[10%] w-64 h-64 rounded-full bg-green-primary/5 blur-3xl animate-float" />
+      <div
+        className="absolute bottom-20 left-[10%] w-80 h-80 rounded-full bg-green-teal/5 blur-3xl animate-float"
+        style={{ animationDelay: '2s' }}
+      />
+
+      <div className="relative z-10 w-full max-w-lg px-4">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -51,7 +179,6 @@ export default function LoginPage() {
           </Link>
         </motion.div>
 
-        {/* Login Card */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -60,15 +187,14 @@ export default function LoginPage() {
         >
           <div className="text-center mb-8">
             <h1 className="text-2xl font-bold text-green-dark dark:text-white mb-2">
-              مرحباً بعودتك
+              تسجيل الدخول
             </h1>
             <p className="text-gray-medium dark:text-gray-light text-sm">
-              سجّل دخولك للوصول إلى لوحة التحكم
+              سجّل دخولك للوصول إلى لوحة التحكم ومشاريعك
             </p>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-5">
-            {/* Email */}
+          <form onSubmit={handleLogin} className="space-y-5">
             <div className="space-y-2">
               <Label htmlFor="email" className="text-green-dark dark:text-white">
                 البريد الإلكتروني
@@ -87,7 +213,6 @@ export default function LoginPage() {
               </div>
             </div>
 
-            {/* Password */}
             <div className="space-y-2">
               <Label htmlFor="password" className="text-green-dark dark:text-white">
                 كلمة المرور
@@ -113,6 +238,36 @@ export default function LoginPage() {
               </div>
             </div>
 
+<<<<<<< ours
+<<<<<<< ours
+<<<<<<< ours
+<<<<<<< ours
+<<<<<<< ours
+            <div className="flex items-start gap-2">
+              <Checkbox
+                id="remember"
+                checked={formData.remember}
+                onCheckedChange={(checked) =>
+                  setFormData({ ...formData, remember: checked as boolean })
+                }
+                className="mt-1 border-green-primary/30 data-[state=checked]:bg-green-primary data-[state=checked]:border-green-primary"
+              />
+              <Label htmlFor="remember" className="text-sm text-gray-medium cursor-pointer leading-relaxed">
+                تذكّرني على هذا الجهاز
+              </Label>
+=======
+=======
+>>>>>>> theirs
+=======
+>>>>>>> theirs
+=======
+>>>>>>> theirs
+=======
+>>>>>>> theirs
+            {errorMessage && (
+              <p className="text-sm text-red-600 dark:text-red-400">{errorMessage}</p>
+            )}
+
             {/* Remember & Forgot */}
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
@@ -129,29 +284,60 @@ export default function LoginPage() {
               <Link href="#" className="text-sm text-green-primary hover:underline">
                 نسيت كلمة المرور؟
               </Link>
+>>>>>>> theirs
             </div>
 
-            {/* Submit */}
             <Button
               type="submit"
+<<<<<<< ours
+<<<<<<< ours
+<<<<<<< ours
+<<<<<<< ours
+<<<<<<< ours
+              disabled={loading}
+              className="w-full h-12 bg-gradient-to-r from-green-primary to-green-teal text-white rounded-xl shadow-btn hover:shadow-card-hover transition-all hover:-translate-y-0.5 disabled:opacity-70"
+            >
+              {loading ? (
+                <>
+                  <Loader2 className="w-5 h-5 ml-2 animate-spin" />
+                  جاري تسجيل الدخول...
+                </>
+              ) : (
+                <>
+                  دخول
+                  <ArrowLeft className="w-5 h-5 mr-2" />
+                </>
+              )}
+=======
+=======
+>>>>>>> theirs
+=======
+>>>>>>> theirs
+=======
+>>>>>>> theirs
+=======
+>>>>>>> theirs
+              disabled={isSubmitting}
               className="w-full h-12 bg-gradient-to-r from-green-primary to-green-teal text-white rounded-xl shadow-btn hover:shadow-card-hover transition-all hover:-translate-y-0.5"
             >
-              تسجيل الدخول
+              {isSubmitting ? 'جارٍ تسجيل الدخول...' : 'تسجيل الدخول'}
+<<<<<<< ours
+<<<<<<< ours
+<<<<<<< ours
+<<<<<<< ours
+>>>>>>> theirs
+=======
+>>>>>>> theirs
+=======
+>>>>>>> theirs
+=======
+>>>>>>> theirs
+=======
+>>>>>>> theirs
             </Button>
           </form>
 
-          {/* Divider */}
-          <div className="relative my-6">
-            <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-green-primary/10"></div>
-            </div>
-            <div className="relative flex justify-center text-sm">
-              <span className="px-4 bg-white dark:bg-[#1B2D2B] text-gray-medium">أو</span>
-            </div>
-          </div>
-
-          {/* Register Link */}
-          <p className="text-center text-gray-medium">
+          <p className="text-center mt-6 text-gray-medium">
             ليس لديك حساب؟{' '}
             <Link href={ROUTES.REGISTER} className="text-green-primary hover:underline font-medium">
               إنشاء حساب جديد
@@ -159,7 +345,6 @@ export default function LoginPage() {
           </p>
         </motion.div>
 
-        {/* Back to Home */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}

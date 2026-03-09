@@ -8,13 +8,45 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
-import { Briefcase, Eye, EyeOff, Mail, Lock, User, Building, ArrowLeft, Check } from 'lucide-react';
+import {
+  Briefcase,
+  Eye,
+  EyeOff,
+  Mail,
+  Lock,
+  User,
+  Building,
+  ArrowLeft,
+  Check,
+  Loader2,
+} from 'lucide-react';
 import { ROUTES } from '@/lib/routes';
+<<<<<<< ours
+<<<<<<< ours
+<<<<<<< ours
+<<<<<<< ours
+<<<<<<< ours
+import { supabase } from '@/lib/supabase';
+=======
+import { supabase } from '@/lib/supabase/client';
+>>>>>>> theirs
+=======
+import { supabase } from '@/lib/supabase/client';
+>>>>>>> theirs
+=======
+import { supabase } from '@/lib/supabase/client';
+>>>>>>> theirs
+=======
+import { supabase } from '@/lib/supabase/client';
+>>>>>>> theirs
+=======
+import { supabase } from '@/lib/supabase/client';
+>>>>>>> theirs
 
 const plans = [
-  { name: 'مجانية', price: '0', features: ['10 قوالب', '3 أدوات', '50 MB تخزين'] },
-  { name: 'محترف', price: '69', features: ['50+ قالب', 'جميع الأدوات', '5 GB تخزين'] },
-  { name: 'أعمال', price: '169', features: ['100+ قالب', '5 مستخدمين', '20 GB تخزين'] },
+  { slug: 'free', name: 'مجانية', price: '0', features: ['10 قوالب', '3 أدوات', '50 MB تخزين'] },
+  { slug: 'pro', name: 'محترف', price: '69', features: ['50+ قالب', 'جميع الأدوات', '5 GB تخزين'] },
+  { slug: 'business', name: 'أعمال', price: '169', features: ['100+ قالب', '5 مستخدمين', '20 GB تخزين'] },
 ];
 
 export default function RegisterPage() {
@@ -22,6 +54,38 @@ export default function RegisterPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [step, setStep] = useState(1);
   const [selectedPlan, setSelectedPlan] = useState(0);
+<<<<<<< ours
+<<<<<<< ours
+<<<<<<< ours
+<<<<<<< ours
+<<<<<<< ours
+  const [loading, setLoading] = useState(false);
+
+=======
+  const [errorMessage, setErrorMessage] = useState('');
+  const [infoMessage, setInfoMessage] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+>>>>>>> theirs
+=======
+  const [errorMessage, setErrorMessage] = useState('');
+  const [infoMessage, setInfoMessage] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+>>>>>>> theirs
+=======
+  const [errorMessage, setErrorMessage] = useState('');
+  const [infoMessage, setInfoMessage] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+>>>>>>> theirs
+=======
+  const [errorMessage, setErrorMessage] = useState('');
+  const [infoMessage, setInfoMessage] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+>>>>>>> theirs
+=======
+  const [errorMessage, setErrorMessage] = useState('');
+  const [infoMessage, setInfoMessage] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+>>>>>>> theirs
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -30,31 +94,168 @@ export default function RegisterPage() {
     agreeTerms: false,
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+<<<<<<< ours
+<<<<<<< ours
+<<<<<<< ours
+<<<<<<< ours
+<<<<<<< ours
+  const handleStepOne = (e: React.FormEvent) => {
     e.preventDefault();
-    if (step === 1) {
-      setStep(2);
-    } else {
+
+    if (!formData.agreeTerms) {
+      alert('يجب الموافقة على الشروط وسياسة الخصوصية');
+      return;
+    }
+
+    setStep(2);
+  };
+
+  const handleFinalSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    try {
+      setLoading(true);
+
       const selectedPlanData = plans[selectedPlan];
-      if (selectedPlanData.price === '0') {
-        router.push('/dashboard');
-      } else {
-        router.push(`/payment?plan=${selectedPlan}`);
+
+      const { data, error } = await supabase.auth.signUp({
+        email: formData.email.trim(),
+=======
+=======
+>>>>>>> theirs
+=======
+>>>>>>> theirs
+=======
+>>>>>>> theirs
+=======
+>>>>>>> theirs
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setErrorMessage('');
+
+    if (step === 1) {
+      setInfoMessage('');
+      setIsSubmitting(true);
+
+      const { data, error } = await supabase.auth.signUp({
+        email: formData.email,
+<<<<<<< ours
+<<<<<<< ours
+<<<<<<< ours
+<<<<<<< ours
+>>>>>>> theirs
+=======
+>>>>>>> theirs
+=======
+>>>>>>> theirs
+=======
+>>>>>>> theirs
+=======
+>>>>>>> theirs
+        password: formData.password,
+        options: {
+          data: {
+            full_name: formData.fullName,
+<<<<<<< ours
+<<<<<<< ours
+<<<<<<< ours
+<<<<<<< ours
+<<<<<<< ours
+            organization: formData.organization,
+            selected_plan: selectedPlanData.slug,
+=======
+>>>>>>> theirs
+=======
+>>>>>>> theirs
+=======
+>>>>>>> theirs
+=======
+>>>>>>> theirs
+=======
+>>>>>>> theirs
+          },
+        },
+      });
+
+<<<<<<< ours
+<<<<<<< ours
+<<<<<<< ours
+<<<<<<< ours
+<<<<<<< ours
+      if (error) {
+        alert(error.message);
+        return;
       }
+
+      if (data.session) {
+        alert('تم إنشاء الحساب وتسجيل دخولك بنجاح.');
+        window.location.href = ROUTES.DASHBOARD;
+        return;
+      }
+
+      alert('تم إنشاء الحساب بنجاح. يمكنك الآن تسجيل الدخول.');
+      router.push(ROUTES.LOGIN);
+    } catch {
+      alert('حدث خطأ غير متوقع أثناء إنشاء الحساب');
+    } finally {
+      setLoading(false);
+=======
+=======
+>>>>>>> theirs
+=======
+>>>>>>> theirs
+=======
+>>>>>>> theirs
+=======
+>>>>>>> theirs
+      setIsSubmitting(false);
+
+      if (error) {
+        setErrorMessage(error.message);
+        return;
+      }
+
+      if (!data.session) {
+        setInfoMessage('تحقق من بريدك');
+        return;
+      }
+
+      setStep(2);
+      return;
+    }
+
+    const selectedPlanData = plans[selectedPlan];
+    if (selectedPlanData.price === '0') {
+      router.push(ROUTES.DASHBOARD);
+    } else {
+      router.push(`/payment?plan=${selectedPlan}`);
+<<<<<<< ours
+<<<<<<< ours
+<<<<<<< ours
+<<<<<<< ours
+>>>>>>> theirs
+=======
+>>>>>>> theirs
+=======
+>>>>>>> theirs
+=======
+>>>>>>> theirs
+=======
+>>>>>>> theirs
     }
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-hero dark:bg-gradient-dark-hero relative overflow-hidden py-8">
-      {/* Background Pattern */}
       <div className="absolute inset-0 pattern-grid opacity-50" />
-      
-      {/* Floating Shapes */}
+
       <div className="absolute top-20 right-[10%] w-64 h-64 rounded-full bg-green-primary/5 blur-3xl animate-float" />
-      <div className="absolute bottom-20 left-[10%] w-80 h-80 rounded-full bg-green-teal/5 blur-3xl animate-float" style={{ animationDelay: '2s' }} />
+      <div
+        className="absolute bottom-20 left-[10%] w-80 h-80 rounded-full bg-green-teal/5 blur-3xl animate-float"
+        style={{ animationDelay: '2s' }}
+      />
 
       <div className="relative z-10 w-full max-w-lg px-4">
-        {/* Logo */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -69,19 +270,19 @@ export default function RegisterPage() {
           </Link>
         </motion.div>
 
-        {/* Register Card */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
           className="bg-white dark:bg-[#1B2D2B] rounded-2xl shadow-2xl border border-green-primary/10 p-8"
         >
-          {/* Progress Steps */}
           <div className="flex items-center justify-center gap-4 mb-8">
             <div className={`flex items-center gap-2 ${step >= 1 ? 'text-green-primary' : 'text-gray-medium'}`}>
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${
-                step >= 1 ? 'bg-green-primary text-white' : 'bg-gray-light text-gray-medium'
-              }`}>
+              <div
+                className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${
+                  step >= 1 ? 'bg-green-primary text-white' : 'bg-gray-light text-gray-medium'
+                }`}
+              >
                 1
               </div>
               <span className="text-sm hidden sm:inline">البيانات</span>
@@ -90,9 +291,11 @@ export default function RegisterPage() {
               <div className={`h-full bg-green-primary transition-all duration-300 ${step >= 2 ? 'w-full' : 'w-0'}`} />
             </div>
             <div className={`flex items-center gap-2 ${step >= 2 ? 'text-green-primary' : 'text-gray-medium'}`}>
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${
-                step >= 2 ? 'bg-green-primary text-white' : 'bg-gray-light text-gray-medium'
-              }`}>
+              <div
+                className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${
+                  step >= 2 ? 'bg-green-primary text-white' : 'bg-gray-light text-gray-medium'
+                }`}
+              >
                 2
               </div>
               <span className="text-sm hidden sm:inline">الباقة</span>
@@ -110,8 +313,7 @@ export default function RegisterPage() {
                 </p>
               </div>
 
-              <form onSubmit={handleSubmit} className="space-y-5">
-                {/* Full Name */}
+              <form onSubmit={handleStepOne} className="space-y-5">
                 <div className="space-y-2">
                   <Label htmlFor="fullName" className="text-green-dark dark:text-white">
                     الاسم الكامل
@@ -130,7 +332,6 @@ export default function RegisterPage() {
                   </div>
                 </div>
 
-                {/* Email */}
                 <div className="space-y-2">
                   <Label htmlFor="email" className="text-green-dark dark:text-white">
                     البريد الإلكتروني
@@ -149,7 +350,6 @@ export default function RegisterPage() {
                   </div>
                 </div>
 
-                {/* Organization */}
                 <div className="space-y-2">
                   <Label htmlFor="organization" className="text-green-dark dark:text-white">
                     المؤسسة (اختياري)
@@ -167,7 +367,6 @@ export default function RegisterPage() {
                   </div>
                 </div>
 
-                {/* Password */}
                 <div className="space-y-2">
                   <Label htmlFor="password" className="text-green-dark dark:text-white">
                     كلمة المرور
@@ -193,28 +392,57 @@ export default function RegisterPage() {
                   </div>
                 </div>
 
+<<<<<<< ours
+<<<<<<< ours
+<<<<<<< ours
+<<<<<<< ours
+<<<<<<< ours
+=======
+=======
+>>>>>>> theirs
+=======
+>>>>>>> theirs
+=======
+>>>>>>> theirs
+=======
+>>>>>>> theirs
+                {errorMessage && (
+                  <p className="text-sm text-red-600 dark:text-red-400">{errorMessage}</p>
+                )}
+
+                {infoMessage && (
+                  <p className="text-sm text-emerald-700 dark:text-emerald-300">{infoMessage}</p>
+                )}
+
                 {/* Terms */}
+>>>>>>> theirs
                 <div className="flex items-start gap-2">
                   <Checkbox
                     id="terms"
                     checked={formData.agreeTerms}
-                    onCheckedChange={(checked) => setFormData({ ...formData, agreeTerms: checked as boolean })}
+                    onCheckedChange={(checked) =>
+                      setFormData({ ...formData, agreeTerms: checked as boolean })
+                    }
                     className="mt-1 border-green-primary/30 data-[state=checked]:bg-green-primary data-[state=checked]:border-green-primary"
                   />
                   <Label htmlFor="terms" className="text-sm text-gray-medium cursor-pointer leading-relaxed">
                     أوافق على{' '}
-                    <Link href="#" className="text-green-primary hover:underline">شروط الاستخدام</Link>
-                    {' '}و{' '}
-                    <Link href="#" className="text-green-primary hover:underline">سياسة الخصوصية</Link>
+                    <Link href="#" className="text-green-primary hover:underline">
+                      شروط الاستخدام
+                    </Link>{' '}
+                    و{' '}
+                    <Link href="#" className="text-green-primary hover:underline">
+                      سياسة الخصوصية
+                    </Link>
                   </Label>
                 </div>
 
-                {/* Submit */}
                 <Button
                   type="submit"
+                  disabled={isSubmitting}
                   className="w-full h-12 bg-gradient-to-r from-green-primary to-green-teal text-white rounded-xl shadow-btn hover:shadow-card-hover transition-all hover:-translate-y-0.5"
                 >
-                  متابعة
+                  {isSubmitting ? 'جارٍ إنشاء الحساب...' : 'متابعة'}
                   <ArrowLeft className="w-5 h-5 mr-2" />
                 </Button>
               </form>
@@ -230,11 +458,11 @@ export default function RegisterPage() {
                 </p>
               </div>
 
-              <form onSubmit={handleSubmit} className="space-y-5">
+              <form onSubmit={handleFinalSubmit} className="space-y-5">
                 <div className="space-y-3">
                   {plans.map((plan, index) => (
                     <div
-                      key={index}
+                      key={plan.slug}
                       onClick={() => setSelectedPlan(index)}
                       className={`p-4 rounded-xl border-2 cursor-pointer transition-all ${
                         selectedPlan === index
@@ -244,9 +472,11 @@ export default function RegisterPage() {
                     >
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-3">
-                          <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${
-                            selectedPlan === index ? 'border-green-primary' : 'border-gray-medium'
-                          }`}>
+                          <div
+                            className={`w-6 h-6 rounded-full border-2 flex items-center justify-center ${
+                              selectedPlan === index ? 'border-green-primary' : 'border-gray-medium'
+                            }`}
+                          >
                             {selectedPlan === index && <Check className="w-4 h-4 text-green-primary" />}
                           </div>
                           <div>
@@ -274,17 +504,26 @@ export default function RegisterPage() {
                   </Button>
                   <Button
                     type="submit"
-                    className="flex-1 h-12 bg-gradient-to-r from-green-primary to-green-teal text-white rounded-xl shadow-btn hover:shadow-card-hover transition-all hover:-translate-y-0.5"
+                    disabled={loading}
+                    className="flex-1 h-12 bg-gradient-to-r from-green-primary to-green-teal text-white rounded-xl shadow-btn hover:shadow-card-hover transition-all hover:-translate-y-0.5 disabled:opacity-70"
                   >
-                    إنشاء الحساب
-                    <ArrowLeft className="w-5 h-5 mr-2" />
+                    {loading ? (
+                      <>
+                        <Loader2 className="w-5 h-5 ml-2 animate-spin" />
+                        جاري الإنشاء...
+                      </>
+                    ) : (
+                      <>
+                        إنشاء الحساب
+                        <ArrowLeft className="w-5 h-5 mr-2" />
+                      </>
+                    )}
                   </Button>
                 </div>
               </form>
             </>
           )}
 
-          {/* Login Link */}
           <p className="text-center mt-6 text-gray-medium">
             لديك حساب بالفعل؟{' '}
             <Link href={ROUTES.LOGIN} className="text-green-primary hover:underline font-medium">
@@ -293,7 +532,6 @@ export default function RegisterPage() {
           </p>
         </motion.div>
 
-        {/* Back to Home */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}

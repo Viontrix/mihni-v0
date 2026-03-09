@@ -19,8 +19,8 @@ export const ROUTES = {
   REGISTER: '/register',
   
   // Tools
-  START: '/start',                    // Tool picker page
-  TOOLS: '/tools',                    // Redirects to START
+  START: '/tools',                    // Tool picker page
+  TOOLS: '/tools',                    // Tools landing page
   TOOL_DETAIL: '/tools/:slug',        // Individual tool page
   
   // Templates
@@ -28,7 +28,7 @@ export const ROUTES = {
   TEMPLATE_DETAIL: '/templates/:slug',
   
   // Pricing & Payment
-  PRICING: '/pricing',                // Redirects to HOME with section param
+  PRICING: '/pricing',                // Pricing page
   PAYMENT: '/payment',
   
   // User Account
@@ -117,7 +117,7 @@ export function getBackDestination(fromParam: string | null): { path: string; la
     case 'account':
       return { path: ROUTES.ACCOUNT, label: 'العودة للحساب' };
     case 'tools':
-      return { path: ROUTES.START, label: 'العودة للأدوات' };
+      return { path: ROUTES.TOOLS, label: 'العودة للأدوات' };
     default:
       return { path: ROUTES.HOME, label: 'العودة للرئيسية' };
   }
@@ -174,8 +174,8 @@ export const LEGACY_REDIRECTS: Record<string, string> = {
   '/#templates': getHomeSectionUrl('templates'),
   '/#faq': getHomeSectionUrl('faq'),
   '/#hero': getHomeSectionUrl('hero'),
-  '/pricing': getHomeSectionUrl('pricing'),
-  '/tools': ROUTES.START,
+  '/pricing': ROUTES.PRICING,
+  '/tools': ROUTES.TOOLS,
   '/templates': ROUTES.TEMPLATES,
   // Legacy tool routes - redirect to dynamic routes
   '/tools/certificate-maker': getToolUrl('certificate'),
@@ -204,7 +204,7 @@ export const NAV_LINKS = {
   templates: { name: 'القوالب', href: getHomeSectionUrl('templates'), type: 'section' as const, sectionId: 'templates' },
   pricing: { name: 'الباقات', href: getHomeSectionUrl('pricing'), type: 'section' as const, sectionId: 'pricing' },
   support: { name: 'الدعم', href: ROUTES.SUPPORT, type: 'page' as const },
-  start: { name: 'ابدأ مجاناً', href: ROUTES.START, type: 'page' as const },
+  start: { name: 'ابدأ مجاناً', href: ROUTES.TOOLS, type: 'page' as const },
   login: { name: 'تسجيل الدخول', href: ROUTES.LOGIN, type: 'page' as const },
   dashboard: { name: 'لوحة التحكم', href: ROUTES.DASHBOARD, type: 'page' as const },
   account: { name: 'حسابي', href: ROUTES.ACCOUNT, type: 'page' as const },

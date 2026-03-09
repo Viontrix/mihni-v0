@@ -1,31 +1,24 @@
 /**
  * Plans & Entitlements System - Single Source of Truth
  * نظام الخطط والصلاحيات - مصدر الحقيقة الوحيد
- * 
- * هذا الملف هو المصدر الوحيد للباقات والأسعار والمميزات
- * جميع الصفحات تقرأ من هذا الملف مباشرة
  */
 
 import type { UserPlan, ToolAccessLevel } from '../tools/types';
 
-// ============================================
-// Unified Plan Definitions - Single Source of Truth
-// ============================================
-
 export interface UnifiedPlan {
   id: UserPlan;
-  name: string; // English name
-  nameAr: string; // Arabic name
+  name: string;
+  nameAr: string;
   description: string;
   monthlyPrice: number;
   yearlyPrice: number;
   yearlyDiscountPercent: number;
   popular: boolean;
   color: string;
-  icon: string; // Icon name reference
+  icon: string;
   maxRunsPerDay: number;
   maxSavedProjects: number;
-  storageGB: number; // -1 for unlimited
+  storageGB: number;
   enabledAccessLevels: ToolAccessLevel[];
   features: {
     included: string[];
@@ -45,23 +38,24 @@ export const unifiedPlans: UnifiedPlan[] = [
     popular: false,
     color: 'from-gray-400 to-gray-500',
     icon: 'User',
-    maxRunsPerDay: 10,
+    maxRunsPerDay: 20,
     maxSavedProjects: 3,
-    storageGB: 0.05, // 50 MB
+    storageGB: 0.1,
     enabledAccessLevels: ['free'],
     features: {
       included: [
-        'استخدام القوالب فقط',
+        'استخدام القوالب',
         '3 مشاريع محفوظة',
-        '10 تشغيل/يوم',
-        'تصدير PNG',
+        '20 تشغيل/يوم',
+        'تخزين 100 ميجابايت',
+        'تصدير أساسي',
       ],
       notIncluded: [
-        'الأدوات الذكية',
+        'الأدوات الذكية الكاملة',
         'تخصيص الألوان',
         'رفع الشعار',
-        'تصدير PDF',
-        'التخزين السحابي',
+        'إزالة العلامة المائية',
+        'التصدير الاحترافي',
       ],
     },
   },
@@ -69,31 +63,31 @@ export const unifiedPlans: UnifiedPlan[] = [
     id: 'pro',
     name: 'Pro',
     nameAr: 'المحترف',
-    description: 'للأفراد والمحترفين',
-    monthlyPrice: 99,
-    yearlyPrice: 69,
-    yearlyDiscountPercent: 30,
+    description: 'للأفراد والمحترفين وصنّاع المحتوى',
+    monthlyPrice: 29,
+    yearlyPrice: 24,
+    yearlyDiscountPercent: 17,
     popular: true,
     color: 'from-green-primary to-green-teal',
     icon: 'Crown',
-    maxRunsPerDay: 100,
-    maxSavedProjects: 20,
+    maxRunsPerDay: 200,
+    maxSavedProjects: 30,
     storageGB: 5,
     enabledAccessLevels: ['free', 'pro'],
     features: {
       included: [
-        'جميع الأدوات الذكية',
-        '20 مشروع محفوظ',
-        '100 تشغيل/يوم',
+        'جميع الأدوات الذكية الأساسية',
+        '30 مشروع محفوظ',
+        '200 تشغيل/يوم',
         'تخصيص كامل للألوان',
         'رفع الشعار الخاص',
-        'تصدير PDF عالي الجودة',
+        'تصدير PDF',
         'تخزين 5 جيجابايت',
       ],
       notIncluded: [
         'التقارير المتقدمة',
-        'إزالة العلامة المائية',
-        'مستخدمين متزامنين',
+        'مستخدمون متزامنون',
+        'لوحة إدارة فريق',
       ],
     },
   },
@@ -101,31 +95,31 @@ export const unifiedPlans: UnifiedPlan[] = [
     id: 'business',
     name: 'Business',
     nameAr: 'الأعمال',
-    description: 'للمدارس والمؤسسات الصغيرة',
-    monthlyPrice: 199,
-    yearlyPrice: 169,
-    yearlyDiscountPercent: 15,
+    description: 'للمدارس والفرق والجهات الصغيرة',
+    monthlyPrice: 79,
+    yearlyPrice: 66,
+    yearlyDiscountPercent: 16,
     popular: false,
     color: 'from-blue-500 to-cyan-500',
     icon: 'School',
-    maxRunsPerDay: 500,
-    maxSavedProjects: 100,
+    maxRunsPerDay: 800,
+    maxSavedProjects: 150,
     storageGB: 20,
     enabledAccessLevels: ['free', 'pro', 'business'],
     features: {
       included: [
         'كل مميزات المحترف',
-        '100 مشروع محفوظ',
-        '500 تشغيل/يوم',
-        'تخزين سحابي 20 جيجا',
-        'تقارير متقدمة',
+        '150 مشروع محفوظ',
+        '800 تشغيل/يوم',
         'إزالة العلامة المائية',
+        'تقارير متقدمة',
+        'تخزين 20 جيجابايت',
         '5 مستخدمين متزامنين',
         'دعم فني أولوية',
       ],
       notIncluded: [
-        'إدارة الفريق',
-        'لوحة تحكم إدارية',
+        'إدارة مؤسسية متقدمة',
+        'تكامل API كامل',
       ],
     },
   },
@@ -133,37 +127,32 @@ export const unifiedPlans: UnifiedPlan[] = [
     id: 'enterprise',
     name: 'Enterprise',
     nameAr: 'المؤسسات',
-    description: 'للشركات الكبرى والجهات الحكومية',
-    monthlyPrice: 499,
-    yearlyPrice: 399,
-    yearlyDiscountPercent: 20,
+    description: 'للشركات الكبرى والجهات الحكومية والمؤسسات التعليمية',
+    monthlyPrice: 199,
+    yearlyPrice: 166,
+    yearlyDiscountPercent: 17,
     popular: false,
     color: 'from-amber-500 to-orange-500',
     icon: 'Building2',
-    maxRunsPerDay: -1, // Unlimited
-    maxSavedProjects: -1, // Unlimited
-    storageGB: -1, // Unlimited
+    maxRunsPerDay: 2000,
+    maxSavedProjects: 500,
+    storageGB: 100,
     enabledAccessLevels: ['free', 'pro', 'business', 'enterprise'],
     features: {
       included: [
-        'جميع المميزات السابقة',
-        'مشاريع غير محدودة',
-        'تشغيل غير محدود',
-        'تخزين غير محدود',
+        'جميع مميزات الأعمال',
+        '500 مشروع محفوظ',
+        '2000 تشغيل/يوم',
+        'تخزين 100 جيجابايت',
         'إدارة فريق متكاملة',
-        'حسابات متعددة غير محدودة',
         'لوحة تحكم إدارية',
-        'تكامل API كامل',
+        'تكامل API',
         'دعم فني 24/7',
       ],
       notIncluded: [],
     },
   },
 ];
-
-// ============================================
-// Storage Add-ons
-// ============================================
 
 export interface StorageAddon {
   id: string;
@@ -179,32 +168,24 @@ export const storageAddons: StorageAddon[] = [
   { id: 'storage-20gb', sizeGB: 20, monthlyPrice: 79, yearlyPrice: 790, label: '+20 جيجابايت' },
 ];
 
-// ============================================
-// Feature Comparison Table
-// ============================================
-
 export const featureComparison = [
   { feature: 'استخدام القوالب', free: true, pro: true, business: true, enterprise: true },
   { feature: 'الأدوات الذكية', free: false, pro: true, business: true, enterprise: true },
-  { feature: 'عدد المشاريع', free: '3', pro: '20', business: '100', enterprise: 'غير محدود' },
-  { feature: 'التشغيل اليومي', free: '10', pro: '100', business: '500', enterprise: 'غير محدود' },
-  { feature: 'سعة التخزين', free: '50 ميجا', pro: '5 جيجا', business: '20 جيجا', enterprise: 'غير محدود' },
+  { feature: 'عدد المشاريع', free: '3', pro: '30', business: '150', enterprise: '500' },
+  { feature: 'التشغيل اليومي', free: '20', pro: '200', business: '800', enterprise: '2000' },
+  { feature: 'سعة التخزين', free: '100 ميجا', pro: '5 جيجا', business: '20 جيجا', enterprise: '100 جيجا' },
   { feature: 'تخصيص الألوان', free: false, pro: true, business: true, enterprise: true },
   { feature: 'رفع الشعار', free: false, pro: true, business: true, enterprise: true },
   { feature: 'تصدير PDF', free: false, pro: true, business: true, enterprise: true },
-  { feature: 'تصدير Word/Excel', free: false, pro: true, business: true, enterprise: true },
+  { feature: 'تصدير Word/Excel', free: false, pro: false, business: true, enterprise: true },
   { feature: 'إزالة العلامة المائية', free: false, pro: false, business: true, enterprise: true },
   { feature: 'التقارير المتقدمة', free: false, pro: false, business: true, enterprise: true },
-  { feature: 'المستخدمين المتزامنين', free: '1', pro: '1', business: '5', enterprise: 'غير محدود' },
+  { feature: 'المستخدمين المتزامنين', free: '1', pro: '1', business: '5', enterprise: '20' },
   { feature: 'إدارة الفريق', free: false, pro: false, business: false, enterprise: true },
   { feature: 'لوحة تحكم إدارية', free: false, pro: false, business: false, enterprise: true },
   { feature: 'تكامل API', free: false, pro: false, business: 'محدود', enterprise: true },
   { feature: 'دعم فني 24/7', free: false, pro: false, business: false, enterprise: true },
 ];
-
-// ============================================
-// Helper Functions
-// ============================================
 
 export function getPlanById(id: UserPlan): UnifiedPlan | undefined {
   return unifiedPlans.find(plan => plan.id === id);
@@ -224,21 +205,17 @@ export function getPlanPrice(id: UserPlan, billing: 'monthly' | 'yearly' = 'mont
 export function getYearlySavings(id: UserPlan): { amount: number; percentage: number } {
   const plan = getPlanById(id);
   if (!plan || plan.monthlyPrice === 0) return { amount: 0, percentage: 0 };
-  
+
   const yearlyFromMonthly = plan.monthlyPrice * 12;
-  const yearlyPrice = plan.yearlyPrice * 12;
-  const savings = yearlyFromMonthly - yearlyPrice;
-  const percentage = (savings / yearlyFromMonthly) * 100;
-  
+  const yearlyAsMonthly = plan.yearlyPrice * 12;
+  const savings = yearlyFromMonthly - yearlyAsMonthly;
+  const percentage = yearlyFromMonthly > 0 ? (savings / yearlyFromMonthly) * 100 : 0;
+
   return {
     amount: Math.round(savings),
     percentage: Math.round(percentage),
   };
 }
-
-// ============================================
-// Access Level Hierarchy
-// ============================================
 
 const accessLevelHierarchy: ToolAccessLevel[] = ['free', 'pro', 'business', 'enterprise'];
 
@@ -252,10 +229,6 @@ export function isAccessLevelHigherOrEqual(
 ): boolean {
   return getAccessLevelIndex(userLevel) >= getAccessLevelIndex(requiredLevel);
 }
-
-// ============================================
-// Upgrade Path
-// ============================================
 
 export function getUpgradeTarget(currentPlan: UserPlan): UserPlan | null {
   const upgradePath: Record<UserPlan, UserPlan | null> = {
@@ -274,12 +247,7 @@ export function getUpgradeButtonText(currentPlan: UserPlan): string {
   return `الترقية إلى ${targetPlan?.nameAr}`;
 }
 
-// ============================================
-// Storage Helpers
-// ============================================
-
 export function formatStorage(sizeGB: number): string {
-  if (sizeGB === -1) return 'غير محدود';
   if (sizeGB < 1) return `${Math.round(sizeGB * 1024)} ميجابايت`;
   return `${sizeGB} جيجابايت`;
 }
@@ -290,10 +258,6 @@ export function getStorageWarningLevel(percentage: number): 'normal' | 'warning'
   return 'normal';
 }
 
-// ============================================
-// Legacy exports for backward compatibility
-// ============================================
-
 export const plans = unifiedPlans;
 
 export function calculateYearlySavings(monthlyPrice: number, yearlyPrice: number): {
@@ -301,7 +265,8 @@ export function calculateYearlySavings(monthlyPrice: number, yearlyPrice: number
   percentage: number;
 } {
   const yearlyFromMonthly = monthlyPrice * 12;
-  const savings = yearlyFromMonthly - (yearlyPrice * 12);
+  const yearlyAsMonthly = yearlyPrice * 12;
+  const savings = yearlyFromMonthly - yearlyAsMonthly;
   const percentage = yearlyFromMonthly > 0 ? (savings / yearlyFromMonthly) * 100 : 0;
 
   return {
