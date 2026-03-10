@@ -679,8 +679,11 @@ export default function Hero() {
               className="mb-8"
             >
               <h1 className="text-5xl sm:text-5xl lg:text-7xl xl:text-8xl font-extrabold leading-tight">
+                <span className="text-green-dark dark:text-white">
+                  منصة{' '}
+                </span>
                 <span className="bg-gradient-to-r from-green-primary via-green-teal to-green-light bg-clip-text text-transparent">
-                  منصة مِهني
+                  مِهني
                 </span>
               </h1>
             </motion.div>
@@ -705,7 +708,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-12"
+              className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-8"
             >
               <motion.div 
                 whileHover={{ scale: 1.05 }} 
@@ -741,8 +744,17 @@ export default function Hero() {
               </motion.div>
             </motion.div>
 
-
-          </div>
+            {/* Examples Line */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="text-center lg:text-right"
+            >
+              <p className="text-sm text-gray-600 dark:text-gray-400 font-medium">
+                شهادات • تقارير • اختبارات • جداول • خطط • نماذج
+              </p>
+            </motion.div>
 
           {/* Right Side - Image Showcase */}
           <motion.div
