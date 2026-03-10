@@ -679,57 +679,47 @@ const SchedulePreview = ({ data }: { data: typeof showcaseImages[4] }) => {
   );
 };
 
-// Floating Elements around the Slider
+// Floating icon badges — matches the reference design (4 corners, icon-only rounded squares)
 const SliderFloatingElements = () => (
   <>
-    {/* Top-right badge: templates */}
+    {/* Top-left: Star / purple */}
     <motion.div
-      initial={{ opacity: 0, x: 20, y: -10 }}
-      animate={{ opacity: 1, x: 0, y: 0 }}
-      transition={{ delay: 0.6, duration: 0.5 }}
-      className="absolute -top-4 -right-4 z-20 flex items-center gap-1.5 bg-white dark:bg-[#1B2D2B] rounded-xl px-3 py-2 shadow-lg border border-gray-100 dark:border-green-primary/20"
+      initial={{ opacity: 0, scale: 0.7 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ delay: 0.5, duration: 0.4, type: 'spring', stiffness: 200 }}
+      className="absolute -top-5 -left-5 z-20 w-12 h-12 rounded-2xl bg-[#9B59B6] flex items-center justify-center shadow-lg"
     >
-      <div className="w-6 h-6 rounded-lg bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center">
-        <Award className="w-3.5 h-3.5 text-amber-500" />
-      </div>
-      <div>
-        <p className="text-[9px] text-gray-400 leading-none">قوالب</p>
-        <p className="text-xs font-bold text-green-dark dark:text-white leading-tight">+100</p>
-      </div>
+      <Star className="w-6 h-6 text-white" fill="white" />
     </motion.div>
 
-    {/* Bottom-left badge: users */}
+    {/* Top-right: Lightning / orange */}
     <motion.div
-      initial={{ opacity: 0, x: -20, y: 10 }}
-      animate={{ opacity: 1, x: 0, y: 0 }}
-      transition={{ delay: 0.8, duration: 0.5 }}
-      className="absolute -bottom-4 -left-4 z-20 flex items-center gap-1.5 bg-white dark:bg-[#1B2D2B] rounded-xl px-3 py-2 shadow-lg border border-gray-100 dark:border-green-primary/20"
+      initial={{ opacity: 0, scale: 0.7 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ delay: 0.6, duration: 0.4, type: 'spring', stiffness: 200 }}
+      className="absolute -top-5 -right-5 z-20 w-12 h-12 rounded-2xl bg-[#F39C12] flex items-center justify-center shadow-lg"
     >
-      <div className="w-6 h-6 rounded-lg bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
-        <Users className="w-3.5 h-3.5 text-green-primary" />
-      </div>
-      <div>
-        <p className="text-[9px] text-gray-400 leading-none">مستخدم</p>
-        <p className="text-xs font-bold text-green-dark dark:text-white leading-tight">+10k</p>
-      </div>
+      <Zap className="w-6 h-6 text-white" fill="white" />
     </motion.div>
 
-    {/* Top-left pulse dot */}
+    {/* Bottom-left: Download / teal-green */}
     <motion.div
-      animate={{ scale: [1, 1.3, 1] }}
-      transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-      className="absolute top-8 -left-3 z-20 w-5 h-5 rounded-full bg-green-primary/30 flex items-center justify-center"
+      initial={{ opacity: 0, scale: 0.7 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ delay: 0.7, duration: 0.4, type: 'spring', stiffness: 200 }}
+      className="absolute -bottom-5 -left-5 z-20 w-12 h-12 rounded-2xl bg-[#27AE60] flex items-center justify-center shadow-lg"
     >
-      <div className="w-2.5 h-2.5 rounded-full bg-green-primary" />
+      <Download className="w-6 h-6 text-white" />
     </motion.div>
 
-    {/* Bottom-right star */}
+    {/* Bottom-right: Award / blue */}
     <motion.div
-      animate={{ rotate: [0, 15, -15, 0] }}
-      transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-      className="absolute bottom-10 -right-3 z-20 w-7 h-7 rounded-xl bg-amber-100 dark:bg-amber-900/40 flex items-center justify-center shadow-sm border border-amber-200/50"
+      initial={{ opacity: 0, scale: 0.7 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ delay: 0.8, duration: 0.4, type: 'spring', stiffness: 200 }}
+      className="absolute -bottom-5 -right-5 z-20 w-12 h-12 rounded-2xl bg-[#2980B9] flex items-center justify-center shadow-lg"
     >
-      <Star className="w-3.5 h-3.5 text-amber-500" />
+      <Award className="w-6 h-6 text-white" />
     </motion.div>
   </>
 );
