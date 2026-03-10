@@ -119,21 +119,29 @@ const FloatingParticles = () => {
 const GradientOrbs = () => {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      {/* Top-right orb */}
       <motion.div 
-        className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full bg-gradient-to-br from-green-primary/15 via-green-teal/10 to-transparent blur-[100px]"
-        animate={{ 
-          scale: [1, 1.2, 1],
-          x: [0, 30, 0],
-        }}
+        className="absolute top-0 right-0 w-[550px] h-[550px] rounded-full bg-gradient-to-br from-green-primary/15 via-green-teal/10 to-transparent blur-[110px]"
+        animate={{ scale: [1, 1.2, 1], x: [0, 30, 0] }}
         transition={{ duration: 15, repeat: Infinity, ease: 'easeInOut' }}
       />
+      {/* Bottom-left orb */}
       <motion.div 
-        className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full bg-gradient-to-tr from-green-light/15 via-green-teal/10 to-transparent blur-[80px]"
-        animate={{ 
-          scale: [1.2, 1, 1.2],
-          x: [0, -30, 0],
-        }}
+        className="absolute bottom-0 left-0 w-[450px] h-[450px] rounded-full bg-gradient-to-tr from-green-light/15 via-green-teal/10 to-transparent blur-[90px]"
+        animate={{ scale: [1.2, 1, 1.2], x: [0, -30, 0] }}
         transition={{ duration: 18, repeat: Infinity, ease: 'easeInOut' }}
+      />
+      {/* Center subtle glow */}
+      <motion.div 
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] rounded-full bg-gradient-to-r from-green-primary/5 via-green-teal/8 to-green-light/5 blur-[80px]"
+        animate={{ scale: [1, 1.1, 1], opacity: [0.6, 1, 0.6] }}
+        transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
+      />
+      {/* Top-center accent */}
+      <motion.div 
+        className="absolute -top-20 left-1/2 -translate-x-1/2 w-[300px] h-[300px] rounded-full bg-gradient-to-b from-green-primary/8 to-transparent blur-[60px]"
+        animate={{ y: [0, 20, 0], opacity: [0.4, 0.7, 0.4] }}
+        transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
       />
     </div>
   );
@@ -455,7 +463,11 @@ const ImageShowcase = () => {
   return (
     <div className="relative">
       {/* Main Preview with Floating Elements */}
-      <div className="relative transform scale-105 origin-center">
+      <motion.div
+        className="relative transform scale-105 origin-center"
+        animate={{ y: [0, -8, 0] }}
+        transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
+      >
         <AnimatePresence mode="wait">
           <motion.div
             key={currentIndex}
@@ -474,7 +486,7 @@ const ImageShowcase = () => {
         
         {/* Floating Elements - positioned relative to the preview card */}
         <FloatingElements />
-      </div>
+      </motion.div>
 
       {/* Navigation Dots */}
       <div className="flex justify-center gap-1.5 mt-8">
@@ -546,13 +558,18 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="mb-8"
+              className="mb-5"
             >
               <motion.span 
-                className="inline-flex items-center gap-2 text-green-primary dark:text-green-light text-sm font-bold"
+                className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-green-primary/10 dark:bg-green-primary/20 border border-green-primary/20 text-green-primary dark:text-green-light text-sm font-bold"
                 whileHover={{ scale: 1.05 }}
               >
-                <Sparkles className="w-4 h-4" />
+                <motion.span
+                  animate={{ rotate: [0, 15, -10, 0] }}
+                  transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut', repeatDelay: 1 }}
+                >
+                  <Sparkles className="w-4 h-4" />
+                </motion.span>
                 أنجز أعمالك باحترافية
               </motion.span>
             </motion.div>
@@ -562,13 +579,21 @@ export default function Hero() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="mb-12"
+              className="mb-6"
             >
               <h1 className="text-6xl sm:text-6xl lg:text-8xl xl:text-9xl font-extrabold leading-tight tracking-tight">
                 <span className="bg-gradient-to-r from-green-primary via-green-teal to-green-light bg-clip-text text-transparent">
                   منصة مهني
                 </span>
               </h1>
+              {/* Decorative underline accent */}
+              <motion.div
+                initial={{ scaleX: 0, opacity: 0 }}
+                animate={{ scaleX: 1, opacity: 1 }}
+                transition={{ duration: 0.8, delay: 0.5, ease: [0.4, 0, 0.2, 1] }}
+                className="h-1 mt-2 rounded-full bg-gradient-to-r from-green-primary via-green-teal to-green-light origin-right"
+                style={{ maxWidth: '60%' }}
+              />
             </motion.div>
 
             {/* Marketing Subtitle */}
@@ -600,7 +625,8 @@ export default function Hero() {
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 0.3 + i * 0.1 }}
-                  className="flex items-center gap-2 px-4 py-2 bg-white/60 dark:bg-[#1B2D2B]/60 rounded-full border border-green-primary/10"
+                  whileHover={{ y: -2, scale: 1.05, boxShadow: '0 8px 20px rgba(45,106,79,0.12)' }}
+                  className="flex items-center gap-2 px-4 py-2 bg-white/70 dark:bg-[#1B2D2B]/70 rounded-full border border-green-primary/10 hover:border-green-primary/30 backdrop-blur-sm cursor-default transition-colors"
                 >
                   <feature.icon className="w-4 h-4 text-green-primary" />
                   <span className="text-sm text-gray-700 dark:text-gray-300">{feature.text}</span>
@@ -615,11 +641,17 @@ export default function Hero() {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 sm:gap-4 mb-6"
             >
-              <motion.div whileHover={{ scale: 1.08, y: -2 }} whileTap={{ scale: 0.96 }}>
+              <motion.div whileHover={{ scale: 1.08, y: -2 }} whileTap={{ scale: 0.96 }} className="relative">
+                {/* Subtle pulse ring */}
+                <motion.span
+                  className="absolute inset-0 rounded-2xl bg-green-primary/30 pointer-events-none"
+                  animate={{ scale: [1, 1.18, 1], opacity: [0.5, 0, 0.5] }}
+                  transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
+                />
                 <Link href={ROUTES.START}>
                   <Button
                     size="lg"
-                    className="bg-gradient-to-r from-green-primary to-green-teal text-white px-10 py-7 text-lg rounded-2xl shadow-lg hover:shadow-[0_20px_40px_rgba(45,106,79,0.3)] transition-all duration-300 group font-bold hover:from-green-primary/95 hover:to-green-teal/95"
+                    className="relative bg-gradient-to-r from-green-primary to-green-teal text-white px-10 py-7 text-lg rounded-2xl shadow-lg hover:shadow-[0_20px_40px_rgba(45,106,79,0.35)] transition-all duration-300 group font-bold hover:from-green-primary/95 hover:to-green-teal/95"
                   >
                     ابدأ مجاناً
                     <ArrowLeft className="w-5 h-5 mr-2 group-hover:-translate-x-1 transition-transform" />
@@ -680,7 +712,13 @@ export default function Hero() {
             className="order-1 lg:order-2 relative pb-12 lg:pb-0"
           >
             {/* Glow Effect */}
-            <div className="absolute -inset-2 lg:-inset-4 bg-gradient-to-r from-green-primary/20 via-green-teal/20 to-green-light/20 rounded-[2rem] lg:rounded-[3rem] blur-2xl lg:blur-3xl opacity-60" />
+            <div className="absolute -inset-2 lg:-inset-4 bg-gradient-to-r from-green-primary/25 via-green-teal/20 to-green-light/20 rounded-[2rem] lg:rounded-[3rem] blur-2xl lg:blur-3xl opacity-70" />
+            {/* Second inner glow ring for depth */}
+            <motion.div
+              className="absolute -inset-1 lg:-inset-2 bg-gradient-to-br from-green-primary/10 to-transparent rounded-[2rem] lg:rounded-[3rem] blur-xl"
+              animate={{ opacity: [0.4, 0.8, 0.4] }}
+              transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+            />
             
             {/* Image Showcase Container */}
             <div className="relative mx-auto lg:mx-0 max-w-[300px] sm:max-w-[360px] lg:max-w-[420px]">
@@ -715,8 +753,9 @@ export default function Hero() {
               return (
                 <motion.div 
                   key={index}
-                  whileHover={{ y: -3, scale: 1.02 }}
-                  className={`relative ${bgColors[index]} dark:bg-opacity-10 rounded-xl p-3 sm:p-4 border border-transparent hover:border-green-primary/20 transition-all overflow-hidden group`}
+                  whileHover={{ y: -5, scale: 1.03 }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                  className={`relative ${bgColors[index]} dark:bg-opacity-10 rounded-xl p-3 sm:p-4 border border-transparent hover:border-green-primary/20 hover:shadow-[0_12px_32px_rgba(45,106,79,0.15)] transition-all overflow-hidden group cursor-pointer`}
                 >
                   {/* Top icon with gradient */}
                   <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-gradient-to-br ${colors[index]} flex items-center justify-center mb-2 shadow-md group-hover:shadow-lg transition-shadow`}>
