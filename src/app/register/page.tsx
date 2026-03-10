@@ -21,27 +21,36 @@ import {
   Loader2,
 } from 'lucide-react';
 import { ROUTES } from '@/lib/routes';
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
-import { supabase } from '@/lib/supabase';
-=======
-import { supabase } from '@/lib/supabase/client';
->>>>>>> theirs
-=======
-import { supabase } from '@/lib/supabase/client';
->>>>>>> theirs
-=======
-import { supabase } from '@/lib/supabase/client';
->>>>>>> theirs
-=======
-import { supabase } from '@/lib/supabase/client';
->>>>>>> theirs
-=======
-import { supabase } from '@/lib/supabase/client';
->>>>>>> theirs
+import { supabase, isSupabaseConfigured } from '@/lib/supabase/client';
+
+// Show configuration message when Supabase is not set up
+function SupabaseNotConfigured() {
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gradient-hero dark:bg-gradient-dark-hero relative overflow-hidden py-8">
+      <div className="absolute inset-0 pattern-grid opacity-50" />
+      <div className="relative z-10 w-full max-w-lg px-4">
+        <div className="bg-white dark:bg-[#1B2D2B] rounded-2xl shadow-2xl border border-green-primary/10 p-8 text-center">
+          <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center">
+            <Lock className="w-8 h-8 text-amber-600 dark:text-amber-400" />
+          </div>
+          <h1 className="text-2xl font-bold text-green-dark dark:text-white mb-3">
+            إعداد قاعدة البيانات مطلوب
+          </h1>
+          <p className="text-gray-medium dark:text-gray-light mb-6">
+            التسجيل غير متاح حالياً. يرجى إعداد متغيرات بيئة Supabase للمتابعة.
+          </p>
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 text-green-primary hover:underline font-medium"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            العودة للصفحة الرئيسية
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 const plans = [
   { slug: 'free', name: 'مجانية', price: '0', features: ['10 قوالب', '3 أدوات', '50 MB تخزين'] },
@@ -50,42 +59,18 @@ const plans = [
 ];
 
 export default function RegisterPage() {
+  // Show configuration message when Supabase is not set up
+  if (!isSupabaseConfigured) {
+    return <SupabaseNotConfigured />;
+  }
+
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [step, setStep] = useState(1);
   const [selectedPlan, setSelectedPlan] = useState(0);
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
   const [loading, setLoading] = useState(false);
-
-=======
   const [errorMessage, setErrorMessage] = useState('');
   const [infoMessage, setInfoMessage] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
->>>>>>> theirs
-=======
-  const [errorMessage, setErrorMessage] = useState('');
-  const [infoMessage, setInfoMessage] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
->>>>>>> theirs
-=======
-  const [errorMessage, setErrorMessage] = useState('');
-  const [infoMessage, setInfoMessage] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
->>>>>>> theirs
-=======
-  const [errorMessage, setErrorMessage] = useState('');
-  const [infoMessage, setInfoMessage] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
->>>>>>> theirs
-=======
-  const [errorMessage, setErrorMessage] = useState('');
-  const [infoMessage, setInfoMessage] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
->>>>>>> theirs
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -94,16 +79,38 @@ export default function RegisterPage() {
     agreeTerms: false,
   });
 
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
-  const handleStepOne = (e: React.FormEvent) => {
+  const handleStepOne = async (e: React.FormEvent) => {
     e.preventDefault();
+    setErrorMessage('');
+    setInfoMessage('');
 
     if (!formData.agreeTerms) {
-      alert('يجب الموافقة على الشروط وسياسة الخصوصية');
+      setErrorMessage('يجب الموافقة على الشروط وسياسة الخصوصية');
+      return;
+    }
+
+    setLoading(true);
+
+    const { data, error } = await supabase.auth.signUp({
+      email: formData.email.trim(),
+      password: formData.password,
+      options: {
+        data: {
+          full_name: formData.fullName,
+          organization: formData.organization,
+        },
+      },
+    });
+
+    setLoading(false);
+
+    if (error) {
+      setErrorMessage(error.message);
+      return;
+    }
+
+    if (!data.session) {
+      setInfoMessage('تحقق من بريدك الإلكتروني لتأكيد الحساب');
       return;
     }
 
@@ -113,135 +120,12 @@ export default function RegisterPage() {
   const handleFinalSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    try {
-      setLoading(true);
-
-      const selectedPlanData = plans[selectedPlan];
-
-      const { data, error } = await supabase.auth.signUp({
-        email: formData.email.trim(),
-=======
-=======
->>>>>>> theirs
-=======
->>>>>>> theirs
-=======
->>>>>>> theirs
-=======
->>>>>>> theirs
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setErrorMessage('');
-
-    if (step === 1) {
-      setInfoMessage('');
-      setIsSubmitting(true);
-
-      const { data, error } = await supabase.auth.signUp({
-        email: formData.email,
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
->>>>>>> theirs
-=======
->>>>>>> theirs
-=======
->>>>>>> theirs
-=======
->>>>>>> theirs
-=======
->>>>>>> theirs
-        password: formData.password,
-        options: {
-          data: {
-            full_name: formData.fullName,
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
-            organization: formData.organization,
-            selected_plan: selectedPlanData.slug,
-=======
->>>>>>> theirs
-=======
->>>>>>> theirs
-=======
->>>>>>> theirs
-=======
->>>>>>> theirs
-=======
->>>>>>> theirs
-          },
-        },
-      });
-
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
-      if (error) {
-        alert(error.message);
-        return;
-      }
-
-      if (data.session) {
-        alert('تم إنشاء الحساب وتسجيل دخولك بنجاح.');
-        window.location.href = ROUTES.DASHBOARD;
-        return;
-      }
-
-      alert('تم إنشاء الحساب بنجاح. يمكنك الآن تسجيل الدخول.');
-      router.push(ROUTES.LOGIN);
-    } catch {
-      alert('حدث خطأ غير متوقع أثناء إنشاء الحساب');
-    } finally {
-      setLoading(false);
-=======
-=======
->>>>>>> theirs
-=======
->>>>>>> theirs
-=======
->>>>>>> theirs
-=======
->>>>>>> theirs
-      setIsSubmitting(false);
-
-      if (error) {
-        setErrorMessage(error.message);
-        return;
-      }
-
-      if (!data.session) {
-        setInfoMessage('تحقق من بريدك');
-        return;
-      }
-
-      setStep(2);
-      return;
-    }
-
     const selectedPlanData = plans[selectedPlan];
+    
     if (selectedPlanData.price === '0') {
       router.push(ROUTES.DASHBOARD);
     } else {
       router.push(`/payment?plan=${selectedPlan}`);
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
->>>>>>> theirs
-=======
->>>>>>> theirs
-=======
->>>>>>> theirs
-=======
->>>>>>> theirs
-=======
->>>>>>> theirs
     }
   };
 
@@ -392,20 +276,6 @@ export default function RegisterPage() {
                   </div>
                 </div>
 
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
-=======
-=======
->>>>>>> theirs
-=======
->>>>>>> theirs
-=======
->>>>>>> theirs
-=======
->>>>>>> theirs
                 {errorMessage && (
                   <p className="text-sm text-red-600 dark:text-red-400">{errorMessage}</p>
                 )}
@@ -414,8 +284,6 @@ export default function RegisterPage() {
                   <p className="text-sm text-emerald-700 dark:text-emerald-300">{infoMessage}</p>
                 )}
 
-                {/* Terms */}
->>>>>>> theirs
                 <div className="flex items-start gap-2">
                   <Checkbox
                     id="terms"
@@ -439,11 +307,20 @@ export default function RegisterPage() {
 
                 <Button
                   type="submit"
-                  disabled={isSubmitting}
-                  className="w-full h-12 bg-gradient-to-r from-green-primary to-green-teal text-white rounded-xl shadow-btn hover:shadow-card-hover transition-all hover:-translate-y-0.5"
+                  disabled={loading}
+                  className="w-full h-12 bg-gradient-to-r from-green-primary to-green-teal text-white rounded-xl shadow-btn hover:shadow-card-hover transition-all hover:-translate-y-0.5 disabled:opacity-70"
                 >
-                  {isSubmitting ? 'جارٍ إنشاء الحساب...' : 'متابعة'}
-                  <ArrowLeft className="w-5 h-5 mr-2" />
+                  {loading ? (
+                    <>
+                      <Loader2 className="w-5 h-5 ml-2 animate-spin" />
+                      جاري إنشاء الحساب...
+                    </>
+                  ) : (
+                    <>
+                      متابعة
+                      <ArrowLeft className="w-5 h-5 mr-2" />
+                    </>
+                  )}
                 </Button>
               </form>
             </>
@@ -504,20 +381,10 @@ export default function RegisterPage() {
                   </Button>
                   <Button
                     type="submit"
-                    disabled={loading}
-                    className="flex-1 h-12 bg-gradient-to-r from-green-primary to-green-teal text-white rounded-xl shadow-btn hover:shadow-card-hover transition-all hover:-translate-y-0.5 disabled:opacity-70"
+                    className="flex-1 h-12 bg-gradient-to-r from-green-primary to-green-teal text-white rounded-xl shadow-btn hover:shadow-card-hover transition-all hover:-translate-y-0.5"
                   >
-                    {loading ? (
-                      <>
-                        <Loader2 className="w-5 h-5 ml-2 animate-spin" />
-                        جاري الإنشاء...
-                      </>
-                    ) : (
-                      <>
-                        إنشاء الحساب
-                        <ArrowLeft className="w-5 h-5 mr-2" />
-                      </>
-                    )}
+                    إنشاء الحساب
+                    <ArrowLeft className="w-5 h-5 mr-2" />
                   </Button>
                 </div>
               </form>
@@ -539,7 +406,7 @@ export default function RegisterPage() {
           className="text-center mt-6"
         >
           <Link href="/" className="text-gray-medium hover:text-green-primary transition-colors text-sm">
-            العودة للصفحة الرئيسية
+            ��لعودة للصفحة الرئيسية
           </Link>
         </motion.div>
       </div>

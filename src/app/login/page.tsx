@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -17,73 +18,54 @@ import {
   Loader2,
 } from 'lucide-react';
 import { ROUTES } from '@/lib/routes';
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
-import { supabase } from '@/lib/supabase';
-=======
-import { supabase } from '@/lib/supabase/client';
->>>>>>> theirs
-=======
-import { supabase } from '@/lib/supabase/client';
->>>>>>> theirs
-=======
-import { supabase } from '@/lib/supabase/client';
->>>>>>> theirs
-=======
-import { supabase } from '@/lib/supabase/client';
->>>>>>> theirs
-=======
-import { supabase } from '@/lib/supabase/client';
->>>>>>> theirs
+import { supabase, isSupabaseConfigured } from '@/lib/supabase/client';
 
 export default function LoginPage() {
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
   const [loading, setLoading] = useState(false);
-
-=======
   const [errorMessage, setErrorMessage] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
->>>>>>> theirs
-=======
-  const [errorMessage, setErrorMessage] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
->>>>>>> theirs
-=======
-  const [errorMessage, setErrorMessage] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
->>>>>>> theirs
-=======
-  const [errorMessage, setErrorMessage] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
->>>>>>> theirs
-=======
-  const [errorMessage, setErrorMessage] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
->>>>>>> theirs
   const [formData, setFormData] = useState({
     email: '',
     password: '',
     remember: false,
   });
 
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
+  // Show configuration message when Supabase is not set up
+  if (!isSupabaseConfigured) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-hero dark:bg-gradient-dark-hero relative overflow-hidden py-8">
+        <div className="absolute inset-0 pattern-grid opacity-50" />
+        <div className="relative z-10 w-full max-w-lg px-4">
+          <div className="bg-white dark:bg-[#1B2D2B] rounded-2xl shadow-2xl border border-green-primary/10 p-8 text-center">
+            <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center">
+              <Lock className="w-8 h-8 text-amber-600 dark:text-amber-400" />
+            </div>
+            <h1 className="text-2xl font-bold text-green-dark dark:text-white mb-3">
+              إعداد قاعدة البيانات مطلوب
+            </h1>
+            <p className="text-gray-medium dark:text-gray-light mb-6">
+              تسجيل الدخول غير متاح حالياً. يرجى إعداد متغيرات بيئة Supabase للمتابعة.
+            </p>
+            <Link
+              href="/"
+              className="inline-flex items-center gap-2 text-green-primary hover:underline font-medium"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              العودة للصفحة الرئيسية
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
+    setErrorMessage('');
 
     if (!formData.email || !formData.password) {
-      alert('يرجى إدخال البريد الإلكتروني وكلمة المرور');
+      setErrorMessage('يرجى إدخال البريد الإلكتروني وكلمة المرور');
       return;
     }
 
@@ -96,12 +78,12 @@ export default function LoginPage() {
       });
 
       if (error) {
-        alert(error.message);
+        setErrorMessage(error.message);
         return;
       }
 
       if (!data.session) {
-        alert('تم تسجيل الدخول لكن لم يتم إنشاء session.');
+        setErrorMessage('تم تسجيل الدخول لكن لم يتم إنشاء session.');
         return;
       }
 
@@ -118,40 +100,13 @@ export default function LoginPage() {
         refresh_token: data.session.refresh_token,
       });
 
-      window.location.href = ROUTES.DASHBOARD;
-    } catch (err: any) {
-      alert(err?.message || 'حدث خطأ أثناء تسجيل الدخول');
+      router.push(ROUTES.DASHBOARD);
+    } catch (err: unknown) {
+      const errorMsg = err instanceof Error ? err.message : 'حدث خطأ أثناء تسجيل الدخول';
+      setErrorMessage(errorMsg);
     } finally {
       setLoading(false);
     }
-=======
-=======
->>>>>>> theirs
-=======
->>>>>>> theirs
-=======
->>>>>>> theirs
-=======
->>>>>>> theirs
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setErrorMessage('');
-    setIsSubmitting(true);
-
-    const { error } = await supabase.auth.signInWithPassword({
-      email: formData.email,
-      password: formData.password,
-    });
-
-    setIsSubmitting(false);
-
-    if (error) {
-      setErrorMessage(error.message);
-      return;
-    }
-
-    router.push(ROUTES.DASHBOARD);
->>>>>>> theirs
   };
 
   return (
@@ -222,7 +177,7 @@ export default function LoginPage() {
                 <Input
                   id="password"
                   type={showPassword ? 'text' : 'password'}
-                  placeholder="••••••••"
+                  placeholder="********"
                   value={formData.password}
                   onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                   className="pr-10 pl-12 h-12 bg-cream dark:bg-[#152B26] border-green-primary/20 focus:border-green-primary"
@@ -238,37 +193,10 @@ export default function LoginPage() {
               </div>
             </div>
 
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
-            <div className="flex items-start gap-2">
-              <Checkbox
-                id="remember"
-                checked={formData.remember}
-                onCheckedChange={(checked) =>
-                  setFormData({ ...formData, remember: checked as boolean })
-                }
-                className="mt-1 border-green-primary/30 data-[state=checked]:bg-green-primary data-[state=checked]:border-green-primary"
-              />
-              <Label htmlFor="remember" className="text-sm text-gray-medium cursor-pointer leading-relaxed">
-                تذكّرني على هذا الجهاز
-              </Label>
-=======
-=======
->>>>>>> theirs
-=======
->>>>>>> theirs
-=======
->>>>>>> theirs
-=======
->>>>>>> theirs
             {errorMessage && (
               <p className="text-sm text-red-600 dark:text-red-400">{errorMessage}</p>
             )}
 
-            {/* Remember & Forgot */}
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <Checkbox
@@ -284,16 +212,10 @@ export default function LoginPage() {
               <Link href="#" className="text-sm text-green-primary hover:underline">
                 نسيت كلمة المرور؟
               </Link>
->>>>>>> theirs
             </div>
 
             <Button
               type="submit"
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
               disabled={loading}
               className="w-full h-12 bg-gradient-to-r from-green-primary to-green-teal text-white rounded-xl shadow-btn hover:shadow-card-hover transition-all hover:-translate-y-0.5 disabled:opacity-70"
             >
@@ -308,32 +230,6 @@ export default function LoginPage() {
                   <ArrowLeft className="w-5 h-5 mr-2" />
                 </>
               )}
-=======
-=======
->>>>>>> theirs
-=======
->>>>>>> theirs
-=======
->>>>>>> theirs
-=======
->>>>>>> theirs
-              disabled={isSubmitting}
-              className="w-full h-12 bg-gradient-to-r from-green-primary to-green-teal text-white rounded-xl shadow-btn hover:shadow-card-hover transition-all hover:-translate-y-0.5"
-            >
-              {isSubmitting ? 'جارٍ تسجيل الدخول...' : 'تسجيل الدخول'}
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
->>>>>>> theirs
-=======
->>>>>>> theirs
-=======
->>>>>>> theirs
-=======
->>>>>>> theirs
-=======
->>>>>>> theirs
             </Button>
           </form>
 
