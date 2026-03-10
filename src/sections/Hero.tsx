@@ -659,20 +659,16 @@ export default function Hero() {
           
           {/* Left Side - Content */}
           <div className="text-center lg:text-right order-2 lg:order-1 pt-4 lg:pt-8">
-            {/* Badge */}
+            {/* Small line above title */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="mb-6"
+              className="mb-4"
             >
-              <motion.span 
-                className="inline-flex items-center gap-2 text-green-primary dark:text-green-light text-sm font-bold"
-                whileHover={{ scale: 1.05 }}
-              >
-                <Sparkles className="w-4 h-4" />
-                منصة مِهني - احترافية في كل تفصيلة
-              </motion.span>
+              <p className="text-base sm:text-lg font-semibold text-gray-600 dark:text-gray-400">
+                أنجز أعمالك باحترافية مع
+              </p>
             </motion.div>
 
             {/* Main Heading */}
@@ -680,14 +676,11 @@ export default function Hero() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="mb-6"
+              className="mb-8"
             >
               <h1 className="text-5xl sm:text-5xl lg:text-7xl xl:text-8xl font-extrabold leading-tight">
-                <span className="text-green-dark dark:text-white lg:inline block">
-                  منصة{' '}
-                </span>
                 <span className="bg-gradient-to-r from-green-primary via-green-teal to-green-light bg-clip-text text-transparent">
-                  مِهني
+                  منصة مِهني
                 </span>
               </h1>
             </motion.div>
@@ -697,70 +690,52 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="mb-8"
+              className="mb-10"
             >
-              <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
-                <span className="text-green-primary font-bold">وفّر وقتك</span> وأنجز عملك باحترافية مع{' '}
-                <span className="font-semibold">قوالب جاهزة</span> وأدوات تنفيذية متكاملة
-              </p>
-              <p className="text-gray-500 mt-3">
-                شهادات • تقييمات • خطط • تقارير • اختبارات • جداول • تصاميم
+              <p className="text-lg sm:text-xl text-gray-700 dark:text-gray-300 leading-relaxed max-w-lg mx-auto lg:mx-0">
+                منصة رقمية تساعد المدارس والمؤسسات والشركات والأفراد على إنجاز أعمالهم بسرعة واحترافية باستخدام قوالب ذكية وأدوات عملية.
               </p>
             </motion.div>
 
-            {/* Features List */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.25 }}
-              className="flex flex-wrap justify-center lg:justify-start gap-3 mb-8"
-            >
-              {[
-                { icon: Palette, text: 'تخصيص سهل' },
-                { icon: Download, text: 'تصدير فوري' },
-                { icon: Clock, text: 'توفر الوقت' },
-              ].map((feature, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.3 + i * 0.1 }}
-                  className="flex items-center gap-2 px-4 py-2 bg-white/60 dark:bg-[#1B2D2B]/60 rounded-full border border-green-primary/10"
-                >
-                  <feature.icon className="w-4 h-4 text-green-primary" />
-                  <span className="text-sm text-gray-700 dark:text-gray-300">{feature.text}</span>
-                </motion.div>
-              ))}
-            </motion.div>
+
+            {/* Removed features list for cleaner layout */}
 
             {/* CTA Buttons */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-8"
+              className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-12"
             >
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
-                <Link href={ROUTES.START}>
+              <motion.div 
+                whileHover={{ scale: 1.05 }} 
+                whileTap={{ scale: 0.98 }}
+                className="w-full sm:w-auto"
+              >
+                <Link href={ROUTES.START} className="w-full sm:w-auto">
                   <Button
                     size="lg"
-                    className="bg-gradient-to-r from-green-primary to-green-teal text-white px-8 py-6 text-lg rounded-2xl shadow-xl hover:shadow-2xl transition-all group font-bold"
+                    className="w-full sm:w-auto bg-gradient-to-r from-green-primary to-green-teal text-white px-8 h-14 text-base rounded-xl shadow-lg hover:shadow-xl transition-all group font-semibold hover:scale-105"
                   >
                     ابدأ مجاناً
-                    <ArrowLeft className="w-5 h-5 mr-2 group-hover:-translate-x-1 transition-transform" />
+                    <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" />
                   </Button>
                 </Link>
               </motion.div>
               
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
-                <Link href={getHomeSectionUrl('templates')}>
+              <motion.div 
+                whileHover={{ scale: 1.05 }} 
+                whileTap={{ scale: 0.98 }}
+                className="w-full sm:w-auto"
+              >
+                <Link href={getHomeSectionUrl('templates')} className="w-full sm:w-auto">
                   <Button
                     size="lg"
                     variant="outline"
-                    className="border-2 border-green-primary/30 text-green-primary hover:bg-green-primary/10 hover:border-green-primary px-8 py-6 text-lg rounded-2xl transition-all font-bold bg-white/50 backdrop-blur-sm"
+                    className="w-full sm:w-auto border border-green-primary/40 text-green-primary hover:bg-green-primary/5 hover:border-green-primary/80 px-8 h-14 text-base rounded-xl transition-all font-semibold bg-white/70 dark:bg-[#1B2D2B]/70 backdrop-blur-sm hover:scale-105"
                   >
-                    <Play className="w-5 h-5 mr-2" />
-                    استكشف القوالب
+                    <Play className="w-4 h-4 mr-2" />
+                    استكشف قوالبنا
                   </Button>
                 </Link>
               </motion.div>
@@ -774,10 +749,10 @@ export default function Hero() {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="order-1 lg:order-2 relative pb-16 lg:pb-20"
+            className="order-1 lg:order-2 relative pb-12 lg:pb-16"
           >
             {/* Glow Effect */}
-            <div className="absolute -inset-2 lg:-inset-4 bg-gradient-to-r from-green-primary/20 via-green-teal/20 to-green-light/20 rounded-[2rem] lg:rounded-[3rem] blur-2xl lg:blur-3xl opacity-60" />
+            <div className="absolute -inset-2 lg:-inset-4 bg-gradient-to-r from-green-primary/20 via-green-teal/20 to-green-light/20 rounded-2xl lg:rounded-3xl blur-2xl lg:blur-3xl opacity-50" />
             
             {/* Image Showcase Container */}
             <div className="relative mx-auto lg:mx-0 max-w-[320px] sm:max-w-[400px] lg:max-w-[480px]">
@@ -791,9 +766,9 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5 }}
-          className="mt-10 lg:mt-16"
+          className="mt-16 lg:mt-20"
         >
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
             {stats.map((stat, index) => {
               const Icon = stat.icon;
               const colors = [
@@ -812,24 +787,24 @@ export default function Hero() {
               return (
                 <motion.div 
                   key={index}
-                  whileHover={{ y: -3, scale: 1.02 }}
-                  className={`relative ${bgColors[index]} dark:bg-opacity-10 rounded-xl p-3 sm:p-4 border border-transparent hover:border-green-primary/20 transition-all overflow-hidden group`}
+                  whileHover={{ y: -4, scale: 1.02 }}
+                  className={`relative ${bgColors[index]} dark:bg-opacity-10 rounded-lg p-5 sm:p-6 border border-transparent hover:border-green-primary/30 transition-all overflow-hidden group`}
                 >
                   {/* Top icon with gradient */}
-                  <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-gradient-to-br ${colors[index]} flex items-center justify-center mb-2 shadow-md group-hover:shadow-lg transition-shadow`}>
-                    <Icon className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+                  <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-gradient-to-br ${colors[index]} flex items-center justify-center mb-3 shadow-md group-hover:shadow-lg transition-shadow`}>
+                    <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
                   </div>
                   
                   {/* Number */}
-                  <div className="text-xl sm:text-2xl lg:text-3xl font-bold text-green-dark dark:text-white mb-0.5">
+                  <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-green-dark dark:text-white mb-1">
                     <AnimatedCounter value={stat.value} suffix={stat.suffix} />
                   </div>
                   
                   {/* Label */}
-                  <div className="text-[10px] sm:text-xs text-gray-500">{stat.label}</div>
+                  <div className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 font-medium">{stat.label}</div>
                   
                   {/* Subtle decoration */}
-                  <div className={`absolute -bottom-2 -right-2 w-12 h-12 rounded-full bg-gradient-to-br ${colors[index]} opacity-10 group-hover:opacity-20 transition-opacity`} />
+                  <div className={`absolute -bottom-3 -right-3 w-16 h-16 rounded-full bg-gradient-to-br ${colors[index]} opacity-10 group-hover:opacity-15 transition-opacity`} />
                 </motion.div>
               );
             })}
