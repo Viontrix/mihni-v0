@@ -742,7 +742,7 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-[#F0F9F4] via-[#E8F5E9] to-[#C8E6C9] dark:from-[#0A1F1A] dark:via-[#0D1B1A] dark:to-[#0A1512]"
+      className="relative overflow-hidden bg-gradient-to-br from-[#F0F9F4] via-[#E8F5E9] to-[#C8E6C9] dark:from-[#0A1F1A] dark:via-[#0D1B1A] dark:to-[#0A1512]"
     >
       {/* Background Effects */}
       <GradientOrbs />
@@ -762,12 +762,14 @@ export default function Hero() {
         />
       </div>
 
-      {/* Main Content */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 sm:pt-32 lg:pt-28 pb-8 lg:pb-12">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-start">
-          
-          {/* Left Side - Content */}
-          <div className="text-center lg:text-right order-2 lg:order-1 pt-4 lg:pt-12">
+      {/* Main Content Wrapper */}
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        {/* ── Upper Section: Content + Slider ── */}
+        <div className="pt-28 sm:pt-32 lg:pt-28 pb-10 lg:pb-14 flex flex-col lg:flex-row items-center lg:items-stretch gap-10 lg:gap-16">
+
+          {/* Content Side */}
+          <div className="w-full lg:flex-1 text-center lg:text-right flex flex-col justify-center">
             {/* Badge */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -848,7 +850,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-8"
+              className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4"
             >
               <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
                 <Link href={ROUTES.START}>
@@ -879,29 +881,29 @@ export default function Hero() {
 
           </div>
 
-          {/* Right Side - Image Showcase */}
+          {/* Slider Side */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="order-1 lg:order-2 relative pt-0 lg:pt-12"
+            className="w-full lg:w-[480px] xl:w-[520px] flex-shrink-0 relative"
           >
             {/* Glow Effect */}
-            <div className="absolute -inset-2 lg:-inset-4 bg-gradient-to-r from-green-primary/20 via-green-teal/20 to-green-light/20 rounded-[2rem] lg:rounded-[3rem] blur-2xl lg:blur-3xl opacity-60" />
+            <div className="absolute -inset-2 lg:-inset-4 bg-gradient-to-r from-green-primary/20 via-green-teal/20 to-green-light/20 rounded-[2rem] lg:rounded-[3rem] blur-2xl lg:blur-3xl opacity-60 pointer-events-none" />
             
-            {/* Image Showcase Container */}
-            <div className="relative mx-auto lg:mx-0 max-w-[320px] sm:max-w-[400px] lg:max-w-[480px]">
+            {/* Fixed-size Slider Container */}
+            <div className="relative w-full">
               <ImageShowcase />
             </div>
           </motion.div>
         </div>
 
-        {/* Stats Section */}
+        {/* ── Lower Section: Stats ── */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5 }}
-          className="mt-10 lg:mt-16"
+          className="pb-10 lg:pb-14 border-t border-green-primary/10 pt-8 lg:pt-10"
         >
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
             {stats.map((stat, index) => {
@@ -945,6 +947,7 @@ export default function Hero() {
             })}
           </div>
         </motion.div>
+
       </div>
 
     </section>
