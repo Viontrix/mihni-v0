@@ -93,6 +93,42 @@ const showcaseImages = [
       days: ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس'],
       classes: ['رياضيات', 'علوم', 'عربي', 'إنجليزي', 'فنية']
     }
+  },
+  {
+    id: 6,
+    title: 'منشئ التقارير',
+    description: 'أنشئ تقارير احترافية بسهولة',
+    color: 'from-red-500 to-rose-600',
+    icon: FileText,
+    preview: {
+      title: 'تقرير الأداء',
+      sections: ['ملخص', 'إحصائيات', 'ملاحظات', 'التوصيات'],
+      status: 'جاهز للطباعة'
+    }
+  },
+  {
+    id: 7,
+    title: 'خطط الدروس الذكية',
+    description: 'خطط دروس منظمة وسهلة التخطيط',
+    color: 'from-indigo-500 to-blue-600',
+    icon: FileText,
+    preview: {
+      title: 'خطة درس',
+      elements: ['الأهداف', 'المحتوى', 'الأنشطة', 'التقييم'],
+      duration: '45 دقيقة'
+    }
+  },
+  {
+    id: 8,
+    title: 'لوحات البيانات والتحليلات',
+    description: 'تصور البيانات وتحليلها بفعالية',
+    color: 'from-cyan-500 to-teal-600',
+    icon: TrendingUp,
+    preview: {
+      title: 'تحليلات الأداء',
+      charts: ['الإحصائيات', 'المقارنات', 'التنبؤات'],
+      performance: '92%'
+    }
   }
 ];
 
@@ -580,6 +616,10 @@ const ImageShowcase = () => {
         return <QuizPreview data={currentData} />;
       case 5:
         return <SchedulePreview data={currentData} />;
+      case 6:
+      case 7:
+      case 8:
+        return <DashboardPreview data={currentData} />;
       default:
         return <DashboardPreview data={currentData} />;
     }
@@ -633,7 +673,7 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-[#F0F9F4] via-[#E8F5E9] to-[#C8E6C9] dark:from-[#0A1F1A] dark:via-[#0D1B1A] dark:to-[#0A1512]"
+      className="relative min-h-[90vh] flex items-center overflow-hidden bg-gradient-to-br from-[#F0F9F4] via-[#E8F5E9] to-[#C8E6C9] dark:from-[#0A1F1A] dark:via-[#0D1B1A] dark:to-[#0A1512]"
     >
       {/* Background Effects */}
       <GradientOrbs />
@@ -659,20 +699,16 @@ export default function Hero() {
           
           {/* Left Side - Content */}
           <div className="text-center lg:text-right order-2 lg:order-1 pt-4 lg:pt-8">
-            {/* Badge */}
+            {/* Subtitle - Above Title */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="mb-6"
+              className="mb-4"
             >
-              <motion.span 
-                className="inline-flex items-center gap-2 text-green-primary dark:text-green-light text-sm font-bold"
-                whileHover={{ scale: 1.05 }}
-              >
-                <Sparkles className="w-4 h-4" />
-                منصة مِهني - احترافية في كل تفصيلة
-              </motion.span>
+              <p className="text-lg font-semibold text-gray-700 dark:text-gray-300">
+                أنجز أعمالك باحترافية مع
+              </p>
             </motion.div>
 
             {/* Main Heading */}
@@ -682,30 +718,31 @@ export default function Hero() {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="mb-6"
             >
-              <h1 className="text-5xl sm:text-5xl lg:text-7xl xl:text-8xl font-extrabold leading-tight">
+              <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-extrabold leading-tight">
                 <span className="text-green-dark dark:text-white lg:inline block">
                   منصة{' '}
                 </span>
-                <span className="bg-gradient-to-r from-green-primary via-green-teal to-green-light bg-clip-text text-transparent">
+                <span className="text-6xl sm:text-7xl lg:text-8xl xl:text-9xl bg-gradient-to-r from-green-primary via-green-teal to-green-light bg-clip-text text-transparent">
                   مِهني
                 </span>
               </h1>
             </motion.div>
 
-            {/* Marketing Subtitle */}
+            {/* Optional Badge - Subtle Animation */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="mb-8"
+              transition={{ duration: 0.6, delay: 0.15 }}
+              className="mb-8 flex justify-center lg:justify-start"
             >
-              <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
-                <span className="text-green-primary font-bold">وفّر وقتك</span> وأنجز عملك باحترافية مع{' '}
-                <span className="font-semibold">قوالب جاهزة</span> وأدوات تنفيذية متكاملة
-              </p>
-              <p className="text-gray-500 mt-3">
-                شهادات • تقييمات • خطط • تقارير • اختبارات • جداول • تصاميم
-              </p>
+              <motion.span 
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-primary/5 border border-green-primary/20 text-green-primary dark:text-green-light text-sm font-medium"
+                animate={{ opacity: [0.7, 1, 0.7] }}
+                transition={{ duration: 3, repeat: Infinity }}
+              >
+                <Sparkles className="w-4 h-4" />
+                قوالب ذكية وأدوات تنفيذية للمحترفين
+              </motion.span>
             </motion.div>
 
             {/* Features List */}
@@ -744,7 +781,7 @@ export default function Hero() {
                 <Link href={ROUTES.START}>
                   <Button
                     size="lg"
-                    className="bg-gradient-to-r from-green-primary to-green-teal text-white px-8 py-6 text-lg rounded-2xl shadow-xl hover:shadow-2xl transition-all group font-bold"
+                    className="bg-gradient-to-r from-green-primary to-green-teal text-white px-8 py-6 h-14 text-lg rounded-2xl shadow-xl hover:shadow-2xl hover:from-green-primary/90 hover:to-green-teal/90 transition-all group font-bold"
                   >
                     ابدأ مجاناً
                     <ArrowLeft className="w-5 h-5 mr-2 group-hover:-translate-x-1 transition-transform" />
@@ -756,11 +793,10 @@ export default function Hero() {
                 <Link href={getHomeSectionUrl('templates')}>
                   <Button
                     size="lg"
-                    variant="outline"
-                    className="border-2 border-green-primary/30 text-green-primary hover:bg-green-primary/10 hover:border-green-primary px-8 py-6 text-lg rounded-2xl transition-all font-bold bg-white/50 backdrop-blur-sm"
+                    className="border-2 border-green-primary/30 text-green-dark dark:text-green-light px-8 py-6 h-14 text-lg rounded-2xl transition-all font-bold bg-white/50 dark:bg-[#1B2D2B]/50 backdrop-blur-sm hover:bg-green-primary/10 hover:border-green-primary dark:hover:bg-green-primary/20"
                   >
                     <Play className="w-5 h-5 mr-2" />
-                    استكشف القوالب
+                    استكشف قوالبنا
                   </Button>
                 </Link>
               </motion.div>
@@ -786,14 +822,14 @@ export default function Hero() {
           </motion.div>
         </div>
 
-        {/* Stats Section */}
+        {/* Stats Section - Fixed Position */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5 }}
           className="mt-10 lg:mt-16"
         >
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sticky bottom-8 lg:bottom-12">
             {stats.map((stat, index) => {
               const Icon = stat.icon;
               const colors = [
