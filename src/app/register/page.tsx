@@ -21,27 +21,7 @@ import {
   Loader2,
 } from 'lucide-react';
 import { ROUTES } from '@/lib/routes';
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
-import { supabase } from '@/lib/supabase';
-=======
 import { supabase } from '@/lib/supabase/client';
->>>>>>> theirs
-=======
-import { supabase } from '@/lib/supabase/client';
->>>>>>> theirs
-=======
-import { supabase } from '@/lib/supabase/client';
->>>>>>> theirs
-=======
-import { supabase } from '@/lib/supabase/client';
->>>>>>> theirs
-=======
-import { supabase } from '@/lib/supabase/client';
->>>>>>> theirs
 
 const plans = [
   { slug: 'free', name: 'مجانية', price: '0', features: ['10 قوالب', '3 أدوات', '50 MB تخزين'] },
@@ -54,38 +34,9 @@ export default function RegisterPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [step, setStep] = useState(1);
   const [selectedPlan, setSelectedPlan] = useState(0);
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
   const [loading, setLoading] = useState(false);
-
-=======
   const [errorMessage, setErrorMessage] = useState('');
   const [infoMessage, setInfoMessage] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
->>>>>>> theirs
-=======
-  const [errorMessage, setErrorMessage] = useState('');
-  const [infoMessage, setInfoMessage] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
->>>>>>> theirs
-=======
-  const [errorMessage, setErrorMessage] = useState('');
-  const [infoMessage, setInfoMessage] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
->>>>>>> theirs
-=======
-  const [errorMessage, setErrorMessage] = useState('');
-  const [infoMessage, setInfoMessage] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
->>>>>>> theirs
-=======
-  const [errorMessage, setErrorMessage] = useState('');
-  const [infoMessage, setInfoMessage] = useState('');
-  const [isSubmitting, setIsSubmitting] = useState(false);
->>>>>>> theirs
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -94,20 +45,46 @@ export default function RegisterPage() {
     agreeTerms: false,
   });
 
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
-  const handleStepOne = (e: React.FormEvent) => {
+  const handleStepOne = async (e: React.FormEvent) => {
     e.preventDefault();
+    setErrorMessage('');
+    setInfoMessage('');
 
     if (!formData.agreeTerms) {
-      alert('يجب الموافقة على الشروط وسياسة الخصوصية');
+      setErrorMessage('يجب الموافقة على الشروط وسياسة الخصوصية');
       return;
     }
 
-    setStep(2);
+    try {
+      setLoading(true);
+
+      const { data, error } = await supabase.auth.signUp({
+        email: formData.email.trim(),
+        password: formData.password,
+        options: {
+          data: {
+            full_name: formData.fullName,
+            organization: formData.organization,
+          },
+        },
+      });
+
+      if (error) {
+        setErrorMessage(error.message);
+        return;
+      }
+
+      if (!data.session) {
+        setInfoMessage('تم إرسال رابط التأكيد إلى بريدك الإلكتروني. يرجى التحقق منه.');
+        return;
+      }
+
+      setStep(2);
+    } catch (err: any) {
+      setErrorMessage(err?.message || 'حدث خطأ غير متوقع أثناء إنشاء الحساب');
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleFinalSubmit = async (e: React.FormEvent) => {
@@ -118,130 +95,25 @@ export default function RegisterPage() {
 
       const selectedPlanData = plans[selectedPlan];
 
-      const { data, error } = await supabase.auth.signUp({
-        email: formData.email.trim(),
-=======
-=======
->>>>>>> theirs
-=======
->>>>>>> theirs
-=======
->>>>>>> theirs
-=======
->>>>>>> theirs
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setErrorMessage('');
-
-    if (step === 1) {
-      setInfoMessage('');
-      setIsSubmitting(true);
-
-      const { data, error } = await supabase.auth.signUp({
-        email: formData.email,
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
->>>>>>> theirs
-=======
->>>>>>> theirs
-=======
->>>>>>> theirs
-=======
->>>>>>> theirs
-=======
->>>>>>> theirs
-        password: formData.password,
-        options: {
-          data: {
-            full_name: formData.fullName,
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
-            organization: formData.organization,
-            selected_plan: selectedPlanData.slug,
-=======
->>>>>>> theirs
-=======
->>>>>>> theirs
-=======
->>>>>>> theirs
-=======
->>>>>>> theirs
-=======
->>>>>>> theirs
-          },
-        },
+      // Update user metadata with selected plan
+      const { error } = await supabase.auth.updateUser({
+        data: { selected_plan: selectedPlanData.slug },
       });
-
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
-      if (error) {
-        alert(error.message);
-        return;
-      }
-
-      if (data.session) {
-        alert('تم إنشاء الحساب وتسجيل دخولك بنجاح.');
-        window.location.href = ROUTES.DASHBOARD;
-        return;
-      }
-
-      alert('تم إنشاء الحساب بنجاح. يمكنك الآن تسجيل الدخول.');
-      router.push(ROUTES.LOGIN);
-    } catch {
-      alert('حدث خطأ غير متوقع أثناء إنشاء الحساب');
-    } finally {
-      setLoading(false);
-=======
-=======
->>>>>>> theirs
-=======
->>>>>>> theirs
-=======
->>>>>>> theirs
-=======
->>>>>>> theirs
-      setIsSubmitting(false);
 
       if (error) {
         setErrorMessage(error.message);
         return;
       }
 
-      if (!data.session) {
-        setInfoMessage('تحقق من بريدك');
-        return;
+      if (selectedPlanData.price === '0') {
+        router.push(ROUTES.DASHBOARD);
+      } else {
+        router.push(`/payment?plan=${selectedPlan}`);
       }
-
-      setStep(2);
-      return;
-    }
-
-    const selectedPlanData = plans[selectedPlan];
-    if (selectedPlanData.price === '0') {
-      router.push(ROUTES.DASHBOARD);
-    } else {
-      router.push(`/payment?plan=${selectedPlan}`);
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
->>>>>>> theirs
-=======
->>>>>>> theirs
-=======
->>>>>>> theirs
-=======
->>>>>>> theirs
-=======
->>>>>>> theirs
+    } catch {
+      setErrorMessage('حدث خطأ غير متوقع');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -392,20 +264,6 @@ export default function RegisterPage() {
                   </div>
                 </div>
 
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
-<<<<<<< ours
-=======
-=======
->>>>>>> theirs
-=======
->>>>>>> theirs
-=======
->>>>>>> theirs
-=======
->>>>>>> theirs
                 {errorMessage && (
                   <p className="text-sm text-red-600 dark:text-red-400">{errorMessage}</p>
                 )}
@@ -414,8 +272,6 @@ export default function RegisterPage() {
                   <p className="text-sm text-emerald-700 dark:text-emerald-300">{infoMessage}</p>
                 )}
 
-                {/* Terms */}
->>>>>>> theirs
                 <div className="flex items-start gap-2">
                   <Checkbox
                     id="terms"
@@ -439,11 +295,20 @@ export default function RegisterPage() {
 
                 <Button
                   type="submit"
-                  disabled={isSubmitting}
-                  className="w-full h-12 bg-gradient-to-r from-green-primary to-green-teal text-white rounded-xl shadow-btn hover:shadow-card-hover transition-all hover:-translate-y-0.5"
+                  disabled={loading}
+                  className="w-full h-12 bg-gradient-to-r from-green-primary to-green-teal text-white rounded-xl shadow-btn hover:shadow-card-hover transition-all hover:-translate-y-0.5 disabled:opacity-70"
                 >
-                  {isSubmitting ? 'جارٍ إنشاء الحساب...' : 'متابعة'}
-                  <ArrowLeft className="w-5 h-5 mr-2" />
+                  {loading ? (
+                    <>
+                      <Loader2 className="w-5 h-5 ml-2 animate-spin" />
+                      جاري إنشاء الحساب...
+                    </>
+                  ) : (
+                    <>
+                      متابعة
+                      <ArrowLeft className="w-5 h-5 mr-2" />
+                    </>
+                  )}
                 </Button>
               </form>
             </>
@@ -492,6 +357,10 @@ export default function RegisterPage() {
                     </div>
                   ))}
                 </div>
+
+                {errorMessage && (
+                  <p className="text-sm text-red-600 dark:text-red-400">{errorMessage}</p>
+                )}
 
                 <div className="flex gap-3">
                   <Button

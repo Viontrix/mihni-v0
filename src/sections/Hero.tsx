@@ -28,6 +28,7 @@ const showcaseImages = [
     id: 1,
     title: 'لوحة التحكم الذكية',
     description: 'تابع إنجازاتك وإحصائياتك في مكان واحد',
+    audience: 'للشركات',
     color: 'from-green-500 to-emerald-600',
     icon: TrendingUp,
     stats: [
@@ -44,6 +45,7 @@ const showcaseImages = [
     id: 2,
     title: 'منشئ الشهادات الاحترافي',
     description: 'صمم شهاداتك بخطوات بسيطة وسهلة',
+    audience: 'للمدارس',
     color: 'from-amber-500 to-orange-600',
     icon: Award,
     preview: {
@@ -57,6 +59,7 @@ const showcaseImages = [
     id: 3,
     title: 'حاسبة الدرجات الذكية',
     description: 'احسب درجات طلابك بسرعة ودقة',
+    audience: 'للمدارس',
     color: 'from-blue-500 to-cyan-600',
     icon: Calculator,
     preview: {
@@ -72,6 +75,7 @@ const showcaseImages = [
     id: 4,
     title: 'مولد الاختبارات',
     description: 'أنشئ اختبارات متنوعة في ثوانٍ',
+    audience: 'للمدارس',
     color: 'from-purple-500 to-pink-600',
     icon: FileText,
     preview: {
@@ -87,11 +91,60 @@ const showcaseImages = [
     id: 5,
     title: 'بناء الجداول الدراسية',
     description: 'نظم جداولك الأسبوعية بسهولة',
+    audience: 'للجهات',
     color: 'from-teal-500 to-emerald-600',
     icon: Calendar,
     preview: {
       days: ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس'],
       classes: ['رياضيات', 'علوم', 'عربي', 'إنجليزي', 'فنية']
+    }
+  },
+  {
+    id: 6,
+    title: 'نماذج التقييم',
+    description: 'أنشئ نماذج تقييم احترافية',
+    audience: 'للجهات',
+    color: 'from-rose-500 to-red-600',
+    icon: FileText,
+    preview: {
+      questions: [
+        { type: 'تقييم أداء', count: 5 },
+        { type: 'استبيان رضا', count: 4 },
+        { type: 'تقييم مشروع', count: 3 },
+      ],
+      total: '12 نموذج'
+    }
+  },
+  {
+    id: 7,
+    title: 'محرر التقارير',
+    description: 'احترف كتابة التقارير المهنية',
+    audience: 'للجهات',
+    color: 'from-indigo-500 to-purple-600',
+    icon: FileText,
+    preview: {
+      sections: [
+        { name: 'المقدمة', words: 250 },
+        { name: 'الإحصائيات', words: 500 },
+        { name: 'التوصيات', words: 300 },
+      ],
+      total: '1050 كلمة'
+    }
+  },
+  {
+    id: 8,
+    title: 'مكتبة القوالب الجاهزة',
+    description: 'استخدم قوالب جاهزة واحترافية',
+    audience: 'للأفراد',
+    color: 'from-cyan-500 to-blue-600',
+    icon: Sparkles,
+    preview: {
+      templates: [
+        { name: 'CV احترافي', category: 'سيرة ذاتية' },
+        { name: 'كتاب تقرير', category: 'مستندات' },
+        { name: 'شهادة تقدير', category: 'شهادات' },
+      ],
+      total: '50+ قالب'
     }
   }
 ];
@@ -667,7 +720,7 @@ const SchedulePreview = ({ data }: { data: typeof showcaseImages[4] }) => {
             </div>
             <div className="flex items-center gap-1">
               <div className="w-2 h-2 rounded-full bg-green-500" />
-              <span className="text-[10px] text-gray-500">علوم</span>
+              <span className="text-[10px] text-gray-500">عل����م</span>
             </div>
           </div>
           <div className="px-2 py-1 bg-green-primary/10 rounded text-[10px] font-medium text-green-primary">
@@ -679,10 +732,205 @@ const SchedulePreview = ({ data }: { data: typeof showcaseImages[4] }) => {
   );
 };
 
-// Floating Elements Component
+// Forms & Assessment Preview Component
+const FormsPreview = ({ data }: { data: typeof showcaseImages[5] }) => {
+  return (
+    <AppFrame title="نماذج التقييم" icon={FileText} iconColor="text-rose-500">
+      <div className="p-4 sm:p-5">
+        <div className="flex items-center justify-between mb-4">
+          <p className="text-xs font-medium text-green-dark dark:text-white">نموذج تقييم الأداء</p>
+          <div className="px-2.5 py-1 bg-rose-100 dark:bg-rose-900/30 rounded-md text-[10px] font-medium text-rose-700 dark:text-rose-400">
+            نشط
+          </div>
+        </div>
 
+        <div className="space-y-2.5">
+          {data.preview?.questions?.map((q: any, i: number) => (
+            <motion.div 
+              key={i}
+              initial={{ opacity: 0, x: -15 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.15 + i * 0.1 }}
+              className="p-3 bg-gradient-to-l from-gray-50 to-white dark:from-[#152B26] dark:to-[#1B2D2B] rounded-lg border border-gray-100 dark:border-green-primary/10"
+            >
+              <div className="flex items-start justify-between mb-1.5">
+                <p className="text-xs font-medium text-green-dark dark:text-white">{q.type}</p>
+                <span className="text-[10px] text-gray-400">{q.count} أسئلة</span>
+              </div>
+              <div className="h-1.5 bg-gray-200 dark:bg-white/10 rounded-full overflow-hidden">
+                <motion.div 
+                  className="h-full bg-gradient-to-r from-rose-500 to-rose-600"
+                  initial={{ width: 0 }}
+                  animate={{ width: `${(i + 1) * 30}%` }}
+                  transition={{ delay: 0.3 + i * 0.1 }}
+                />
+              </div>
+            </motion.div>
+          ))}
+        </div>
 
-// Main Showcase Component
+        <motion.div 
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5 }}
+          className="mt-4 p-2.5 bg-rose-50 dark:bg-rose-900/20 rounded-lg border border-rose-200 dark:border-rose-700/30"
+        >
+          <p className="text-[10px] text-rose-700 dark:text-rose-400">إجمالي الأسئلة: <span className="font-bold">{data.preview?.total}</span></p>
+        </motion.div>
+      </div>
+    </AppFrame>
+  );
+};
+
+// Reports Editor Preview Component
+const ReportsPreview = ({ data }: { data: typeof showcaseImages[6] }) => {
+  return (
+    <AppFrame title="محرر التقارير" icon={FileText} iconColor="text-indigo-500">
+      <div className="p-4 sm:p-5">
+        <div className="flex items-center justify-between mb-3">
+          <div>
+            <p className="text-xs font-medium text-green-dark dark:text-white">تقرير ربع سنوي</p>
+            <p className="text-[10px] text-gray-500">تم التحديث: اليوم</p>
+          </div>
+          <div className="flex items-center gap-1">
+            <div className="w-6 h-6 rounded-md bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center">
+              <FileText className="w-3.5 h-3.5 text-indigo-600" />
+            </div>
+          </div>
+        </div>
+
+        <div className="space-y-2">
+          {data.preview?.sections?.map((section: any, i: number) => (
+            <motion.div 
+              key={i}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.15 + i * 0.1 }}
+              className="p-3 bg-gradient-to-b from-gray-50 to-white dark:from-[#152B26] dark:to-[#1B2D2B] rounded-lg border border-gray-100 dark:border-green-primary/10"
+            >
+              <div className="flex items-center justify-between mb-1.5">
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 rounded-full bg-indigo-500" />
+                  <p className="text-xs font-medium text-green-dark dark:text-white">{section.name}</p>
+                </div>
+                <span className="text-[10px] text-gray-400">{section.words} كلمة</span>
+              </div>
+              <div className="h-1 bg-gray-200 dark:bg-white/10 rounded-full overflow-hidden">
+                <motion.div 
+                  className="h-full bg-gradient-to-r from-indigo-500 to-purple-600"
+                  initial={{ width: 0 }}
+                  animate={{ width: `${(section.words / 600) * 100}%` }}
+                  transition={{ delay: 0.3 + i * 0.1 }}
+                />
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        <motion.div 
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5 }}
+          className="mt-4 p-2.5 bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-900/20 dark:to-purple-900/20 rounded-lg border border-indigo-200 dark:border-indigo-700/30"
+        >
+          <p className="text-[10px] text-indigo-700 dark:text-indigo-400">إجمالي الكلمات: <span className="font-bold">{data.preview?.total}</span></p>
+        </motion.div>
+      </div>
+    </AppFrame>
+  );
+};
+
+// Templates Library Preview Component
+const TemplatesPreview = ({ data }: { data: typeof showcaseImages[7] }) => {
+  return (
+    <AppFrame title="مكتبة القوالب" icon={Sparkles} iconColor="text-cyan-500">
+      <div className="p-4 sm:p-5">
+        <div className="flex items-center justify-between mb-4">
+          <p className="text-xs font-medium text-green-dark dark:text-white">جميع القوالب</p>
+          <div className="px-2.5 py-1 bg-cyan-100 dark:bg-cyan-900/30 rounded-md text-[10px] font-bold text-cyan-700 dark:text-cyan-400">
+            {data.preview?.total}
+          </div>
+        </div>
+
+        <div className="space-y-2">
+          {data.preview?.templates?.map((template: any, i: number) => (
+            <motion.div 
+              key={i}
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.15 + i * 0.1 }}
+              className="p-2.5 bg-gradient-to-r from-cyan-50 to-blue-50 dark:from-[#0a4d5e]/20 dark:to-[#0d3a4a]/20 rounded-lg border border-cyan-200 dark:border-cyan-700/30 cursor-pointer hover:border-cyan-400 dark:hover:border-cyan-600 transition-colors"
+            >
+              <div className="flex items-center gap-2">
+                <div className="w-6 h-6 rounded-md bg-cyan-100 dark:bg-cyan-900/40 flex items-center justify-center flex-shrink-0">
+                  <Sparkles className="w-3.5 h-3.5 text-cyan-600" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-xs font-medium text-green-dark dark:text-white truncate">{template.name}</p>
+                  <p className="text-[10px] text-gray-500">{template.category}</p>
+                </div>
+                <ArrowLeft className="w-3.5 h-3.5 text-gray-400 rotate-180" />
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        <motion.div 
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5 }}
+          className="mt-4 p-3 bg-gradient-to-br from-cyan-100 to-blue-100 dark:from-cyan-900/30 dark:to-blue-900/30 rounded-lg border border-cyan-300 dark:border-cyan-700/50 text-center"
+        >
+          <p className="text-xs font-medium text-cyan-700 dark:text-cyan-400">واصل الاستكشاف لاكتشاف المزيد</p>
+        </motion.div>
+      </div>
+    </AppFrame>
+  );
+};
+
+// Floating Elements Component - العناصر الطافية المتحركة بتدرج لوني
+const FloatingElements = () => {
+  return (
+    <>
+      {/* Top Right - Lightning */}
+      <motion.div
+        className="absolute -top-3 sm:-top-4 lg:-top-5 -right-3 sm:-right-4 lg:-right-5 w-10 sm:w-12 lg:w-14 h-10 sm:h-12 lg:h-14 bg-gradient-to-br from-amber-400 to-orange-500 rounded-xl lg:rounded-2xl flex items-center justify-center shadow-xl z-30"
+        animate={{ y: [-8, 8, -8], rotate: [0, 8, -8, 0] }}
+        transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+      >
+        <Zap className="w-5 sm:w-6 lg:w-7 h-5 sm:h-6 lg:h-7 text-white" />
+      </motion.div>
+      
+      {/* Top Left - Star */}
+      <motion.div
+        className="absolute -top-3 sm:-top-4 lg:-top-5 -left-3 sm:-left-4 lg:-left-5 w-9 sm:w-10 lg:w-12 h-9 sm:h-10 lg:h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg lg:rounded-xl flex items-center justify-center shadow-xl z-30"
+        animate={{ y: [6, -6, 6], rotate: [0, -10, 10, 0] }}
+        transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
+      >
+        <Star className="w-4 sm:w-5 lg:w-6 h-4 sm:h-5 lg:h-6 text-white" />
+      </motion.div>
+      
+      {/* Bottom Left - Download */}
+      <motion.div
+        className="absolute -bottom-3 sm:-bottom-4 lg:-bottom-5 -left-3 sm:-left-4 lg:-left-5 w-9 sm:w-10 lg:w-12 h-9 sm:h-10 lg:h-12 bg-gradient-to-br from-green-primary to-green-teal rounded-lg lg:rounded-xl flex items-center justify-center shadow-xl z-30"
+        animate={{ y: [8, -8, 8] }}
+        transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+      >
+        <Download className="w-4 sm:w-5 lg:w-6 h-4 sm:h-5 lg:h-6 text-white" />
+      </motion.div>
+      
+      {/* Bottom Right - Award */}
+      <motion.div
+        className="absolute -bottom-3 sm:-bottom-4 lg:-bottom-5 -right-3 sm:-right-4 lg:-right-5 w-10 sm:w-11 lg:w-12 h-10 sm:h-11 lg:h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl lg:rounded-2xl flex items-center justify-center shadow-xl z-30"
+        animate={{ y: [-6, 6, -6], scale: [1, 1.05, 1] }}
+        transition={{ duration: 3.2, repeat: Infinity, ease: 'easeInOut' }}
+      >
+        <Award className="w-5 sm:w-5 lg:w-6 h-5 sm:h-5 lg:h-6 text-white" />
+      </motion.div>
+    </>
+  );
+};
+
 const ImageShowcase = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -707,6 +955,12 @@ const ImageShowcase = () => {
         return <QuizPreview data={currentData} />;
       case 5:
         return <SchedulePreview data={currentData} />;
+      case 6:
+        return <FormsPreview data={currentData} />;
+      case 7:
+        return <ReportsPreview data={currentData} />;
+      case 8:
+        return <TemplatesPreview data={currentData} />;
       default:
         return <DashboardPreview data={currentData} />;
     }
@@ -714,9 +968,32 @@ const ImageShowcase = () => {
 
   return (
     <div className="relative">
-      {/* Main Preview */}
+      {/* Main Preview with Floating Elements */}
+      <div className="relative">
+        <AnimatePresence mode="wait">
+          <div key={currentData.id}>
+            {renderPreview()}
+          </div>
+        </AnimatePresence>
+        
+        {/* Floating Elements - positioned relative to the preview card */}
+        <FloatingElements />
+      </div>
+
+      {/* Audience Label */}
       <AnimatePresence mode="wait">
-        {renderPreview()}
+        <motion.div
+          key={currentIndex}
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 10 }}
+          transition={{ duration: 0.3 }}
+          className="text-center mb-2"
+        >
+          <p className="text-xs sm:text-sm font-semibold text-green-primary">
+            {currentData.audience}
+          </p>
+        </motion.div>
       </AnimatePresence>
 
       {/* Navigation Dots */}
@@ -799,6 +1076,22 @@ export default function Hero() {
                   مِهني
                 </span>
               </h1>
+            </motion.div>
+
+            {/* Target Audience Line */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.15 }}
+              className="mb-6"
+            >
+              <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 tracking-widest">
+                <span className="text-green-primary font-semibold">للمدارس</span> • 
+                <span className="text-green-primary font-semibold"> الجهات</span> • 
+                <span className="text-green-primary font-semibold"> الشركات</span> • 
+                <span className="text-green-primary font-semibold"> الأفراد</span> • 
+                <span className="text-green-primary font-semibold"> الاستخدام المخصص</span>
+              </p>
             </motion.div>
 
             {/* Marketing Subtitle */}
