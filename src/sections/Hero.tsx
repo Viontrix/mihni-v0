@@ -223,11 +223,15 @@ const stats = [
   { value: 4.9, suffix: '', label: 'تقييم المستخدمين', icon: Star },
 ];
 
-// Animated counter - shows numbers immediately
+// Animated counter - client only to avoid hydration mismatch
 const AnimatedCounter = ({ value, suffix }: { value: number; suffix: string }) => {
-  const [displayCount, setDisplayCount] = useState(0);
+  const [displayCount, setDisplayCount] = useState<number | null>(null);
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
+    setIsMounted(true);
+    setDisplayCount(0);
+    
     const duration = 1500;
     const steps = 40;
     const increment = value / steps;
@@ -245,9 +249,14 @@ const AnimatedCounter = ({ value, suffix }: { value: number; suffix: string }) =
     return () => clearInterval(timer);
   }, [value]);
 
+  // Show static value on server, animate on client
+  if (!isMounted) {
+    return <span>{value % 1 !== 0 ? value.toFixed(1) : value.toLocaleString()}{suffix}</span>;
+  }
+
   return (
     <span>
-      {value % 1 !== 0 ? displayCount.toFixed(1) : displayCount.toLocaleString()}{suffix}
+      {displayCount !== null ? (value % 1 !== 0 ? displayCount.toFixed(1) : displayCount.toLocaleString()) : value}{suffix}
     </span>
   );
 };
