@@ -154,6 +154,16 @@ const particlePositions = [
 ];
 
 const FloatingParticles = () => {
+  const [isMounted, setIsMounted] = useState(false);
+  
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) {
+    return <div className="absolute inset-0 overflow-hidden pointer-events-none" />;
+  }
+
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
       {particlePositions.map((particle, i) => (
