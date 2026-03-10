@@ -96,36 +96,28 @@ const showcaseImages = [
   }
 ];
 
-// Floating particles
+// Floating particles - Minimal for performance
 const FloatingParticles = () => {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {[...Array(20)].map((_, i) => (
+      {[...Array(8)].map((_, i) => (
         <motion.div
           key={i}
-          className={`absolute rounded-full ${
-            i % 3 === 0 
-              ? 'w-2 h-2 bg-green-primary/25' 
-              : i % 3 === 1 
-                ? 'w-1.5 h-1.5 bg-green-teal/30' 
-                : 'w-1 h-1 bg-green-light/35'
-          }`}
+          className="absolute w-1 h-1 rounded-full bg-green-primary/20"
           initial={{ 
-            x: Math.random() * 100 + '%', 
-            y: '110%',
-            opacity: 0,
-            scale: 0.5
+            x: `${15 + i * 10}%`, 
+            y: '105%',
+            opacity: 0
           }}
           animate={{ 
-            y: '-10%',
-            opacity: [0, 0.8, 0],
-            scale: [0.5, 1, 0.5]
+            y: '-5%',
+            opacity: [0, 0.6, 0]
           }}
           transition={{ 
-            duration: Math.random() * 6 + 10,
+            duration: 12 + i * 2,
             repeat: Infinity,
-            delay: Math.random() * 8,
-            ease: 'easeOut'
+            delay: i * 1.5,
+            ease: 'linear'
           }}
         />
       ))}
@@ -133,36 +125,12 @@ const FloatingParticles = () => {
   );
 };
 
-// Animated gradient orbs
+// Subtle gradient orbs - Static for performance
 const GradientOrbs = () => {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      <motion.div 
-        className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full bg-gradient-to-br from-green-primary/20 via-green-teal/15 to-transparent blur-[120px]"
-        animate={{ 
-          scale: [1, 1.15, 1],
-          x: [0, 40, 0],
-          y: [0, 20, 0],
-        }}
-        transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
-      />
-      <motion.div 
-        className="absolute bottom-0 left-0 w-[500px] h-[500px] rounded-full bg-gradient-to-tr from-green-light/20 via-green-teal/15 to-transparent blur-[100px]"
-        animate={{ 
-          scale: [1.15, 1, 1.15],
-          x: [0, -40, 0],
-          y: [0, -20, 0],
-        }}
-        transition={{ duration: 14, repeat: Infinity, ease: 'easeInOut' }}
-      />
-      <motion.div 
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full bg-gradient-to-r from-green-teal/10 to-green-primary/10 blur-[80px]"
-        animate={{ 
-          scale: [1, 1.1, 1],
-          rotate: [0, 180, 360],
-        }}
-        transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
-      />
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full bg-gradient-to-br from-green-primary/15 to-transparent blur-[100px]" />
+      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full bg-gradient-to-tr from-green-teal/10 to-transparent blur-[80px]" />
     </div>
   );
 };
@@ -208,78 +176,75 @@ const AnimatedCounter = ({ value, suffix }: { value: number; suffix: string }) =
 const DashboardPreview = ({ data }: { data: typeof showcaseImages[0] }) => {
   return (
     <motion.div 
-      initial={{ opacity: 0, scale: 0.9 }}
+      initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.9 }}
-      transition={{ duration: 0.5 }}
-      className="relative bg-white dark:bg-[#1B2D2B] rounded-3xl shadow-2xl overflow-hidden border border-green-primary/10"
+      exit={{ opacity: 0, scale: 0.95 }}
+      transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
+      className="relative bg-white dark:bg-[#1A2B28] rounded-2xl shadow-2xl shadow-black/10 dark:shadow-black/30 overflow-hidden border border-gray-200/50 dark:border-white/10"
     >
-      {/* Browser Header */}
-      <div className="flex items-center gap-3 px-5 py-4 bg-gray-50 dark:bg-[#152B26] border-b border-green-primary/10">
-        <div className="flex gap-2">
-          <div className="w-3 h-3 rounded-full bg-red-400" />
-          <div className="w-3 h-3 rounded-full bg-yellow-400" />
-          <div className="w-3 h-3 rounded-full bg-green-400" />
+      {/* Browser Header - More refined */}
+      <div className="flex items-center gap-3 px-4 py-3 bg-gray-50/80 dark:bg-[#0F1D1A] border-b border-gray-200/50 dark:border-white/5">
+        <div className="flex gap-1.5">
+          <div className="w-2.5 h-2.5 rounded-full bg-red-400/80" />
+          <div className="w-2.5 h-2.5 rounded-full bg-yellow-400/80" />
+          <div className="w-2.5 h-2.5 rounded-full bg-green-400/80" />
         </div>
         <div className="flex-1 flex justify-center">
-          <div className="flex items-center gap-2 px-4 py-1.5 bg-white dark:bg-[#0D1B1A] rounded-lg text-sm text-gray-500">
-            <TrendingUp className="w-4 h-4 text-green-primary" />
-            mahni.edu.sa
+          <div className="flex items-center gap-2 px-3 py-1 bg-white dark:bg-[#0D1B1A] rounded-md text-xs text-gray-500 border border-gray-200/50 dark:border-white/5">
+            <TrendingUp className="w-3 h-3 text-green-primary" />
+            mihni.app
           </div>
         </div>
       </div>
 
-      <div className="p-6">
-        {/* Welcome */}
-        <div className="flex items-center justify-between mb-6">
+      <div className="p-5">
+        {/* Welcome - More compact */}
+        <div className="flex items-center justify-between mb-5">
           <div>
-            <h3 className="text-lg font-bold text-green-dark dark:text-white flex items-center gap-2">
-              مرحباً بك! 👋
+            <h3 className="text-base font-bold text-green-dark dark:text-white">
+              مرحباً بك
             </h3>
-            <p className="text-sm text-gray-500">لديك 5 قوالب جديدة</p>
+            <p className="text-xs text-gray-500 dark:text-gray-400">5 قوالب جديدة متاحة</p>
           </div>
-          <div className="flex items-center gap-2 px-3 py-1.5 bg-amber-100 dark:bg-amber-900/30 rounded-lg">
-            <Award className="w-4 h-4 text-amber-500" />
-            <span className="text-xs font-bold text-amber-700 dark:text-amber-400">باقة المحترف</span>
+          <div className="flex items-center gap-1.5 px-2.5 py-1 bg-green-50 dark:bg-green-900/20 rounded-md border border-green-200/50 dark:border-green-800/30">
+            <Award className="w-3 h-3 text-green-600 dark:text-green-400" />
+            <span className="text-[10px] font-semibold text-green-700 dark:text-green-400">PRO</span>
           </div>
         </div>
 
-        {/* Stats */}
-        <div className="grid grid-cols-3 gap-3 mb-6">
+        {/* Stats - More refined */}
+        <div className="grid grid-cols-3 gap-2 mb-5">
           {data.stats?.map((stat, i) => (
             <motion.div 
               key={i}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 + i * 0.1 }}
-              className="p-3 bg-gray-50 dark:bg-[#152B26] rounded-xl text-center"
+              transition={{ delay: 0.15 + i * 0.08 }}
+              className="p-2.5 bg-gray-50 dark:bg-white/5 rounded-lg text-center border border-gray-100 dark:border-white/5"
             >
-              <div className={`w-8 h-8 rounded-lg ${stat.color} flex items-center justify-center mx-auto mb-2`}>
-                <TrendingUp className="w-4 h-4" />
-              </div>
-              <div className="text-xl font-bold text-green-dark dark:text-white">{stat.value}</div>
-              <div className="text-xs text-gray-500">{stat.label}</div>
+              <div className="text-lg font-bold text-green-dark dark:text-white">{stat.value}</div>
+              <div className="text-[10px] text-gray-500 dark:text-gray-400">{stat.label}</div>
             </motion.div>
           ))}
         </div>
 
-        {/* Activities */}
+        {/* Activities - Cleaner */}
         <div className="space-y-2">
           {data.activities?.map((item, i) => (
             <motion.div 
               key={i}
-              initial={{ opacity: 0, x: -20 }}
+              initial={{ opacity: 0, x: -15 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.4 + i * 0.1 }}
-              className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-[#152B26] rounded-xl"
+              transition={{ delay: 0.3 + i * 0.08 }}
+              className="flex items-center gap-2.5 p-2.5 bg-gray-50 dark:bg-white/5 rounded-lg border border-gray-100 dark:border-white/5"
             >
-              <div className="w-8 h-8 rounded-lg bg-green-primary/10 flex items-center justify-center">
-                <item.icon className="w-4 h-4 text-green-primary" />
+              <div className="w-7 h-7 rounded-md bg-green-primary/10 flex items-center justify-center flex-shrink-0">
+                <item.icon className="w-3.5 h-3.5 text-green-primary" />
               </div>
-              <div className="flex-1">
-                <p className="text-sm font-medium text-green-dark dark:text-white">{item.name}</p>
+              <div className="flex-1 min-w-0">
+                <p className="text-xs font-medium text-green-dark dark:text-white truncate">{item.name}</p>
               </div>
-              <span className="text-xs text-gray-400">{item.time}</span>
+              <span className="text-[10px] text-gray-400 flex-shrink-0">{item.time}</span>
             </motion.div>
           ))}
         </div>
@@ -292,61 +257,60 @@ const DashboardPreview = ({ data }: { data: typeof showcaseImages[0] }) => {
 const CertificatePreview = ({ data }: { data: typeof showcaseImages[1] }) => {
   return (
     <motion.div 
-      initial={{ opacity: 0, scale: 0.9 }}
+      initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.9 }}
-      transition={{ duration: 0.5 }}
-      className="relative bg-white dark:bg-[#1B2D2B] rounded-3xl shadow-2xl overflow-hidden border border-green-primary/10"
+      exit={{ opacity: 0, scale: 0.95 }}
+      transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
+      className="relative bg-white dark:bg-[#1A2B28] rounded-2xl shadow-2xl shadow-black/10 dark:shadow-black/30 overflow-hidden border border-gray-200/50 dark:border-white/10"
     >
       {/* Browser Header */}
-      <div className="flex items-center gap-3 px-5 py-4 bg-gray-50 dark:bg-[#152B26] border-b border-green-primary/10">
-        <div className="flex gap-2">
-          <div className="w-3 h-3 rounded-full bg-red-400" />
-          <div className="w-3 h-3 rounded-full bg-yellow-400" />
-          <div className="w-3 h-3 rounded-full bg-green-400" />
+      <div className="flex items-center gap-3 px-4 py-3 bg-gray-50/80 dark:bg-[#0F1D1A] border-b border-gray-200/50 dark:border-white/5">
+        <div className="flex gap-1.5">
+          <div className="w-2.5 h-2.5 rounded-full bg-red-400/80" />
+          <div className="w-2.5 h-2.5 rounded-full bg-yellow-400/80" />
+          <div className="w-2.5 h-2.5 rounded-full bg-green-400/80" />
         </div>
         <div className="flex-1 flex justify-center">
-          <div className="flex items-center gap-2 px-4 py-1.5 bg-white dark:bg-[#0D1B1A] rounded-lg text-sm text-gray-500">
-            <Award className="w-4 h-4 text-green-primary" />
+          <div className="flex items-center gap-2 px-3 py-1 bg-white dark:bg-[#0D1B1A] rounded-md text-xs text-gray-500 border border-gray-200/50 dark:border-white/5">
+            <Award className="w-3 h-3 text-amber-500" />
             منشئ الشهادات
           </div>
         </div>
       </div>
 
-      <div className="p-6">
-        {/* Certificate Preview */}
-        <div className="aspect-[1.4/1] bg-gradient-to-br from-amber-50 via-white to-amber-50 rounded-xl border-4 border-double border-amber-300 flex flex-col items-center justify-center p-6 text-center relative overflow-hidden">
-          {/* Decorative Frame */}
-          <div className="absolute inset-3 border-2 border-amber-400/50 rounded-lg" />
-          <div className="absolute inset-6 border border-amber-300/30 rounded-lg" />
+      <div className="p-5">
+        {/* Certificate Preview - Cleaner */}
+        <div className="aspect-[1.4/1] bg-gradient-to-br from-amber-50/80 via-white to-amber-50/80 rounded-lg border-2 border-amber-200/60 flex flex-col items-center justify-center p-4 text-center relative overflow-hidden">
+          {/* Subtle decorative frame */}
+          <div className="absolute inset-2 border border-amber-300/30 rounded" />
           
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
+            transition={{ delay: 0.2 }}
           >
-            <h3 className="text-2xl font-bold text-amber-700 mb-2">{data.preview?.title}</h3>
-            <p className="text-amber-600 text-sm mb-4">{data.preview?.subtitle}</p>
-            <div className="w-16 h-16 rounded-full bg-amber-100 flex items-center justify-center mx-auto mb-4">
-              <Star className="w-8 h-8 text-amber-500" />
+            <h3 className="text-lg font-bold text-amber-700 mb-1">{data.preview?.title}</h3>
+            <p className="text-amber-600/80 text-xs mb-3">{data.preview?.subtitle}</p>
+            <div className="w-10 h-10 rounded-full bg-amber-100 flex items-center justify-center mx-auto mb-3">
+              <Star className="w-5 h-5 text-amber-500" />
             </div>
-            <p className="text-xl font-bold text-gray-800 mb-2">{data.preview?.recipient}</p>
-            <p className="text-gray-500 text-sm">{data.preview?.date}</p>
+            <p className="text-base font-bold text-gray-800 mb-1">{data.preview?.recipient}</p>
+            <p className="text-gray-400 text-[10px]">{data.preview?.date}</p>
           </motion.div>
         </div>
 
-        {/* Controls */}
-        <div className="mt-4 flex gap-2">
-          <div className="flex-1 h-2 bg-gray-100 rounded-full overflow-hidden">
+        {/* Progress indicator */}
+        <div className="mt-3 flex items-center gap-2">
+          <div className="flex-1 h-1.5 bg-gray-100 dark:bg-white/10 rounded-full overflow-hidden">
             <motion.div 
-              className="h-full bg-gradient-to-r from-amber-400 to-orange-500"
+              className="h-full bg-amber-400"
               initial={{ width: 0 }}
-              animate={{ width: '70%' }}
-              transition={{ delay: 0.5, duration: 1 }}
+              animate={{ width: '100%' }}
+              transition={{ delay: 0.4, duration: 0.8 }}
             />
           </div>
+          <span className="text-[10px] text-gray-500">جاهز</span>
         </div>
-        <p className="text-xs text-gray-500 mt-2 text-center">جاهز للتحميل</p>
       </div>
     </motion.div>
   );
@@ -356,60 +320,60 @@ const CertificatePreview = ({ data }: { data: typeof showcaseImages[1] }) => {
 const CalculatorPreview = ({ data }: { data: typeof showcaseImages[2] }) => {
   return (
     <motion.div 
-      initial={{ opacity: 0, scale: 0.9 }}
+      initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.9 }}
-      transition={{ duration: 0.5 }}
-      className="relative bg-white dark:bg-[#1B2D2B] rounded-3xl shadow-2xl overflow-hidden border border-green-primary/10"
+      exit={{ opacity: 0, scale: 0.95 }}
+      transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
+      className="relative bg-white dark:bg-[#1A2B28] rounded-2xl shadow-2xl shadow-black/10 dark:shadow-black/30 overflow-hidden border border-gray-200/50 dark:border-white/10"
     >
-      <div className="flex items-center gap-3 px-5 py-4 bg-gray-50 dark:bg-[#152B26] border-b border-green-primary/10">
-        <div className="flex gap-2">
-          <div className="w-3 h-3 rounded-full bg-red-400" />
-          <div className="w-3 h-3 rounded-full bg-yellow-400" />
-          <div className="w-3 h-3 rounded-full bg-green-400" />
+      <div className="flex items-center gap-3 px-4 py-3 bg-gray-50/80 dark:bg-[#0F1D1A] border-b border-gray-200/50 dark:border-white/5">
+        <div className="flex gap-1.5">
+          <div className="w-2.5 h-2.5 rounded-full bg-red-400/80" />
+          <div className="w-2.5 h-2.5 rounded-full bg-yellow-400/80" />
+          <div className="w-2.5 h-2.5 rounded-full bg-green-400/80" />
         </div>
         <div className="flex-1 flex justify-center">
-          <div className="flex items-center gap-2 px-4 py-1.5 bg-white dark:bg-[#0D1B1A] rounded-lg text-sm text-gray-500">
-            <Calculator className="w-4 h-4 text-blue-500" />
+          <div className="flex items-center gap-2 px-3 py-1 bg-white dark:bg-[#0D1B1A] rounded-md text-xs text-gray-500 border border-gray-200/50 dark:border-white/5">
+            <Calculator className="w-3 h-3 text-blue-500" />
             حاسبة الدرجات
           </div>
         </div>
       </div>
 
-      <div className="p-6">
-        <div className="space-y-3">
+      <div className="p-5">
+        <div className="space-y-2">
           {data.preview?.subjects?.map((subject: any, i: number) => (
             <motion.div 
               key={i}
-              initial={{ opacity: 0, x: -20 }}
+              initial={{ opacity: 0, x: -15 }}
               animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.2 + i * 0.1 }}
-              className="flex items-center justify-between p-3 bg-gray-50 dark:bg-[#152B26] rounded-xl"
+              transition={{ delay: 0.15 + i * 0.08 }}
+              className="flex items-center justify-between p-2.5 bg-gray-50 dark:bg-white/5 rounded-lg border border-gray-100 dark:border-white/5"
             >
-              <span className="text-sm font-medium text-green-dark dark:text-white">{subject.name}</span>
+              <span className="text-xs font-medium text-green-dark dark:text-white">{subject.name}</span>
               <div className="flex items-center gap-2">
-                <div className="w-24 h-2 bg-gray-200 rounded-full overflow-hidden">
+                <div className="w-16 h-1.5 bg-gray-200 dark:bg-white/10 rounded-full overflow-hidden">
                   <motion.div 
                     className="h-full bg-blue-500"
                     initial={{ width: 0 }}
                     animate={{ width: `${subject.score}%` }}
-                    transition={{ delay: 0.4 + i * 0.1, duration: 0.8 }}
+                    transition={{ delay: 0.3 + i * 0.08, duration: 0.6 }}
                   />
                 </div>
-                <span className="text-sm font-bold text-blue-600">{subject.score}/{subject.total}</span>
+                <span className="text-xs font-bold text-blue-600">{subject.score}</span>
               </div>
             </motion.div>
           ))}
         </div>
 
         <motion.div 
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6 }}
-          className="mt-4 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-xl text-center"
+          transition={{ delay: 0.5 }}
+          className="mt-4 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg text-center border border-blue-100 dark:border-blue-800/30"
         >
-          <p className="text-sm text-gray-500">المعدل العام</p>
-          <p className="text-3xl font-bold text-blue-600">{data.preview?.average || '0%'}</p>
+          <p className="text-[10px] text-gray-500 dark:text-gray-400 mb-0.5">المعدل العام</p>
+          <p className="text-2xl font-bold text-blue-600">{data.preview?.average || '0%'}</p>
         </motion.div>
       </div>
     </motion.div>
@@ -420,50 +384,50 @@ const CalculatorPreview = ({ data }: { data: typeof showcaseImages[2] }) => {
 const QuizPreview = ({ data }: { data: typeof showcaseImages[3] }) => {
   return (
     <motion.div 
-      initial={{ opacity: 0, scale: 0.9 }}
+      initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.9 }}
-      transition={{ duration: 0.5 }}
-      className="relative bg-white dark:bg-[#1B2D2B] rounded-3xl shadow-2xl overflow-hidden border border-green-primary/10"
+      exit={{ opacity: 0, scale: 0.95 }}
+      transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
+      className="relative bg-white dark:bg-[#1A2B28] rounded-2xl shadow-2xl shadow-black/10 dark:shadow-black/30 overflow-hidden border border-gray-200/50 dark:border-white/10"
     >
-      <div className="flex items-center gap-3 px-5 py-4 bg-gray-50 dark:bg-[#152B26] border-b border-green-primary/10">
-        <div className="flex gap-2">
-          <div className="w-3 h-3 rounded-full bg-red-400" />
-          <div className="w-3 h-3 rounded-full bg-yellow-400" />
-          <div className="w-3 h-3 rounded-full bg-green-400" />
+      <div className="flex items-center gap-3 px-4 py-3 bg-gray-50/80 dark:bg-[#0F1D1A] border-b border-gray-200/50 dark:border-white/5">
+        <div className="flex gap-1.5">
+          <div className="w-2.5 h-2.5 rounded-full bg-red-400/80" />
+          <div className="w-2.5 h-2.5 rounded-full bg-yellow-400/80" />
+          <div className="w-2.5 h-2.5 rounded-full bg-green-400/80" />
         </div>
         <div className="flex-1 flex justify-center">
-          <div className="flex items-center gap-2 px-4 py-1.5 bg-white dark:bg-[#0D1B1A] rounded-lg text-sm text-gray-500">
-            <FileText className="w-4 h-4 text-purple-500" />
+          <div className="flex items-center gap-2 px-3 py-1 bg-white dark:bg-[#0D1B1A] rounded-md text-xs text-gray-500 border border-gray-200/50 dark:border-white/5">
+            <FileText className="w-3 h-3 text-purple-500" />
             مولد الاختبارات
           </div>
         </div>
       </div>
 
-      <div className="p-6">
-        <div className="grid grid-cols-3 gap-3 mb-4">
+      <div className="p-5">
+        <div className="grid grid-cols-3 gap-2 mb-4">
           {data.preview?.questions?.map((q: any, i: number) => (
             <motion.div 
               key={i}
-              initial={{ opacity: 0, scale: 0.8 }}
+              initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.2 + i * 0.1 }}
-              className="p-3 bg-purple-50 dark:bg-purple-900/20 rounded-xl text-center"
+              transition={{ delay: 0.15 + i * 0.08 }}
+              className="p-2.5 bg-purple-50 dark:bg-purple-900/20 rounded-lg text-center border border-purple-100 dark:border-purple-800/30"
             >
-              <p className="text-2xl font-bold text-purple-600">{q.count}</p>
-              <p className="text-xs text-gray-500">{q.type}</p>
+              <p className="text-xl font-bold text-purple-600">{q.count}</p>
+              <p className="text-[10px] text-gray-500 dark:text-gray-400">{q.type}</p>
             </motion.div>
           ))}
         </div>
 
         <motion.div 
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5 }}
-          className="p-4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl text-white text-center"
+          transition={{ delay: 0.4 }}
+          className="p-3 bg-purple-600 rounded-lg text-white text-center"
         >
-          <p className="text-sm opacity-80">إجمالي الأسئلة</p>
-          <p className="text-2xl font-bold">{data.preview?.total || '0'}</p>
+          <p className="text-[10px] opacity-80 mb-0.5">إجمالي الأسئلة</p>
+          <p className="text-xl font-bold">{data.preview?.total || '0'}</p>
         </motion.div>
       </div>
     </motion.div>
@@ -474,48 +438,48 @@ const QuizPreview = ({ data }: { data: typeof showcaseImages[3] }) => {
 const SchedulePreview = ({ data }: { data: typeof showcaseImages[4] }) => {
   return (
     <motion.div 
-      initial={{ opacity: 0, scale: 0.9 }}
+      initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.9 }}
-      transition={{ duration: 0.5 }}
-      className="relative bg-white dark:bg-[#1B2D2B] rounded-3xl shadow-2xl overflow-hidden border border-green-primary/10"
+      exit={{ opacity: 0, scale: 0.95 }}
+      transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
+      className="relative bg-white dark:bg-[#1A2B28] rounded-2xl shadow-2xl shadow-black/10 dark:shadow-black/30 overflow-hidden border border-gray-200/50 dark:border-white/10"
     >
-      <div className="flex items-center gap-3 px-5 py-4 bg-gray-50 dark:bg-[#152B26] border-b border-green-primary/10">
-        <div className="flex gap-2">
-          <div className="w-3 h-3 rounded-full bg-red-400" />
-          <div className="w-3 h-3 rounded-full bg-yellow-400" />
-          <div className="w-3 h-3 rounded-full bg-green-400" />
+      <div className="flex items-center gap-3 px-4 py-3 bg-gray-50/80 dark:bg-[#0F1D1A] border-b border-gray-200/50 dark:border-white/5">
+        <div className="flex gap-1.5">
+          <div className="w-2.5 h-2.5 rounded-full bg-red-400/80" />
+          <div className="w-2.5 h-2.5 rounded-full bg-yellow-400/80" />
+          <div className="w-2.5 h-2.5 rounded-full bg-green-400/80" />
         </div>
         <div className="flex-1 flex justify-center">
-          <div className="flex items-center gap-2 px-4 py-1.5 bg-white dark:bg-[#0D1B1A] rounded-lg text-sm text-gray-500">
-            <Calendar className="w-4 h-4 text-teal-500" />
+          <div className="flex items-center gap-2 px-3 py-1 bg-white dark:bg-[#0D1B1A] rounded-md text-xs text-gray-500 border border-gray-200/50 dark:border-white/5">
+            <Calendar className="w-3 h-3 text-teal-500" />
             الجدول الدراسي
           </div>
         </div>
       </div>
 
       <div className="p-4">
-        <div className="grid grid-cols-5 gap-2">
+        <div className="grid grid-cols-5 gap-1.5">
           {data.preview?.days?.map((day: string, i: number) => (
             <motion.div 
               key={i}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 + i * 0.05 }}
+              transition={{ delay: 0.1 + i * 0.04 }}
               className="text-center"
             >
-              <div className="text-xs text-gray-500 mb-2">{day}</div>
+              <div className="text-[10px] text-gray-500 dark:text-gray-400 mb-1.5 font-medium">{day}</div>
               <div className="space-y-1">
                 {data.preview?.classes?.slice(0, 3).map((cls: string, j: number) => (
                   <motion.div 
                     key={j}
-                    initial={{ opacity: 0, scale: 0.8 }}
+                    initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.3 + i * 0.05 + j * 0.03 }}
-                    className={`text-[10px] p-1 rounded ${
-                      j === 0 ? 'bg-blue-100 text-blue-700' :
-                      j === 1 ? 'bg-green-100 text-green-700' :
-                      'bg-amber-100 text-amber-700'
+                    transition={{ delay: 0.2 + i * 0.04 + j * 0.02 }}
+                    className={`text-[9px] py-1 px-0.5 rounded font-medium ${
+                      j === 0 ? 'bg-blue-50 text-blue-600 dark:bg-blue-900/30 dark:text-blue-400' :
+                      j === 1 ? 'bg-green-50 text-green-600 dark:bg-green-900/30 dark:text-green-400' :
+                      'bg-amber-50 text-amber-600 dark:bg-amber-900/30 dark:text-amber-400'
                     }`}
                   >
                     {cls}
@@ -530,62 +494,44 @@ const SchedulePreview = ({ data }: { data: typeof showcaseImages[4] }) => {
   );
 };
 
-// Floating Elements Component
+// Floating Elements Component - Refined with subtle animations
 const FloatingElements = () => {
   return (
     <>
-      {/* Top Right - Lightning */}
+      {/* Top Right - Zap */}
       <motion.div
-        className="absolute -top-4 sm:-top-5 lg:-top-6 -right-4 sm:-right-5 lg:-right-6 w-11 sm:w-13 lg:w-16 h-11 sm:h-13 lg:h-16 bg-gradient-to-br from-amber-400 to-orange-500 rounded-xl lg:rounded-2xl flex items-center justify-center shadow-2xl z-30"
-        animate={{ 
-          y: [-10, 10, -10], 
-          rotate: [0, 10, -10, 0],
-          scale: [1, 1.05, 1]
-        }}
+        className="absolute -top-3 sm:-top-4 lg:-top-5 -right-3 sm:-right-4 lg:-right-5 w-9 sm:w-10 lg:w-12 h-9 sm:h-10 lg:h-12 bg-amber-500 rounded-lg lg:rounded-xl flex items-center justify-center shadow-lg shadow-amber-500/30 z-30"
+        animate={{ y: [-6, 6, -6] }}
         transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-        whileHover={{ scale: 1.15 }}
       >
-        <Zap className="w-5 sm:w-6 lg:w-8 h-5 sm:h-6 lg:h-8 text-white drop-shadow-sm" />
+        <Zap className="w-4 sm:w-5 lg:w-6 h-4 sm:h-5 lg:h-6 text-white" />
       </motion.div>
       
       {/* Top Left - Star */}
       <motion.div
-        className="absolute -top-4 sm:-top-5 lg:-top-6 -left-4 sm:-left-5 lg:-left-6 w-10 sm:w-11 lg:w-14 h-10 sm:h-11 lg:h-14 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg lg:rounded-xl flex items-center justify-center shadow-2xl z-30"
-        animate={{ 
-          y: [8, -8, 8], 
-          rotate: [0, -12, 12, 0],
-          scale: [1, 1.05, 1]
-        }}
+        className="absolute -top-3 sm:-top-4 lg:-top-5 -left-3 sm:-left-4 lg:-left-5 w-8 sm:w-9 lg:w-11 h-8 sm:h-9 lg:h-11 bg-purple-500 rounded-lg flex items-center justify-center shadow-lg shadow-purple-500/30 z-30"
+        animate={{ y: [5, -5, 5] }}
         transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
-        whileHover={{ scale: 1.15 }}
       >
-        <Star className="w-4 sm:w-5 lg:w-7 h-4 sm:h-5 lg:h-7 text-white drop-shadow-sm" />
+        <Star className="w-3.5 sm:w-4 lg:w-5 h-3.5 sm:h-4 lg:h-5 text-white" />
       </motion.div>
       
       {/* Bottom Left - Download */}
       <motion.div
-        className="absolute -bottom-4 sm:-bottom-5 lg:-bottom-6 -left-4 sm:-left-5 lg:-left-6 w-10 sm:w-11 lg:w-14 h-10 sm:h-11 lg:h-14 bg-gradient-to-br from-green-primary to-green-teal rounded-lg lg:rounded-xl flex items-center justify-center shadow-2xl z-30"
-        animate={{ 
-          y: [10, -10, 10],
-          scale: [1, 1.05, 1]
-        }}
+        className="absolute -bottom-3 sm:-bottom-4 lg:-bottom-5 -left-3 sm:-left-4 lg:-left-5 w-8 sm:w-9 lg:w-11 h-8 sm:h-9 lg:h-11 bg-green-primary rounded-lg flex items-center justify-center shadow-lg shadow-green-primary/30 z-30"
+        animate={{ y: [6, -6, 6] }}
         transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-        whileHover={{ scale: 1.15 }}
       >
-        <Download className="w-4 sm:w-5 lg:w-7 h-4 sm:h-5 lg:h-7 text-white drop-shadow-sm" />
+        <Download className="w-3.5 sm:w-4 lg:w-5 h-3.5 sm:h-4 lg:h-5 text-white" />
       </motion.div>
       
       {/* Bottom Right - Award */}
       <motion.div
-        className="absolute -bottom-4 sm:-bottom-5 lg:-bottom-6 -right-4 sm:-right-5 lg:-right-6 w-11 sm:w-12 lg:w-14 h-11 sm:h-12 lg:h-14 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl lg:rounded-2xl flex items-center justify-center shadow-2xl z-30"
-        animate={{ 
-          y: [-8, 8, -8], 
-          scale: [1, 1.08, 1]
-        }}
+        className="absolute -bottom-3 sm:-bottom-4 lg:-bottom-5 -right-3 sm:-right-4 lg:-right-5 w-9 sm:w-10 lg:w-12 h-9 sm:h-10 lg:h-12 bg-blue-500 rounded-lg lg:rounded-xl flex items-center justify-center shadow-lg shadow-blue-500/30 z-30"
+        animate={{ y: [-5, 5, -5] }}
         transition={{ duration: 3.2, repeat: Infinity, ease: 'easeInOut' }}
-        whileHover={{ scale: 1.15 }}
       >
-        <Award className="w-5 sm:w-6 lg:w-7 h-5 sm:h-6 lg:h-7 text-white drop-shadow-sm" />
+        <Award className="w-4 sm:w-5 lg:w-6 h-4 sm:h-5 lg:h-6 text-white" />
       </motion.div>
     </>
   );
@@ -633,35 +579,33 @@ const ImageShowcase = () => {
         <FloatingElements />
       </div>
 
-      {/* Navigation Dots */}
-      <div className="flex justify-center gap-2.5 mt-6">
+      {/* Navigation Dots - Cleaner */}
+      <div className="flex justify-center gap-2 mt-5">
         {showcaseImages.map((_, i) => (
-          <motion.button
+          <button
             key={i}
             onClick={() => setCurrentIndex(i)}
-            whileHover={{ scale: 1.2 }}
-            whileTap={{ scale: 0.9 }}
-            className={`h-2.5 rounded-full transition-all duration-300 ${
+            className={`h-2 rounded-full transition-all duration-300 ${
               i === currentIndex 
-                ? 'w-10 bg-gradient-to-r from-green-primary to-green-teal shadow-md' 
-                : 'w-2.5 bg-gray-300 dark:bg-gray-600 hover:bg-gray-400 dark:hover:bg-gray-500'
+                ? 'w-6 bg-green-primary' 
+                : 'w-2 bg-gray-300 dark:bg-gray-600 hover:bg-gray-400'
             }`}
           />
         ))}
       </div>
 
-      {/* Title Overlay */}
+      {/* Title Overlay - More compact */}
       <AnimatePresence mode="wait">
         <motion.div
           key={currentIndex}
-          initial={{ opacity: 0, y: 15 }}
+          initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -10 }}
-          transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="mt-5 text-center"
+          exit={{ opacity: 0, y: -8 }}
+          transition={{ duration: 0.3 }}
+          className="mt-4 text-center"
         >
-          <p className="text-base sm:text-lg font-bold text-green-dark dark:text-white mb-1">{currentData.title}</p>
-          <p className="text-sm text-gray-500 dark:text-gray-400">{currentData.description}</p>
+          <p className="text-sm sm:text-base font-semibold text-green-dark dark:text-white">{currentData.title}</p>
+          <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{currentData.description}</p>
         </motion.div>
       </AnimatePresence>
     </div>
@@ -703,15 +647,17 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
-              className="mb-8"
+              className="mb-6 lg:mb-8"
             >
               <motion.span 
-                className="inline-flex items-center gap-2.5 px-5 py-2.5 bg-green-primary/10 dark:bg-green-primary/20 rounded-full text-green-primary dark:text-green-light text-sm font-bold border border-green-primary/20"
-                whileHover={{ scale: 1.03, backgroundColor: 'rgba(45, 106, 79, 0.15)' }}
+                className="inline-flex items-center gap-2 px-4 py-2 bg-white/80 dark:bg-white/10 rounded-full text-green-primary dark:text-green-light text-xs sm:text-sm font-semibold shadow-sm backdrop-blur-sm border border-green-primary/10"
+                whileHover={{ scale: 1.02 }}
                 transition={{ type: 'spring', stiffness: 400, damping: 25 }}
               >
-                <Sparkles className="w-4 h-4 animate-pulse" />
-                منصة مِهني - احترافية في كل تفصيلة
+                <span className="flex items-center justify-center w-5 h-5 rounded-full bg-green-primary/10">
+                  <Sparkles className="w-3 h-3" />
+                </span>
+                قوالب ذكية وأدوات تنفيذية للمحترفين
               </motion.span>
             </motion.div>
 
@@ -720,21 +666,19 @@ export default function Hero() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
-              className="mb-8"
+              className="mb-5 lg:mb-6"
             >
-              <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-extrabold leading-[1.1] tracking-tight">
-                <span className="text-green-dark dark:text-white lg:inline block">
-                  منصة{' '}
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-[1.15] tracking-tight text-balance">
+                <span className="text-green-dark dark:text-white">
+                  أنجز أعمالك
                 </span>
-                <motion.span 
-                  className="bg-gradient-to-r from-green-primary via-green-teal to-green-light bg-clip-text text-transparent inline-block"
-                  initial={{ backgroundPosition: '0% 50%' }}
-                  animate={{ backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'] }}
-                  transition={{ duration: 5, repeat: Infinity, ease: 'linear' }}
-                  style={{ backgroundSize: '200% 200%' }}
-                >
+                <br className="hidden sm:block" />
+                <span className="text-green-dark dark:text-white">
+                  باحترافية مع{' '}
+                </span>
+                <span className="bg-gradient-to-l from-green-primary via-green-teal to-green-light bg-clip-text text-transparent">
                   مِهني
-                </motion.span>
+                </span>
               </h1>
             </motion.div>
 
@@ -743,48 +687,36 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
-              className="mb-10"
+              className="mb-8 lg:mb-10"
             >
-              <p className="text-lg sm:text-xl lg:text-2xl text-gray-600 dark:text-gray-300 leading-relaxed max-w-xl mx-auto lg:mx-0 lg:max-w-none">
-                <span className="text-green-primary font-bold">وفّر وقتك</span> وأنجز عملك باحترافية مع{' '}
-                <span className="font-semibold">قوالب جاهزة</span> وأدوات تنفيذية متكاملة
-              </p>
-              <p className="text-gray-500 dark:text-gray-400 mt-4 text-base sm:text-lg tracking-wide">
-                شهادات • تقييمات • خطط • تقارير • اختبارات • جداول • تصاميم
+              <p className="text-base sm:text-lg lg:text-xl text-gray-600 dark:text-gray-300 leading-relaxed max-w-lg mx-auto lg:mx-0 lg:max-w-none text-balance">
+                منصة متكاملة تخدم <span className="text-green-primary font-semibold">المدارس والمنظمات والشركات والأفراد</span> بقوالب جاهزة وأدوات ذكية تختصر الوقت وترفع الجودة
               </p>
             </motion.div>
 
-            {/* Features List */}
+            {/* Target Audience Pills */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.25, ease: [0.25, 0.46, 0.45, 0.94] }}
-              className="flex flex-wrap justify-center lg:justify-start gap-3 sm:gap-4 mb-10"
+              className="flex flex-wrap justify-center lg:justify-start gap-2 sm:gap-3 mb-8 lg:mb-10"
             >
               {[
-                { icon: Palette, text: 'تخصيص سهل' },
-                { icon: Download, text: 'تصدير فوري' },
-                { icon: Clock, text: 'توفر الوقت' },
+                { icon: Users, text: 'للمدارس', color: 'text-blue-600 dark:text-blue-400' },
+                { icon: Award, text: 'للمنظمات', color: 'text-amber-600 dark:text-amber-400' },
+                { icon: TrendingUp, text: 'للشركات', color: 'text-green-600 dark:text-green-400' },
+                { icon: Star, text: 'للأفراد', color: 'text-purple-600 dark:text-purple-400' },
               ].map((feature, i) => (
                 <motion.div
                   key={i}
-                  initial={{ opacity: 0, scale: 0.8, y: 10 }}
-                  animate={{ opacity: 1, scale: 1, y: 0 }}
-                  transition={{ 
-                    delay: 0.35 + i * 0.1, 
-                    type: 'spring', 
-                    stiffness: 300, 
-                    damping: 20 
-                  }}
-                  whileHover={{ 
-                    scale: 1.05, 
-                    y: -2,
-                    boxShadow: '0 8px 25px rgba(45, 106, 79, 0.15)'
-                  }}
-                  className="flex items-center gap-2.5 px-5 py-2.5 bg-white/70 dark:bg-[#1B2D2B]/70 rounded-full border border-green-primary/15 backdrop-blur-sm shadow-sm cursor-default transition-colors hover:border-green-primary/30"
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.3 + i * 0.08, duration: 0.4 }}
+                  whileHover={{ scale: 1.03, y: -1 }}
+                  className="flex items-center gap-1.5 px-3 py-1.5 bg-white/60 dark:bg-white/5 rounded-lg border border-gray-200/50 dark:border-white/10 backdrop-blur-sm cursor-default"
                 >
-                  <feature.icon className="w-4 h-4 text-green-primary" />
-                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300">{feature.text}</span>
+                  <feature.icon className={`w-3.5 h-3.5 ${feature.color}`} />
+                  <span className="text-xs font-medium text-gray-600 dark:text-gray-300">{feature.text}</span>
                 </motion.div>
               ))}
             </motion.div>
@@ -794,31 +726,30 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
-              className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 sm:gap-5 mb-10"
+              className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 sm:gap-4"
             >
+              {/* Primary CTA */}
               <motion.div 
-                whileHover={{ scale: 1.03, y: -2 }} 
+                whileHover={{ scale: 1.02 }} 
                 whileTap={{ scale: 0.98 }}
                 transition={{ type: 'spring', stiffness: 400, damping: 25 }}
               >
                 <Link href={ROUTES.START}>
                   <Button
                     size="lg"
-                    className="relative overflow-hidden bg-gradient-to-r from-green-primary to-green-teal text-white px-10 py-7 text-lg rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 group font-bold"
+                    className="relative overflow-hidden bg-green-primary hover:bg-green-primary/90 text-white px-8 py-6 text-base sm:text-lg rounded-xl shadow-lg shadow-green-primary/25 hover:shadow-xl hover:shadow-green-primary/30 transition-all duration-300 group font-bold"
                   >
-                    <span className="relative z-10 flex items-center">
-                      ابدأ مجاناً
-                      <ArrowLeft className="w-5 h-5 mr-2 group-hover:-translate-x-1.5 transition-transform duration-300" />
+                    <span className="relative z-10 flex items-center gap-2">
+                      ابدأ الآن مجاناً
+                      <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5 group-hover:-translate-x-1 transition-transform duration-200" />
                     </span>
-                    <motion.div
-                      className="absolute inset-0 bg-gradient-to-r from-green-teal to-green-light opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                    />
                   </Button>
                 </Link>
               </motion.div>
               
+              {/* Secondary CTA */}
               <motion.div 
-                whileHover={{ scale: 1.03, y: -2 }} 
+                whileHover={{ scale: 1.02 }} 
                 whileTap={{ scale: 0.98 }}
                 transition={{ type: 'spring', stiffness: 400, damping: 25 }}
               >
@@ -826,10 +757,10 @@ export default function Hero() {
                   <Button
                     size="lg"
                     variant="outline"
-                    className="border-2 border-green-primary/30 text-green-primary hover:bg-green-primary/10 hover:border-green-primary px-10 py-7 text-lg rounded-2xl transition-all duration-300 font-bold bg-white/60 dark:bg-[#1B2D2B]/60 backdrop-blur-sm group"
+                    className="border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-white/5 hover:border-gray-400 dark:hover:border-gray-500 px-8 py-6 text-base sm:text-lg rounded-xl transition-all duration-200 font-medium bg-white/50 dark:bg-transparent backdrop-blur-sm group"
                   >
-                    <Play className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform duration-300" />
-                    استكشف القوالب
+                    <Play className="w-4 h-4 sm:w-5 sm:h-5 ml-2 text-green-primary" />
+                    تصفح القوالب
                   </Button>
                 </Link>
               </motion.div>
@@ -840,91 +771,53 @@ export default function Hero() {
 
           {/* Right Side - Image Showcase */}
           <motion.div
-            initial={{ opacity: 0, x: 50, scale: 0.95 }}
-            animate={{ opacity: 1, x: 0, scale: 1 }}
-            transition={{ 
-              duration: 0.8, 
-              delay: 0.3,
-              ease: [0.25, 0.46, 0.45, 0.94]
-            }}
-            className="order-1 lg:order-2 relative pb-20 lg:pb-24"
+            initial={{ opacity: 0, x: 40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
+            className="order-1 lg:order-2 relative pb-16 lg:pb-20"
           >
-            {/* Glow Effect */}
-            <motion.div 
-              className="absolute -inset-3 lg:-inset-6 bg-gradient-to-r from-green-primary/25 via-green-teal/20 to-green-light/25 rounded-[2rem] lg:rounded-[3rem] blur-2xl lg:blur-3xl"
-              animate={{ 
-                opacity: [0.5, 0.7, 0.5],
-                scale: [1, 1.02, 1]
-              }}
-              transition={{ 
-                duration: 4, 
-                repeat: Infinity, 
-                ease: 'easeInOut' 
-              }}
-            />
+            {/* Subtle Glow Effect */}
+            <div className="absolute -inset-4 lg:-inset-8 bg-gradient-to-br from-green-primary/15 via-transparent to-green-teal/10 rounded-3xl blur-2xl opacity-60" />
             
             {/* Image Showcase Container */}
-            <div className="relative mx-auto lg:mx-0 max-w-[340px] sm:max-w-[420px] lg:max-w-[500px]">
+            <div className="relative mx-auto lg:mx-0 max-w-[320px] sm:max-w-[380px] lg:max-w-[440px]">
               <ImageShowcase />
             </div>
           </motion.div>
         </div>
 
-        {/* Stats Section */}
+        {/* Stats Section - Simplified */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
-          className="mt-14 lg:mt-20"
+          transition={{ duration: 0.6, delay: 0.4 }}
+          className="mt-12 lg:mt-16"
         >
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
             {stats.map((stat, index) => {
               const Icon = stat.icon;
-              const colors = [
-                'from-blue-500 to-cyan-500',
-                'from-green-500 to-emerald-500', 
-                'from-purple-500 to-violet-500',
-                'from-amber-500 to-orange-500'
-              ];
-              const bgColors = [
-                'bg-blue-50 dark:bg-blue-950/30',
-                'bg-green-50 dark:bg-green-950/30',
-                'bg-purple-50 dark:bg-purple-950/30',
-                'bg-amber-50 dark:bg-amber-950/30'
+              const iconColors = [
+                'text-blue-500',
+                'text-green-500', 
+                'text-purple-500',
+                'text-amber-500'
               ];
               
               return (
                 <motion.div 
                   key={index}
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.6 + index * 0.1, duration: 0.5 }}
-                  whileHover={{ 
-                    y: -4, 
-                    scale: 1.02,
-                    transition: { type: 'spring', stiffness: 400, damping: 25 }
-                  }}
-                  className={`relative ${bgColors[index]} rounded-2xl p-4 sm:p-5 border border-transparent hover:border-green-primary/20 transition-all duration-300 overflow-hidden group backdrop-blur-sm`}
+                  transition={{ delay: 0.5 + index * 0.08 }}
+                  className="bg-white/60 dark:bg-white/5 rounded-xl p-4 border border-gray-200/50 dark:border-white/10 backdrop-blur-sm"
                 >
-                  {/* Top icon with gradient */}
-                  <motion.div 
-                    className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br ${colors[index]} flex items-center justify-center mb-3 shadow-lg group-hover:shadow-xl transition-shadow duration-300`}
-                    whileHover={{ rotate: [0, -5, 5, 0] }}
-                    transition={{ duration: 0.4 }}
-                  >
-                    <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
-                  </motion.div>
-                  
-                  {/* Number */}
-                  <div className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-green-dark dark:text-white mb-1 tracking-tight">
+                  <div className="flex items-center gap-2 mb-2">
+                    <Icon className={`w-4 h-4 ${iconColors[index]}`} />
+                    <span className="text-xs text-gray-500 dark:text-gray-400">{stat.label}</span>
+                  </div>
+                  <div className="text-2xl sm:text-3xl font-bold text-green-dark dark:text-white">
                     <AnimatedCounter value={stat.value} suffix={stat.suffix} />
                   </div>
-                  
-                  {/* Label */}
-                  <div className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 font-medium">{stat.label}</div>
-                  
-                  {/* Subtle decoration */}
-                  <div className={`absolute -bottom-3 -right-3 w-16 h-16 rounded-full bg-gradient-to-br ${colors[index]} opacity-10 group-hover:opacity-20 transition-opacity duration-300`} />
                 </motion.div>
               );
             })}
