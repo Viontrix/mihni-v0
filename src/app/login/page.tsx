@@ -31,6 +31,7 @@ export default function LoginPage() {
     remember: false,
   });
 
+  // Show configuration message when Supabase is not set up
   if (!isSupabaseConfigured) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-hero dark:bg-gradient-dark-hero relative overflow-hidden py-8">
