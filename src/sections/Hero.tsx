@@ -720,7 +720,7 @@ const SchedulePreview = ({ data }: { data: typeof showcaseImages[4] }) => {
             </div>
             <div className="flex items-center gap-1">
               <div className="w-2 h-2 rounded-full bg-green-500" />
-              <span className="text-[10px] text-gray-500">عل��م</span>
+              <span className="text-[10px] text-gray-500">عل����م</span>
             </div>
           </div>
           <div className="px-2 py-1 bg-green-primary/10 rounded text-[10px] font-medium text-green-primary">
@@ -887,6 +887,50 @@ const TemplatesPreview = ({ data }: { data: typeof showcaseImages[7] }) => {
     </AppFrame>
   );
 };
+
+// Floating Elements Component - العناصر الطافية المتحركة بتدرج لوني
+const FloatingElements = () => {
+  return (
+    <>
+      {/* Top Right - Lightning */}
+      <motion.div
+        className="absolute -top-3 sm:-top-4 lg:-top-5 -right-3 sm:-right-4 lg:-right-5 w-10 sm:w-12 lg:w-14 h-10 sm:h-12 lg:h-14 bg-gradient-to-br from-amber-400 to-orange-500 rounded-xl lg:rounded-2xl flex items-center justify-center shadow-xl z-30"
+        animate={{ y: [-8, 8, -8], rotate: [0, 8, -8, 0] }}
+        transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+      >
+        <Zap className="w-5 sm:w-6 lg:w-7 h-5 sm:h-6 lg:h-7 text-white" />
+      </motion.div>
+      
+      {/* Top Left - Star */}
+      <motion.div
+        className="absolute -top-3 sm:-top-4 lg:-top-5 -left-3 sm:-left-4 lg:-left-5 w-9 sm:w-10 lg:w-12 h-9 sm:h-10 lg:h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg lg:rounded-xl flex items-center justify-center shadow-xl z-30"
+        animate={{ y: [6, -6, 6], rotate: [0, -10, 10, 0] }}
+        transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
+      >
+        <Star className="w-4 sm:w-5 lg:w-6 h-4 sm:h-5 lg:h-6 text-white" />
+      </motion.div>
+      
+      {/* Bottom Left - Download */}
+      <motion.div
+        className="absolute -bottom-3 sm:-bottom-4 lg:-bottom-5 -left-3 sm:-left-4 lg:-left-5 w-9 sm:w-10 lg:w-12 h-9 sm:h-10 lg:h-12 bg-gradient-to-br from-green-primary to-green-teal rounded-lg lg:rounded-xl flex items-center justify-center shadow-xl z-30"
+        animate={{ y: [8, -8, 8] }}
+        transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+      >
+        <Download className="w-4 sm:w-5 lg:w-6 h-4 sm:h-5 lg:h-6 text-white" />
+      </motion.div>
+      
+      {/* Bottom Right - Award */}
+      <motion.div
+        className="absolute -bottom-3 sm:-bottom-4 lg:-bottom-5 -right-3 sm:-right-4 lg:-right-5 w-10 sm:w-11 lg:w-12 h-10 sm:h-11 lg:h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl lg:rounded-2xl flex items-center justify-center shadow-xl z-30"
+        animate={{ y: [-6, 6, -6], scale: [1, 1.05, 1] }}
+        transition={{ duration: 3.2, repeat: Infinity, ease: 'easeInOut' }}
+      >
+        <Award className="w-5 sm:w-5 lg:w-6 h-5 sm:h-5 lg:h-6 text-white" />
+      </motion.div>
+    </>
+  );
+};
+
 const ImageShowcase = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -924,12 +968,17 @@ const ImageShowcase = () => {
 
   return (
     <div className="relative">
-      {/* Main Preview */}
-      <AnimatePresence mode="wait">
-        <div key={currentData.id}>
-          {renderPreview()}
-        </div>
-      </AnimatePresence>
+      {/* Main Preview with Floating Elements */}
+      <div className="relative">
+        <AnimatePresence mode="wait">
+          <div key={currentData.id}>
+            {renderPreview()}
+          </div>
+        </AnimatePresence>
+        
+        {/* Floating Elements - positioned relative to the preview card */}
+        <FloatingElements />
+      </div>
 
       {/* Audience Label */}
       <AnimatePresence mode="wait">
