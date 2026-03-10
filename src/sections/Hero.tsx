@@ -680,47 +680,7 @@ const SchedulePreview = ({ data }: { data: typeof showcaseImages[4] }) => {
 };
 
 // Floating Elements Component
-const FloatingElements = () => {
-  return (
-    <>
-      {/* Top Right - Lightning */}
-      <motion.div
-        className="absolute -top-3 sm:-top-4 lg:-top-5 -right-3 sm:-right-4 lg:-right-5 w-10 sm:w-12 lg:w-14 h-10 sm:h-12 lg:h-14 bg-gradient-to-br from-amber-400 to-orange-500 rounded-xl lg:rounded-2xl flex items-center justify-center shadow-xl z-30"
-        animate={{ y: [-8, 8, -8], rotate: [0, 8, -8, 0] }}
-        transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-      >
-        <Zap className="w-5 sm:w-6 lg:w-7 h-5 sm:h-6 lg:h-7 text-white" />
-      </motion.div>
-      
-      {/* Top Left - Star */}
-      <motion.div
-        className="absolute -top-3 sm:-top-4 lg:-top-5 -left-3 sm:-left-4 lg:-left-5 w-9 sm:w-10 lg:w-12 h-9 sm:h-10 lg:h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg lg:rounded-xl flex items-center justify-center shadow-xl z-30"
-        animate={{ y: [6, -6, 6], rotate: [0, -10, 10, 0] }}
-        transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
-      >
-        <Star className="w-4 sm:w-5 lg:w-6 h-4 sm:h-5 lg:h-6 text-white" />
-      </motion.div>
-      
-      {/* Bottom Left - Download */}
-      <motion.div
-        className="absolute -bottom-3 sm:-bottom-4 lg:-bottom-5 -left-3 sm:-left-4 lg:-left-5 w-9 sm:w-10 lg:w-12 h-9 sm:h-10 lg:h-12 bg-gradient-to-br from-green-primary to-green-teal rounded-lg lg:rounded-xl flex items-center justify-center shadow-xl z-30"
-        animate={{ y: [8, -8, 8] }}
-        transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-      >
-        <Download className="w-4 sm:w-5 lg:w-6 h-4 sm:h-5 lg:h-6 text-white" />
-      </motion.div>
-      
-      {/* Bottom Right - Award */}
-      <motion.div
-        className="absolute -bottom-3 sm:-bottom-4 lg:-bottom-5 -right-3 sm:-right-4 lg:-right-5 w-10 sm:w-11 lg:w-12 h-10 sm:h-11 lg:h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl lg:rounded-2xl flex items-center justify-center shadow-xl z-30"
-        animate={{ y: [-6, 6, -6], scale: [1, 1.05, 1] }}
-        transition={{ duration: 3.2, repeat: Infinity, ease: 'easeInOut' }}
-      >
-        <Award className="w-5 sm:w-5 lg:w-6 h-5 sm:h-5 lg:h-6 text-white" />
-      </motion.div>
-    </>
-  );
-};
+
 
 // Main Showcase Component
 const ImageShowcase = () => {
@@ -754,66 +714,26 @@ const ImageShowcase = () => {
 
   return (
     <div className="relative">
-      {/* Main Preview with Floating Elements */}
-      <div className="relative">
-        <AnimatePresence mode="wait">
-          {renderPreview()}
-        </AnimatePresence>
-        
-        {/* Floating Elements - positioned relative to the preview card */}
-        <FloatingElements />
-      </div>
-
-      {/* Navigation with tool icons */}
-      <div className="flex justify-center items-center gap-1.5 mt-5">
-        {showcaseImages.map((item, i) => {
-          const Icon = item.icon;
-          return (
-            <button
-              key={i}
-              onClick={() => setCurrentIndex(i)}
-              className={`relative flex items-center justify-center transition-all duration-300 ${
-                i === currentIndex 
-                  ? 'w-10 h-10 bg-gradient-to-br from-green-primary to-green-teal rounded-xl shadow-lg shadow-green-primary/30' 
-                  : 'w-8 h-8 bg-white dark:bg-[#1B2D2B] hover:bg-gray-50 dark:hover:bg-[#152B26] rounded-lg border border-gray-200 dark:border-green-primary/20'
-              }`}
-            >
-              <Icon className={`transition-all duration-300 ${
-                i === currentIndex 
-                  ? 'w-5 h-5 text-white' 
-                  : 'w-4 h-4 text-gray-400'
-              }`} />
-              {i === currentIndex && (
-                <motion.div
-                  layoutId="activeIndicator"
-                  className="absolute -bottom-1 w-1 h-1 bg-green-primary rounded-full"
-                  transition={{ type: "spring", stiffness: 500, damping: 30 }}
-                />
-              )}
-            </button>
-          );
-        })}
-      </div>
-
-      {/* Title Overlay - More subtle, integrated */}
+      {/* Main Preview */}
       <AnimatePresence mode="wait">
-        <motion.div
-          key={currentIndex}
-          initial={{ opacity: 0, y: 8 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -8 }}
-          transition={{ duration: 0.3 }}
-          className="mt-4 text-center"
-        >
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-white/60 dark:bg-[#1B2D2B]/60 backdrop-blur-sm rounded-full border border-gray-200/50 dark:border-green-primary/10">
-            {(() => {
-              const Icon = currentData.icon;
-              return <Icon className="w-3.5 h-3.5 text-green-primary" />;
-            })()}
-            <p className="text-xs sm:text-sm font-medium text-green-dark dark:text-white">{currentData.title}</p>
-          </div>
-        </motion.div>
+        {renderPreview()}
       </AnimatePresence>
+
+      {/* Navigation Dots */}
+      <div className="flex justify-center items-center gap-2 mt-4">
+        {showcaseImages.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setCurrentIndex(i)}
+            aria-label={`الشريحة ${i + 1}`}
+            className={`transition-all duration-300 rounded-full ${
+              i === currentIndex
+                ? 'w-6 h-2 bg-green-primary'
+                : 'w-2 h-2 bg-gray-300 dark:bg-gray-600 hover:bg-green-primary/50'
+            }`}
+          />
+        ))}
+      </div>
     </div>
   );
 };
@@ -844,16 +764,16 @@ export default function Hero() {
 
       {/* Main Content */}
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 sm:pt-32 lg:pt-28 pb-8 lg:pb-12">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-start">
           
           {/* Left Side - Content */}
-          <div className="text-center lg:text-right order-2 lg:order-1 pt-4 lg:pt-8">
+          <div className="text-center lg:text-right order-2 lg:order-1 pt-4 lg:pt-12">
             {/* Badge */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="mb-6"
+              className="mb-4"
             >
               <motion.span 
                 className="inline-flex items-center gap-2 text-green-primary dark:text-green-light text-sm font-bold"
@@ -869,7 +789,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="mb-6"
+              className="mb-4"
             >
               <h1 className="text-5xl sm:text-5xl lg:text-7xl xl:text-8xl font-extrabold leading-tight">
                 <span className="text-green-dark dark:text-white lg:inline block">
@@ -886,14 +806,15 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="mb-8"
+              className="mb-6"
             >
               <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
-                <span className="text-green-primary font-bold">وفّر وقتك</span> وأنجز عملك باحترافية مع{' '}
-                <span className="font-semibold">قوالب جاهزة</span> وأدوات تنفيذية متكاملة
+                <span className="text-green-primary font-bold">وفّر وقتك</span> وأنجز عملك باحترافية
+                <br className="hidden sm:block" />
+                مع <span className="font-semibold">قوالب جاهزة</span> وأدوات تنفيذية متكاملة
               </p>
-              <p className="text-gray-500 mt-3">
-                شهادات • تقييمات • خطط • تقارير • اختبارات • جداول • تصاميم
+              <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
+                شهادات • تقييمات • خطط • تقارير • اختبارات • جداول
               </p>
             </motion.div>
 
@@ -902,7 +823,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.25 }}
-              className="flex flex-wrap justify-center lg:justify-start gap-3 mb-8"
+              className="flex flex-wrap justify-center lg:justify-start gap-2.5 mb-7"
             >
               {[
                 { icon: Palette, text: 'تخصيص سهل' },
@@ -914,9 +835,9 @@ export default function Hero() {
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 0.3 + i * 0.1 }}
-                  className="flex items-center gap-2 px-4 py-2 bg-white/60 dark:bg-[#1B2D2B]/60 rounded-full border border-green-primary/10"
+                  className="flex items-center gap-2 px-3.5 py-1.5 bg-white/60 dark:bg-[#1B2D2B]/60 rounded-full border border-green-primary/10"
                 >
-                  <feature.icon className="w-4 h-4 text-green-primary" />
+                  <feature.icon className="w-3.5 h-3.5 text-green-primary" />
                   <span className="text-sm text-gray-700 dark:text-gray-300">{feature.text}</span>
                 </motion.div>
               ))}
@@ -929,11 +850,11 @@ export default function Hero() {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-8"
             >
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
+              <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
                 <Link href={ROUTES.START}>
                   <Button
                     size="lg"
-                    className="bg-gradient-to-r from-green-primary to-green-teal text-white px-8 py-6 text-lg rounded-2xl shadow-xl hover:shadow-2xl transition-all group font-bold"
+                    className="bg-gradient-to-r from-green-primary to-green-teal text-white px-10 py-7 text-xl rounded-2xl shadow-xl hover:shadow-2xl transition-all group font-bold"
                   >
                     ابدأ مجاناً
                     <ArrowLeft className="w-5 h-5 mr-2 group-hover:-translate-x-1 transition-transform" />
@@ -941,7 +862,7 @@ export default function Hero() {
                 </Link>
               </motion.div>
               
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
+              <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
                 <Link href={getHomeSectionUrl('templates')}>
                   <Button
                     size="lg"
@@ -963,7 +884,7 @@ export default function Hero() {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="order-1 lg:order-2 relative pb-16 lg:pb-20"
+            className="order-1 lg:order-2 relative pt-0 lg:pt-12"
           >
             {/* Glow Effect */}
             <div className="absolute -inset-2 lg:-inset-4 bg-gradient-to-r from-green-primary/20 via-green-teal/20 to-green-light/20 rounded-[2rem] lg:rounded-[3rem] blur-2xl lg:blur-3xl opacity-60" />
