@@ -664,14 +664,14 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="mb-6"
+              className="mb-8"
             >
               <motion.span 
                 className="inline-flex items-center gap-2 text-green-primary dark:text-green-light text-sm font-bold"
                 whileHover={{ scale: 1.05 }}
               >
                 <Sparkles className="w-4 h-4" />
-                منصة مِهني - احترافية في كل تفصيلة
+                أنجز أعمالك باحترافية
               </motion.span>
             </motion.div>
 
@@ -680,14 +680,11 @@ export default function Hero() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="mb-6"
+              className="mb-8"
             >
               <h1 className="text-5xl sm:text-5xl lg:text-7xl xl:text-8xl font-extrabold leading-tight">
-                <span className="text-green-dark dark:text-white lg:inline block">
-                  منصة{' '}
-                </span>
                 <span className="bg-gradient-to-r from-green-primary via-green-teal to-green-light bg-clip-text text-transparent">
-                  مِهني
+                  منصة مهني
                 </span>
               </h1>
             </motion.div>
@@ -697,14 +694,10 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="mb-8"
+              className="mb-10"
             >
               <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
-                <span className="text-green-primary font-bold">وفّر وقتك</span> وأنجز عملك باحترافية مع{' '}
-                <span className="font-semibold">قوالب جاهزة</span> وأدوات تنفيذية متكاملة
-              </p>
-              <p className="text-gray-500 mt-3">
-                شهادات • تقييمات • خطط • تقارير • اختبارات • جداول • تصاميم
+                منصة رقمية تساعد المدارس والجهات والشركات والأفراد على إنجاز أعمالهم بسرعة واحترافية باستخدام قوالب جاهزة وأدوات ذكية سهلة الاستخدام.
               </p>
             </motion.div>
 
@@ -713,7 +706,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.25 }}
-              className="flex flex-wrap justify-center lg:justify-start gap-3 mb-8"
+              className="flex flex-wrap justify-center lg:justify-start gap-3 mb-12"
             >
               {[
                 { icon: Palette, text: 'تخصيص سهل' },
@@ -738,7 +731,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-8"
+              className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-6"
             >
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
                 <Link href={ROUTES.START}>
@@ -760,10 +753,20 @@ export default function Hero() {
                     className="border-2 border-green-primary/30 text-green-primary hover:bg-green-primary/10 hover:border-green-primary px-8 py-6 text-lg rounded-2xl transition-all font-bold bg-white/50 backdrop-blur-sm"
                   >
                     <Play className="w-5 h-5 mr-2" />
-                    استكشف القوالب
+                    استكشف قوالبنا
                   </Button>
                 </Link>
               </motion.div>
+            </motion.div>
+
+            {/* Examples Line */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="text-gray-500 text-sm"
+            >
+              شهادات • تقارير • اختبارات • جداول • خطط • نماذج
             </motion.div>
 
 
