@@ -93,6 +93,19 @@ const showcaseImages = [
       days: ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس'],
       classes: ['رياضيات', 'علوم', 'عربي', 'إنجليزي', 'فنية']
     }
+  },
+  {
+    id: 6,
+    title: 'مجموعة أدوات متكاملة',
+    description: 'كل ما تحتاجه لإنجاز أعمالك احترافياً',
+    color: 'from-emerald-500 to-teal-600',
+    icon: Zap,
+    tools: [
+      { icon: Award, label: 'شهادات', color: 'bg-amber-100 text-amber-600' },
+      { icon: FileText, label: 'تقارير', color: 'bg-blue-100 text-blue-600' },
+      { icon: Calculator, label: 'اختبارات', color: 'bg-purple-100 text-purple-600' },
+      { icon: Calendar, label: 'جداول', color: 'bg-green-100 text-green-600' },
+    ]
   }
 ];
 
@@ -194,7 +207,7 @@ const DashboardPreview = ({ data }: { data: typeof showcaseImages[0] }) => {
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.9 }}
       transition={{ duration: 0.5 }}
-      className="relative bg-white dark:bg-[#1B2D2B] rounded-3xl shadow-2xl overflow-hidden border border-green-primary/10"
+      className="relative bg-white dark:bg-[#1B2D2B] rounded-3xl shadow-[0_20px_60px_rgba(45,106,79,0.15)] dark:shadow-[0_20px_60px_rgba(0,0,0,0.4)] overflow-hidden border border-green-primary/10"
     >
       {/* Browser Header */}
       <div className="flex items-center gap-3 px-5 py-4 bg-gray-50 dark:bg-[#152B26] border-b border-green-primary/10">
@@ -278,7 +291,7 @@ const CertificatePreview = ({ data }: { data: typeof showcaseImages[1] }) => {
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.9 }}
       transition={{ duration: 0.5 }}
-      className="relative bg-white dark:bg-[#1B2D2B] rounded-3xl shadow-2xl overflow-hidden border border-green-primary/10"
+      className="relative bg-white dark:bg-[#1B2D2B] rounded-3xl shadow-[0_20px_60px_rgba(45,106,79,0.15)] dark:shadow-[0_20px_60px_rgba(0,0,0,0.4)] overflow-hidden border border-green-primary/10"
     >
       {/* Browser Header */}
       <div className="flex items-center gap-3 px-5 py-4 bg-gray-50 dark:bg-[#152B26] border-b border-green-primary/10">
@@ -342,7 +355,7 @@ const CalculatorPreview = ({ data }: { data: typeof showcaseImages[2] }) => {
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.9 }}
       transition={{ duration: 0.5 }}
-      className="relative bg-white dark:bg-[#1B2D2B] rounded-3xl shadow-2xl overflow-hidden border border-green-primary/10"
+      className="relative bg-white dark:bg-[#1B2D2B] rounded-3xl shadow-[0_20px_60px_rgba(45,106,79,0.15)] dark:shadow-[0_20px_60px_rgba(0,0,0,0.4)] overflow-hidden border border-green-primary/10"
     >
       <div className="flex items-center gap-3 px-5 py-4 bg-gray-50 dark:bg-[#152B26] border-b border-green-primary/10">
         <div className="flex gap-2">
@@ -406,7 +419,7 @@ const QuizPreview = ({ data }: { data: typeof showcaseImages[3] }) => {
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.9 }}
       transition={{ duration: 0.5 }}
-      className="relative bg-white dark:bg-[#1B2D2B] rounded-3xl shadow-2xl overflow-hidden border border-green-primary/10"
+      className="relative bg-white dark:bg-[#1B2D2B] rounded-3xl shadow-[0_20px_60px_rgba(45,106,79,0.15)] dark:shadow-[0_20px_60px_rgba(0,0,0,0.4)] overflow-hidden border border-green-primary/10"
     >
       <div className="flex items-center gap-3 px-5 py-4 bg-gray-50 dark:bg-[#152B26] border-b border-green-primary/10">
         <div className="flex gap-2">
@@ -460,7 +473,7 @@ const SchedulePreview = ({ data }: { data: typeof showcaseImages[4] }) => {
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.9 }}
       transition={{ duration: 0.5 }}
-      className="relative bg-white dark:bg-[#1B2D2B] rounded-3xl shadow-2xl overflow-hidden border border-green-primary/10"
+      className="relative bg-white dark:bg-[#1B2D2B] rounded-3xl shadow-[0_20px_60px_rgba(45,106,79,0.15)] dark:shadow-[0_20px_60px_rgba(0,0,0,0.4)] overflow-hidden border border-green-primary/10"
     >
       <div className="flex items-center gap-3 px-5 py-4 bg-gray-50 dark:bg-[#152B26] border-b border-green-primary/10">
         <div className="flex gap-2">
@@ -507,6 +520,73 @@ const SchedulePreview = ({ data }: { data: typeof showcaseImages[4] }) => {
             </motion.div>
           ))}
         </div>
+      </div>
+    </motion.div>
+  );
+};
+
+// Tools Overview Component
+const ToolsPreview = ({ data }: { data: typeof showcaseImages[5] }) => {
+  return (
+    <motion.div 
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.9 }}
+      transition={{ duration: 0.5 }}
+      className="relative bg-white dark:bg-[#1B2D2B] rounded-3xl shadow-[0_20px_60px_rgba(45,106,79,0.15)] dark:shadow-[0_20px_60px_rgba(0,0,0,0.4)] overflow-hidden border border-green-primary/10"
+    >
+      {/* Browser Header */}
+      <div className="flex items-center gap-3 px-5 py-4 bg-gray-50 dark:bg-[#152B26] border-b border-green-primary/10">
+        <div className="flex gap-2">
+          <div className="w-3 h-3 rounded-full bg-red-400" />
+          <div className="w-3 h-3 rounded-full bg-yellow-400" />
+          <div className="w-3 h-3 rounded-full bg-green-400" />
+        </div>
+        <div className="flex-1 flex justify-center">
+          <div className="flex items-center gap-2 px-4 py-1.5 bg-white dark:bg-[#0D1B1A] rounded-lg text-sm text-gray-500">
+            <Zap className="w-4 h-4 text-emerald-500" />
+            مجموعة الأدوات
+          </div>
+        </div>
+      </div>
+
+      <div className="p-6">
+        {/* Title */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="mb-6 text-center"
+        >
+          <h3 className="text-lg font-bold text-green-dark dark:text-white mb-1">أدوات متكاملة</h3>
+          <p className="text-sm text-gray-500">كل ما تحتاجه لإنجاز أعمالك احترافياً</p>
+        </motion.div>
+
+        {/* Tools Grid */}
+        <div className="grid grid-cols-2 gap-3">
+          {data.tools?.map((tool: any, i: number) => (
+            <motion.div 
+              key={i}
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.3 + i * 0.1 }}
+              className={`p-4 rounded-xl border border-gray-200 dark:border-gray-700 flex flex-col items-center justify-center text-center hover:border-green-primary/30 transition-all ${tool.color}`}
+            >
+              <tool.icon className="w-6 h-6 mb-2" />
+              <span className="text-sm font-semibold">{tool.label}</span>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Bottom CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.7 }}
+          className="mt-6 p-4 bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20 rounded-xl text-center border border-emerald-200 dark:border-emerald-800"
+        >
+          <p className="text-sm font-semibold text-green-dark dark:text-white">جميع الأدوات متاحة الآن</p>
+        </motion.div>
       </div>
     </motion.div>
   );
@@ -562,7 +642,7 @@ const ImageShowcase = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % showcaseImages.length);
-    }, 3000);
+    }, 4000);
     return () => clearInterval(interval);
   }, []);
 
@@ -580,6 +660,8 @@ const ImageShowcase = () => {
         return <QuizPreview data={currentData} />;
       case 5:
         return <SchedulePreview data={currentData} />;
+      case 6:
+        return <ToolsPreview data={currentData} />;
       default:
         return <DashboardPreview data={currentData} />;
     }
@@ -590,7 +672,15 @@ const ImageShowcase = () => {
       {/* Main Preview with Floating Elements */}
       <div className="relative">
         <AnimatePresence mode="wait">
-          {renderPreview()}
+          <motion.div
+            key={currentIndex}
+            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: -20 }}
+            transition={{ duration: 0.6, ease: 'easeOut' }}
+          >
+            {renderPreview()}
+          </motion.div>
         </AnimatePresence>
         
         {/* Floating Elements - positioned relative to the preview card */}
@@ -598,15 +688,17 @@ const ImageShowcase = () => {
       </div>
 
       {/* Navigation Dots */}
-      <div className="flex justify-center gap-2 mt-4">
+      <div className="flex justify-center gap-2 mt-6">
         {showcaseImages.map((_, i) => (
-          <button
+          <motion.button
             key={i}
             onClick={() => setCurrentIndex(i)}
-            className={`w-2.5 h-2.5 rounded-full transition-all ${
+            whileHover={{ scale: 1.2 }}
+            whileTap={{ scale: 0.9 }}
+            className={`rounded-full transition-all ${
               i === currentIndex 
-                ? 'w-8 bg-green-primary' 
-                : 'bg-gray-300 hover:bg-gray-400'
+                ? 'w-8 h-2.5 bg-green-primary' 
+                : 'w-2.5 h-2.5 bg-gray-300 hover:bg-gray-400'
             }`}
           />
         ))}
@@ -619,7 +711,8 @@ const ImageShowcase = () => {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
-          className="mt-4 text-center"
+          transition={{ duration: 0.4 }}
+          className="mt-6 text-center"
         >
           <p className="text-sm sm:text-base font-bold text-green-dark dark:text-white">{currentData.title}</p>
           <p className="text-xs text-gray-500">{currentData.description}</p>
@@ -654,8 +747,8 @@ export default function Hero() {
       </div>
 
       {/* Main Content */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 sm:pt-32 lg:pt-28 pb-8 lg:pb-12">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 sm:pt-32 lg:pt-20 pb-8 lg:pb-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-20 items-center">
           
           {/* Left Side - Content */}
           <div className="text-center lg:text-right order-2 lg:order-1 pt-4 lg:pt-8">
@@ -680,9 +773,9 @@ export default function Hero() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="mb-8"
+              className="mb-12"
             >
-              <h1 className="text-5xl sm:text-5xl lg:text-7xl xl:text-8xl font-extrabold leading-tight">
+              <h1 className="text-6xl sm:text-6xl lg:text-8xl xl:text-9xl font-extrabold leading-tight tracking-tight">
                 <span className="bg-gradient-to-r from-green-primary via-green-teal to-green-light bg-clip-text text-transparent">
                   منصة مهني
                 </span>
@@ -731,13 +824,13 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-6"
+              className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-8"
             >
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
                 <Link href={ROUTES.START}>
                   <Button
                     size="lg"
-                    className="bg-gradient-to-r from-green-primary to-green-teal text-white px-8 py-6 text-lg rounded-2xl shadow-xl hover:shadow-2xl transition-all group font-bold"
+                    className="bg-gradient-to-r from-green-primary to-green-teal text-white px-10 py-7 text-lg rounded-2xl shadow-xl hover:shadow-2xl transition-all group font-bold hover:from-green-primary/90 hover:to-green-teal/90"
                   >
                     ابدأ مجاناً
                     <ArrowLeft className="w-5 h-5 mr-2 group-hover:-translate-x-1 transition-transform" />
@@ -750,7 +843,7 @@ export default function Hero() {
                   <Button
                     size="lg"
                     variant="outline"
-                    className="border-2 border-green-primary/30 text-green-primary hover:bg-green-primary/10 hover:border-green-primary px-8 py-6 text-lg rounded-2xl transition-all font-bold bg-white/50 backdrop-blur-sm"
+                    className="border-2 border-green-primary/40 text-green-primary hover:bg-green-primary/10 hover:border-green-primary px-10 py-7 text-lg rounded-2xl transition-all font-bold bg-white/50 dark:bg-[#1B2D2B]/50 backdrop-blur-sm"
                   >
                     <Play className="w-5 h-5 mr-2" />
                     استكشف قوالبنا
@@ -777,7 +870,7 @@ export default function Hero() {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="order-1 lg:order-2 relative pb-16 lg:pb-20"
+            className="order-1 lg:order-2 relative pb-16 lg:pb-0"
           >
             {/* Glow Effect */}
             <div className="absolute -inset-2 lg:-inset-4 bg-gradient-to-r from-green-primary/20 via-green-teal/20 to-green-light/20 rounded-[2rem] lg:rounded-[3rem] blur-2xl lg:blur-3xl opacity-60" />
