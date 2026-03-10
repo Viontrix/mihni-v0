@@ -201,11 +201,11 @@ const AppFrame = ({ children, title, icon: Icon, iconColor = "text-green-primary
       transition={{ duration: 0.4, ease: "easeOut" }}
       className="relative"
     >
-      {/* Outer shadow layer for depth */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/5 to-black/20 dark:from-black/20 dark:to-black/40 rounded-2xl translate-y-2 blur-xl" />
+      {/* Outer shadow layer for depth — softened */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/3 to-black/10 dark:from-black/15 dark:to-black/30 rounded-xl translate-y-1.5 blur-lg" />
       
       {/* Main app container */}
-      <div className="relative bg-white dark:bg-[#1B2D2B] rounded-2xl overflow-hidden border border-gray-200/80 dark:border-green-primary/20 shadow-[0_8px_40px_rgba(0,0,0,0.12)] dark:shadow-[0_8px_40px_rgba(0,0,0,0.4)]">
+      <div className="relative bg-white dark:bg-[#1B2D2B] rounded-xl overflow-hidden border border-gray-200/70 dark:border-green-primary/20 shadow-[0_4px_24px_rgba(0,0,0,0.08)] dark:shadow-[0_4px_24px_rgba(0,0,0,0.3)]">
         {/* Top bar - macOS style window chrome */}
         <div className="flex items-center gap-3 px-4 py-3 bg-gradient-to-b from-gray-100 to-gray-50 dark:from-[#1a2f2a] dark:to-[#152B26] border-b border-gray-200/80 dark:border-green-primary/10">
           {/* Window controls */}
@@ -679,8 +679,60 @@ const SchedulePreview = ({ data }: { data: typeof showcaseImages[4] }) => {
   );
 };
 
-// Floating Elements Component
+// Floating Elements around the Slider
+const SliderFloatingElements = () => (
+  <>
+    {/* Top-right badge: templates */}
+    <motion.div
+      initial={{ opacity: 0, x: 20, y: -10 }}
+      animate={{ opacity: 1, x: 0, y: 0 }}
+      transition={{ delay: 0.6, duration: 0.5 }}
+      className="absolute -top-4 -right-4 z-20 flex items-center gap-1.5 bg-white dark:bg-[#1B2D2B] rounded-xl px-3 py-2 shadow-lg border border-gray-100 dark:border-green-primary/20"
+    >
+      <div className="w-6 h-6 rounded-lg bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center">
+        <Award className="w-3.5 h-3.5 text-amber-500" />
+      </div>
+      <div>
+        <p className="text-[9px] text-gray-400 leading-none">قوالب</p>
+        <p className="text-xs font-bold text-green-dark dark:text-white leading-tight">+100</p>
+      </div>
+    </motion.div>
 
+    {/* Bottom-left badge: users */}
+    <motion.div
+      initial={{ opacity: 0, x: -20, y: 10 }}
+      animate={{ opacity: 1, x: 0, y: 0 }}
+      transition={{ delay: 0.8, duration: 0.5 }}
+      className="absolute -bottom-4 -left-4 z-20 flex items-center gap-1.5 bg-white dark:bg-[#1B2D2B] rounded-xl px-3 py-2 shadow-lg border border-gray-100 dark:border-green-primary/20"
+    >
+      <div className="w-6 h-6 rounded-lg bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
+        <Users className="w-3.5 h-3.5 text-green-primary" />
+      </div>
+      <div>
+        <p className="text-[9px] text-gray-400 leading-none">مستخدم</p>
+        <p className="text-xs font-bold text-green-dark dark:text-white leading-tight">+10k</p>
+      </div>
+    </motion.div>
+
+    {/* Top-left pulse dot */}
+    <motion.div
+      animate={{ scale: [1, 1.3, 1] }}
+      transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+      className="absolute top-8 -left-3 z-20 w-5 h-5 rounded-full bg-green-primary/30 flex items-center justify-center"
+    >
+      <div className="w-2.5 h-2.5 rounded-full bg-green-primary" />
+    </motion.div>
+
+    {/* Bottom-right star */}
+    <motion.div
+      animate={{ rotate: [0, 15, -15, 0] }}
+      transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+      className="absolute bottom-10 -right-3 z-20 w-7 h-7 rounded-xl bg-amber-100 dark:bg-amber-900/40 flex items-center justify-center shadow-sm border border-amber-200/50"
+    >
+      <Star className="w-3.5 h-3.5 text-amber-500" />
+    </motion.div>
+  </>
+);
 
 // Main Showcase Component
 const ImageShowcase = () => {
@@ -744,7 +796,7 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative overflow-hidden bg-gradient-to-br from-[#F0F9F4] via-[#E8F5E9] to-[#C8E6C9] dark:from-[#0A1F1A] dark:via-[#0D1B1A] dark:to-[#0A1512]"
+      className="relative overflow-hidden bg-gradient-to-br from-[#F0F9F4] via-[#E8F5E9] to-[#C8E6C9] dark:from-[#0A1F1A] dark:via-[#0D1B1A] dark:to-[#0A1512] min-h-screen flex flex-col"
     >
       {/* Background Effects */}
       <GradientOrbs />
@@ -765,10 +817,10 @@ export default function Hero() {
       </div>
 
       {/* Main Content Wrapper */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col flex-1">
 
         {/* ── Upper Section: Content + Slider ── */}
-        <div className="pt-28 sm:pt-32 lg:pt-28 pb-10 lg:pb-12 flex flex-col lg:flex-row items-center lg:items-center gap-10 lg:gap-16 lg:min-h-[600px]">
+        <div className="pt-24 sm:pt-28 lg:pt-24 pb-8 lg:pb-10 flex flex-col lg:flex-row items-center lg:items-center gap-10 lg:gap-16 flex-1">
 
           {/* Content Side */}
           <div className="w-full lg:flex-1 text-center lg:text-right flex flex-col justify-center">
@@ -890,8 +942,11 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.3 }}
             className="w-full lg:w-[480px] xl:w-[500px] flex-shrink-0 relative self-center"
           >
-            {/* Glow Effect */}
-            <div className="absolute -inset-2 lg:-inset-4 bg-gradient-to-r from-green-primary/20 via-green-teal/20 to-green-light/20 rounded-[2rem] lg:rounded-[3rem] blur-2xl lg:blur-3xl opacity-60 pointer-events-none" />
+            {/* Subtle glow — reduced opacity */}
+            <div className="absolute -inset-2 bg-gradient-to-br from-green-primary/10 via-green-teal/10 to-green-light/8 rounded-2xl blur-xl opacity-70 pointer-events-none" />
+
+            {/* Floating elements anchored to slider */}
+            <SliderFloatingElements />
             
             {/* Fixed-size Slider Container */}
             <div className="relative w-full">
@@ -905,7 +960,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5 }}
-          className="pb-10 lg:pb-14 border-t border-green-primary/10 pt-8 lg:pt-10"
+          className="pb-8 lg:pb-10 border-t border-green-primary/10 pt-6 lg:pt-8"
         >
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
             {stats.map((stat, index) => {
