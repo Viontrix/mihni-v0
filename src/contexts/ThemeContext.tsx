@@ -12,14 +12,18 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>(() => {
-    if (typeof window !== 'undefined') {
-      return (localStorage.getItem('theme') as Theme) || 'system';
-    }
-    return 'system';
-  });
-  
+  const [theme, setTheme] = useState<Theme>('system');
   const [resolvedTheme, setResolvedTheme] = useState<'light' | 'dark'>('light');
+  const [mounted, setMounted] = useState(false);
+
+  // Load theme from localStorage after mount
+  useEffect(() => {
+    const stored = localStorage.getItem('theme') as Theme;
+    if (stored) {
+      setTheme(stored);
+    }
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const root = window.document.documentElement;
@@ -53,6 +57,11 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       return () => mediaQuery.removeEventListener('change', handleChange);
     }
   }, [theme]);
+
+  // Prevent flash by not rendering until mounted
+  if (!mounted) {
+    return <>{children}</>;
+  }
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme, resolvedTheme }}>
