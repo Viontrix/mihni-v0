@@ -26,7 +26,6 @@ import {
 import ExportGate from "@/components/ExportGate"
 import { ROUTES } from "@/lib/routes"
 import { createProject, getProjectById, updateProject } from "@/lib/supabase/projects"
-import { createProject, getProjectById, updateProject } from "@/lib/supabase/projects"
 import {
   ArrowRight,
   Award,
