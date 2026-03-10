@@ -100,24 +100,32 @@ const showcaseImages = [
 const FloatingParticles = () => {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {[...Array(15)].map((_, i) => (
+      {[...Array(20)].map((_, i) => (
         <motion.div
           key={i}
-          className="absolute w-1.5 h-1.5 rounded-full bg-green-primary/30"
+          className={`absolute rounded-full ${
+            i % 3 === 0 
+              ? 'w-2 h-2 bg-green-primary/25' 
+              : i % 3 === 1 
+                ? 'w-1.5 h-1.5 bg-green-teal/30' 
+                : 'w-1 h-1 bg-green-light/35'
+          }`}
           initial={{ 
             x: Math.random() * 100 + '%', 
             y: '110%',
-            opacity: 0 
+            opacity: 0,
+            scale: 0.5
           }}
           animate={{ 
             y: '-10%',
-            opacity: [0, 1, 0]
+            opacity: [0, 0.8, 0],
+            scale: [0.5, 1, 0.5]
           }}
           transition={{ 
-            duration: Math.random() * 8 + 8,
+            duration: Math.random() * 6 + 10,
             repeat: Infinity,
-            delay: Math.random() * 5,
-            ease: 'linear'
+            delay: Math.random() * 8,
+            ease: 'easeOut'
           }}
         />
       ))}
@@ -130,20 +138,30 @@ const GradientOrbs = () => {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
       <motion.div 
-        className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full bg-gradient-to-br from-green-primary/15 via-green-teal/10 to-transparent blur-[100px]"
+        className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full bg-gradient-to-br from-green-primary/20 via-green-teal/15 to-transparent blur-[120px]"
         animate={{ 
-          scale: [1, 1.2, 1],
-          x: [0, 30, 0],
+          scale: [1, 1.15, 1],
+          x: [0, 40, 0],
+          y: [0, 20, 0],
         }}
-        transition={{ duration: 15, repeat: Infinity, ease: 'easeInOut' }}
+        transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
       />
       <motion.div 
-        className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full bg-gradient-to-tr from-green-light/15 via-green-teal/10 to-transparent blur-[80px]"
+        className="absolute bottom-0 left-0 w-[500px] h-[500px] rounded-full bg-gradient-to-tr from-green-light/20 via-green-teal/15 to-transparent blur-[100px]"
         animate={{ 
-          scale: [1.2, 1, 1.2],
-          x: [0, -30, 0],
+          scale: [1.15, 1, 1.15],
+          x: [0, -40, 0],
+          y: [0, -20, 0],
         }}
-        transition={{ duration: 18, repeat: Infinity, ease: 'easeInOut' }}
+        transition={{ duration: 14, repeat: Infinity, ease: 'easeInOut' }}
+      />
+      <motion.div 
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full bg-gradient-to-r from-green-teal/10 to-green-primary/10 blur-[80px]"
+        animate={{ 
+          scale: [1, 1.1, 1],
+          rotate: [0, 180, 360],
+        }}
+        transition={{ duration: 20, repeat: Infinity, ease: 'linear' }}
       />
     </div>
   );
@@ -518,38 +536,56 @@ const FloatingElements = () => {
     <>
       {/* Top Right - Lightning */}
       <motion.div
-        className="absolute -top-3 sm:-top-4 lg:-top-5 -right-3 sm:-right-4 lg:-right-5 w-10 sm:w-12 lg:w-14 h-10 sm:h-12 lg:h-14 bg-gradient-to-br from-amber-400 to-orange-500 rounded-xl lg:rounded-2xl flex items-center justify-center shadow-xl z-30"
-        animate={{ y: [-8, 8, -8], rotate: [0, 8, -8, 0] }}
+        className="absolute -top-4 sm:-top-5 lg:-top-6 -right-4 sm:-right-5 lg:-right-6 w-11 sm:w-13 lg:w-16 h-11 sm:h-13 lg:h-16 bg-gradient-to-br from-amber-400 to-orange-500 rounded-xl lg:rounded-2xl flex items-center justify-center shadow-2xl z-30"
+        animate={{ 
+          y: [-10, 10, -10], 
+          rotate: [0, 10, -10, 0],
+          scale: [1, 1.05, 1]
+        }}
         transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+        whileHover={{ scale: 1.15 }}
       >
-        <Zap className="w-5 sm:w-6 lg:w-7 h-5 sm:h-6 lg:h-7 text-white" />
+        <Zap className="w-5 sm:w-6 lg:w-8 h-5 sm:h-6 lg:h-8 text-white drop-shadow-sm" />
       </motion.div>
       
       {/* Top Left - Star */}
       <motion.div
-        className="absolute -top-3 sm:-top-4 lg:-top-5 -left-3 sm:-left-4 lg:-left-5 w-9 sm:w-10 lg:w-12 h-9 sm:h-10 lg:h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg lg:rounded-xl flex items-center justify-center shadow-xl z-30"
-        animate={{ y: [6, -6, 6], rotate: [0, -10, 10, 0] }}
+        className="absolute -top-4 sm:-top-5 lg:-top-6 -left-4 sm:-left-5 lg:-left-6 w-10 sm:w-11 lg:w-14 h-10 sm:h-11 lg:h-14 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg lg:rounded-xl flex items-center justify-center shadow-2xl z-30"
+        animate={{ 
+          y: [8, -8, 8], 
+          rotate: [0, -12, 12, 0],
+          scale: [1, 1.05, 1]
+        }}
         transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
+        whileHover={{ scale: 1.15 }}
       >
-        <Star className="w-4 sm:w-5 lg:w-6 h-4 sm:h-5 lg:h-6 text-white" />
+        <Star className="w-4 sm:w-5 lg:w-7 h-4 sm:h-5 lg:h-7 text-white drop-shadow-sm" />
       </motion.div>
       
       {/* Bottom Left - Download */}
       <motion.div
-        className="absolute -bottom-3 sm:-bottom-4 lg:-bottom-5 -left-3 sm:-left-4 lg:-left-5 w-9 sm:w-10 lg:w-12 h-9 sm:h-10 lg:h-12 bg-gradient-to-br from-green-primary to-green-teal rounded-lg lg:rounded-xl flex items-center justify-center shadow-xl z-30"
-        animate={{ y: [8, -8, 8] }}
+        className="absolute -bottom-4 sm:-bottom-5 lg:-bottom-6 -left-4 sm:-left-5 lg:-left-6 w-10 sm:w-11 lg:w-14 h-10 sm:h-11 lg:h-14 bg-gradient-to-br from-green-primary to-green-teal rounded-lg lg:rounded-xl flex items-center justify-center shadow-2xl z-30"
+        animate={{ 
+          y: [10, -10, 10],
+          scale: [1, 1.05, 1]
+        }}
         transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+        whileHover={{ scale: 1.15 }}
       >
-        <Download className="w-4 sm:w-5 lg:w-6 h-4 sm:h-5 lg:h-6 text-white" />
+        <Download className="w-4 sm:w-5 lg:w-7 h-4 sm:h-5 lg:h-7 text-white drop-shadow-sm" />
       </motion.div>
       
       {/* Bottom Right - Award */}
       <motion.div
-        className="absolute -bottom-3 sm:-bottom-4 lg:-bottom-5 -right-3 sm:-right-4 lg:-right-5 w-10 sm:w-11 lg:w-12 h-10 sm:h-11 lg:h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl lg:rounded-2xl flex items-center justify-center shadow-xl z-30"
-        animate={{ y: [-6, 6, -6], scale: [1, 1.05, 1] }}
+        className="absolute -bottom-4 sm:-bottom-5 lg:-bottom-6 -right-4 sm:-right-5 lg:-right-6 w-11 sm:w-12 lg:w-14 h-11 sm:h-12 lg:h-14 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl lg:rounded-2xl flex items-center justify-center shadow-2xl z-30"
+        animate={{ 
+          y: [-8, 8, -8], 
+          scale: [1, 1.08, 1]
+        }}
         transition={{ duration: 3.2, repeat: Infinity, ease: 'easeInOut' }}
+        whileHover={{ scale: 1.15 }}
       >
-        <Award className="w-5 sm:w-5 lg:w-6 h-5 sm:h-5 lg:h-6 text-white" />
+        <Award className="w-5 sm:w-6 lg:w-7 h-5 sm:h-6 lg:h-7 text-white drop-shadow-sm" />
       </motion.div>
     </>
   );
@@ -598,15 +634,17 @@ const ImageShowcase = () => {
       </div>
 
       {/* Navigation Dots */}
-      <div className="flex justify-center gap-2 mt-4">
+      <div className="flex justify-center gap-2.5 mt-6">
         {showcaseImages.map((_, i) => (
-          <button
+          <motion.button
             key={i}
             onClick={() => setCurrentIndex(i)}
-            className={`w-2.5 h-2.5 rounded-full transition-all ${
+            whileHover={{ scale: 1.2 }}
+            whileTap={{ scale: 0.9 }}
+            className={`h-2.5 rounded-full transition-all duration-300 ${
               i === currentIndex 
-                ? 'w-8 bg-green-primary' 
-                : 'bg-gray-300 hover:bg-gray-400'
+                ? 'w-10 bg-gradient-to-r from-green-primary to-green-teal shadow-md' 
+                : 'w-2.5 bg-gray-300 dark:bg-gray-600 hover:bg-gray-400 dark:hover:bg-gray-500'
             }`}
           />
         ))}
@@ -616,13 +654,14 @@ const ImageShowcase = () => {
       <AnimatePresence mode="wait">
         <motion.div
           key={currentIndex}
-          initial={{ opacity: 0, y: 10 }}
+          initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -10 }}
-          className="mt-4 text-center"
+          transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
+          className="mt-5 text-center"
         >
-          <p className="text-sm sm:text-base font-bold text-green-dark dark:text-white">{currentData.title}</p>
-          <p className="text-xs text-gray-500">{currentData.description}</p>
+          <p className="text-base sm:text-lg font-bold text-green-dark dark:text-white mb-1">{currentData.title}</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400">{currentData.description}</p>
         </motion.div>
       </AnimatePresence>
     </div>
@@ -654,23 +693,24 @@ export default function Hero() {
       </div>
 
       {/* Main Content */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 sm:pt-32 lg:pt-28 pb-8 lg:pb-12">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 pt-32 sm:pt-36 lg:pt-32 pb-12 lg:pb-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-14 lg:gap-20 items-center">
           
           {/* Left Side - Content */}
-          <div className="text-center lg:text-right order-2 lg:order-1 pt-4 lg:pt-8">
+          <div className="text-center lg:text-right order-2 lg:order-1 pt-6 lg:pt-10">
             {/* Badge */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="mb-6"
+              transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
+              className="mb-8"
             >
               <motion.span 
-                className="inline-flex items-center gap-2 text-green-primary dark:text-green-light text-sm font-bold"
-                whileHover={{ scale: 1.05 }}
+                className="inline-flex items-center gap-2.5 px-5 py-2.5 bg-green-primary/10 dark:bg-green-primary/20 rounded-full text-green-primary dark:text-green-light text-sm font-bold border border-green-primary/20"
+                whileHover={{ scale: 1.03, backgroundColor: 'rgba(45, 106, 79, 0.15)' }}
+                transition={{ type: 'spring', stiffness: 400, damping: 25 }}
               >
-                <Sparkles className="w-4 h-4" />
+                <Sparkles className="w-4 h-4 animate-pulse" />
                 منصة مِهني - احترافية في كل تفصيلة
               </motion.span>
             </motion.div>
@@ -679,16 +719,22 @@ export default function Hero() {
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="mb-6"
+              transition={{ duration: 0.6, delay: 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
+              className="mb-8"
             >
-              <h1 className="text-5xl sm:text-5xl lg:text-7xl xl:text-8xl font-extrabold leading-tight">
+              <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-extrabold leading-[1.1] tracking-tight">
                 <span className="text-green-dark dark:text-white lg:inline block">
                   منصة{' '}
                 </span>
-                <span className="bg-gradient-to-r from-green-primary via-green-teal to-green-light bg-clip-text text-transparent">
+                <motion.span 
+                  className="bg-gradient-to-r from-green-primary via-green-teal to-green-light bg-clip-text text-transparent inline-block"
+                  initial={{ backgroundPosition: '0% 50%' }}
+                  animate={{ backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'] }}
+                  transition={{ duration: 5, repeat: Infinity, ease: 'linear' }}
+                  style={{ backgroundSize: '200% 200%' }}
+                >
                   مِهني
-                </span>
+                </motion.span>
               </h1>
             </motion.div>
 
@@ -696,14 +742,14 @@ export default function Hero() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="mb-8"
+              transition={{ duration: 0.6, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
+              className="mb-10"
             >
-              <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
+              <p className="text-lg sm:text-xl lg:text-2xl text-gray-600 dark:text-gray-300 leading-relaxed max-w-xl mx-auto lg:mx-0 lg:max-w-none">
                 <span className="text-green-primary font-bold">وفّر وقتك</span> وأنجز عملك باحترافية مع{' '}
                 <span className="font-semibold">قوالب جاهزة</span> وأدوات تنفيذية متكاملة
               </p>
-              <p className="text-gray-500 mt-3">
+              <p className="text-gray-500 dark:text-gray-400 mt-4 text-base sm:text-lg tracking-wide">
                 شهادات • تقييمات • خطط • تقارير • اختبارات • جداول • تصاميم
               </p>
             </motion.div>
@@ -712,8 +758,8 @@ export default function Hero() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.25 }}
-              className="flex flex-wrap justify-center lg:justify-start gap-3 mb-8"
+              transition={{ duration: 0.6, delay: 0.25, ease: [0.25, 0.46, 0.45, 0.94] }}
+              className="flex flex-wrap justify-center lg:justify-start gap-3 sm:gap-4 mb-10"
             >
               {[
                 { icon: Palette, text: 'تخصيص سهل' },
@@ -722,13 +768,23 @@ export default function Hero() {
               ].map((feature, i) => (
                 <motion.div
                   key={i}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.3 + i * 0.1 }}
-                  className="flex items-center gap-2 px-4 py-2 bg-white/60 dark:bg-[#1B2D2B]/60 rounded-full border border-green-primary/10"
+                  initial={{ opacity: 0, scale: 0.8, y: 10 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  transition={{ 
+                    delay: 0.35 + i * 0.1, 
+                    type: 'spring', 
+                    stiffness: 300, 
+                    damping: 20 
+                  }}
+                  whileHover={{ 
+                    scale: 1.05, 
+                    y: -2,
+                    boxShadow: '0 8px 25px rgba(45, 106, 79, 0.15)'
+                  }}
+                  className="flex items-center gap-2.5 px-5 py-2.5 bg-white/70 dark:bg-[#1B2D2B]/70 rounded-full border border-green-primary/15 backdrop-blur-sm shadow-sm cursor-default transition-colors hover:border-green-primary/30"
                 >
                   <feature.icon className="w-4 h-4 text-green-primary" />
-                  <span className="text-sm text-gray-700 dark:text-gray-300">{feature.text}</span>
+                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300">{feature.text}</span>
                 </motion.div>
               ))}
             </motion.div>
@@ -737,29 +793,42 @@ export default function Hero() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-8"
+              transition={{ duration: 0.6, delay: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
+              className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 sm:gap-5 mb-10"
             >
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
+              <motion.div 
+                whileHover={{ scale: 1.03, y: -2 }} 
+                whileTap={{ scale: 0.98 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+              >
                 <Link href={ROUTES.START}>
                   <Button
                     size="lg"
-                    className="bg-gradient-to-r from-green-primary to-green-teal text-white px-8 py-6 text-lg rounded-2xl shadow-xl hover:shadow-2xl transition-all group font-bold"
+                    className="relative overflow-hidden bg-gradient-to-r from-green-primary to-green-teal text-white px-10 py-7 text-lg rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 group font-bold"
                   >
-                    ابدأ مجاناً
-                    <ArrowLeft className="w-5 h-5 mr-2 group-hover:-translate-x-1 transition-transform" />
+                    <span className="relative z-10 flex items-center">
+                      ابدأ مجاناً
+                      <ArrowLeft className="w-5 h-5 mr-2 group-hover:-translate-x-1.5 transition-transform duration-300" />
+                    </span>
+                    <motion.div
+                      className="absolute inset-0 bg-gradient-to-r from-green-teal to-green-light opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    />
                   </Button>
                 </Link>
               </motion.div>
               
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
+              <motion.div 
+                whileHover={{ scale: 1.03, y: -2 }} 
+                whileTap={{ scale: 0.98 }}
+                transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+              >
                 <Link href={getHomeSectionUrl('templates')}>
                   <Button
                     size="lg"
                     variant="outline"
-                    className="border-2 border-green-primary/30 text-green-primary hover:bg-green-primary/10 hover:border-green-primary px-8 py-6 text-lg rounded-2xl transition-all font-bold bg-white/50 backdrop-blur-sm"
+                    className="border-2 border-green-primary/30 text-green-primary hover:bg-green-primary/10 hover:border-green-primary px-10 py-7 text-lg rounded-2xl transition-all duration-300 font-bold bg-white/60 dark:bg-[#1B2D2B]/60 backdrop-blur-sm group"
                   >
-                    <Play className="w-5 h-5 mr-2" />
+                    <Play className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform duration-300" />
                     استكشف القوالب
                   </Button>
                 </Link>
@@ -771,16 +840,31 @@ export default function Hero() {
 
           {/* Right Side - Image Showcase */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="order-1 lg:order-2 relative pb-16 lg:pb-20"
+            initial={{ opacity: 0, x: 50, scale: 0.95 }}
+            animate={{ opacity: 1, x: 0, scale: 1 }}
+            transition={{ 
+              duration: 0.8, 
+              delay: 0.3,
+              ease: [0.25, 0.46, 0.45, 0.94]
+            }}
+            className="order-1 lg:order-2 relative pb-20 lg:pb-24"
           >
             {/* Glow Effect */}
-            <div className="absolute -inset-2 lg:-inset-4 bg-gradient-to-r from-green-primary/20 via-green-teal/20 to-green-light/20 rounded-[2rem] lg:rounded-[3rem] blur-2xl lg:blur-3xl opacity-60" />
+            <motion.div 
+              className="absolute -inset-3 lg:-inset-6 bg-gradient-to-r from-green-primary/25 via-green-teal/20 to-green-light/25 rounded-[2rem] lg:rounded-[3rem] blur-2xl lg:blur-3xl"
+              animate={{ 
+                opacity: [0.5, 0.7, 0.5],
+                scale: [1, 1.02, 1]
+              }}
+              transition={{ 
+                duration: 4, 
+                repeat: Infinity, 
+                ease: 'easeInOut' 
+              }}
+            />
             
             {/* Image Showcase Container */}
-            <div className="relative mx-auto lg:mx-0 max-w-[320px] sm:max-w-[400px] lg:max-w-[480px]">
+            <div className="relative mx-auto lg:mx-0 max-w-[340px] sm:max-w-[420px] lg:max-w-[500px]">
               <ImageShowcase />
             </div>
           </motion.div>
@@ -788,12 +872,12 @@ export default function Hero() {
 
         {/* Stats Section */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.5 }}
-          className="mt-10 lg:mt-16"
+          transition={{ duration: 0.8, delay: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
+          className="mt-14 lg:mt-20"
         >
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
             {stats.map((stat, index) => {
               const Icon = stat.icon;
               const colors = [
@@ -803,33 +887,44 @@ export default function Hero() {
                 'from-amber-500 to-orange-500'
               ];
               const bgColors = [
-                'bg-blue-50',
-                'bg-green-50',
-                'bg-purple-50',
-                'bg-amber-50'
+                'bg-blue-50 dark:bg-blue-950/30',
+                'bg-green-50 dark:bg-green-950/30',
+                'bg-purple-50 dark:bg-purple-950/30',
+                'bg-amber-50 dark:bg-amber-950/30'
               ];
               
               return (
                 <motion.div 
                   key={index}
-                  whileHover={{ y: -3, scale: 1.02 }}
-                  className={`relative ${bgColors[index]} dark:bg-opacity-10 rounded-xl p-3 sm:p-4 border border-transparent hover:border-green-primary/20 transition-all overflow-hidden group`}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.6 + index * 0.1, duration: 0.5 }}
+                  whileHover={{ 
+                    y: -4, 
+                    scale: 1.02,
+                    transition: { type: 'spring', stiffness: 400, damping: 25 }
+                  }}
+                  className={`relative ${bgColors[index]} rounded-2xl p-4 sm:p-5 border border-transparent hover:border-green-primary/20 transition-all duration-300 overflow-hidden group backdrop-blur-sm`}
                 >
                   {/* Top icon with gradient */}
-                  <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-gradient-to-br ${colors[index]} flex items-center justify-center mb-2 shadow-md group-hover:shadow-lg transition-shadow`}>
-                    <Icon className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
-                  </div>
+                  <motion.div 
+                    className={`w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-gradient-to-br ${colors[index]} flex items-center justify-center mb-3 shadow-lg group-hover:shadow-xl transition-shadow duration-300`}
+                    whileHover={{ rotate: [0, -5, 5, 0] }}
+                    transition={{ duration: 0.4 }}
+                  >
+                    <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+                  </motion.div>
                   
                   {/* Number */}
-                  <div className="text-xl sm:text-2xl lg:text-3xl font-bold text-green-dark dark:text-white mb-0.5">
+                  <div className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-green-dark dark:text-white mb-1 tracking-tight">
                     <AnimatedCounter value={stat.value} suffix={stat.suffix} />
                   </div>
                   
                   {/* Label */}
-                  <div className="text-[10px] sm:text-xs text-gray-500">{stat.label}</div>
+                  <div className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 font-medium">{stat.label}</div>
                   
                   {/* Subtle decoration */}
-                  <div className={`absolute -bottom-2 -right-2 w-12 h-12 rounded-full bg-gradient-to-br ${colors[index]} opacity-10 group-hover:opacity-20 transition-opacity`} />
+                  <div className={`absolute -bottom-3 -right-3 w-16 h-16 rounded-full bg-gradient-to-br ${colors[index]} opacity-10 group-hover:opacity-20 transition-opacity duration-300`} />
                 </motion.div>
               );
             })}
