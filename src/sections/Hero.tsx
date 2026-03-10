@@ -19,93 +19,70 @@ import {
   Calculator,
   Calendar,
   Clock,
-  Users
+  Users,
+  Edit3,
+  LayoutGrid,
+  FileDown,
+  Layers
 } from 'lucide-react';
 
-// صور العرض المتغيرة (محاكاة للوحة التحكم والأدوات)
+// صور العرض المتغيرة - 8 أدوات رئيسية
 const showcaseImages = [
   {
     id: 1,
-    title: 'لوحة التحكم الذكية',
-    description: 'تابع إنجازاتك وإحصائياتك في مكان واحد',
-    color: 'from-green-500 to-emerald-600',
-    icon: TrendingUp,
-    stats: [
-      { label: 'قالب مستخدم', value: '24', color: 'bg-blue-100 text-blue-600' },
-      { label: 'شهادة منشأة', value: '156', color: 'bg-amber-100 text-amber-600' },
-      { label: 'معدل الاستخدام', value: '89%', color: 'bg-green-100 text-green-600' },
-    ],
-    activities: [
-      { name: 'شهادة تقدير', time: 'منذ ساعة', icon: Award },
-      { name: 'تقرير تقييم', time: 'منذ 3 ساعات', icon: FileText },
-    ]
+    title: 'منشئ الشهادات',
+    description: 'صمم شهادات احترافية بسهولة',
+    icon: Award,
+    color: 'from-amber-500 to-orange-500'
   },
   {
     id: 2,
-    title: 'منشئ الشهادات الاحترافي',
-    description: 'صمم شهاداتك بخطوات بسيطة وسهلة',
-    color: 'from-amber-500 to-orange-600',
-    icon: Award,
-    preview: {
-      title: 'شهادة تقدير',
-      subtitle: 'تقديراً للجهود المتميزة',
-      recipient: 'اسم المكرم',
-      date: '2026-02-20'
-    }
+    title: 'مولد الاختبارات',
+    description: 'أنشئ اختبارات متنوعة في ثوانٍ',
+    icon: FileText,
+    color: 'from-purple-500 to-pink-500'
   },
   {
     id: 3,
-    title: 'حاسبة الدرجات الذكية',
-    description: 'احسب درجات طلابك بسرعة ودقة',
-    color: 'from-blue-500 to-cyan-600',
-    icon: Calculator,
-    preview: {
-      subjects: [
-        { name: 'الرياضيات', score: 95, total: 100 },
-        { name: 'العلوم', score: 88, total: 100 },
-        { name: 'اللغة العربية', score: 92, total: 100 },
-      ],
-      average: '91.7%'
-    }
+    title: 'إنشاء التقارير',
+    description: 'تقارير تفصيلية جاهزة للطباعة',
+    icon: TrendingUp,
+    color: 'from-blue-500 to-cyan-500'
   },
   {
     id: 4,
-    title: 'مولد الاختبارات',
-    description: 'أنشئ اختبارات متنوعة في ثوانٍ',
-    color: 'from-purple-500 to-pink-600',
-    icon: FileText,
-    preview: {
-      questions: [
-        { type: 'اختيار من متعدد', count: 10 },
-        { type: 'صح أو خطأ', count: 5 },
-        { type: 'مقالي', count: 3 },
-      ],
-      total: '18 سؤال'
-    }
+    title: 'مكتبة القوالب',
+    description: 'مئات القوالب الجاهزة للاستخدام',
+    icon: LayoutGrid,
+    color: 'from-green-500 to-emerald-500'
   },
   {
     id: 5,
-    title: 'بناء الجداول الدراسية',
-    description: 'نظم جداولك الأسبوعية بسهولة',
-    color: 'from-teal-500 to-emerald-600',
-    icon: Calendar,
-    preview: {
-      days: ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس'],
-      classes: ['رياضيات', 'علوم', 'عربي', 'إنجليزي', 'فنية']
-    }
+    title: 'محرر القوالب',
+    description: 'خصص قوالبك حسب احتياجاتك',
+    icon: Edit3,
+    color: 'from-teal-500 to-cyan-500'
   },
   {
     id: 6,
-    title: 'مجموعة أدوات متكاملة',
-    description: 'كل ما تحتاجه لإنجاز أعمالك احترافياً',
-    color: 'from-emerald-500 to-teal-600',
+    title: 'التصدير PDF',
+    description: 'صدّر ملفاتك بجودة عالية',
+    icon: FileDown,
+    color: 'from-red-500 to-rose-500'
+  },
+  {
+    id: 7,
+    title: 'لوحة التحكم',
+    description: 'تابع إنجازاتك وإحصائياتك',
+    icon: Layers,
+    color: 'from-indigo-500 to-violet-500'
+  },
+  {
+    id: 8,
+    title: 'مكتبة الأدوات',
+    description: 'كل ما تحتاجه في مكان واحد',
     icon: Zap,
-    tools: [
-      { icon: Award, label: 'شهادات', color: 'bg-amber-100 text-amber-600' },
-      { icon: FileText, label: 'تقارير', color: 'bg-blue-100 text-blue-600' },
-      { icon: Calculator, label: 'اختبارات', color: 'bg-purple-100 text-purple-600' },
-      { icon: Calendar, label: 'جداول', color: 'bg-green-100 text-green-600' },
-    ]
+    color: 'from-emerald-500 to-teal-500'
   }
 ];
 
@@ -199,394 +176,217 @@ const AnimatedCounter = ({ value, suffix }: { value: number; suffix: string }) =
   );
 };
 
-// Dashboard Preview Component
-const DashboardPreview = ({ data }: { data: typeof showcaseImages[0] }) => {
-  return (
-    <motion.div 
-      initial={{ opacity: 0, scale: 0.9 }}
-      animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.9 }}
-      transition={{ duration: 0.5 }}
-      className="relative bg-white dark:bg-[#1B2D2B] rounded-3xl shadow-[0_20px_60px_rgba(45,106,79,0.15)] dark:shadow-[0_20px_60px_rgba(0,0,0,0.4)] overflow-hidden border border-green-primary/10"
-    >
-      {/* Browser Header */}
-      <div className="flex items-center gap-3 px-5 py-4 bg-gray-50 dark:bg-[#152B26] border-b border-green-primary/10">
-        <div className="flex gap-2">
-          <div className="w-3 h-3 rounded-full bg-red-400" />
-          <div className="w-3 h-3 rounded-full bg-yellow-400" />
-          <div className="w-3 h-3 rounded-full bg-green-400" />
-        </div>
-        <div className="flex-1 flex justify-center">
-          <div className="flex items-center gap-2 px-4 py-1.5 bg-white dark:bg-[#0D1B1A] rounded-lg text-sm text-gray-500">
-            <TrendingUp className="w-4 h-4 text-green-primary" />
-            mahni.edu.sa
-          </div>
-        </div>
-      </div>
-
-      <div className="p-6">
-        {/* Welcome */}
-        <div className="flex items-center justify-between mb-6">
-          <div>
-            <h3 className="text-lg font-bold text-green-dark dark:text-white flex items-center gap-2">
-              مرحباً بك! 👋
-            </h3>
-            <p className="text-sm text-gray-500">لديك 5 قوالب جديدة</p>
-          </div>
-          <div className="flex items-center gap-2 px-3 py-1.5 bg-amber-100 dark:bg-amber-900/30 rounded-lg">
-            <Award className="w-4 h-4 text-amber-500" />
-            <span className="text-xs font-bold text-amber-700 dark:text-amber-400">باقة المحترف</span>
-          </div>
-        </div>
-
-        {/* Stats */}
-        <div className="grid grid-cols-3 gap-3 mb-6">
-          {data.stats?.map((stat, i) => (
-            <motion.div 
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 + i * 0.1 }}
-              className="p-3 bg-gray-50 dark:bg-[#152B26] rounded-xl text-center"
-            >
-              <div className={`w-8 h-8 rounded-lg ${stat.color} flex items-center justify-center mx-auto mb-2`}>
-                <TrendingUp className="w-4 h-4" />
-              </div>
-              <div className="text-xl font-bold text-green-dark dark:text-white">{stat.value}</div>
-              <div className="text-xs text-gray-500">{stat.label}</div>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Activities */}
-        <div className="space-y-2">
-          {data.activities?.map((item, i) => (
-            <motion.div 
-              key={i}
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.4 + i * 0.1 }}
-              className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-[#152B26] rounded-xl"
-            >
-              <div className="w-8 h-8 rounded-lg bg-green-primary/10 flex items-center justify-center">
-                <item.icon className="w-4 h-4 text-green-primary" />
-              </div>
-              <div className="flex-1">
-                <p className="text-sm font-medium text-green-dark dark:text-white">{item.name}</p>
-              </div>
-              <span className="text-xs text-gray-400">{item.time}</span>
-            </motion.div>
-          ))}
-        </div>
-      </div>
-    </motion.div>
-  );
-};
-
-// Certificate Preview Component
-const CertificatePreview = ({ data }: { data: typeof showcaseImages[1] }) => {
-  return (
-    <motion.div 
-      initial={{ opacity: 0, scale: 0.9 }}
-      animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.9 }}
-      transition={{ duration: 0.5 }}
-      className="relative bg-white dark:bg-[#1B2D2B] rounded-3xl shadow-[0_20px_60px_rgba(45,106,79,0.15)] dark:shadow-[0_20px_60px_rgba(0,0,0,0.4)] overflow-hidden border border-green-primary/10"
-    >
-      {/* Browser Header */}
-      <div className="flex items-center gap-3 px-5 py-4 bg-gray-50 dark:bg-[#152B26] border-b border-green-primary/10">
-        <div className="flex gap-2">
-          <div className="w-3 h-3 rounded-full bg-red-400" />
-          <div className="w-3 h-3 rounded-full bg-yellow-400" />
-          <div className="w-3 h-3 rounded-full bg-green-400" />
-        </div>
-        <div className="flex-1 flex justify-center">
-          <div className="flex items-center gap-2 px-4 py-1.5 bg-white dark:bg-[#0D1B1A] rounded-lg text-sm text-gray-500">
-            <Award className="w-4 h-4 text-green-primary" />
-            منشئ الشهادات
-          </div>
-        </div>
-      </div>
-
-      <div className="p-6">
-        {/* Certificate Preview */}
-        <div className="aspect-[1.4/1] bg-gradient-to-br from-amber-50 via-white to-amber-50 rounded-xl border-4 border-double border-amber-300 flex flex-col items-center justify-center p-6 text-center relative overflow-hidden">
-          {/* Decorative Frame */}
-          <div className="absolute inset-3 border-2 border-amber-400/50 rounded-lg" />
-          <div className="absolute inset-6 border border-amber-300/30 rounded-lg" />
-          
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-          >
-            <h3 className="text-2xl font-bold text-amber-700 mb-2">{data.preview?.title}</h3>
-            <p className="text-amber-600 text-sm mb-4">{data.preview?.subtitle}</p>
-            <div className="w-16 h-16 rounded-full bg-amber-100 flex items-center justify-center mx-auto mb-4">
-              <Star className="w-8 h-8 text-amber-500" />
+// Unified Tool Preview Component - renders each tool as a mini UI mockup
+const ToolPreview = ({ data }: { data: typeof showcaseImages[number] }) => {
+  const Icon = data.icon;
+  
+  // Tool-specific content based on id
+  const renderToolContent = () => {
+    switch (data.id) {
+      case 1: // Certificate Generator
+        return (
+          <div className="space-y-3">
+            <div className="aspect-[1.5/1] bg-gradient-to-br from-amber-50 via-white to-amber-50 rounded-xl border-2 border-amber-200 flex flex-col items-center justify-center p-4 relative">
+              <div className="absolute inset-2 border border-amber-300/50 rounded-lg" />
+              <Award className="w-8 h-8 text-amber-500 mb-2" />
+              <div className="text-sm font-bold text-amber-700">شهادة تقدير</div>
+              <div className="text-xs text-amber-600 mt-1">تقديراً للجهود المتميزة</div>
+              <div className="w-16 h-0.5 bg-amber-300 mt-2" />
             </div>
-            <p className="text-xl font-bold text-gray-800 mb-2">{data.preview?.recipient}</p>
-            <p className="text-gray-500 text-sm">{data.preview?.date}</p>
-          </motion.div>
-        </div>
-
-        {/* Controls */}
-        <div className="mt-4 flex gap-2">
-          <div className="flex-1 h-2 bg-gray-100 rounded-full overflow-hidden">
-            <motion.div 
-              className="h-full bg-gradient-to-r from-amber-400 to-orange-500"
-              initial={{ width: 0 }}
-              animate={{ width: '70%' }}
-              transition={{ delay: 0.5, duration: 1 }}
-            />
+            <div className="flex gap-2">
+              <motion.div initial={{ width: 0 }} animate={{ width: '100%' }} transition={{ delay: 0.3, duration: 0.8 }} className="h-1.5 bg-gradient-to-r from-amber-400 to-orange-500 rounded-full" />
+            </div>
           </div>
-        </div>
-        <p className="text-xs text-gray-500 mt-2 text-center">جاهز للتحميل</p>
-      </div>
-    </motion.div>
-  );
-};
-
-// Calculator Preview Component
-const CalculatorPreview = ({ data }: { data: typeof showcaseImages[2] }) => {
-  return (
-    <motion.div 
-      initial={{ opacity: 0, scale: 0.9 }}
-      animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.9 }}
-      transition={{ duration: 0.5 }}
-      className="relative bg-white dark:bg-[#1B2D2B] rounded-3xl shadow-[0_20px_60px_rgba(45,106,79,0.15)] dark:shadow-[0_20px_60px_rgba(0,0,0,0.4)] overflow-hidden border border-green-primary/10"
-    >
-      <div className="flex items-center gap-3 px-5 py-4 bg-gray-50 dark:bg-[#152B26] border-b border-green-primary/10">
-        <div className="flex gap-2">
-          <div className="w-3 h-3 rounded-full bg-red-400" />
-          <div className="w-3 h-3 rounded-full bg-yellow-400" />
-          <div className="w-3 h-3 rounded-full bg-green-400" />
-        </div>
-        <div className="flex-1 flex justify-center">
-          <div className="flex items-center gap-2 px-4 py-1.5 bg-white dark:bg-[#0D1B1A] rounded-lg text-sm text-gray-500">
-            <Calculator className="w-4 h-4 text-blue-500" />
-            حاسبة الدرجات
+        );
+      
+      case 2: // Test Generator
+        return (
+          <div className="space-y-3">
+            <div className="grid grid-cols-3 gap-2">
+              {[{ label: 'اختياري', count: 10 }, { label: 'صح/خطأ', count: 5 }, { label: 'مقالي', count: 3 }].map((q, i) => (
+                <motion.div key={i} initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.2 + i * 0.1 }} className="p-2 bg-purple-50 dark:bg-purple-900/30 rounded-lg text-center">
+                  <div className="text-lg font-bold text-purple-600">{q.count}</div>
+                  <div className="text-[10px] text-gray-500">{q.label}</div>
+                </motion.div>
+              ))}
+            </div>
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }} className="p-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl text-white text-center">
+              <div className="text-xs opacity-80">إجمالي الأسئلة</div>
+              <div className="text-xl font-bold">18 سؤال</div>
+            </motion.div>
           </div>
-        </div>
-      </div>
-
-      <div className="p-6">
-        <div className="space-y-3">
-          {data.preview?.subjects?.map((subject: any, i: number) => (
-            <motion.div 
-              key={i}
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.2 + i * 0.1 }}
-              className="flex items-center justify-between p-3 bg-gray-50 dark:bg-[#152B26] rounded-xl"
-            >
-              <span className="text-sm font-medium text-green-dark dark:text-white">{subject.name}</span>
-              <div className="flex items-center gap-2">
-                <div className="w-24 h-2 bg-gray-200 rounded-full overflow-hidden">
-                  <motion.div 
-                    className="h-full bg-blue-500"
-                    initial={{ width: 0 }}
-                    animate={{ width: `${subject.score}%` }}
-                    transition={{ delay: 0.4 + i * 0.1, duration: 0.8 }}
-                  />
+        );
+      
+      case 3: // Report Creation
+        return (
+          <div className="space-y-3">
+            {[{ label: 'الرياضيات', value: 95 }, { label: 'العلوم', value: 88 }, { label: 'اللغة العربية', value: 92 }].map((item, i) => (
+              <motion.div key={i} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.2 + i * 0.1 }} className="flex items-center justify-between p-2 bg-gray-50 dark:bg-[#152B26] rounded-lg">
+                <span className="text-xs text-gray-700 dark:text-gray-300">{item.label}</span>
+                <div className="flex items-center gap-2">
+                  <div className="w-16 h-1.5 bg-gray-200 rounded-full overflow-hidden">
+                    <motion.div className="h-full bg-blue-500" initial={{ width: 0 }} animate={{ width: `${item.value}%` }} transition={{ delay: 0.4 + i * 0.1, duration: 0.6 }} />
+                  </div>
+                  <span className="text-xs font-bold text-blue-600">{item.value}%</span>
                 </div>
-                <span className="text-sm font-bold text-blue-600">{subject.score}/{subject.total}</span>
-              </div>
+              </motion.div>
+            ))}
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }} className="p-3 bg-blue-50 dark:bg-blue-900/20 rounded-xl text-center">
+              <div className="text-xs text-gray-500">المعدل العام</div>
+              <div className="text-2xl font-bold text-blue-600">91.7%</div>
             </motion.div>
-          ))}
-        </div>
-
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6 }}
-          className="mt-4 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-xl text-center"
-        >
-          <p className="text-sm text-gray-500">المعدل العام</p>
-          <p className="text-3xl font-bold text-blue-600">{data.preview?.average || '0%'}</p>
-        </motion.div>
-      </div>
-    </motion.div>
-  );
-};
-
-// Quiz Preview Component
-const QuizPreview = ({ data }: { data: typeof showcaseImages[3] }) => {
-  return (
-    <motion.div 
-      initial={{ opacity: 0, scale: 0.9 }}
-      animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.9 }}
-      transition={{ duration: 0.5 }}
-      className="relative bg-white dark:bg-[#1B2D2B] rounded-3xl shadow-[0_20px_60px_rgba(45,106,79,0.15)] dark:shadow-[0_20px_60px_rgba(0,0,0,0.4)] overflow-hidden border border-green-primary/10"
-    >
-      <div className="flex items-center gap-3 px-5 py-4 bg-gray-50 dark:bg-[#152B26] border-b border-green-primary/10">
-        <div className="flex gap-2">
-          <div className="w-3 h-3 rounded-full bg-red-400" />
-          <div className="w-3 h-3 rounded-full bg-yellow-400" />
-          <div className="w-3 h-3 rounded-full bg-green-400" />
-        </div>
-        <div className="flex-1 flex justify-center">
-          <div className="flex items-center gap-2 px-4 py-1.5 bg-white dark:bg-[#0D1B1A] rounded-lg text-sm text-gray-500">
-            <FileText className="w-4 h-4 text-purple-500" />
-            مولد الاختبارات
           </div>
-        </div>
-      </div>
-
-      <div className="p-6">
-        <div className="grid grid-cols-3 gap-3 mb-4">
-          {data.preview?.questions?.map((q: any, i: number) => (
-            <motion.div 
-              key={i}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.2 + i * 0.1 }}
-              className="p-3 bg-purple-50 dark:bg-purple-900/20 rounded-xl text-center"
-            >
-              <p className="text-2xl font-bold text-purple-600">{q.count}</p>
-              <p className="text-xs text-gray-500">{q.type}</p>
+        );
+      
+      case 4: // Template Library
+        return (
+          <div className="space-y-3">
+            <div className="grid grid-cols-3 gap-2">
+              {[
+                { color: 'bg-amber-100', icon: Award },
+                { color: 'bg-blue-100', icon: FileText },
+                { color: 'bg-purple-100', icon: LayoutGrid },
+                { color: 'bg-green-100', icon: TrendingUp },
+                { color: 'bg-red-100', icon: Calendar },
+                { color: 'bg-teal-100', icon: Star },
+              ].map((item, i) => (
+                <motion.div key={i} initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.15 + i * 0.05 }} className={`aspect-square ${item.color} rounded-lg flex items-center justify-center`}>
+                  <item.icon className="w-5 h-5 text-gray-600" />
+                </motion.div>
+              ))}
+            </div>
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }} className="flex items-center justify-between p-2 bg-green-50 dark:bg-green-900/20 rounded-lg">
+              <span className="text-xs font-semibold text-green-700">+100 قالب</span>
+              <LayoutGrid className="w-4 h-4 text-green-600" />
             </motion.div>
-          ))}
-        </div>
-
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5 }}
-          className="p-4 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl text-white text-center"
-        >
-          <p className="text-sm opacity-80">إجمالي الأسئلة</p>
-          <p className="text-2xl font-bold">{data.preview?.total || '0'}</p>
-        </motion.div>
-      </div>
-    </motion.div>
-  );
-};
-
-// Schedule Preview Component
-const SchedulePreview = ({ data }: { data: typeof showcaseImages[4] }) => {
-  return (
-    <motion.div 
-      initial={{ opacity: 0, scale: 0.9 }}
-      animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.9 }}
-      transition={{ duration: 0.5 }}
-      className="relative bg-white dark:bg-[#1B2D2B] rounded-3xl shadow-[0_20px_60px_rgba(45,106,79,0.15)] dark:shadow-[0_20px_60px_rgba(0,0,0,0.4)] overflow-hidden border border-green-primary/10"
-    >
-      <div className="flex items-center gap-3 px-5 py-4 bg-gray-50 dark:bg-[#152B26] border-b border-green-primary/10">
-        <div className="flex gap-2">
-          <div className="w-3 h-3 rounded-full bg-red-400" />
-          <div className="w-3 h-3 rounded-full bg-yellow-400" />
-          <div className="w-3 h-3 rounded-full bg-green-400" />
-        </div>
-        <div className="flex-1 flex justify-center">
-          <div className="flex items-center gap-2 px-4 py-1.5 bg-white dark:bg-[#0D1B1A] rounded-lg text-sm text-gray-500">
-            <Calendar className="w-4 h-4 text-teal-500" />
-            الجدول الدراسي
           </div>
-        </div>
-      </div>
-
-      <div className="p-4">
-        <div className="grid grid-cols-5 gap-2">
-          {data.preview?.days?.map((day: string, i: number) => (
-            <motion.div 
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 + i * 0.05 }}
-              className="text-center"
-            >
-              <div className="text-xs text-gray-500 mb-2">{day}</div>
-              <div className="space-y-1">
-                {data.preview?.classes?.slice(0, 3).map((cls: string, j: number) => (
-                  <motion.div 
-                    key={j}
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 0.3 + i * 0.05 + j * 0.03 }}
-                    className={`text-[10px] p-1 rounded ${
-                      j === 0 ? 'bg-blue-100 text-blue-700' :
-                      j === 1 ? 'bg-green-100 text-green-700' :
-                      'bg-amber-100 text-amber-700'
-                    }`}
-                  >
-                    {cls}
-                  </motion.div>
-                ))}
+        );
+      
+      case 5: // Template Editor
+        return (
+          <div className="space-y-3">
+            <div className="p-3 bg-gray-50 dark:bg-[#152B26] rounded-xl">
+              <div className="flex items-center gap-2 mb-3">
+                <div className="w-6 h-6 rounded bg-teal-100 flex items-center justify-center">
+                  <Edit3 className="w-3 h-3 text-teal-600" />
+                </div>
+                <div className="flex-1 h-2 bg-gray-200 rounded" />
               </div>
+              <div className="space-y-2">
+                <motion.div initial={{ width: 0 }} animate={{ width: '80%' }} transition={{ delay: 0.3 }} className="h-2 bg-teal-200 rounded" />
+                <motion.div initial={{ width: 0 }} animate={{ width: '60%' }} transition={{ delay: 0.4 }} className="h-2 bg-teal-100 rounded" />
+                <motion.div initial={{ width: 0 }} animate={{ width: '90%' }} transition={{ delay: 0.5 }} className="h-2 bg-teal-200 rounded" />
+              </div>
+            </div>
+            <div className="flex gap-2">
+              {['الخط', 'اللون', 'الحجم'].map((label, i) => (
+                <motion.div key={i} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 + i * 0.1 }} className="flex-1 p-2 bg-teal-50 dark:bg-teal-900/20 rounded-lg text-center text-[10px] text-teal-700">{label}</motion.div>
+              ))}
+            </div>
+          </div>
+        );
+      
+      case 6: // Export PDF
+        return (
+          <div className="space-y-3">
+            <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="p-4 bg-red-50 dark:bg-red-900/20 rounded-xl text-center">
+              <FileDown className="w-10 h-10 text-red-500 mx-auto mb-2" />
+              <div className="text-sm font-bold text-red-700">تصدير PDF</div>
             </motion.div>
-          ))}
-        </div>
-      </div>
-    </motion.div>
-  );
-};
+            <div className="space-y-2">
+              {['جودة عالية', 'حجم مضغوط', 'طباعة جاهزة'].map((label, i) => (
+                <motion.div key={i} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.4 + i * 0.1 }} className="flex items-center gap-2 p-2 bg-gray-50 dark:bg-[#152B26] rounded-lg">
+                  <div className="w-4 h-4 rounded-full bg-red-500 flex items-center justify-center">
+                    <Star className="w-2 h-2 text-white" />
+                  </div>
+                  <span className="text-xs text-gray-600 dark:text-gray-300">{label}</span>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        );
+      
+      case 7: // Dashboard
+        return (
+          <div className="space-y-3">
+            <div className="flex items-center justify-between mb-2">
+              <div className="text-sm font-bold text-gray-800 dark:text-white">مرحباً!</div>
+              <div className="px-2 py-1 bg-indigo-100 rounded text-[10px] text-indigo-700">محترف</div>
+            </div>
+            <div className="grid grid-cols-3 gap-2">
+              {[{ value: '24', label: 'قالب', color: 'bg-blue-50 text-blue-600' }, { value: '156', label: 'شهادة', color: 'bg-amber-50 text-amber-600' }, { value: '89%', label: 'إنجاز', color: 'bg-green-50 text-green-600' }].map((stat, i) => (
+                <motion.div key={i} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 + i * 0.1 }} className={`p-2 rounded-lg text-center ${stat.color}`}>
+                  <div className="text-lg font-bold">{stat.value}</div>
+                  <div className="text-[10px]">{stat.label}</div>
+                </motion.div>
+              ))}
+            </div>
+            <div className="space-y-1.5">
+              {['شهادة تقدير', 'تقرير أداء'].map((item, i) => (
+                <motion.div key={i} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 + i * 0.1 }} className="flex items-center gap-2 p-2 bg-gray-50 dark:bg-[#152B26] rounded-lg">
+                  <div className="w-5 h-5 rounded bg-indigo-100 flex items-center justify-center">
+                    <Award className="w-3 h-3 text-indigo-600" />
+                  </div>
+                  <span className="text-xs text-gray-600 dark:text-gray-300">{item}</span>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        );
+      
+      case 8: // Tools Library
+        return (
+          <div className="space-y-3">
+            <div className="grid grid-cols-2 gap-2">
+              {[
+                { icon: Award, label: 'شهادات', color: 'bg-amber-100 text-amber-600' },
+                { icon: FileText, label: 'تقارير', color: 'bg-blue-100 text-blue-600' },
+                { icon: LayoutGrid, label: 'قوالب', color: 'bg-purple-100 text-purple-600' },
+                { icon: Calendar, label: 'جداول', color: 'bg-green-100 text-green-600' },
+              ].map((tool, i) => (
+                <motion.div key={i} initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.2 + i * 0.1 }} className={`p-3 rounded-xl flex flex-col items-center ${tool.color}`}>
+                  <tool.icon className="w-5 h-5 mb-1" />
+                  <span className="text-xs font-semibold">{tool.label}</span>
+                </motion.div>
+              ))}
+            </div>
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }} className="p-3 bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20 rounded-xl text-center border border-emerald-200 dark:border-emerald-800">
+              <span className="text-xs font-semibold text-emerald-700 dark:text-emerald-400">جميع الأدوات متاحة</span>
+            </motion.div>
+          </div>
+        );
+      
+      default:
+        return null;
+    }
+  };
 
-// Tools Overview Component
-const ToolsPreview = ({ data }: { data: typeof showcaseImages[5] }) => {
   return (
     <motion.div 
-      initial={{ opacity: 0, scale: 0.9 }}
+      initial={{ opacity: 0, scale: 0.92 }}
       animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.9 }}
-      transition={{ duration: 0.5 }}
-      className="relative bg-white dark:bg-[#1B2D2B] rounded-3xl shadow-[0_20px_60px_rgba(45,106,79,0.15)] dark:shadow-[0_20px_60px_rgba(0,0,0,0.4)] overflow-hidden border border-green-primary/10"
+      exit={{ opacity: 0, scale: 0.92 }}
+      transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
+      className="relative bg-white dark:bg-[#1B2D2B] rounded-3xl shadow-[0_25px_70px_rgba(45,106,79,0.18)] dark:shadow-[0_25px_70px_rgba(0,0,0,0.5)] overflow-hidden border border-green-primary/10"
     >
       {/* Browser Header */}
-      <div className="flex items-center gap-3 px-5 py-4 bg-gray-50 dark:bg-[#152B26] border-b border-green-primary/10">
-        <div className="flex gap-2">
-          <div className="w-3 h-3 rounded-full bg-red-400" />
-          <div className="w-3 h-3 rounded-full bg-yellow-400" />
-          <div className="w-3 h-3 rounded-full bg-green-400" />
+      <div className="flex items-center gap-3 px-5 py-3.5 bg-gray-50 dark:bg-[#152B26] border-b border-green-primary/10">
+        <div className="flex gap-1.5">
+          <div className="w-2.5 h-2.5 rounded-full bg-red-400" />
+          <div className="w-2.5 h-2.5 rounded-full bg-yellow-400" />
+          <div className="w-2.5 h-2.5 rounded-full bg-green-400" />
         </div>
         <div className="flex-1 flex justify-center">
-          <div className="flex items-center gap-2 px-4 py-1.5 bg-white dark:bg-[#0D1B1A] rounded-lg text-sm text-gray-500">
-            <Zap className="w-4 h-4 text-emerald-500" />
-            مجموعة الأدوات
+          <div className={`flex items-center gap-2 px-3 py-1 bg-gradient-to-r ${data.color} rounded-lg text-xs text-white font-medium`}>
+            <Icon className="w-3.5 h-3.5" />
+            {data.title}
           </div>
         </div>
       </div>
 
-      <div className="p-6">
-        {/* Title */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          className="mb-6 text-center"
-        >
-          <h3 className="text-lg font-bold text-green-dark dark:text-white mb-1">أدوات متكاملة</h3>
-          <p className="text-sm text-gray-500">كل ما تحتاجه لإنجاز أعمالك احترافياً</p>
-        </motion.div>
-
-        {/* Tools Grid */}
-        <div className="grid grid-cols-2 gap-3">
-          {data.tools?.map((tool: any, i: number) => (
-            <motion.div 
-              key={i}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.3 + i * 0.1 }}
-              className={`p-4 rounded-xl border border-gray-200 dark:border-gray-700 flex flex-col items-center justify-center text-center hover:border-green-primary/30 transition-all ${tool.color}`}
-            >
-              <tool.icon className="w-6 h-6 mb-2" />
-              <span className="text-sm font-semibold">{tool.label}</span>
-            </motion.div>
-          ))}
-        </div>
-
-        {/* Bottom CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.7 }}
-          className="mt-6 p-4 bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-900/20 dark:to-teal-900/20 rounded-xl text-center border border-emerald-200 dark:border-emerald-800"
-        >
-          <p className="text-sm font-semibold text-green-dark dark:text-white">جميع الأدوات متاحة الآن</p>
-        </motion.div>
+      {/* Content */}
+      <div className="p-5">
+        {renderToolContent()}
       </div>
     </motion.div>
   );
@@ -642,42 +442,31 @@ const ImageShowcase = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % showcaseImages.length);
-    }, 4000);
+    }, 4500);
     return () => clearInterval(interval);
   }, []);
 
   const currentData = showcaseImages[currentIndex];
 
   const renderPreview = () => {
-    switch (currentData.id) {
-      case 1:
-        return <DashboardPreview data={currentData} />;
-      case 2:
-        return <CertificatePreview data={currentData} />;
-      case 3:
-        return <CalculatorPreview data={currentData} />;
-      case 4:
-        return <QuizPreview data={currentData} />;
-      case 5:
-        return <SchedulePreview data={currentData} />;
-      case 6:
-        return <ToolsPreview data={currentData} />;
-      default:
-        return <DashboardPreview data={currentData} />;
-    }
+    return <ToolPreview data={currentData} />;
   };
 
   return (
     <div className="relative">
       {/* Main Preview with Floating Elements */}
-      <div className="relative">
+      <div className="relative transform scale-105 origin-center">
         <AnimatePresence mode="wait">
           <motion.div
             key={currentIndex}
-            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+            initial={{ opacity: 0, scale: 0.9, y: 30 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: -20 }}
-            transition={{ duration: 0.6, ease: 'easeOut' }}
+            exit={{ opacity: 0, scale: 0.9, y: -30 }}
+            transition={{ 
+              duration: 0.7, 
+              ease: [0.4, 0, 0.2, 1],
+              opacity: { duration: 0.5 }
+            }}
           >
             {renderPreview()}
           </motion.div>
@@ -688,17 +477,17 @@ const ImageShowcase = () => {
       </div>
 
       {/* Navigation Dots */}
-      <div className="flex justify-center gap-2 mt-6">
+      <div className="flex justify-center gap-1.5 mt-8">
         {showcaseImages.map((_, i) => (
           <motion.button
             key={i}
             onClick={() => setCurrentIndex(i)}
-            whileHover={{ scale: 1.2 }}
-            whileTap={{ scale: 0.9 }}
-            className={`rounded-full transition-all ${
+            whileHover={{ scale: 1.3 }}
+            whileTap={{ scale: 0.85 }}
+            className={`rounded-full transition-all duration-300 ${
               i === currentIndex 
-                ? 'w-8 h-2.5 bg-green-primary' 
-                : 'w-2.5 h-2.5 bg-gray-300 hover:bg-gray-400'
+                ? 'w-6 h-2 bg-gradient-to-r from-green-primary to-green-teal' 
+                : 'w-2 h-2 bg-gray-300 hover:bg-green-primary/50'
             }`}
           />
         ))}
@@ -708,11 +497,11 @@ const ImageShowcase = () => {
       <AnimatePresence mode="wait">
         <motion.div
           key={currentIndex}
-          initial={{ opacity: 0, y: 10 }}
+          initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -10 }}
-          transition={{ duration: 0.4 }}
-          className="mt-6 text-center"
+          exit={{ opacity: 0, y: -15 }}
+          transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
+          className="mt-5 text-center"
         >
           <p className="text-sm sm:text-base font-bold text-green-dark dark:text-white">{currentData.title}</p>
           <p className="text-xs text-gray-500">{currentData.description}</p>
