@@ -93,6 +93,51 @@ const showcaseImages = [
       days: ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس'],
       classes: ['رياضيات', 'علوم', 'عربي', 'إنجليزي', 'فنية']
     }
+  },
+  {
+    id: 6,
+    title: 'إدارة المحتوى التعليمي',
+    description: 'نظم وأدر جميع محتوياتك في مكان واحد',
+    color: 'from-indigo-500 to-blue-600',
+    icon: FileText,
+    preview: {
+      categories: [
+        { name: 'المناهج', count: 12 },
+        { name: 'المواد الدراسية', count: 25 },
+        { name: 'الملفات', count: 148 },
+      ],
+      total: '185 عنصر'
+    }
+  },
+  {
+    id: 7,
+    title: 'نظام التقييمات الشامل',
+    description: 'قيّم وتتبع أداء طلابك بسهولة',
+    color: 'from-rose-500 to-red-600',
+    icon: Star,
+    preview: {
+      assessments: [
+        { type: 'اختبار شامل', score: 85 },
+        { type: 'مشروع عملي', score: 92 },
+        { type: 'مشاركة صفية', score: 88 },
+      ],
+      average: '88%'
+    }
+  },
+  {
+    id: 8,
+    title: 'مولد التقارير المتقدم',
+    description: 'أنشئ تقارير احترافية وشاملة',
+    color: 'from-cyan-500 to-teal-600',
+    icon: TrendingUp,
+    preview: {
+      reports: [
+        { name: 'تقرير النتائج', status: 'جاهز' },
+        { name: 'تقرير الحضور', status: 'جاهز' },
+        { name: 'تقرير الأداء', status: 'جاهز' },
+      ],
+      total: '3 تقارير'
+    }
   }
 ];
 
@@ -580,6 +625,12 @@ const ImageShowcase = () => {
         return <QuizPreview data={currentData} />;
       case 5:
         return <SchedulePreview data={currentData} />;
+      case 6:
+        return <DashboardPreview data={currentData} />;
+      case 7:
+        return <QuizPreview data={currentData} />;
+      case 8:
+        return <DashboardPreview data={currentData} />;
       default:
         return <DashboardPreview data={currentData} />;
     }
@@ -654,25 +705,21 @@ export default function Hero() {
       </div>
 
       {/* Main Content */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 sm:pt-32 lg:pt-28 pb-8 lg:pb-12">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 sm:pt-32 lg:pt-28 pb-40 lg:pb-48">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
           
           {/* Left Side - Content */}
           <div className="text-center lg:text-right order-2 lg:order-1 pt-4 lg:pt-8">
-            {/* Badge */}
+            {/* Subtitle - "أنجز أعمالك باحترافية مع" */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              className="mb-6"
+              transition={{ duration: 0.5 }}
+              className="mb-2"
             >
-              <motion.span 
-                className="inline-flex items-center gap-2 text-green-primary dark:text-green-light text-sm font-bold"
-                whileHover={{ scale: 1.05 }}
-              >
-                <Sparkles className="w-4 h-4" />
-                منصة مِهني - احترافية في كل تفصيلة
-              </motion.span>
+              <p className="text-sm text-gray-600 dark:text-gray-400">
+                أنجز أعمالك باحترافية مع
+              </p>
             </motion.div>
 
             {/* Main Heading */}
@@ -682,14 +729,30 @@ export default function Hero() {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="mb-6"
             >
-              <h1 className="text-5xl sm:text-5xl lg:text-7xl xl:text-8xl font-extrabold leading-tight">
-                <span className="text-green-dark dark:text-white lg:inline block">
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-tight">
+                <span className="text-green-dark dark:text-white">
                   منصة{' '}
                 </span>
-                <span className="bg-gradient-to-r from-green-primary via-green-teal to-green-light bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-green-primary via-green-teal to-green-light bg-clip-text text-transparent text-5xl sm:text-6xl lg:text-7xl xl:text-8xl">
                   مِهني
                 </span>
               </h1>
+            </motion.div>
+
+            {/* Badge */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.15 }}
+              className="mb-6"
+            >
+              <motion.span 
+                className="inline-flex items-center gap-2 text-green-primary dark:text-green-light text-sm font-bold"
+                whileHover={{ scale: 1.05 }}
+              >
+                <Sparkles className="w-4 h-4" />
+                احترافية في كل تفصيلة
+              </motion.span>
             </motion.div>
 
             {/* Marketing Subtitle */}
@@ -744,7 +807,7 @@ export default function Hero() {
                 <Link href={ROUTES.START}>
                   <Button
                     size="lg"
-                    className="bg-gradient-to-r from-green-primary to-green-teal text-white px-8 py-6 text-lg rounded-2xl shadow-xl hover:shadow-2xl transition-all group font-bold"
+                    className="bg-gradient-to-r from-green-primary to-green-teal text-white px-8 py-6 text-lg rounded-2xl shadow-xl hover:shadow-2xl transition-all group font-bold h-auto"
                   >
                     ابدأ مجاناً
                     <ArrowLeft className="w-5 h-5 mr-2 group-hover:-translate-x-1 transition-transform" />
@@ -757,10 +820,10 @@ export default function Hero() {
                   <Button
                     size="lg"
                     variant="outline"
-                    className="border-2 border-green-primary/30 text-green-primary hover:bg-green-primary/10 hover:border-green-primary px-8 py-6 text-lg rounded-2xl transition-all font-bold bg-white/50 backdrop-blur-sm"
+                    className="border-2 border-green-primary/30 text-green-primary hover:bg-green-primary/10 hover:border-green-primary px-8 py-6 text-lg rounded-2xl transition-all font-bold bg-white/50 backdrop-blur-sm h-auto"
                   >
                     <Play className="w-5 h-5 mr-2" />
-                    استكشف القوالب
+                    استكشف قوالبنا
                   </Button>
                 </Link>
               </motion.div>
@@ -786,53 +849,57 @@ export default function Hero() {
           </motion.div>
         </div>
 
-        {/* Stats Section */}
+        {/* Stats Section - Fixed at bottom */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5 }}
-          className="mt-10 lg:mt-16"
+          className="fixed bottom-0 left-0 right-0 w-full"
         >
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
-            {stats.map((stat, index) => {
-              const Icon = stat.icon;
-              const colors = [
-                'from-blue-500 to-cyan-500',
-                'from-green-500 to-emerald-500', 
-                'from-purple-500 to-violet-500',
-                'from-amber-500 to-orange-500'
-              ];
-              const bgColors = [
-                'bg-blue-50',
-                'bg-green-50',
-                'bg-purple-50',
-                'bg-amber-50'
-              ];
-              
-              return (
-                <motion.div 
-                  key={index}
-                  whileHover={{ y: -3, scale: 1.02 }}
-                  className={`relative ${bgColors[index]} dark:bg-opacity-10 rounded-xl p-3 sm:p-4 border border-transparent hover:border-green-primary/20 transition-all overflow-hidden group`}
-                >
-                  {/* Top icon with gradient */}
-                  <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-gradient-to-br ${colors[index]} flex items-center justify-center mb-2 shadow-md group-hover:shadow-lg transition-shadow`}>
-                    <Icon className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
-                  </div>
+          <div className="bg-gradient-to-br from-[#F0F9F4] via-[#E8F5E9] to-[#C8E6C9] dark:from-[#0A1F1A] dark:via-[#0D1B1A] dark:to-[#0A1512] border-t border-green-primary/10">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+                {stats.map((stat, index) => {
+                  const Icon = stat.icon;
+                  const colors = [
+                    'from-blue-500 to-cyan-500',
+                    'from-green-500 to-emerald-500', 
+                    'from-purple-500 to-violet-500',
+                    'from-amber-500 to-orange-500'
+                  ];
+                  const bgColors = [
+                    'bg-blue-50',
+                    'bg-green-50',
+                    'bg-purple-50',
+                    'bg-amber-50'
+                  ];
                   
-                  {/* Number */}
-                  <div className="text-xl sm:text-2xl lg:text-3xl font-bold text-green-dark dark:text-white mb-0.5">
-                    <AnimatedCounter value={stat.value} suffix={stat.suffix} />
-                  </div>
-                  
-                  {/* Label */}
-                  <div className="text-[10px] sm:text-xs text-gray-500">{stat.label}</div>
-                  
-                  {/* Subtle decoration */}
-                  <div className={`absolute -bottom-2 -right-2 w-12 h-12 rounded-full bg-gradient-to-br ${colors[index]} opacity-10 group-hover:opacity-20 transition-opacity`} />
-                </motion.div>
-              );
-            })}
+                  return (
+                    <motion.div 
+                      key={index}
+                      whileHover={{ y: -3, scale: 1.02 }}
+                      className={`relative ${bgColors[index]} dark:bg-opacity-10 rounded-xl p-3 sm:p-4 border border-transparent hover:border-green-primary/20 transition-all overflow-hidden group`}
+                    >
+                      {/* Top icon with gradient */}
+                      <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-gradient-to-br ${colors[index]} flex items-center justify-center mb-2 shadow-md group-hover:shadow-lg transition-shadow`}>
+                        <Icon className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+                      </div>
+                      
+                      {/* Number */}
+                      <div className="text-xl sm:text-2xl lg:text-3xl font-bold text-green-dark dark:text-white mb-0.5">
+                        <AnimatedCounter value={stat.value} suffix={stat.suffix} />
+                      </div>
+                      
+                      {/* Label */}
+                      <div className="text-[10px] sm:text-xs text-gray-500">{stat.label}</div>
+                      
+                      {/* Subtle decoration */}
+                      <div className={`absolute -bottom-2 -right-2 w-12 h-12 rounded-full bg-gradient-to-br ${colors[index]} opacity-10 group-hover:opacity-20 transition-opacity`} />
+                    </motion.div>
+                  );
+                })}
+              </div>
+            </div>
           </div>
         </motion.div>
       </div>
