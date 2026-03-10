@@ -537,10 +537,10 @@ export default function Hero() {
 
       {/* Main Content */}
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 sm:pt-32 lg:pt-20 pb-8 lg:pb-12">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-20 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-10 lg:gap-16 items-center">
           
           {/* Left Side - Content */}
-          <div className="text-center lg:text-right order-2 lg:order-1 pt-4 lg:pt-8">
+          <div className="text-center lg:text-right order-2 lg:order-1 pt-4 lg:pt-8 max-w-[600px] mx-auto lg:mx-0">
             {/* Badge */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -576,7 +576,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="mb-10"
+              className="mb-6"
             >
               <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
                 منصة رقمية تساعد المدارس والجهات والشركات والأفراد على إنجاز أعمالهم بسرعة واحترافية باستخدام قوالب جاهزة وأدوات ذكية سهلة الاستخدام.
@@ -588,7 +588,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.25 }}
-              className="flex flex-wrap justify-center lg:justify-start gap-3 mb-12"
+              className="flex flex-wrap justify-center lg:justify-start gap-2 sm:gap-3 mb-8"
             >
               {[
                 { icon: Clock, text: 'توفر الوقت' },
@@ -613,13 +613,13 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-8"
+              className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 sm:gap-4 mb-6"
             >
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
+              <motion.div whileHover={{ scale: 1.08, y: -2 }} whileTap={{ scale: 0.96 }}>
                 <Link href={ROUTES.START}>
                   <Button
                     size="lg"
-                    className="bg-gradient-to-r from-green-primary to-green-teal text-white px-10 py-7 text-lg rounded-2xl shadow-xl hover:shadow-2xl transition-all group font-bold hover:from-green-primary/90 hover:to-green-teal/90"
+                    className="bg-gradient-to-r from-green-primary to-green-teal text-white px-10 py-7 text-lg rounded-2xl shadow-lg hover:shadow-[0_20px_40px_rgba(45,106,79,0.3)] transition-all duration-300 group font-bold hover:from-green-primary/95 hover:to-green-teal/95"
                   >
                     ابدأ مجاناً
                     <ArrowLeft className="w-5 h-5 mr-2 group-hover:-translate-x-1 transition-transform" />
@@ -641,14 +641,32 @@ export default function Hero() {
               </motion.div>
             </motion.div>
 
-            {/* Examples Line */}
+            {/* Trust Bar - Statistics */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="text-gray-500 text-sm"
+              transition={{ duration: 0.6, delay: 0.35 }}
+              className="flex flex-wrap items-center justify-center lg:justify-start gap-4 sm:gap-6 px-4 sm:px-0 mb-6 text-sm"
             >
-              شهادات • تقارير • اختبارات • جداول • خطط • نماذج
+              <div className="flex items-center gap-2 text-gray-700 dark:text-gray-300">
+                <Star className="w-4 h-4 text-amber-500 fill-amber-500" />
+                <span className="font-semibold">4.9 تقييم المستخدمين</span>
+              </div>
+              <div className="w-px h-5 bg-gray-300 dark:bg-gray-600 hidden sm:block" />
+              <div className="flex items-center gap-2 text-gray-700 dark:text-gray-300">
+                <Users className="w-4 h-4 text-green-primary" />
+                <span className="font-semibold">+10,000 مستخدم</span>
+              </div>
+              <div className="w-px h-5 bg-gray-300 dark:bg-gray-600 hidden sm:block" />
+              <div className="flex items-center gap-2 text-gray-700 dark:text-gray-300">
+                <Zap className="w-4 h-4 text-blue-500" />
+                <span className="font-semibold">+50 أداة ذكية</span>
+              </div>
+              <div className="w-px h-5 bg-gray-300 dark:bg-gray-600 hidden sm:block" />
+              <div className="flex items-center gap-2 text-gray-700 dark:text-gray-300">
+                <FileText className="w-4 h-4 text-purple-500" />
+                <span className="font-semibold">+100 قالب</span>
+              </div>
             </motion.div>
 
 
@@ -659,13 +677,13 @@ export default function Hero() {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="order-1 lg:order-2 relative pb-16 lg:pb-0"
+            className="order-1 lg:order-2 relative pb-12 lg:pb-0"
           >
             {/* Glow Effect */}
             <div className="absolute -inset-2 lg:-inset-4 bg-gradient-to-r from-green-primary/20 via-green-teal/20 to-green-light/20 rounded-[2rem] lg:rounded-[3rem] blur-2xl lg:blur-3xl opacity-60" />
             
             {/* Image Showcase Container */}
-            <div className="relative mx-auto lg:mx-0 max-w-[320px] sm:max-w-[400px] lg:max-w-[480px]">
+            <div className="relative mx-auto lg:mx-0 max-w-[300px] sm:max-w-[360px] lg:max-w-[420px]">
               <ImageShowcase />
             </div>
           </motion.div>
