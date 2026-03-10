@@ -93,6 +93,44 @@ const showcaseImages = [
       days: ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس'],
       classes: ['رياضيات', 'علوم', 'عربي', 'إنجليزي', 'فنية']
     }
+  },
+  {
+    id: 6,
+    title: 'بناء الخطط التعليمية',
+    description: 'ضع خطط شاملة لتحقيق أهدافك',
+    color: 'from-indigo-500 to-purple-600',
+    icon: Calendar,
+    preview: {
+      days: ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس'],
+      classes: ['خطة', 'أهداف', 'متابعة', 'تقييم', 'تطوير']
+    }
+  },
+  {
+    id: 7,
+    title: 'لوحة التحليلات والبيانات',
+    description: 'حلل بيانات أدائك بشكل مرئي وسهل',
+    color: 'from-pink-500 to-rose-600',
+    icon: TrendingUp,
+    stats: [
+      { label: 'تقرير', value: '42', color: 'bg-pink-100 text-pink-600' },
+      { label: 'إحصائية', value: '128', color: 'bg-rose-100 text-rose-600' },
+      { label: 'تحسن', value: '35%', color: 'bg-red-100 text-red-600' },
+    ],
+    activities: [
+      { name: 'تقرير أسبوعي', time: 'منذ يومين', icon: FileText },
+      { name: 'تحليل شامل', time: 'منذ 5 أيام', icon: TrendingUp },
+    ]
+  },
+  {
+    id: 8,
+    title: 'مكتبة الموارد الذكية',
+    description: 'وصول سريع إلى جميع أدواتك وقوالبك',
+    color: 'from-cyan-500 to-teal-600',
+    icon: Sparkles,
+    preview: {
+      days: ['الأدوات', 'القوالب', 'الموارد', 'الشهادات', 'التقارير'],
+      classes: ['محفوظة', 'مشترك', 'مقترح', 'جديد', 'الكل']
+    }
   }
 ];
 
@@ -580,6 +618,12 @@ const ImageShowcase = () => {
         return <QuizPreview data={currentData} />;
       case 5:
         return <SchedulePreview data={currentData} />;
+      case 6:
+        return <SchedulePreview data={currentData} />;
+      case 7:
+        return <DashboardPreview data={currentData} />;
+      case 8:
+        return <SchedulePreview data={currentData} />;
       default:
         return <DashboardPreview data={currentData} />;
     }
@@ -633,7 +677,7 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-[#F0F9F4] via-[#E8F5E9] to-[#C8E6C9] dark:from-[#0A1F1A] dark:via-[#0D1B1A] dark:to-[#0A1512]"
+      className="relative min-h-[90vh] flex items-center overflow-hidden bg-gradient-to-br from-[#F0F9F4] via-[#E8F5E9] to-[#C8E6C9] dark:from-[#0A1F1A] dark:via-[#0D1B1A] dark:to-[#0A1512]"
     >
       {/* Background Effects */}
       <GradientOrbs />
@@ -654,24 +698,25 @@ export default function Hero() {
       </div>
 
       {/* Main Content */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 sm:pt-32 lg:pt-28 pb-8 lg:pb-12">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
           
           {/* Left Side - Content */}
           <div className="text-center lg:text-right order-2 lg:order-1 pt-4 lg:pt-8">
-            {/* Badge */}
+            {/* Tagline as subtle badge */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="mb-6"
+              className="mb-4"
             >
               <motion.span 
-                className="inline-flex items-center gap-2 text-green-primary dark:text-green-light text-sm font-bold"
+                className="inline-flex items-center gap-2 px-3 py-1.5 bg-white/60 dark:bg-[#1B2D2B]/60 rounded-full border border-green-primary/20 text-green-primary dark:text-green-light text-xs sm:text-sm font-semibold"
                 whileHover={{ scale: 1.05 }}
               >
-                <Sparkles className="w-4 h-4" />
-                منصة مِهني - احترافية في كل تفصيلة
+                <Sparkles className="w-3 h-3 sm:w-4 sm:h-4" />
+                <span className="hidden sm:inline">أنجز أعمالك باحترافية مع</span>
+                <span className="sm:hidden">احترافية</span>
               </motion.span>
             </motion.div>
 
@@ -680,14 +725,11 @@ export default function Hero() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="mb-6"
+              className="mb-8"
             >
               <h1 className="text-5xl sm:text-5xl lg:text-7xl xl:text-8xl font-extrabold leading-tight">
-                <span className="text-green-dark dark:text-white lg:inline block">
-                  منصة{' '}
-                </span>
                 <span className="bg-gradient-to-r from-green-primary via-green-teal to-green-light bg-clip-text text-transparent">
-                  مِهني
+                  منصة مِهني
                 </span>
               </h1>
             </motion.div>
@@ -738,13 +780,13 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-8"
+              className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4"
             >
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
                 <Link href={ROUTES.START}>
                   <Button
                     size="lg"
-                    className="bg-gradient-to-r from-green-primary to-green-teal text-white px-8 py-6 text-lg rounded-2xl shadow-xl hover:shadow-2xl transition-all group font-bold"
+                    className="bg-gradient-to-r from-green-primary to-green-teal text-white h-12 sm:h-14 px-6 sm:px-8 text-base sm:text-lg rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 group font-bold hover:text-white"
                   >
                     ابدأ مجاناً
                     <ArrowLeft className="w-5 h-5 mr-2 group-hover:-translate-x-1 transition-transform" />
@@ -756,11 +798,10 @@ export default function Hero() {
                 <Link href={getHomeSectionUrl('templates')}>
                   <Button
                     size="lg"
-                    variant="outline"
-                    className="border-2 border-green-primary/30 text-green-primary hover:bg-green-primary/10 hover:border-green-primary px-8 py-6 text-lg rounded-2xl transition-all font-bold bg-white/50 backdrop-blur-sm"
+                    className="border-2 border-green-primary text-green-primary hover:bg-green-primary hover:text-white h-12 sm:h-14 px-6 sm:px-8 text-base sm:text-lg rounded-2xl transition-all duration-300 font-bold bg-white/80 dark:bg-[#1B2D2B]/80 backdrop-blur-sm"
                   >
                     <Play className="w-5 h-5 mr-2" />
-                    استكشف القوالب
+                    استكشف قوالبنا
                   </Button>
                 </Link>
               </motion.div>
@@ -786,14 +827,14 @@ export default function Hero() {
           </motion.div>
         </div>
 
-        {/* Stats Section */}
+        {/* Stats Section - Fixed at bottom */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5 }}
-          className="mt-10 lg:mt-16"
+          className="mt-16 lg:mt-20 pt-8 lg:pt-12 border-t border-green-primary/10"
         >
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {stats.map((stat, index) => {
               const Icon = stat.icon;
               const colors = [
@@ -803,33 +844,40 @@ export default function Hero() {
                 'from-amber-500 to-orange-500'
               ];
               const bgColors = [
-                'bg-blue-50',
-                'bg-green-50',
-                'bg-purple-50',
-                'bg-amber-50'
+                'bg-blue-50 dark:bg-blue-950/30',
+                'bg-green-50 dark:bg-green-950/30',
+                'bg-purple-50 dark:bg-purple-950/30',
+                'bg-amber-50 dark:bg-amber-950/30'
               ];
               
               return (
                 <motion.div 
                   key={index}
-                  whileHover={{ y: -3, scale: 1.02 }}
-                  className={`relative ${bgColors[index]} dark:bg-opacity-10 rounded-xl p-3 sm:p-4 border border-transparent hover:border-green-primary/20 transition-all overflow-hidden group`}
+                  whileHover={{ y: -4, scale: 1.02 }}
+                  transition={{ type: 'spring', stiffness: 300, damping: 10 }}
+                  className={`relative ${bgColors[index]} rounded-xl p-4 sm:p-6 border border-green-primary/10 hover:border-green-primary/30 transition-all duration-300 overflow-hidden group`}
                 >
-                  {/* Top icon with gradient */}
-                  <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-gradient-to-br ${colors[index]} flex items-center justify-center mb-2 shadow-md group-hover:shadow-lg transition-shadow`}>
-                    <Icon className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
-                  </div>
+                  {/* Gradient overlay on hover */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-white/40 to-transparent dark:from-white/5 dark:to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   
-                  {/* Number */}
-                  <div className="text-xl sm:text-2xl lg:text-3xl font-bold text-green-dark dark:text-white mb-0.5">
-                    <AnimatedCounter value={stat.value} suffix={stat.suffix} />
+                  {/* Content */}
+                  <div className="relative z-10">
+                    {/* Icon with gradient */}
+                    <div className={`w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-gradient-to-br ${colors[index]} flex items-center justify-center mb-3 sm:mb-4 shadow-md group-hover:shadow-lg transition-shadow duration-300`}>
+                      <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+                    </div>
+                    
+                    {/* Number with animation */}
+                    <div className="text-2xl sm:text-3xl lg:text-4xl font-bold text-green-dark dark:text-white mb-1">
+                      <AnimatedCounter value={stat.value} suffix={stat.suffix} />
+                    </div>
+                    
+                    {/* Label */}
+                    <div className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 font-medium">{stat.label}</div>
                   </div>
-                  
-                  {/* Label */}
-                  <div className="text-[10px] sm:text-xs text-gray-500">{stat.label}</div>
                   
                   {/* Subtle decoration */}
-                  <div className={`absolute -bottom-2 -right-2 w-12 h-12 rounded-full bg-gradient-to-br ${colors[index]} opacity-10 group-hover:opacity-20 transition-opacity`} />
+                  <div className={`absolute -bottom-3 -right-3 w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-br ${colors[index]} opacity-10 group-hover:opacity-20 transition-opacity duration-300`} />
                 </motion.div>
               );
             })}
