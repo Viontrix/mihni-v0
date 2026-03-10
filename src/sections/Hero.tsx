@@ -720,7 +720,7 @@ const SchedulePreview = ({ data }: { data: typeof showcaseImages[4] }) => {
             </div>
             <div className="flex items-center gap-1">
               <div className="w-2 h-2 rounded-full bg-green-500" />
-              <span className="text-[10px] text-gray-500">علوم</span>
+              <span className="text-[10px] text-gray-500">عل��م</span>
             </div>
           </div>
           <div className="px-2 py-1 bg-green-primary/10 rounded text-[10px] font-medium text-green-primary">
@@ -926,7 +926,9 @@ const ImageShowcase = () => {
     <div className="relative">
       {/* Main Preview */}
       <AnimatePresence mode="wait">
-        {renderPreview()}
+        <div key={currentData.id}>
+          {renderPreview()}
+        </div>
       </AnimatePresence>
 
       {/* Audience Label */}
