@@ -802,9 +802,9 @@ export default function Hero() {
               className="flex flex-wrap justify-center lg:justify-start gap-3 mb-12"
             >
               {[
-                { icon: Palette, text: 'تخصيص سهل' },
-                { icon: Download, text: 'تصدير فوري' },
                 { icon: Clock, text: 'توفر الوقت' },
+                { icon: Palette, text: 'تصميم احترافي' },
+                { icon: Zap, text: 'تخصيص سهل' },
               ].map((feature, i) => (
                 <motion.div
                   key={i}
