@@ -201,11 +201,11 @@ const AppFrame = ({ children, title, icon: Icon, iconColor = "text-green-primary
       transition={{ duration: 0.4, ease: "easeOut" }}
       className="relative"
     >
-      {/* Outer shadow layer for depth */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/5 to-black/20 dark:from-black/20 dark:to-black/40 rounded-2xl translate-y-2 blur-xl" />
+      {/* Outer shadow layer for depth — softened */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/3 to-black/10 dark:from-black/15 dark:to-black/30 rounded-xl translate-y-1.5 blur-lg" />
       
       {/* Main app container */}
-      <div className="relative bg-white dark:bg-[#1B2D2B] rounded-2xl overflow-hidden border border-gray-200/80 dark:border-green-primary/20 shadow-[0_8px_40px_rgba(0,0,0,0.12)] dark:shadow-[0_8px_40px_rgba(0,0,0,0.4)]">
+      <div className="relative bg-white dark:bg-[#1B2D2B] rounded-xl overflow-hidden border border-gray-200/70 dark:border-green-primary/20 shadow-[0_4px_24px_rgba(0,0,0,0.08)] dark:shadow-[0_4px_24px_rgba(0,0,0,0.3)]">
         {/* Top bar - macOS style window chrome */}
         <div className="flex items-center gap-3 px-4 py-3 bg-gradient-to-b from-gray-100 to-gray-50 dark:from-[#1a2f2a] dark:to-[#152B26] border-b border-gray-200/80 dark:border-green-primary/10">
           {/* Window controls */}
@@ -231,33 +231,33 @@ const AppFrame = ({ children, title, icon: Icon, iconColor = "text-green-primary
           </div>
         </div>
         
-        {/* Sidebar + Content layout */}
-        <div className="flex">
-          {/* Mini Sidebar */}
-          <div className="hidden sm:flex flex-col w-12 bg-gray-50/80 dark:bg-[#0D1B1A]/50 border-l border-gray-100 dark:border-green-primary/10 py-3 gap-2 items-center">
-            <div className="w-8 h-8 rounded-lg bg-green-primary/10 flex items-center justify-center">
-              <TrendingUp className="w-4 h-4 text-green-primary" />
+          {/* Sidebar + Content layout */}
+          <div className="flex h-[320px] sm:h-[360px]">
+            {/* Mini Sidebar */}
+            <div className="hidden sm:flex flex-col w-12 bg-gray-50/80 dark:bg-[#0D1B1A]/50 border-l border-gray-100 dark:border-green-primary/10 py-3 gap-2 items-center flex-shrink-0">
+              <div className="w-8 h-8 rounded-lg bg-green-primary/10 flex items-center justify-center">
+                <TrendingUp className="w-4 h-4 text-green-primary" />
+              </div>
+              <div className="w-8 h-8 rounded-lg hover:bg-gray-200/50 dark:hover:bg-white/5 flex items-center justify-center transition-colors">
+                <Award className="w-4 h-4 text-gray-400" />
+              </div>
+              <div className="w-8 h-8 rounded-lg hover:bg-gray-200/50 dark:hover:bg-white/5 flex items-center justify-center transition-colors">
+                <FileText className="w-4 h-4 text-gray-400" />
+              </div>
+              <div className="w-8 h-8 rounded-lg hover:bg-gray-200/50 dark:hover:bg-white/5 flex items-center justify-center transition-colors">
+                <Calculator className="w-4 h-4 text-gray-400" />
+              </div>
+              <div className="flex-1" />
+              <div className="w-6 h-6 rounded-full bg-gradient-to-br from-green-primary to-green-teal flex items-center justify-center">
+                <span className="text-[10px] font-bold text-white">م</span>
+              </div>
             </div>
-            <div className="w-8 h-8 rounded-lg hover:bg-gray-200/50 dark:hover:bg-white/5 flex items-center justify-center transition-colors">
-              <Award className="w-4 h-4 text-gray-400" />
-            </div>
-            <div className="w-8 h-8 rounded-lg hover:bg-gray-200/50 dark:hover:bg-white/5 flex items-center justify-center transition-colors">
-              <FileText className="w-4 h-4 text-gray-400" />
-            </div>
-            <div className="w-8 h-8 rounded-lg hover:bg-gray-200/50 dark:hover:bg-white/5 flex items-center justify-center transition-colors">
-              <Calculator className="w-4 h-4 text-gray-400" />
-            </div>
-            <div className="flex-1" />
-            <div className="w-6 h-6 rounded-full bg-gradient-to-br from-green-primary to-green-teal flex items-center justify-center">
-              <span className="text-[10px] font-bold text-white">م</span>
+            
+            {/* Main content area — scrollable internally so slides never push height */}
+            <div className="flex-1 overflow-y-auto overflow-x-hidden scrollbar-hide">
+              {children}
             </div>
           </div>
-          
-          {/* Main content area */}
-          <div className="flex-1 min-h-[280px] sm:min-h-[320px]">
-            {children}
-          </div>
-        </div>
         
         {/* Bottom status bar */}
         <div className="flex items-center justify-between px-4 py-2 bg-gray-50/80 dark:bg-[#0D1B1A]/50 border-t border-gray-100 dark:border-green-primary/10 text-[10px] text-gray-400">
@@ -679,8 +679,48 @@ const SchedulePreview = ({ data }: { data: typeof showcaseImages[4] }) => {
   );
 };
 
-// Floating Elements Component
-
+// Floating Elements Component — original animated gradient icons
+const SliderFloatingElements = () => {
+  return (
+    <>
+      {/* Top Right - Lightning */}
+      <motion.div
+        className="absolute -top-3 sm:-top-4 lg:-top-5 -right-3 sm:-right-4 lg:-right-5 w-10 sm:w-12 lg:w-14 h-10 sm:h-12 lg:h-14 bg-gradient-to-br from-amber-400 to-orange-500 rounded-xl lg:rounded-2xl flex items-center justify-center shadow-xl z-30"
+        animate={{ y: [-8, 8, -8], rotate: [0, 8, -8, 0] }}
+        transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+      >
+        <Zap className="w-5 sm:w-6 lg:w-7 h-5 sm:h-6 lg:h-7 text-white" />
+      </motion.div>
+      
+      {/* Top Left - Star */}
+      <motion.div
+        className="absolute -top-3 sm:-top-4 lg:-top-5 -left-3 sm:-left-4 lg:-left-5 w-9 sm:w-10 lg:w-12 h-9 sm:h-10 lg:h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg lg:rounded-xl flex items-center justify-center shadow-xl z-30"
+        animate={{ y: [6, -6, 6], rotate: [0, -10, 10, 0] }}
+        transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
+      >
+        <Star className="w-4 sm:w-5 lg:w-6 h-4 sm:h-5 lg:h-6 text-white" />
+      </motion.div>
+      
+      {/* Bottom Left - Download */}
+      <motion.div
+        className="absolute -bottom-3 sm:-bottom-4 lg:-bottom-5 -left-3 sm:-left-4 lg:-left-5 w-9 sm:w-10 lg:w-12 h-9 sm:h-10 lg:h-12 bg-gradient-to-br from-green-primary to-green-teal rounded-lg lg:rounded-xl flex items-center justify-center shadow-xl z-30"
+        animate={{ y: [8, -8, 8] }}
+        transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+      >
+        <Download className="w-4 sm:w-5 lg:w-6 h-4 sm:h-5 lg:h-6 text-white" />
+      </motion.div>
+      
+      {/* Bottom Right - Award */}
+      <motion.div
+        className="absolute -bottom-3 sm:-bottom-4 lg:-bottom-5 -right-3 sm:-right-4 lg:-right-5 w-10 sm:w-11 lg:w-12 h-10 sm:h-11 lg:h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl lg:rounded-2xl flex items-center justify-center shadow-xl z-30"
+        animate={{ y: [-6, 6, -6], scale: [1, 1.05, 1] }}
+        transition={{ duration: 3.2, repeat: Infinity, ease: 'easeInOut' }}
+      >
+        <Award className="w-5 sm:w-5 lg:w-6 h-5 sm:h-5 lg:h-6 text-white" />
+      </motion.div>
+    </>
+  );
+};
 
 // Main Showcase Component
 const ImageShowcase = () => {
@@ -713,11 +753,13 @@ const ImageShowcase = () => {
   };
 
   return (
-    <div className="relative">
-      {/* Main Preview */}
-      <AnimatePresence mode="wait">
-        {renderPreview()}
-      </AnimatePresence>
+    <div className="relative flex flex-col">
+      {/* Fixed-height slide area — no slide can grow beyond this */}
+      <div className="relative overflow-hidden" style={{ height: '420px' }}>
+        <AnimatePresence mode="wait">
+          {renderPreview()}
+        </AnimatePresence>
+      </div>
 
       {/* Navigation Dots */}
       <div className="flex justify-center items-center gap-2 mt-4">
@@ -742,7 +784,7 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-[#F0F9F4] via-[#E8F5E9] to-[#C8E6C9] dark:from-[#0A1F1A] dark:via-[#0D1B1A] dark:to-[#0A1512]"
+      className="relative overflow-hidden bg-gradient-to-br from-[#F0F9F4] via-[#E8F5E9] to-[#C8E6C9] dark:from-[#0A1F1A] dark:via-[#0D1B1A] dark:to-[#0A1512] min-h-screen flex flex-col"
     >
       {/* Background Effects */}
       <GradientOrbs />
@@ -762,12 +804,14 @@ export default function Hero() {
         />
       </div>
 
-      {/* Main Content */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 sm:pt-32 lg:pt-28 pb-8 lg:pb-12">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-start">
-          
-          {/* Left Side - Content */}
-          <div className="text-center lg:text-right order-2 lg:order-1 pt-4 lg:pt-12">
+      {/* Main Content Wrapper */}
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col flex-1">
+
+        {/* ── Upper Section: Content + Slider ── */}
+        <div className="pt-24 sm:pt-28 lg:pt-24 pb-8 lg:pb-10 flex flex-col lg:flex-row items-center lg:items-center gap-10 lg:gap-16 flex-1">
+
+          {/* Content Side */}
+          <div className="w-full lg:flex-1 text-center lg:text-right flex flex-col justify-center">
             {/* Badge */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -848,7 +892,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 mb-8"
+              className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4"
             >
               <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
                 <Link href={ROUTES.START}>
@@ -879,29 +923,29 @@ export default function Hero() {
 
           </div>
 
-          {/* Right Side - Image Showcase */}
+          {/* Slider Side */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="order-1 lg:order-2 relative pt-0 lg:pt-12"
+            className="w-full lg:w-[480px] xl:w-[500px] flex-shrink-0 relative self-center"
           >
-            {/* Glow Effect */}
-            <div className="absolute -inset-2 lg:-inset-4 bg-gradient-to-r from-green-primary/20 via-green-teal/20 to-green-light/20 rounded-[2rem] lg:rounded-[3rem] blur-2xl lg:blur-3xl opacity-60" />
+            {/* Floating elements anchored to slider */}
+            <SliderFloatingElements />
             
-            {/* Image Showcase Container */}
-            <div className="relative mx-auto lg:mx-0 max-w-[320px] sm:max-w-[400px] lg:max-w-[480px]">
+            {/* Fixed-size Slider Container */}
+            <div className="relative w-full">
               <ImageShowcase />
             </div>
           </motion.div>
         </div>
 
-        {/* Stats Section */}
+        {/* ── Lower Section: Stats ── */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.5 }}
-          className="mt-10 lg:mt-16"
+          className="pb-8 lg:pb-10 border-t border-green-primary/10 pt-6 lg:pt-8"
         >
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
             {stats.map((stat, index) => {
@@ -945,6 +989,7 @@ export default function Hero() {
             })}
           </div>
         </motion.div>
+
       </div>
 
     </section>
