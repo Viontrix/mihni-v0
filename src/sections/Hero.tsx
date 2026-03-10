@@ -703,21 +703,16 @@ export default function Hero() {
           
           {/* Left Side - Content */}
           <div className="text-center lg:text-right order-2 lg:order-1 pt-4 lg:pt-8">
-            {/* Tagline as subtle badge */}
+            {/* Tagline - Small line above title */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               className="mb-4"
             >
-              <motion.span 
-                className="inline-flex items-center gap-2 px-3 py-1.5 bg-white/60 dark:bg-[#1B2D2B]/60 rounded-full border border-green-primary/20 text-green-primary dark:text-green-light text-xs sm:text-sm font-semibold"
-                whileHover={{ scale: 1.05 }}
-              >
-                <Sparkles className="w-3 h-3 sm:w-4 sm:h-4" />
-                <span className="hidden sm:inline">أنجز أعمالك باحترافية مع</span>
-                <span className="sm:hidden">احترافية</span>
-              </motion.span>
+              <span className="text-sm sm:text-base text-gray-500 dark:text-gray-400 font-medium">
+                أنجز أعمالك باحترافية مع
+              </span>
             </motion.div>
 
             {/* Main Heading */}
@@ -725,11 +720,12 @@ export default function Hero() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="mb-8"
+              className="mb-6"
             >
-              <h1 className="text-5xl sm:text-5xl lg:text-7xl xl:text-8xl font-extrabold leading-tight">
-                <span className="bg-gradient-to-r from-green-primary via-green-teal to-green-light bg-clip-text text-transparent">
-                  منصة مِهني
+              <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-extrabold leading-tight">
+                <span className="text-green-dark dark:text-white">منصة </span>
+                <span className="bg-gradient-to-r from-green-primary via-green-teal to-green-light bg-clip-text text-transparent text-6xl sm:text-7xl lg:text-8xl xl:text-9xl">
+                  مِهني
                 </span>
               </h1>
             </motion.div>
@@ -798,7 +794,8 @@ export default function Hero() {
                 <Link href={getHomeSectionUrl('templates')}>
                   <Button
                     size="lg"
-                    className="border-2 border-green-primary text-green-primary hover:bg-green-primary hover:text-white h-12 sm:h-14 px-6 sm:px-8 text-base sm:text-lg rounded-2xl transition-all duration-300 font-bold bg-white/80 dark:bg-[#1B2D2B]/80 backdrop-blur-sm"
+                    variant="outline"
+                    className="border-2 border-green-primary/30 text-green-primary hover:bg-green-primary/10 hover:border-green-primary h-12 sm:h-14 px-6 sm:px-8 text-base sm:text-lg rounded-2xl transition-all duration-300 font-bold bg-white/80 dark:bg-[#1B2D2B]/80 backdrop-blur-sm"
                   >
                     <Play className="w-5 h-5 mr-2" />
                     استكشف قوالبنا
