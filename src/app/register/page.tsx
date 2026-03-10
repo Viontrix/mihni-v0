@@ -21,7 +21,36 @@ import {
   Loader2,
 } from 'lucide-react';
 import { ROUTES } from '@/lib/routes';
-import { supabase } from '@/lib/supabase/client';
+import { supabase, isSupabaseConfigured } from '@/lib/supabase/client';
+
+// Show configuration message when Supabase is not set up
+function SupabaseNotConfigured() {
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-gradient-hero dark:bg-gradient-dark-hero relative overflow-hidden py-8">
+      <div className="absolute inset-0 pattern-grid opacity-50" />
+      <div className="relative z-10 w-full max-w-lg px-4">
+        <div className="bg-white dark:bg-[#1B2D2B] rounded-2xl shadow-2xl border border-green-primary/10 p-8 text-center">
+          <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center">
+            <Lock className="w-8 h-8 text-amber-600 dark:text-amber-400" />
+          </div>
+          <h1 className="text-2xl font-bold text-green-dark dark:text-white mb-3">
+            إعداد قاعدة البيانات مطلوب
+          </h1>
+          <p className="text-gray-medium dark:text-gray-light mb-6">
+            التسجيل غير متاح حالياً. يرجى إعداد متغيرات بيئة Supabase للمتابعة.
+          </p>
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 text-green-primary hover:underline font-medium"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            العودة للصفحة الرئيسية
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 const plans = [
   { slug: 'free', name: 'مجانية', price: '0', features: ['10 قوالب', '3 أدوات', '50 MB تخزين'] },
@@ -30,6 +59,11 @@ const plans = [
 ];
 
 export default function RegisterPage() {
+  // Show configuration message when Supabase is not set up
+  if (!isSupabaseConfigured) {
+    return <SupabaseNotConfigured />;
+  }
+
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [step, setStep] = useState(1);
@@ -372,7 +406,7 @@ export default function RegisterPage() {
           className="text-center mt-6"
         >
           <Link href="/" className="text-gray-medium hover:text-green-primary transition-colors text-sm">
-            العودة للصفحة الرئيسية
+            ��لعودة للصفحة الرئيسية
           </Link>
         </motion.div>
       </div>
