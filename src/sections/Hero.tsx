@@ -5,12 +5,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ROUTES, getHomeSectionUrl } from '@/lib/routes';
-import { 
-  ArrowLeft, 
-  Sparkles, 
-  Award, 
-  FileText, 
-  Star, 
+import {
+  ArrowLeft,
+  Sparkles,
+  Award,
+  FileText,
+  Star,
   Zap,
   TrendingUp,
   Play,
@@ -94,16 +94,16 @@ const FloatingParticles = () => {
         <motion.div
           key={i}
           className="absolute w-1.5 h-1.5 rounded-full bg-green-primary/30"
-          initial={{ 
-            x: Math.random() * 100 + '%', 
+          initial={{
+            x: Math.random() * 100 + '%',
             y: '110%',
-            opacity: 0 
+            opacity: 0
           }}
-          animate={{ 
+          animate={{
             y: '-10%',
             opacity: [0, 1, 0]
           }}
-          transition={{ 
+          transition={{
             duration: Math.random() * 8 + 8,
             repeat: Infinity,
             delay: Math.random() * 5,
@@ -120,25 +120,25 @@ const GradientOrbs = () => {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
       {/* Top-right orb */}
-      <motion.div 
+      <motion.div
         className="absolute top-0 right-0 w-[550px] h-[550px] rounded-full bg-gradient-to-br from-green-primary/15 via-green-teal/10 to-transparent blur-[110px]"
         animate={{ scale: [1, 1.2, 1], x: [0, 30, 0] }}
         transition={{ duration: 15, repeat: Infinity, ease: 'easeInOut' }}
       />
       {/* Bottom-left orb */}
-      <motion.div 
+      <motion.div
         className="absolute bottom-0 left-0 w-[450px] h-[450px] rounded-full bg-gradient-to-tr from-green-light/15 via-green-teal/10 to-transparent blur-[90px]"
         animate={{ scale: [1.2, 1, 1.2], x: [0, -30, 0] }}
         transition={{ duration: 18, repeat: Infinity, ease: 'easeInOut' }}
       />
       {/* Center subtle glow */}
-      <motion.div 
+      <motion.div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] rounded-full bg-gradient-to-r from-green-primary/5 via-green-teal/8 to-green-light/5 blur-[80px]"
         animate={{ scale: [1, 1.1, 1], opacity: [0.6, 1, 0.6] }}
         transition={{ duration: 12, repeat: Infinity, ease: 'easeInOut' }}
       />
       {/* Top-center accent */}
-      <motion.div 
+      <motion.div
         className="absolute -top-20 left-1/2 -translate-x-1/2 w-[300px] h-[300px] rounded-full bg-gradient-to-b from-green-primary/8 to-transparent blur-[60px]"
         animate={{ y: [0, 20, 0], opacity: [0.4, 0.7, 0.4] }}
         transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
@@ -173,7 +173,7 @@ const AnimatedCounter = ({ value, suffix }: { value: number; suffix: string }) =
         setDisplayCount(value % 1 !== 0 ? parseFloat(current.toFixed(1)) : Math.floor(current));
       }
     }, duration / steps);
-    
+
     return () => clearInterval(timer);
   }, [value]);
 
@@ -187,7 +187,7 @@ const AnimatedCounter = ({ value, suffix }: { value: number; suffix: string }) =
 // Unified Tool Preview Component - renders each tool as a mini UI mockup
 const ToolPreview = ({ data }: { data: typeof showcaseImages[number] }) => {
   const Icon = data.icon;
-  
+
   // Tool-specific content based on id
   const renderToolContent = () => {
     switch (data.id) {
@@ -206,7 +206,7 @@ const ToolPreview = ({ data }: { data: typeof showcaseImages[number] }) => {
             </div>
           </div>
         );
-      
+
       case 2: // Test Generator
         return (
           <div className="space-y-3">
@@ -224,7 +224,7 @@ const ToolPreview = ({ data }: { data: typeof showcaseImages[number] }) => {
             </motion.div>
           </div>
         );
-      
+
       case 3: // Report Creation
         return (
           <div className="space-y-3">
@@ -245,7 +245,7 @@ const ToolPreview = ({ data }: { data: typeof showcaseImages[number] }) => {
             </motion.div>
           </div>
         );
-      
+
       case 4: // Template Library
         return (
           <div className="space-y-3">
@@ -269,7 +269,7 @@ const ToolPreview = ({ data }: { data: typeof showcaseImages[number] }) => {
             </motion.div>
           </div>
         );
-      
+
       case 5: // Template Editor
         return (
           <div className="space-y-3">
@@ -293,7 +293,7 @@ const ToolPreview = ({ data }: { data: typeof showcaseImages[number] }) => {
             </div>
           </div>
         );
-      
+
       case 6: // Export PDF
         return (
           <div className="space-y-3">
@@ -313,7 +313,7 @@ const ToolPreview = ({ data }: { data: typeof showcaseImages[number] }) => {
             </div>
           </div>
         );
-      
+
       case 7: // Dashboard
         return (
           <div className="space-y-3">
@@ -341,7 +341,7 @@ const ToolPreview = ({ data }: { data: typeof showcaseImages[number] }) => {
             </div>
           </div>
         );
-      
+
       case 8: // Tools Library
         return (
           <div className="space-y-3">
@@ -363,14 +363,14 @@ const ToolPreview = ({ data }: { data: typeof showcaseImages[number] }) => {
             </motion.div>
           </div>
         );
-      
+
       default:
         return null;
     }
   };
 
   return (
-    <motion.div 
+    <motion.div
       initial={{ opacity: 0, scale: 0.92 }}
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0, scale: 0.92 }}
@@ -412,7 +412,7 @@ const FloatingElements = () => {
       >
         <Zap className="w-5 sm:w-6 lg:w-7 h-5 sm:h-6 lg:h-7 text-white" />
       </motion.div>
-      
+
       {/* Top Left - Star */}
       <motion.div
         className="absolute -top-3 sm:-top-4 lg:-top-5 -left-3 sm:-left-4 lg:-left-5 w-9 sm:w-10 lg:w-12 h-9 sm:h-10 lg:h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg lg:rounded-xl flex items-center justify-center shadow-xl z-30"
@@ -421,7 +421,7 @@ const FloatingElements = () => {
       >
         <Star className="w-4 sm:w-5 lg:w-6 h-4 sm:h-5 lg:h-6 text-white" />
       </motion.div>
-      
+
       {/* Bottom Left - Download */}
       <motion.div
         className="absolute -bottom-3 sm:-bottom-4 lg:-bottom-5 -left-3 sm:-left-4 lg:-left-5 w-9 sm:w-10 lg:w-12 h-9 sm:h-10 lg:h-12 bg-gradient-to-br from-green-primary to-green-teal rounded-lg lg:rounded-xl flex items-center justify-center shadow-xl z-30"
@@ -430,7 +430,7 @@ const FloatingElements = () => {
       >
         <Download className="w-4 sm:w-5 lg:w-6 h-4 sm:h-5 lg:h-6 text-white" />
       </motion.div>
-      
+
       {/* Bottom Right - Award */}
       <motion.div
         className="absolute -bottom-3 sm:-bottom-4 lg:-bottom-5 -right-3 sm:-right-4 lg:-right-5 w-10 sm:w-11 lg:w-12 h-10 sm:h-11 lg:h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl lg:rounded-2xl flex items-center justify-center shadow-xl z-30"
@@ -474,8 +474,8 @@ const ImageShowcase = () => {
             initial={{ opacity: 0, scale: 0.9, y: 30 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: -30 }}
-            transition={{ 
-              duration: 0.7, 
+            transition={{
+              duration: 0.7,
               ease: [0.4, 0, 0.2, 1],
               opacity: { duration: 0.5 }
             }}
@@ -483,7 +483,7 @@ const ImageShowcase = () => {
             {renderPreview()}
           </motion.div>
         </AnimatePresence>
-        
+
         {/* Floating Elements - positioned relative to the preview card */}
         <FloatingElements />
       </motion.div>
@@ -496,11 +496,10 @@ const ImageShowcase = () => {
             onClick={() => setCurrentIndex(i)}
             whileHover={{ scale: 1.3 }}
             whileTap={{ scale: 0.85 }}
-            className={`rounded-full transition-all duration-300 ${
-              i === currentIndex 
-                ? 'w-6 h-2 bg-gradient-to-r from-green-primary to-green-teal' 
+            className={`rounded-full transition-all duration-300 ${i === currentIndex
+                ? 'w-6 h-2 bg-gradient-to-r from-green-primary to-green-teal'
                 : 'w-2 h-2 bg-gray-300 hover:bg-green-primary/50'
-            }`}
+              }`}
           />
         ))}
       </div>
@@ -532,10 +531,10 @@ export default function Hero() {
       {/* Background Effects */}
       <GradientOrbs />
       <FloatingParticles />
-      
+
       {/* Grid Pattern */}
       <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.05]">
-        <div 
+        <div
           className="w-full h-full"
           style={{
             backgroundImage: `
@@ -550,7 +549,7 @@ export default function Hero() {
       {/* Main Content */}
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 sm:pt-32 lg:pt-20 pb-8 lg:pb-12">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-10 lg:gap-16 items-center">
-          
+
           {/* Left Side - Content */}
           <div className="text-center lg:text-right order-2 lg:order-1 pt-4 lg:pt-8 max-w-[600px] mx-auto lg:mx-0">
             {/* Badge */}
@@ -560,7 +559,7 @@ export default function Hero() {
               transition={{ duration: 0.6 }}
               className="mb-5"
             >
-              <motion.span 
+              <motion.span
                 className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-green-primary/10 dark:bg-green-primary/20 border border-green-primary/20 text-green-primary dark:text-green-light text-sm font-bold"
                 whileHover={{ scale: 1.05 }}
               >
@@ -585,7 +584,7 @@ export default function Hero() {
                 <span className="bg-gradient-to-r from-green-primary via-green-teal to-green-light bg-clip-text text-transparent">
                   منصة مهني
                 </span>
-              </h1>
+              </h2>
               {/* Decorative underline accent */}
               <motion.div
                 initial={{ scaleX: 0, opacity: 0 }}
@@ -658,7 +657,7 @@ export default function Hero() {
                   </Button>
                 </Link>
               </motion.div>
-              
+
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
                 <Link href={getHomeSectionUrl('templates')}>
                   <Button
@@ -719,7 +718,7 @@ export default function Hero() {
               animate={{ opacity: [0.4, 0.8, 0.4] }}
               transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
             />
-            
+
             {/* Image Showcase Container */}
             <div className="relative mx-auto lg:mx-0 max-w-[300px] sm:max-w-[360px] lg:max-w-[420px]">
               <ImageShowcase />
@@ -739,7 +738,7 @@ export default function Hero() {
               const Icon = stat.icon;
               const colors = [
                 'from-blue-500 to-cyan-500',
-                'from-green-500 to-emerald-500', 
+                'from-green-500 to-emerald-500',
                 'from-purple-500 to-violet-500',
                 'from-amber-500 to-orange-500'
               ];
@@ -749,9 +748,9 @@ export default function Hero() {
                 'bg-purple-50',
                 'bg-amber-50'
               ];
-              
+
               return (
-                <motion.div 
+                <motion.div
                   key={index}
                   whileHover={{ y: -5, scale: 1.03 }}
                   transition={{ type: 'spring', stiffness: 300, damping: 20 }}
@@ -761,15 +760,15 @@ export default function Hero() {
                   <div className={`w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-gradient-to-br ${colors[index]} flex items-center justify-center mb-2 shadow-md group-hover:shadow-lg transition-shadow`}>
                     <Icon className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
                   </div>
-                  
+
                   {/* Number */}
                   <div className="text-xl sm:text-2xl lg:text-3xl font-bold text-green-dark dark:text-white mb-0.5">
                     <AnimatedCounter value={stat.value} suffix={stat.suffix} />
                   </div>
-                  
+
                   {/* Label */}
                   <div className="text-[10px] sm:text-xs text-gray-500">{stat.label}</div>
-                  
+
                   {/* Subtle decoration */}
                   <div className={`absolute -bottom-2 -right-2 w-12 h-12 rounded-full bg-gradient-to-br ${colors[index]} opacity-10 group-hover:opacity-20 transition-opacity`} />
                 </motion.div>
