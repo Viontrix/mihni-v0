@@ -231,33 +231,33 @@ const AppFrame = ({ children, title, icon: Icon, iconColor = "text-green-primary
           </div>
         </div>
         
-        {/* Sidebar + Content layout */}
-        <div className="flex">
-          {/* Mini Sidebar */}
-          <div className="hidden sm:flex flex-col w-12 bg-gray-50/80 dark:bg-[#0D1B1A]/50 border-l border-gray-100 dark:border-green-primary/10 py-3 gap-2 items-center">
-            <div className="w-8 h-8 rounded-lg bg-green-primary/10 flex items-center justify-center">
-              <TrendingUp className="w-4 h-4 text-green-primary" />
+          {/* Sidebar + Content layout */}
+          <div className="flex h-[320px] sm:h-[360px]">
+            {/* Mini Sidebar */}
+            <div className="hidden sm:flex flex-col w-12 bg-gray-50/80 dark:bg-[#0D1B1A]/50 border-l border-gray-100 dark:border-green-primary/10 py-3 gap-2 items-center flex-shrink-0">
+              <div className="w-8 h-8 rounded-lg bg-green-primary/10 flex items-center justify-center">
+                <TrendingUp className="w-4 h-4 text-green-primary" />
+              </div>
+              <div className="w-8 h-8 rounded-lg hover:bg-gray-200/50 dark:hover:bg-white/5 flex items-center justify-center transition-colors">
+                <Award className="w-4 h-4 text-gray-400" />
+              </div>
+              <div className="w-8 h-8 rounded-lg hover:bg-gray-200/50 dark:hover:bg-white/5 flex items-center justify-center transition-colors">
+                <FileText className="w-4 h-4 text-gray-400" />
+              </div>
+              <div className="w-8 h-8 rounded-lg hover:bg-gray-200/50 dark:hover:bg-white/5 flex items-center justify-center transition-colors">
+                <Calculator className="w-4 h-4 text-gray-400" />
+              </div>
+              <div className="flex-1" />
+              <div className="w-6 h-6 rounded-full bg-gradient-to-br from-green-primary to-green-teal flex items-center justify-center">
+                <span className="text-[10px] font-bold text-white">م</span>
+              </div>
             </div>
-            <div className="w-8 h-8 rounded-lg hover:bg-gray-200/50 dark:hover:bg-white/5 flex items-center justify-center transition-colors">
-              <Award className="w-4 h-4 text-gray-400" />
-            </div>
-            <div className="w-8 h-8 rounded-lg hover:bg-gray-200/50 dark:hover:bg-white/5 flex items-center justify-center transition-colors">
-              <FileText className="w-4 h-4 text-gray-400" />
-            </div>
-            <div className="w-8 h-8 rounded-lg hover:bg-gray-200/50 dark:hover:bg-white/5 flex items-center justify-center transition-colors">
-              <Calculator className="w-4 h-4 text-gray-400" />
-            </div>
-            <div className="flex-1" />
-            <div className="w-6 h-6 rounded-full bg-gradient-to-br from-green-primary to-green-teal flex items-center justify-center">
-              <span className="text-[10px] font-bold text-white">م</span>
+            
+            {/* Main content area — scrollable internally so slides never push height */}
+            <div className="flex-1 overflow-y-auto overflow-x-hidden scrollbar-hide">
+              {children}
             </div>
           </div>
-          
-          {/* Main content area */}
-          <div className="flex-1 min-h-[280px] sm:min-h-[320px]">
-            {children}
-          </div>
-        </div>
         
         {/* Bottom status bar */}
         <div className="flex items-center justify-between px-4 py-2 bg-gray-50/80 dark:bg-[#0D1B1A]/50 border-t border-gray-100 dark:border-green-primary/10 text-[10px] text-gray-400">
@@ -713,11 +713,13 @@ const ImageShowcase = () => {
   };
 
   return (
-    <div className="relative">
-      {/* Main Preview */}
-      <AnimatePresence mode="wait">
-        {renderPreview()}
-      </AnimatePresence>
+    <div className="relative flex flex-col">
+      {/* Fixed-height slide area — no slide can grow beyond this */}
+      <div className="relative overflow-hidden" style={{ height: '420px' }}>
+        <AnimatePresence mode="wait">
+          {renderPreview()}
+        </AnimatePresence>
+      </div>
 
       {/* Navigation Dots */}
       <div className="flex justify-center items-center gap-2 mt-4">
@@ -766,7 +768,7 @@ export default function Hero() {
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* ── Upper Section: Content + Slider ── */}
-        <div className="pt-28 sm:pt-32 lg:pt-28 pb-10 lg:pb-14 flex flex-col lg:flex-row items-center lg:items-stretch gap-10 lg:gap-16">
+        <div className="pt-28 sm:pt-32 lg:pt-28 pb-10 lg:pb-12 flex flex-col lg:flex-row items-center lg:items-center gap-10 lg:gap-16 lg:min-h-[600px]">
 
           {/* Content Side */}
           <div className="w-full lg:flex-1 text-center lg:text-right flex flex-col justify-center">
@@ -886,7 +888,7 @@ export default function Hero() {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.3 }}
-            className="w-full lg:w-[480px] xl:w-[520px] flex-shrink-0 relative"
+            className="w-full lg:w-[480px] xl:w-[500px] flex-shrink-0 relative self-center"
           >
             {/* Glow Effect */}
             <div className="absolute -inset-2 lg:-inset-4 bg-gradient-to-r from-green-primary/20 via-green-teal/20 to-green-light/20 rounded-[2rem] lg:rounded-[3rem] blur-2xl lg:blur-3xl opacity-60 pointer-events-none" />
