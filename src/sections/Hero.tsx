@@ -817,7 +817,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="mb-4"
+              className="mb-6"
             >
               <motion.span 
                 className="inline-flex items-center gap-2 text-green-primary dark:text-green-light text-sm font-bold"
@@ -833,9 +833,9 @@ export default function Hero() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="mb-4"
+              className="mb-5"
             >
-              <h1 className="text-5xl sm:text-5xl lg:text-7xl xl:text-8xl font-extrabold leading-tight">
+              <h1 className="text-5xl sm:text-5xl lg:text-7xl xl:text-8xl font-extrabold leading-[1.1] tracking-tight">
                 <span className="text-green-dark dark:text-white lg:inline block">
                   منصة{' '}
                 </span>
@@ -850,14 +850,14 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="mb-6"
+              className="mb-8"
             >
-              <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
+              <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300 leading-[1.7] tracking-wide">
                 <span className="text-green-primary font-bold">وفّر وقتك</span> وأنجز عملك باحترافية
                 <br className="hidden sm:block" />
                 مع <span className="font-semibold">قوالب جاهزة</span> وأدوات تنفيذية متكاملة
               </p>
-              <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
+              <p className="text-sm text-gray-500 dark:text-gray-400 mt-3 leading-relaxed">
                 شهادات • تقييمات • خطط • تقارير • اختبارات • جداول
               </p>
             </motion.div>
@@ -867,7 +867,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.25 }}
-              className="flex flex-wrap justify-center lg:justify-start gap-2.5 mb-7"
+              className="flex flex-wrap justify-center lg:justify-start gap-2.5 mb-9"
             >
               {[
                 { icon: Palette, text: 'تخصيص سهل' },
@@ -879,7 +879,7 @@ export default function Hero() {
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 0.3 + i * 0.1 }}
-                  className="flex items-center gap-2 px-3.5 py-1.5 bg-white/60 dark:bg-[#1B2D2B]/60 rounded-full border border-green-primary/10"
+                  className="flex items-center gap-2 px-3.5 py-2 bg-white/60 dark:bg-[#1B2D2B]/60 rounded-full border border-green-primary/10 hover:border-green-primary/30 transition-colors"
                 >
                   <feature.icon className="w-3.5 h-3.5 text-green-primary" />
                   <span className="text-sm text-gray-700 dark:text-gray-300">{feature.text}</span>
@@ -894,34 +894,31 @@ export default function Hero() {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4"
             >
-              <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
+              <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>
                 <Link href={ROUTES.START}>
                   <Button
                     size="lg"
-                    className="bg-gradient-to-r from-green-primary to-green-teal text-white px-10 py-7 text-xl rounded-2xl shadow-xl hover:shadow-2xl transition-all group font-bold"
+                    className="bg-gradient-to-r from-green-primary to-green-teal text-white px-8 py-3.5 sm:py-3 text-base sm:text-lg rounded-xl shadow-lg hover:shadow-[0_12px_32px_rgba(45,106,79,0.25)] dark:hover:shadow-[0_12px_32px_rgba(45,106,79,0.4)] transition-all duration-300 group font-semibold h-12 sm:h-12"
                   >
                     ابدأ مجاناً
-                    <ArrowLeft className="w-5 h-5 mr-2 group-hover:-translate-x-1 transition-transform" />
+                    <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" />
                   </Button>
                 </Link>
               </motion.div>
               
-              <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
+              <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>
                 <Link href={getHomeSectionUrl('templates')}>
                   <Button
                     size="lg"
                     variant="outline"
-                    className="border-2 border-green-primary/30 text-green-primary hover:bg-green-primary/10 hover:border-green-primary px-8 py-6 text-lg rounded-2xl transition-all font-bold bg-white/50 backdrop-blur-sm"
+                    className="border-2 border-green-primary text-green-dark dark:text-green-light bg-white/70 dark:bg-[#1B2D2B]/40 hover:bg-green-primary hover:text-white dark:hover:bg-green-primary dark:hover:text-white px-8 py-3.5 sm:py-3 text-base sm:text-lg rounded-xl transition-all duration-300 font-semibold h-12 sm:h-12 backdrop-blur-sm hover:shadow-lg"
                   >
-                    <Play className="w-5 h-5 mr-2" />
+                    <Play className="w-4 h-4 mr-2" />
                     استكشف القوالب
                   </Button>
                 </Link>
               </motion.div>
             </motion.div>
-
-
-          </div>
 
           {/* Slider Side */}
           <motion.div
