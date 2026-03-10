@@ -93,6 +93,39 @@ const showcaseImages = [
       days: ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس'],
       classes: ['رياضيات', 'علوم', 'عربي', 'إنجليزي', 'فنية']
     }
+  },
+  {
+    id: 6,
+    title: 'تقارير الأداء',
+    description: 'أنشئ تقارير مفصلة واحترافية',
+    color: 'from-indigo-500 to-blue-600',
+    icon: FileText,
+    preview: {
+      sections: ['ملخص تنفيذي', 'تحليل الأداء', 'التوصيات'],
+      progress: 85
+    }
+  },
+  {
+    id: 7,
+    title: 'نماذج وإستمارات',
+    description: 'صمم نماذج جمع البيانات بسهولة',
+    color: 'from-rose-500 to-pink-600',
+    icon: Palette,
+    preview: {
+      fields: ['الاسم', 'البريد', 'الملاحظات'],
+      responses: 234
+    }
+  },
+  {
+    id: 8,
+    title: 'خطط العمل',
+    description: 'خطط مشاريعك بوضوح وتنظيم',
+    color: 'from-cyan-500 to-teal-600',
+    icon: TrendingUp,
+    preview: {
+      phases: ['التخطيط', 'التنفيذ', 'المتابعة'],
+      completion: 60
+    }
   }
 ];
 
@@ -125,12 +158,21 @@ const FloatingParticles = () => {
   );
 };
 
-// Subtle gradient orbs - Static for performance
+// Soft animated gradient orbs - Premium look
 const GradientOrbs = () => {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full bg-gradient-to-br from-green-primary/15 to-transparent blur-[100px]" />
-      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full bg-gradient-to-tr from-green-teal/10 to-transparent blur-[80px]" />
+      <motion.div 
+        className="absolute -top-32 -right-32 w-[600px] h-[600px] rounded-full bg-gradient-to-br from-green-300/30 via-green-primary/20 to-transparent blur-[100px]"
+        animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0.7, 0.5] }}
+        transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
+      />
+      <motion.div 
+        className="absolute -bottom-32 -left-32 w-[500px] h-[500px] rounded-full bg-gradient-to-tr from-green-teal/25 via-emerald-300/15 to-transparent blur-[80px]"
+        animate={{ scale: [1.1, 1, 1.1], opacity: [0.4, 0.6, 0.4] }}
+        transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
+      />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full bg-gradient-to-r from-green-200/10 to-emerald-200/10 blur-[60px]" />
     </div>
   );
 };
@@ -494,6 +536,180 @@ const SchedulePreview = ({ data }: { data: typeof showcaseImages[4] }) => {
   );
 };
 
+// Report Preview Component
+const ReportPreview = ({ data }: { data: typeof showcaseImages[5] }) => {
+  return (
+    <motion.div 
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.95 }}
+      transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
+      className="relative bg-white dark:bg-[#1A2B28] rounded-2xl shadow-2xl shadow-black/10 dark:shadow-black/30 overflow-hidden border border-gray-200/50 dark:border-white/10"
+    >
+      <div className="flex items-center gap-3 px-4 py-3 bg-gray-50/80 dark:bg-[#0F1D1A] border-b border-gray-200/50 dark:border-white/5">
+        <div className="flex gap-1.5">
+          <div className="w-2.5 h-2.5 rounded-full bg-red-400/80" />
+          <div className="w-2.5 h-2.5 rounded-full bg-yellow-400/80" />
+          <div className="w-2.5 h-2.5 rounded-full bg-green-400/80" />
+        </div>
+        <div className="flex-1 flex justify-center">
+          <div className="flex items-center gap-2 px-3 py-1 bg-white dark:bg-[#0D1B1A] rounded-md text-xs text-gray-500 border border-gray-200/50 dark:border-white/5">
+            <FileText className="w-3 h-3 text-indigo-500" />
+            تقارير الأداء
+          </div>
+        </div>
+      </div>
+
+      <div className="p-5">
+        <div className="space-y-2 mb-4">
+          {data.preview?.sections?.map((section: string, i: number) => (
+            <motion.div 
+              key={i}
+              initial={{ opacity: 0, x: -15 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.15 + i * 0.08 }}
+              className="flex items-center gap-2.5 p-2.5 bg-indigo-50 dark:bg-indigo-900/20 rounded-lg border border-indigo-100 dark:border-indigo-800/30"
+            >
+              <div className="w-2 h-2 rounded-full bg-indigo-500" />
+              <span className="text-xs font-medium text-indigo-700 dark:text-indigo-300">{section}</span>
+            </motion.div>
+          ))}
+        </div>
+        <motion.div 
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4 }}
+          className="p-3 bg-indigo-600 rounded-lg text-white text-center"
+        >
+          <p className="text-[10px] opacity-80 mb-0.5">نسبة الإنجاز</p>
+          <p className="text-xl font-bold">{data.preview?.progress}%</p>
+        </motion.div>
+      </div>
+    </motion.div>
+  );
+};
+
+// Form Preview Component
+const FormPreview = ({ data }: { data: typeof showcaseImages[6] }) => {
+  return (
+    <motion.div 
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.95 }}
+      transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
+      className="relative bg-white dark:bg-[#1A2B28] rounded-2xl shadow-2xl shadow-black/10 dark:shadow-black/30 overflow-hidden border border-gray-200/50 dark:border-white/10"
+    >
+      <div className="flex items-center gap-3 px-4 py-3 bg-gray-50/80 dark:bg-[#0F1D1A] border-b border-gray-200/50 dark:border-white/5">
+        <div className="flex gap-1.5">
+          <div className="w-2.5 h-2.5 rounded-full bg-red-400/80" />
+          <div className="w-2.5 h-2.5 rounded-full bg-yellow-400/80" />
+          <div className="w-2.5 h-2.5 rounded-full bg-green-400/80" />
+        </div>
+        <div className="flex-1 flex justify-center">
+          <div className="flex items-center gap-2 px-3 py-1 bg-white dark:bg-[#0D1B1A] rounded-md text-xs text-gray-500 border border-gray-200/50 dark:border-white/5">
+            <Palette className="w-3 h-3 text-rose-500" />
+            نماذج وإستمارات
+          </div>
+        </div>
+      </div>
+
+      <div className="p-5">
+        <div className="space-y-2 mb-4">
+          {data.preview?.fields?.map((field: string, i: number) => (
+            <motion.div 
+              key={i}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.15 + i * 0.08 }}
+              className="p-2.5 bg-gray-50 dark:bg-white/5 rounded-lg border border-gray-100 dark:border-white/5"
+            >
+              <span className="text-[10px] text-gray-400 block mb-1">{field}</span>
+              <div className="h-2 bg-gray-200 dark:bg-white/10 rounded w-3/4" />
+            </motion.div>
+          ))}
+        </div>
+        <motion.div 
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4 }}
+          className="flex items-center justify-between p-3 bg-rose-50 dark:bg-rose-900/20 rounded-lg border border-rose-100 dark:border-rose-800/30"
+        >
+          <span className="text-xs text-rose-600 dark:text-rose-400">إجمالي الردود</span>
+          <span className="text-lg font-bold text-rose-600">{data.preview?.responses}</span>
+        </motion.div>
+      </div>
+    </motion.div>
+  );
+};
+
+// Plan Preview Component
+const PlanPreview = ({ data }: { data: typeof showcaseImages[7] }) => {
+  return (
+    <motion.div 
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.95 }}
+      transition={{ duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] }}
+      className="relative bg-white dark:bg-[#1A2B28] rounded-2xl shadow-2xl shadow-black/10 dark:shadow-black/30 overflow-hidden border border-gray-200/50 dark:border-white/10"
+    >
+      <div className="flex items-center gap-3 px-4 py-3 bg-gray-50/80 dark:bg-[#0F1D1A] border-b border-gray-200/50 dark:border-white/5">
+        <div className="flex gap-1.5">
+          <div className="w-2.5 h-2.5 rounded-full bg-red-400/80" />
+          <div className="w-2.5 h-2.5 rounded-full bg-yellow-400/80" />
+          <div className="w-2.5 h-2.5 rounded-full bg-green-400/80" />
+        </div>
+        <div className="flex-1 flex justify-center">
+          <div className="flex items-center gap-2 px-3 py-1 bg-white dark:bg-[#0D1B1A] rounded-md text-xs text-gray-500 border border-gray-200/50 dark:border-white/5">
+            <TrendingUp className="w-3 h-3 text-cyan-500" />
+            خطط العمل
+          </div>
+        </div>
+      </div>
+
+      <div className="p-5">
+        <div className="flex justify-between mb-4">
+          {data.preview?.phases?.map((phase: string, i: number) => (
+            <motion.div 
+              key={i}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.15 + i * 0.1 }}
+              className="text-center flex-1"
+            >
+              <div className={`w-8 h-8 mx-auto rounded-full flex items-center justify-center mb-1.5 ${
+                i === 0 ? 'bg-cyan-500 text-white' :
+                i === 1 ? 'bg-cyan-200 dark:bg-cyan-800 text-cyan-700 dark:text-cyan-300' :
+                'bg-gray-200 dark:bg-gray-700 text-gray-500'
+              }`}>
+                <span className="text-xs font-bold">{i + 1}</span>
+              </div>
+              <span className="text-[10px] text-gray-600 dark:text-gray-400">{phase}</span>
+            </motion.div>
+          ))}
+        </div>
+        <motion.div 
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.4 }}
+        >
+          <div className="flex items-center justify-between mb-1.5">
+            <span className="text-[10px] text-gray-500">التقدم الكلي</span>
+            <span className="text-xs font-bold text-cyan-600">{data.preview?.completion}%</span>
+          </div>
+          <div className="h-2 bg-gray-200 dark:bg-white/10 rounded-full overflow-hidden">
+            <motion.div 
+              className="h-full bg-cyan-500"
+              initial={{ width: 0 }}
+              animate={{ width: `${data.preview?.completion}%` }}
+              transition={{ delay: 0.5, duration: 0.8 }}
+            />
+          </div>
+        </motion.div>
+      </div>
+    </motion.div>
+  );
+};
+
 // Floating Elements Component - Refined with subtle animations
 const FloatingElements = () => {
   return (
@@ -562,6 +778,12 @@ const ImageShowcase = () => {
         return <QuizPreview data={currentData} />;
       case 5:
         return <SchedulePreview data={currentData} />;
+      case 6:
+        return <ReportPreview data={currentData} />;
+      case 7:
+        return <FormPreview data={currentData} />;
+      case 8:
+        return <PlanPreview data={currentData} />;
       default:
         return <DashboardPreview data={currentData} />;
     }
@@ -616,80 +838,82 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen flex items-center overflow-hidden bg-gradient-to-br from-[#F0F9F4] via-[#E8F5E9] to-[#C8E6C9] dark:from-[#0A1F1A] dark:via-[#0D1B1A] dark:to-[#0A1512]"
+      className="relative min-h-[90vh] flex flex-col overflow-hidden bg-gradient-to-b from-[#E8F5E9] via-[#F0F9F4] to-white dark:from-[#0A1F1A] dark:via-[#0D1B1A] dark:to-[#0A1512]"
     >
       {/* Background Effects */}
       <GradientOrbs />
       <FloatingParticles />
       
       {/* Grid Pattern */}
-      <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.05]">
+      <div className="absolute inset-0 opacity-[0.02] dark:opacity-[0.04]">
         <div 
           className="w-full h-full"
           style={{
             backgroundImage: `
-              linear-gradient(rgba(45, 106, 79, 0.3) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(45, 106, 79, 0.3) 1px, transparent 1px)
+              linear-gradient(rgba(45, 106, 79, 0.4) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(45, 106, 79, 0.4) 1px, transparent 1px)
             `,
-            backgroundSize: '60px 60px'
+            backgroundSize: '50px 50px'
           }}
         />
       </div>
 
-      {/* Main Content */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 pt-32 sm:pt-36 lg:pt-32 pb-12 lg:pb-16">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 sm:gap-14 lg:gap-20 items-center">
+      {/* Main Content - Flexible grow */}
+      <div className="relative z-10 flex-1 flex items-center w-full max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 pt-28 sm:pt-32 lg:pt-28">
+        <div className="w-full grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
           
           {/* Left Side - Content */}
-          <div className="text-center lg:text-right order-2 lg:order-1 pt-6 lg:pt-10">
-            {/* Badge */}
+          <div className="text-center lg:text-right order-2 lg:order-1">
+            {/* Subtle Animated Badge */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] }}
-              className="mb-6 lg:mb-8"
+              transition={{ duration: 0.5 }}
+              className="mb-4"
             >
               <motion.span 
-                className="inline-flex items-center gap-2 px-4 py-2 bg-white/80 dark:bg-white/10 rounded-full text-green-primary dark:text-green-light text-xs sm:text-sm font-semibold shadow-sm backdrop-blur-sm border border-green-primary/10"
-                whileHover={{ scale: 1.02 }}
-                transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+                className="inline-flex items-center gap-1.5 text-green-primary/80 dark:text-green-light/80 text-xs font-medium"
+                animate={{ opacity: [0.7, 1, 0.7] }}
+                transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
               >
-                <span className="flex items-center justify-center w-5 h-5 rounded-full bg-green-primary/10">
-                  <Sparkles className="w-3 h-3" />
-                </span>
-                قوالب ذكية وأدوات تنفيذية للمحترفين
+                <Sparkles className="w-3 h-3" />
+                قوالب ذكية وأدوات تنفيذية
               </motion.span>
             </motion.div>
 
-            {/* Main Heading */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
+            {/* Subtitle Line */}
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1, ease: [0.25, 0.46, 0.45, 0.94] }}
-              className="mb-5 lg:mb-6"
+              transition={{ duration: 0.5, delay: 0.05 }}
+              className="text-base sm:text-lg text-gray-600 dark:text-gray-400 mb-2"
             >
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-extrabold leading-[1.15] tracking-tight text-balance">
-                <span className="text-green-dark dark:text-white">
-                  أنجز أعمالك
-                </span>
-                <br className="hidden sm:block" />
-                <span className="text-green-dark dark:text-white">
-                  باحترافية مع{' '}
-                </span>
+              أنجز أعمالك باحترافية مع
+            </motion.p>
+
+            {/* Main Heading - Large "منصة مهني" */}
+            <motion.div
+              initial={{ opacity: 0, y: 25 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="mb-6"
+            >
+              <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-extrabold leading-[1.1] tracking-tight">
+                <span className="text-green-dark dark:text-white">منصة </span>
                 <span className="bg-gradient-to-l from-green-primary via-green-teal to-green-light bg-clip-text text-transparent">
                   مِهني
                 </span>
               </h1>
             </motion.div>
 
-            {/* Marketing Subtitle */}
+            {/* Marketing Description */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
-              className="mb-8 lg:mb-10"
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="mb-8"
             >
-              <p className="text-base sm:text-lg lg:text-xl text-gray-600 dark:text-gray-300 leading-relaxed max-w-lg mx-auto lg:mx-0 lg:max-w-none text-balance">
+              <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed max-w-md mx-auto lg:mx-0 lg:max-w-none">
                 منصة متكاملة تخدم <span className="text-green-primary font-semibold">المدارس والمنظمات والشركات والأفراد</span> بقوالب جاهزة وأدوات ذكية تختصر الوقت وترفع الجودة
               </p>
             </motion.div>
@@ -698,24 +922,23 @@ export default function Hero() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.25, ease: [0.25, 0.46, 0.45, 0.94] }}
-              className="flex flex-wrap justify-center lg:justify-start gap-2 sm:gap-3 mb-8 lg:mb-10"
+              transition={{ duration: 0.6, delay: 0.25 }}
+              className="flex flex-wrap justify-center lg:justify-start gap-2 mb-8"
             >
               {[
-                { icon: Users, text: 'للمدارس', color: 'text-blue-600 dark:text-blue-400' },
-                { icon: Award, text: 'للمنظمات', color: 'text-amber-600 dark:text-amber-400' },
-                { icon: TrendingUp, text: 'للشركات', color: 'text-green-600 dark:text-green-400' },
-                { icon: Star, text: 'للأفراد', color: 'text-purple-600 dark:text-purple-400' },
+                { icon: Users, text: 'للمدارس', color: 'text-blue-500' },
+                { icon: Award, text: 'للمنظمات', color: 'text-amber-500' },
+                { icon: TrendingUp, text: 'للشركات', color: 'text-green-500' },
+                { icon: Star, text: 'للأفراد', color: 'text-purple-500' },
               ].map((feature, i) => (
                 <motion.div
                   key={i}
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.3 + i * 0.08, duration: 0.4 }}
-                  whileHover={{ scale: 1.03, y: -1 }}
-                  className="flex items-center gap-1.5 px-3 py-1.5 bg-white/60 dark:bg-white/5 rounded-lg border border-gray-200/50 dark:border-white/10 backdrop-blur-sm cursor-default"
+                  transition={{ delay: 0.3 + i * 0.06 }}
+                  className="flex items-center gap-1.5 px-3 py-1.5 bg-white/70 dark:bg-white/5 rounded-full border border-gray-200/60 dark:border-white/10 backdrop-blur-sm"
                 >
-                  <feature.icon className={`w-3.5 h-3.5 ${feature.color}`} />
+                  <feature.icon className={`w-3 h-3 ${feature.color}`} />
                   <span className="text-xs font-medium text-gray-600 dark:text-gray-300">{feature.text}</span>
                 </motion.div>
               ))}
@@ -725,22 +948,22 @@ export default function Hero() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.35, ease: [0.25, 0.46, 0.45, 0.94] }}
+              transition={{ duration: 0.6, delay: 0.35 }}
               className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 sm:gap-4"
             >
               {/* Primary CTA */}
               <motion.div 
-                whileHover={{ scale: 1.02 }} 
+                whileHover={{ y: -2, boxShadow: '0 20px 40px rgba(45, 106, 79, 0.3)' }} 
                 whileTap={{ scale: 0.98 }}
                 transition={{ type: 'spring', stiffness: 400, damping: 25 }}
               >
                 <Link href={ROUTES.START}>
                   <Button
                     size="lg"
-                    className="relative overflow-hidden bg-green-primary hover:bg-green-primary/90 text-white px-8 py-6 text-base sm:text-lg rounded-xl shadow-lg shadow-green-primary/25 hover:shadow-xl hover:shadow-green-primary/30 transition-all duration-300 group font-bold"
+                    className="bg-green-primary hover:bg-green-600 text-white px-8 py-6 text-base sm:text-lg rounded-xl shadow-lg shadow-green-primary/20 transition-colors duration-200 group font-bold"
                   >
-                    <span className="relative z-10 flex items-center gap-2">
-                      ابدأ الآن مجاناً
+                    <span className="flex items-center gap-2">
+                      ابدأ مجاناً
                       <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5 group-hover:-translate-x-1 transition-transform duration-200" />
                     </span>
                   </Button>
@@ -749,7 +972,7 @@ export default function Hero() {
               
               {/* Secondary CTA */}
               <motion.div 
-                whileHover={{ scale: 1.02 }} 
+                whileHover={{ y: -2 }} 
                 whileTap={{ scale: 0.98 }}
                 transition={{ type: 'spring', stiffness: 400, damping: 25 }}
               >
@@ -757,41 +980,40 @@ export default function Hero() {
                   <Button
                     size="lg"
                     variant="outline"
-                    className="border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-white/5 hover:border-gray-400 dark:hover:border-gray-500 px-8 py-6 text-base sm:text-lg rounded-xl transition-all duration-200 font-medium bg-white/50 dark:bg-transparent backdrop-blur-sm group"
+                    className="border-2 border-green-primary/20 text-green-dark dark:text-white hover:bg-green-primary/5 hover:border-green-primary/40 px-8 py-6 text-base sm:text-lg rounded-xl transition-all duration-200 font-medium bg-white/60 dark:bg-white/5 backdrop-blur-sm group"
                   >
-                    <Play className="w-4 h-4 sm:w-5 sm:h-5 ml-2 text-green-primary" />
-                    تصفح القوالب
+                    <Play className="w-4 h-4 sm:w-5 sm:h-5 ml-2 text-green-primary group-hover:scale-110 transition-transform" />
+                    استكشف قوالبنا
                   </Button>
                 </Link>
               </motion.div>
             </motion.div>
-
-
           </div>
 
           {/* Right Side - Image Showcase */}
           <motion.div
             initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7, delay: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
-            className="order-1 lg:order-2 relative pb-16 lg:pb-20"
+            transition={{ duration: 0.7, delay: 0.2 }}
+            className="order-1 lg:order-2 relative"
           >
             {/* Subtle Glow Effect */}
-            <div className="absolute -inset-4 lg:-inset-8 bg-gradient-to-br from-green-primary/15 via-transparent to-green-teal/10 rounded-3xl blur-2xl opacity-60" />
+            <div className="absolute -inset-4 lg:-inset-8 bg-gradient-to-br from-green-primary/10 via-transparent to-green-teal/10 rounded-3xl blur-2xl opacity-60" />
             
             {/* Image Showcase Container */}
-            <div className="relative mx-auto lg:mx-0 max-w-[320px] sm:max-w-[380px] lg:max-w-[440px]">
+            <div className="relative mx-auto lg:mx-0 max-w-[300px] sm:max-w-[360px] lg:max-w-[420px]">
               <ImageShowcase />
             </div>
           </motion.div>
         </div>
+      </div>
 
-        {/* Stats Section - Simplified */}
+      {/* Stats Section - Fixed at bottom, never moves */}
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 py-8 lg:py-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="mt-12 lg:mt-16"
+          transition={{ duration: 0.6, delay: 0.5 }}
         >
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
             {stats.map((stat, index) => {
@@ -808,8 +1030,9 @@ export default function Hero() {
                   key={index}
                   initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.5 + index * 0.08 }}
-                  className="bg-white/60 dark:bg-white/5 rounded-xl p-4 border border-gray-200/50 dark:border-white/10 backdrop-blur-sm"
+                  transition={{ delay: 0.6 + index * 0.08 }}
+                  whileHover={{ y: -2 }}
+                  className="bg-white/70 dark:bg-white/5 rounded-xl p-4 border border-gray-200/50 dark:border-white/10 backdrop-blur-sm transition-all duration-200"
                 >
                   <div className="flex items-center gap-2 mb-2">
                     <Icon className={`w-4 h-4 ${iconColors[index]}`} />
@@ -824,7 +1047,6 @@ export default function Hero() {
           </div>
         </motion.div>
       </div>
-
     </section>
   );
 }
