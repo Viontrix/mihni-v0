@@ -26,7 +26,6 @@ import {
 import ExportGate from "@/components/ExportGate"
 import { ROUTES } from "@/lib/routes"
 import { createProject, getProjectById, updateProject } from "@/lib/supabase/projects"
-import { createProject, getProjectById, updateProject } from "@/lib/supabase/projects"
 import {
   ArrowRight,
   Award,
@@ -373,7 +372,7 @@ function formatDate(dateStr: string, useHijri: boolean, format: DateFormat): str
   const m = (date.getMonth() + 1).toString().padStart(2, "0")
   const y = date.getFullYear()
   const shortY = y.toString().slice(-2)
-  const months = ["يناير", "فبراير", "مارس", "أبريل", "مايو", "يونيو", "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"]
+  const months = ["يناير", "فبراير", "مار��", "أبريل", "مايو", "يونيو", "يوليو", "أغسطس", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"]
   const days = ["الأحد", "الإثنين", "الثلاثاء", "الأربعاء", "الخميس", "الجمعة", "السبت"]
 
   switch (format) {
@@ -932,7 +931,7 @@ export default function CertificateMakerPage() {
   }
 
   const loadTemplateFromURL = () => {
-    const url = window.prompt("أدخل رابط صورة التصميم:")
+    const url = window.prompt("أدخل رابط صورة التصمي��:")
     if (!url) return
     setCustomTemplateImage(url)
     setTemplateStyle("custom")
@@ -1439,7 +1438,7 @@ export default function CertificateMakerPage() {
           <div className="mx-auto max-w-4xl">
             <div className="mb-4 flex items-center justify-between rounded-xl border bg-white px-4 py-3 text-sm text-muted-foreground dark:bg-[#1B2D2B]">
               <span>اسم المشروع: <strong className="text-foreground">{buildProjectName(certificate)}</strong></span>
-              <Link href={ROUTES.DASHBOARD} className="text-green-primary hover:underline">العودة إلى لوحة التحكم</Link>
+              <Link href={ROUTES.DASHBOARD} className="text-green-primary hover:underline">العودة إلى لوحة الت��كم</Link>
             </div>
             <div className="flex justify-center">
               <motion.div ref={certRef} initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3 }} style={{ ...getTemplateStyles(), width: certWidth, height: certHeight, padding: "40px", display: "flex", flexDirection: "column", boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)" }}>
