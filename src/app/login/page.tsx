@@ -21,6 +21,16 @@ import { ROUTES } from '@/lib/routes';
 import { supabase, isSupabaseConfigured } from '@/lib/supabase/client';
 
 export default function LoginPage() {
+  const router = useRouter();
+  const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+    remember: false,
+  });
+
   // Show configuration message when Supabase is not set up
   if (!isSupabaseConfigured) {
     return (
@@ -49,15 +59,6 @@ export default function LoginPage() {
       </div>
     );
   }
-  const router = useRouter();
-  const [showPassword, setShowPassword] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
-  const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-    remember: false,
-  });
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -176,7 +177,7 @@ export default function LoginPage() {
                 <Input
                   id="password"
                   type={showPassword ? 'text' : 'password'}
-                  placeholder="••••••••"
+                  placeholder="********"
                   value={formData.password}
                   onChange={(e) => setFormData({ ...formData, password: e.target.value })}
                   className="pr-10 pl-12 h-12 bg-cream dark:bg-[#152B26] border-green-primary/20 focus:border-green-primary"
