@@ -679,50 +679,48 @@ const SchedulePreview = ({ data }: { data: typeof showcaseImages[4] }) => {
   );
 };
 
-// Floating icon badges — matches the reference design (4 corners, icon-only rounded squares)
-const SliderFloatingElements = () => (
-  <>
-    {/* Top-left: Star / purple */}
-    <motion.div
-      initial={{ opacity: 0, scale: 0.7 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ delay: 0.5, duration: 0.4, type: 'spring', stiffness: 200 }}
-      className="absolute -top-5 -left-5 z-20 w-12 h-12 rounded-2xl bg-[#9B59B6] flex items-center justify-center shadow-lg"
-    >
-      <Star className="w-6 h-6 text-white" fill="white" />
-    </motion.div>
-
-    {/* Top-right: Lightning / orange */}
-    <motion.div
-      initial={{ opacity: 0, scale: 0.7 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ delay: 0.6, duration: 0.4, type: 'spring', stiffness: 200 }}
-      className="absolute -top-5 -right-5 z-20 w-12 h-12 rounded-2xl bg-[#F39C12] flex items-center justify-center shadow-lg"
-    >
-      <Zap className="w-6 h-6 text-white" fill="white" />
-    </motion.div>
-
-    {/* Bottom-left: Download / teal-green */}
-    <motion.div
-      initial={{ opacity: 0, scale: 0.7 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ delay: 0.7, duration: 0.4, type: 'spring', stiffness: 200 }}
-      className="absolute -bottom-5 -left-5 z-20 w-12 h-12 rounded-2xl bg-[#27AE60] flex items-center justify-center shadow-lg"
-    >
-      <Download className="w-6 h-6 text-white" />
-    </motion.div>
-
-    {/* Bottom-right: Award / blue */}
-    <motion.div
-      initial={{ opacity: 0, scale: 0.7 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ delay: 0.8, duration: 0.4, type: 'spring', stiffness: 200 }}
-      className="absolute -bottom-5 -right-5 z-20 w-12 h-12 rounded-2xl bg-[#2980B9] flex items-center justify-center shadow-lg"
-    >
-      <Award className="w-6 h-6 text-white" />
-    </motion.div>
-  </>
-);
+// Floating Elements Component — original animated gradient icons
+const SliderFloatingElements = () => {
+  return (
+    <>
+      {/* Top Right - Lightning */}
+      <motion.div
+        className="absolute -top-3 sm:-top-4 lg:-top-5 -right-3 sm:-right-4 lg:-right-5 w-10 sm:w-12 lg:w-14 h-10 sm:h-12 lg:h-14 bg-gradient-to-br from-amber-400 to-orange-500 rounded-xl lg:rounded-2xl flex items-center justify-center shadow-xl z-30"
+        animate={{ y: [-8, 8, -8], rotate: [0, 8, -8, 0] }}
+        transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+      >
+        <Zap className="w-5 sm:w-6 lg:w-7 h-5 sm:h-6 lg:h-7 text-white" />
+      </motion.div>
+      
+      {/* Top Left - Star */}
+      <motion.div
+        className="absolute -top-3 sm:-top-4 lg:-top-5 -left-3 sm:-left-4 lg:-left-5 w-9 sm:w-10 lg:w-12 h-9 sm:h-10 lg:h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg lg:rounded-xl flex items-center justify-center shadow-xl z-30"
+        animate={{ y: [6, -6, 6], rotate: [0, -10, 10, 0] }}
+        transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
+      >
+        <Star className="w-4 sm:w-5 lg:w-6 h-4 sm:h-5 lg:h-6 text-white" />
+      </motion.div>
+      
+      {/* Bottom Left - Download */}
+      <motion.div
+        className="absolute -bottom-3 sm:-bottom-4 lg:-bottom-5 -left-3 sm:-left-4 lg:-left-5 w-9 sm:w-10 lg:w-12 h-9 sm:h-10 lg:h-12 bg-gradient-to-br from-green-primary to-green-teal rounded-lg lg:rounded-xl flex items-center justify-center shadow-xl z-30"
+        animate={{ y: [8, -8, 8] }}
+        transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+      >
+        <Download className="w-4 sm:w-5 lg:w-6 h-4 sm:h-5 lg:h-6 text-white" />
+      </motion.div>
+      
+      {/* Bottom Right - Award */}
+      <motion.div
+        className="absolute -bottom-3 sm:-bottom-4 lg:-bottom-5 -right-3 sm:-right-4 lg:-right-5 w-10 sm:w-11 lg:w-12 h-10 sm:h-11 lg:h-12 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl lg:rounded-2xl flex items-center justify-center shadow-xl z-30"
+        animate={{ y: [-6, 6, -6], scale: [1, 1.05, 1] }}
+        transition={{ duration: 3.2, repeat: Infinity, ease: 'easeInOut' }}
+      >
+        <Award className="w-5 sm:w-5 lg:w-6 h-5 sm:h-5 lg:h-6 text-white" />
+      </motion.div>
+    </>
+  );
+};
 
 // Main Showcase Component
 const ImageShowcase = () => {
@@ -932,9 +930,6 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.3 }}
             className="w-full lg:w-[480px] xl:w-[500px] flex-shrink-0 relative self-center"
           >
-            {/* Subtle glow — reduced opacity */}
-            <div className="absolute -inset-2 bg-gradient-to-br from-green-primary/10 via-green-teal/10 to-green-light/8 rounded-2xl blur-xl opacity-70 pointer-events-none" />
-
             {/* Floating elements anchored to slider */}
             <SliderFloatingElements />
             
