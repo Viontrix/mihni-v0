@@ -151,7 +151,7 @@ export default function PerformanceAnalyzerPage() {
           return
         }
 
-        const rawContent = project.content as SavedPerformanceAnalyzerData | string | null
+        const rawContent = project.data as SavedPerformanceAnalyzerData | string | null
         const content: SavedPerformanceAnalyzerData =
           typeof rawContent === "string"
             ? JSON.parse(rawContent)
