@@ -40,7 +40,7 @@ const showcaseImages = [
 const FloatingParticles = () => {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {[...Array(15)].map((_, i) => (
+      {Array.from({ length: 15 }).map((_, i) => (
         <motion.div
           key={i}
           className="absolute w-1.5 h-1.5 rounded-full bg-green-primary/30"
