@@ -119,9 +119,9 @@ export default function HowItWorks() {
             {/* Background line */}
             <div className="absolute top-4 left-0 right-0 h-0.5 bg-gray-200 dark:bg-gray-700/50 rounded-full" />
             
-            {/* Animated progress line */}
+            {/* Animated progress line - RTL (right to left) */}
             <motion.div 
-              className="absolute top-4 left-0 h-0.5 bg-gradient-to-r from-green-primary via-green-teal to-cyan-400 rounded-full"
+              className="absolute top-4 right-0 h-0.5 bg-gradient-to-l from-green-primary via-green-teal to-cyan-400 rounded-full"
               initial={{ width: '0%' }}
               animate={{ width: isInView ? `${Math.max(0, ((activeStep + 1) / steps.length) * 100)}%` : '0%' }}
               transition={{ duration: 0.8, ease: 'easeOut' }}
@@ -154,13 +154,13 @@ export default function HowItWorks() {
                             initial={{ opacity: 0, scale: 0.5 }}
                             animate={{ opacity: 1, scale: 1 }}
                             exit={{ opacity: 0, scale: 0.5 }}
-                            className="absolute inset-0 w-9 h-9 -top-0.5 -left-0.5 rounded-full bg-green-primary/30 blur-md"
+                            className="absolute inset-0 w-11 h-11 -top-1 -left-1 rounded-full bg-green-primary/30 blur-md"
                           />
                         )}
                       </AnimatePresence>
                       
                       <motion.div 
-                        className="relative w-8 h-8 rounded-full border-[3px] border-white dark:border-[#0F1F1D] flex items-center justify-center z-10"
+                        className="relative w-10 h-10 rounded-full border-[3px] border-white dark:border-[#0F1F1D] flex items-center justify-center z-10"
                         animate={{
                           backgroundColor: isActive ? 'rgb(45, 106, 79)' : 'rgb(229, 231, 235)',
                         }}
@@ -175,14 +175,14 @@ export default function HowItWorks() {
                               exit={{ scale: 0 }}
                               transition={{ type: 'spring', stiffness: 300, damping: 20 }}
                             >
-                              <Check className="w-4 h-4 text-white" strokeWidth={3} />
+                              <Check className="w-5 h-5 text-white" strokeWidth={3} />
                             </motion.div>
                           ) : (
                             <motion.span
                               key="number"
                               initial={{ opacity: 0 }}
                               animate={{ opacity: 1 }}
-                              className="text-[10px] font-bold text-gray-400"
+                              className="text-xs font-bold text-gray-400"
                             >
                               {step.number}
                             </motion.span>
@@ -191,9 +191,9 @@ export default function HowItWorks() {
                       </motion.div>
                     </motion.div>
 
-                    {/* Step number label */}
+                    {/* Step number label - Larger size */}
                     <motion.span
-                      className="mt-3 text-xs font-bold tracking-wider text-gray-400 dark:text-gray-500"
+                      className="mt-3 text-sm font-bold tracking-wider text-gray-400 dark:text-gray-500"
                       animate={{ 
                         color: isActive ? 'rgb(45, 106, 79)' : 'rgb(156, 163, 175)',
                       }}
@@ -206,7 +206,7 @@ export default function HowItWorks() {
             </div>
           </div>
 
-          {/* Steps Grid */}
+          {/* Steps Grid - RTL: step 01 on the right, 04 on the left */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6 lg:pt-16">
             {steps.map((step, index) => {
               const Icon = step.icon;
