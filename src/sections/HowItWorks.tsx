@@ -60,7 +60,7 @@ export default function HowItWorks() {
   }, [isInView, activeStep]);
 
   return (
-    <section id="how-it-works" className="py-20 sm:py-24 lg:py-32 bg-gradient-to-b from-gray-50 via-white to-gray-50 dark:from-[#0D1B1A] dark:via-[#0F1F1D] dark:to-[#0D1B1A] relative overflow-hidden">
+    <section id="how-it-works" className="py-8 sm:py-10 lg:py-12 min-h-screen flex flex-col justify-center bg-gradient-to-b from-gray-50 via-white to-gray-50 dark:from-[#0D1B1A] dark:via-[#0F1F1D] dark:to-[#0D1B1A] relative overflow-hidden">
       {/* Premium background effects */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 left-1/4 w-[500px] h-[500px] bg-green-primary/5 rounded-full blur-[150px]" />
@@ -75,14 +75,14 @@ export default function HowItWorks() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="text-center mb-16 lg:mb-20"
+          className="text-center mb-6 lg:mb-8"
         >
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="inline-block mb-6"
+            className="inline-block mb-3"
           >
             <motion.span 
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-green-primary/10 to-cyan-400/10 border border-green-primary/20 text-green-primary dark:text-green-light text-sm font-semibold backdrop-blur-sm"
@@ -102,7 +102,7 @@ export default function HowItWorks() {
             </motion.span>
           </motion.div>
           
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-green-dark dark:text-white mb-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-green-dark dark:text-white mb-2">
             أربع خطوات
             <span className="bg-gradient-to-r from-green-primary via-green-teal to-cyan-400 bg-clip-text text-transparent"> للبدء</span>
           </h2>
@@ -113,7 +113,7 @@ export default function HowItWorks() {
         </motion.div>
 
         {/* Steps Container */}
-        <div ref={ref} className="relative pt-16 lg:pt-20">
+        <div ref={ref} className="relative pt-10 lg:pt-12">
           {/* Timeline - Desktop */}
           <div className="hidden lg:block absolute top-0 left-[12%] right-[12%]">
             {/* Background line */}
@@ -193,7 +193,7 @@ export default function HowItWorks() {
           </div>
 
           {/* Steps Grid - RTL: step 01 on the right, 04 on the left */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6 lg:pt-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5 lg:pt-10">
             {steps.map((step, index) => {
               const Icon = step.icon;
               const isActive = index <= activeStep;
@@ -220,7 +220,7 @@ export default function HowItWorks() {
                 >
                   {/* Card */}
                   <motion.div 
-                    className="relative p-6 sm:p-7 rounded-3xl border border-gray-200/80 dark:border-gray-700/50 bg-white/80 dark:bg-[#1B2D2B]/60 backdrop-blur-xl shadow-sm overflow-hidden h-full"
+                    className="relative p-4 sm:p-5 rounded-3xl border border-gray-200/80 dark:border-gray-700/50 bg-white/80 dark:bg-[#1B2D2B]/60 backdrop-blur-xl shadow-sm overflow-hidden h-full"
                     animate={{
                       borderColor: isActive || isHovered ? 'rgba(45, 106, 79, 0.5)' : 'rgba(229, 231, 235, 0.8)',
                       y: isHovered ? -10 : 0,
@@ -246,7 +246,7 @@ export default function HowItWorks() {
                     <div className="relative z-10">
                       {/* Icon with floating animation */}
                       <motion.div 
-                        className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${step.color} flex items-center justify-center mb-5 shadow-lg`}
+                        className={`w-11 h-11 rounded-xl bg-gradient-to-br ${step.color} flex items-center justify-center mb-3 shadow-lg`}
                         initial={{ scale: 0, rotate: -20 }}
                         animate={isInView ? { 
                           scale: 1,
@@ -324,9 +324,9 @@ export default function HowItWorks() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="mt-16 lg:mt-24"
+          className="mt-6 lg:mt-8"
         >
-          <div className="relative bg-gradient-to-br from-green-primary via-green-teal to-emerald-600 rounded-[2rem] p-8 sm:p-10 lg:p-14 text-white text-center overflow-hidden">
+          <div className="relative bg-gradient-to-br from-green-primary via-green-teal to-emerald-600 rounded-[2rem] p-5 sm:p-6 lg:p-8 text-white text-center overflow-hidden">
             {/* Animated background decorations */}
             <div className="absolute inset-0 overflow-hidden">
               <motion.div 
@@ -354,7 +354,7 @@ export default function HowItWorks() {
             
             <div className="relative z-10">
               <motion.h3 
-                className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3"
+                className="text-xl sm:text-2xl lg:text-3xl font-bold mb-2"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -363,7 +363,7 @@ export default function HowItWorks() {
                 جاهز للبدء؟
               </motion.h3>
               <motion.p 
-                className="text-white/80 mb-8 max-w-md mx-auto text-base sm:text-lg"
+                className="text-white/80 mb-4 max-w-md mx-auto text-sm sm:text-base"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -379,7 +379,7 @@ export default function HowItWorks() {
                 transition={{ delay: 0.4 }}
                 whileHover={{ scale: 1.05, boxShadow: '0 20px 40px rgba(0, 0, 0, 0.2)' }}
                 whileTap={{ scale: 0.98 }}
-                className="inline-flex items-center gap-3 px-8 sm:px-10 py-4 sm:py-5 bg-white text-green-primary rounded-2xl font-bold shadow-xl hover:shadow-2xl transition-all text-base sm:text-lg"
+                className="inline-flex items-center gap-2 px-6 sm:px-8 py-3 bg-white text-green-primary rounded-2xl font-bold shadow-xl hover:shadow-2xl transition-all text-sm sm:text-base"
               >
                 ابدأ مجاناً
                 <motion.span
