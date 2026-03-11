@@ -423,7 +423,7 @@ const DashboardPreview = ({ data }: { data: typeof showcaseImages[0] }) => {
 // Certificate Preview Component
 const CertificatePreview = ({ data }: { data: typeof showcaseImages[1] }) => {
   return (
-    <AppFrame title="منشئ ال������هادات" icon={Award} iconColor="text-amber-500">
+    <AppFrame title="منشئ ال��������هادات" icon={Award} iconColor="text-amber-500">
       <div className="p-4 sm:p-5">
         {/* Toolbar */}
         <div className="flex items-center justify-between mb-3">
@@ -1224,7 +1224,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="mb-6"
+              className="mb-8"
             >
               <motion.span 
                 className="inline-flex items-center gap-2 text-green-primary dark:text-green-light text-xs sm:text-sm font-bold tracking-wide"
@@ -1240,7 +1240,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.08 }}
-              className="mb-8"
+              className="mb-10"
             >
               <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-extrabold leading-[1.15] tracking-tight">
                 <span className="text-green-dark dark:text-white lg:inline block">
@@ -1257,12 +1257,12 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.12 }}
-              className="mb-8"
+              className="mb-10"
             >
-              <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed max-w-lg mx-auto lg:mx-0">
-                منصة رقمية سعودية تمكّنك من إنجاز أعمالك بسرعة واحترافية
+              <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-[1.8] max-w-2xl mx-auto lg:mx-0">
+                منصة رقمية سعودية تمكّنك من إنجاز أعمالك
                 <br />
-                باستخدام قوالب جاهزة
+                بسرعة واحترافية باستخدام قوالب جاهزة
                 <br />
                 وأدوات ذكية سهلة الاستخدام.
               </p>
@@ -1273,9 +1273,9 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.16 }}
-              className="mb-7"
+              className="mb-10"
             >
-              <p className="text-sm text-gray-500 dark:text-gray-400 font-medium">
+              <p className="text-sm text-gray-500 dark:text-gray-400 font-medium tracking-wide">
                 مدارس • جهات • شركات • أفراد • استخدام مخصص
               </p>
             </motion.div>
@@ -1285,9 +1285,9 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="mb-10 text-xs text-gray-500 dark:text-gray-400"
+              className="mb-14"
             >
-              <p>
+              <p className="text-xs text-gray-500 dark:text-gray-400 font-normal tracking-normal">
                 تخصيص سهل • تصدير فوري • وفر الوقت
               </p>
             </motion.div>
@@ -1301,32 +1301,32 @@ export default function Hero() {
             >
               {/* Primary Button */}
               <motion.div 
-                whileHover={{ y: -2 }} 
-                whileTap={{ scale: 0.98 }}
+                whileHover={{ y: -3 }} 
+                whileTap={{ scale: 0.97 }}
                 transition={{ type: 'spring', stiffness: 400, damping: 17 }}
               >
                 <Link href={ROUTES.START}>
                   <Button
                     size="lg"
-                    className="bg-gradient-to-r from-green-primary to-green-teal text-white px-8 py-3 sm:py-2.5 text-base font-semibold rounded-lg shadow-[0_4px_12px_rgba(45,106,79,0.2)] dark:shadow-[0_4px_12px_rgba(45,106,79,0.3)] hover:shadow-[0_8px_20px_rgba(45,106,79,0.3)] dark:hover:shadow-[0_8px_20px_rgba(45,106,79,0.4)] transition-all duration-300 group h-auto"
+                    className="bg-gradient-to-r from-green-primary to-green-teal text-white px-8 py-3 sm:py-3 text-base font-semibold rounded-lg shadow-[0_4px_16px_rgba(45,106,79,0.25)] dark:shadow-[0_4px_16px_rgba(45,106,79,0.35)] hover:shadow-[0_12px_28px_rgba(45,106,79,0.35)] dark:hover:shadow-[0_12px_28px_rgba(45,106,79,0.45)] transition-all duration-300 group h-auto"
                   >
                     ابدأ مجانًا
-                    <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform duration-300" />
+                    <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1.5 transition-transform duration-300" />
                   </Button>
                 </Link>
               </motion.div>
               
               {/* Secondary Button */}
               <motion.div 
-                whileHover={{ y: -2 }} 
-                whileTap={{ scale: 0.98 }}
+                whileHover={{ y: -3 }} 
+                whileTap={{ scale: 0.97 }}
                 transition={{ type: 'spring', stiffness: 400, damping: 17 }}
               >
                 <Link href={getHomeSectionUrl('templates')}>
                   <Button
                     size="lg"
                     variant="outline"
-                    className="border-2 border-green-primary/50 text-green-dark dark:text-green-light bg-transparent hover:bg-green-primary/8 hover:border-green-primary/80 px-8 py-3 sm:py-2.5 text-base font-semibold rounded-lg transition-all duration-300 group h-auto"
+                    className="border-2 border-green-primary/40 text-green-dark dark:text-green-light bg-white/50 dark:bg-[#1B2D2B]/40 hover:bg-green-primary/10 hover:border-green-primary/80 px-8 py-3 sm:py-3 text-base font-semibold rounded-lg transition-all duration-300 group h-auto backdrop-blur-sm"
                   >
                     <Play className="w-4 h-4 mr-2" />
                     استكشف القوالب

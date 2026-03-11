@@ -762,7 +762,7 @@ export default function CertificateMakerPage() {
     generatorType: generatorType as GeneratorType,
     customTitle,
     customDescription,
-    uploadedFile: uploadedFile ?? null,
+    uploadedFile: null, // File objects can't be serialized; image data is in customTemplateImage
     orientation,
     templateStyle,
     selectedPaletteId: selectedPalette.id,
