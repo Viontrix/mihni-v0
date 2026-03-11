@@ -787,7 +787,7 @@ export default function CertificateMakerPage() {
       setGeneratorType((payload.generatorType ?? "school") as GeneratorType)
       setCustomTitle(payload.customTitle ?? "")
       setCustomDescription(payload.customDescription ?? "")
-      setUploadedFile(payload.uploadedFile ?? null)
+      setUploadedFile(null)
       setLoadedProjectId(project.id)
       setHasLoadedProject(true)
       setIsLoadingProject(false)
