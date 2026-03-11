@@ -818,28 +818,28 @@ const ImageShowcase = () => {
 
   return (
     <div className="relative flex flex-col">
+      {/* Category Badge — outside slider */}
+      <motion.div
+        key={`category-${currentData.id}`}
+        initial={{ opacity: 0, x: -10 }}
+        animate={{ opacity: 1, x: 0 }}
+        exit={{ opacity: 0, x: -10 }}
+        transition={{ duration: 0.3 }}
+        className="mb-2"
+      >
+        <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 bg-gradient-to-r ${currentData.categoryColor} rounded-lg text-xs font-semibold text-white`}>
+          <div className="w-1.5 h-1.5 rounded-full bg-white/70" />
+          {currentData.category}
+        </span>
+      </motion.div>
+
       {/* Fixed-height slide area — no slide can grow beyond this */}
       <div className="relative overflow-hidden" style={{ height: '420px' }}>
         <AnimatePresence mode="wait">
           {renderPreview()}
         </AnimatePresence>
-        
-        {/* Category Badge Overlay */}
-        <motion.div
-          key={currentData.id}
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -10 }}
-          transition={{ duration: 0.3 }}
-          className="absolute top-4 right-4 z-20"
-        >
-          <div className={`inline-flex items-center gap-2 px-3 py-1.5 bg-gradient-to-r ${currentData.categoryColor} rounded-full shadow-lg`}>
-            <div className="w-2 h-2 rounded-full bg-white/70" />
-            <span className="text-xs font-semibold text-white">{currentData.category}</span>
-          </div>
-        </motion.div>
 
-        {/* Tool Title Overlay */}
+        {/* Tool Title Overlay — title only, no category */}
         <motion.div
           key={`title-${currentData.id}`}
           initial={{ opacity: 0, y: 10 }}
