@@ -537,7 +537,7 @@ export default function Tools() {
           animate={isInView ? 'visible' : 'hidden'}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
         >
-          {tools.map((tool) => {
+          {tools.slice(0, 6).map((tool) => {
             const Icon = tool.icon;
             return (
               <motion.div
