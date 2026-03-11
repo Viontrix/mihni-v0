@@ -105,16 +105,34 @@ const showcaseImages = [
   },
 ];
 
-// Floating particles
+// Floating particles - using fixed positions to avoid hydration mismatch
+const particlePositions = [
+  { x: 5, duration: 12, delay: 0.5 },
+  { x: 15, duration: 14, delay: 1.2 },
+  { x: 25, duration: 10, delay: 2.1 },
+  { x: 35, duration: 16, delay: 0.8 },
+  { x: 45, duration: 11, delay: 3.2 },
+  { x: 55, duration: 13, delay: 1.5 },
+  { x: 65, duration: 15, delay: 2.8 },
+  { x: 75, duration: 9, delay: 0.3 },
+  { x: 85, duration: 12, delay: 4.1 },
+  { x: 95, duration: 14, delay: 1.9 },
+  { x: 10, duration: 11, delay: 3.5 },
+  { x: 30, duration: 13, delay: 2.4 },
+  { x: 50, duration: 15, delay: 0.7 },
+  { x: 70, duration: 10, delay: 4.8 },
+  { x: 90, duration: 12, delay: 1.1 },
+];
+
 const FloatingParticles = () => {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {Array.from({ length: 15 }).map((_, i) => (
+      {particlePositions.map((particle, i) => (
         <motion.div
           key={i}
           className="absolute w-1.5 h-1.5 rounded-full bg-green-primary/30"
           initial={{ 
-            x: Math.random() * 100 + '%', 
+            x: `${particle.x}%`, 
             y: '110%',
             opacity: 0 
           }}
@@ -123,9 +141,9 @@ const FloatingParticles = () => {
             opacity: [0, 1, 0]
           }}
           transition={{ 
-            duration: Math.random() * 8 + 8,
+            duration: particle.duration,
             repeat: Infinity,
-            delay: Math.random() * 5,
+            delay: particle.delay,
             ease: 'linear'
           }}
         />
