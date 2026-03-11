@@ -27,6 +27,8 @@ const showcaseImages = [
   {
     id: 1,
     title: 'لوحة التحكم الذكية',
+    category: 'للشركات',
+    categoryColor: 'from-blue-500 to-blue-600',
     description: 'تابع إنجازاتك وإحصائياتك في مكان واحد',
     color: 'from-green-500 to-emerald-600',
     icon: TrendingUp,
@@ -43,6 +45,8 @@ const showcaseImages = [
   {
     id: 2,
     title: 'منشئ الشهادات الاحترافي',
+    category: 'للمدارس',
+    categoryColor: 'from-amber-500 to-amber-600',
     description: 'صمم شهاداتك بخطوات بسيطة وسهلة',
     color: 'from-amber-500 to-orange-600',
     icon: Award,
@@ -55,22 +59,9 @@ const showcaseImages = [
   },
   {
     id: 3,
-    title: 'حاسبة الدرجات الذكية',
-    description: 'احسب درجات طلابك بسرعة ودقة',
-    color: 'from-blue-500 to-cyan-600',
-    icon: Calculator,
-    preview: {
-      subjects: [
-        { name: 'الرياضيات', score: 95, total: 100 },
-        { name: 'العلوم', score: 88, total: 100 },
-        { name: 'اللغة العربية', score: 92, total: 100 },
-      ],
-      average: '91.7%'
-    }
-  },
-  {
-    id: 4,
     title: 'مولد الاختبارات',
+    category: 'للمدارس',
+    categoryColor: 'from-purple-500 to-purple-600',
     description: 'أنشئ اختبارات متنوعة في ثوانٍ',
     color: 'from-purple-500 to-pink-600',
     icon: FileText,
@@ -84,8 +75,57 @@ const showcaseImages = [
     }
   },
   {
+    id: 4,
+    title: 'محرر التقارير',
+    category: 'للجهات',
+    categoryColor: 'from-green-500 to-green-600',
+    description: 'أنشئ تقارير احترافية بسهولة',
+    color: 'from-blue-500 to-cyan-600',
+    icon: FileText,
+    preview: {
+      questions: [
+        { type: 'اختيار من متعدد', count: 10 },
+        { type: 'صح أو خطأ', count: 5 },
+        { type: 'مقالي', count: 3 },
+      ],
+      total: '18 سؤال'
+    }
+  },
+  {
     id: 5,
+    title: 'نماذج التقييم',
+    category: 'للجهات',
+    categoryColor: 'from-rose-500 to-rose-600',
+    description: 'قيّم الأداء بطريقة منظمة وعادلة',
+    color: 'from-teal-500 to-emerald-600',
+    icon: Calendar,
+    preview: {
+      days: ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس'],
+      classes: ['رياضيات', 'علوم', 'عربي', 'إنجليزي', 'فنية']
+    }
+  },
+  {
+    id: 6,
+    title: 'حاسبة الدرجات الذكية',
+    category: 'للأفراد',
+    categoryColor: 'from-cyan-500 to-cyan-600',
+    description: 'احسب درجات طلابك بسرعة ودقة',
+    color: 'from-blue-500 to-cyan-600',
+    icon: Calculator,
+    preview: {
+      subjects: [
+        { name: 'الرياضيات', score: 95, total: 100 },
+        { name: 'العلوم', score: 88, total: 100 },
+        { name: 'اللغة العربية', score: 92, total: 100 },
+      ],
+      average: '91.7%'
+    }
+  },
+  {
+    id: 7,
     title: 'بناء الجداول الدراسية',
+    category: 'مخصص',
+    categoryColor: 'from-indigo-500 to-indigo-600',
     description: 'نظم جداولك الأسبوعية بسهولة',
     color: 'from-teal-500 to-emerald-600',
     icon: Calendar,
@@ -93,6 +133,24 @@ const showcaseImages = [
       days: ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس'],
       classes: ['رياضيات', 'علوم', 'عربي', 'إنجليزي', 'فنية']
     }
+  },
+  {
+    id: 8,
+    title: 'مكتبة الأدوات',
+    category: 'للجميع',
+    categoryColor: 'from-gray-500 to-gray-600',
+    description: 'استكشف جميع الأدوات والقوالب المتاحة',
+    color: 'from-green-500 to-emerald-600',
+    icon: TrendingUp,
+    stats: [
+      { label: 'قالب مستخدم', value: '24', color: 'bg-blue-100 text-blue-600' },
+      { label: 'شهادة منشأة', value: '156', color: 'bg-amber-100 text-amber-600' },
+      { label: 'معدل الاستخدام', value: '89%', color: 'bg-green-100 text-green-600' },
+    ],
+    activities: [
+      { name: 'شهادة تقدير', time: 'منذ ساعة', icon: Award },
+      { name: 'تقرير تقييم', time: 'منذ 3 ساعات', icon: FileText },
+    ]
   }
 ];
 
@@ -742,11 +800,17 @@ const ImageShowcase = () => {
       case 2:
         return <CertificatePreview data={currentData} />;
       case 3:
-        return <CalculatorPreview data={currentData} />;
+        return <QuizPreview data={currentData} />;
       case 4:
         return <QuizPreview data={currentData} />;
       case 5:
         return <SchedulePreview data={currentData} />;
+      case 6:
+        return <CalculatorPreview data={currentData} />;
+      case 7:
+        return <SchedulePreview data={currentData} />;
+      case 8:
+        return <DashboardPreview data={currentData} />;
       default:
         return <DashboardPreview data={currentData} />;
     }
@@ -759,6 +823,38 @@ const ImageShowcase = () => {
         <AnimatePresence mode="wait">
           {renderPreview()}
         </AnimatePresence>
+        
+        {/* Category Badge Overlay */}
+        <motion.div
+          key={currentData.id}
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -10 }}
+          transition={{ duration: 0.3 }}
+          className="absolute top-4 right-4 z-20"
+        >
+          <div className={`inline-flex items-center gap-2 px-3 py-1.5 bg-gradient-to-r ${currentData.categoryColor} rounded-full shadow-lg`}>
+            <div className="w-2 h-2 rounded-full bg-white/70" />
+            <span className="text-xs font-semibold text-white">{currentData.category}</span>
+          </div>
+        </motion.div>
+
+        {/* Tool Title Overlay */}
+        <motion.div
+          key={`title-${currentData.id}`}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: 10 }}
+          transition={{ duration: 0.3, delay: 0.1 }}
+          className="absolute bottom-4 right-4 z-20 max-w-xs"
+        >
+          <h3 className="text-sm sm:text-base font-bold text-gray-900 dark:text-white mb-1">
+            {currentData.title}
+          </h3>
+          <p className="text-xs text-gray-600 dark:text-gray-300 line-clamp-2">
+            {currentData.description}
+          </p>
+        </motion.div>
       </div>
 
       {/* Navigation Dots */}
@@ -850,23 +946,51 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="mb-8"
+              className="mb-6"
             >
               <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300 leading-[1.7] tracking-wide">
                 <span className="text-green-primary font-bold">وفّر وقتك</span> وأنجز عملك باحترافية
                 <br className="hidden sm:block" />
                 مع <span className="font-semibold">قوالب جاهزة</span> وأدوات تنفيذية متكاملة
               </p>
-              <p className="text-sm text-gray-500 dark:text-gray-400 mt-3 leading-relaxed">
-                شهادات • تقييمات • خطط • تقارير • اختبارات • جداول
+              
+              {/* Target Audience Description */}
+              <p className="text-sm text-gray-500 dark:text-gray-400 mt-4 leading-relaxed">
+                منصة رقمية تساعد المدارس والجهات والشركات والأفراد على إنجاز أعمالهم بسرعة واحترافية باستخدام قوالب جاهزة وأدوات ذكية.
               </p>
+            </motion.div>
+
+            {/* Target Audience Chips */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.25 }}
+              className="flex flex-wrap justify-center lg:justify-start gap-2 mb-8"
+            >
+              {[
+                { label: 'المدارس', color: 'from-amber-500 to-amber-600' },
+                { label: 'الجهات', color: 'from-green-500 to-green-600' },
+                { label: 'الشركات', color: 'from-blue-500 to-blue-600' },
+                { label: 'الأفراد', color: 'from-purple-500 to-purple-600' },
+                { label: 'استخدام مخصص', color: 'from-indigo-500 to-indigo-600' },
+              ].map((audience, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, scale: 0.85 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.35 + i * 0.08 }}
+                  className={`px-4 py-2 rounded-full text-sm font-semibold text-white bg-gradient-to-r ${audience.color} shadow-lg hover:shadow-xl transition-all transform hover:scale-105`}
+                >
+                  {audience.label}
+                </motion.div>
+              ))}
             </motion.div>
 
             {/* Features List */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.25 }}
+              transition={{ duration: 0.6, delay: 0.3 }}
               className="flex flex-wrap justify-center lg:justify-start gap-2.5 mb-9"
             >
               {[
