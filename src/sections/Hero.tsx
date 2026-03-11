@@ -24,134 +24,16 @@ import {
 
 // صور العرض المتغيرة (محاكاة للوحة التحكم والأدوات)
 const showcaseImages = [
-  {
-    id: 1,
-    title: 'لوحة التحكم الذكية',
-    category: 'للشركات',
-    categoryColor: 'from-blue-500 to-blue-600',
-    description: 'تابع إنجازاتك وإحصائياتك في مكان واحد',
-    color: 'from-green-500 to-emerald-600',
-    icon: TrendingUp,
-    stats: [
-      { label: 'قالب مستخدم', value: '24', color: 'bg-blue-100 text-blue-600' },
-      { label: 'شهادة منشأة', value: '156', color: 'bg-amber-100 text-amber-600' },
-      { label: 'معدل الاستخدام', value: '89%', color: 'bg-green-100 text-green-600' },
-    ],
-    activities: [
-      { name: 'شهادة تقدير', time: 'منذ ساعة', icon: Award },
-      { name: 'تقرير تقييم', time: 'منذ 3 ساعات', icon: FileText },
-    ]
-  },
-  {
-    id: 2,
-    title: 'منشئ الشهادات الاحترافي',
-    category: 'للمدارس',
-    categoryColor: 'from-amber-500 to-amber-600',
-    description: 'صمم شهاداتك بخطوات بسيطة وسهلة',
-    color: 'from-amber-500 to-orange-600',
-    icon: Award,
-    preview: {
-      title: 'شهادة تقدير',
-      subtitle: 'تقديراً للجهود المتميزة',
-      recipient: 'اسم المكرم',
-      date: '2026-02-20'
-    }
-  },
-  {
-    id: 3,
-    title: 'مولد الاختبارات',
-    category: 'للمدارس',
-    categoryColor: 'from-purple-500 to-purple-600',
-    description: 'أنشئ اختبارات متنوعة في ثوانٍ',
-    color: 'from-purple-500 to-pink-600',
-    icon: FileText,
-    preview: {
-      questions: [
-        { type: 'اختيار من متعدد', count: 10 },
-        { type: 'صح أو خطأ', count: 5 },
-        { type: 'مقالي', count: 3 },
-      ],
-      total: '18 سؤال'
-    }
-  },
-  {
-    id: 4,
-    title: 'محرر التقارير',
-    category: 'للجهات',
-    categoryColor: 'from-green-500 to-green-600',
-    description: 'أنشئ تقارير احترافية بسهولة',
-    color: 'from-blue-500 to-cyan-600',
-    icon: FileText,
-    preview: {
-      questions: [
-        { type: 'اختيار من متعدد', count: 10 },
-        { type: 'صح أو خطأ', count: 5 },
-        { type: 'مقالي', count: 3 },
-      ],
-      total: '18 سؤال'
-    }
-  },
-  {
-    id: 5,
-    title: 'نماذج التقييم',
-    category: 'للجهات',
-    categoryColor: 'from-rose-500 to-rose-600',
-    description: 'قيّم الأداء بطريقة منظمة وعادلة',
-    color: 'from-teal-500 to-emerald-600',
-    icon: Calendar,
-    preview: {
-      days: ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس'],
-      classes: ['رياضيات', 'علوم', 'عربي', 'إنجليزي', 'فنية']
-    }
-  },
-  {
-    id: 6,
-    title: 'حاسبة الدرجات الذكية',
-    category: 'للأفراد',
-    categoryColor: 'from-cyan-500 to-cyan-600',
-    description: 'احسب درجات طلابك بسرعة ودقة',
-    color: 'from-blue-500 to-cyan-600',
-    icon: Calculator,
-    preview: {
-      subjects: [
-        { name: 'الرياضيات', score: 95, total: 100 },
-        { name: 'العلوم', score: 88, total: 100 },
-        { name: 'اللغة العربية', score: 92, total: 100 },
-      ],
-      average: '91.7%'
-    }
-  },
-  {
-    id: 7,
-    title: 'بناء الجداول الدراسية',
-    category: 'مخصص',
-    categoryColor: 'from-indigo-500 to-indigo-600',
-    description: 'نظم جداولك الأسبوعية بسهولة',
-    color: 'from-teal-500 to-emerald-600',
-    icon: Calendar,
-    preview: {
-      days: ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس'],
-      classes: ['رياضيات', 'علوم', 'عربي', 'إنجليزي', 'فنية']
-    }
-  },
-  {
-    id: 8,
-    title: 'مكتبة الأدوات',
-    category: 'للجميع',
-    categoryColor: 'from-gray-500 to-gray-600',
-    description: 'استكشف جميع الأدوات والقوالب المتاحة',
-    color: 'from-green-500 to-emerald-600',
-    icon: TrendingUp,
-    stats: [
-      { label: 'قالب مستخدم', value: '24', color: 'bg-blue-100 text-blue-600' },
-      { label: 'شهادة منشأة', value: '156', color: 'bg-amber-100 text-amber-600' },
-      { label: 'معدل الاستخدام', value: '89%', color: 'bg-green-100 text-green-600' },
-    ],
-    activities: [
-      { name: 'شهادة تقدير', time: 'منذ ساعة', icon: Award },
-      { name: 'تقرير تقييم', time: 'منذ 3 ساعات', icon: FileText },
-    ]
-  }
+  { id: 1, title: 'منشئ الشهادات', color: 'from-amber-500 to-orange-600', icon: Award, type: 'certificate' },
+  { id: 2, title: 'مولد الاختبارات', color: 'from-purple-500 to-pink-600', icon: FileText, type: 'quiz' },
+  { id: 3, title: 'منشئ الاستبانات', color: 'from-blue-500 to-cyan-600', icon: FileText, type: 'survey' },
+  { id: 4, title: 'محرر التقارير', color: 'from-green-500 to-emerald-600', icon: FileText, type: 'report' },
+  { id: 5, title: 'منشئ الجداول', color: 'from-indigo-500 to-blue-600', icon: Calendar, type: 'schedule' },
+  { id: 6, title: 'منشئ العروض', color: 'from-rose-500 to-pink-600', icon: Play, type: 'presentation' },
+  { id: 7, title: 'القوالب الجاهزة', color: 'from-teal-500 to-emerald-600', icon: TrendingUp, type: 'templates' },
+  { id: 8, title: 'لوحة التحكم', color: 'from-blue-500 to-purple-600', icon: TrendingUp, type: 'dashboard' },
+  { id: 9, title: 'منشئ الخطط', color: 'from-orange-500 to-red-600', icon: Calendar, type: 'planning' },
+  { id: 10, title: 'مكتبة الأدوات', color: 'from-gray-500 to-slate-600', icon: TrendingUp, type: 'library' },
 ];
 
 // Floating particles
@@ -783,91 +665,64 @@ const SliderFloatingElements = () => {
 // Main Showcase Component
 const ImageShowcase = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isHovering, setIsHovering] = useState(false);
 
   useEffect(() => {
+    if (isHovering) return;
+    
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % showcaseImages.length);
-    }, 4000); // Slightly longer to let users read content
+    }, 5000);
     return () => clearInterval(interval);
-  }, []);
+  }, [isHovering]);
 
   const currentData = showcaseImages[currentIndex];
 
   const renderPreview = () => {
-    switch (currentData.id) {
-      case 1:
-        return <DashboardPreview data={currentData} />;
-      case 2:
-        return <CertificatePreview data={currentData} />;
-      case 3:
-        return <QuizPreview data={currentData} />;
-      case 4:
-        return <QuizPreview data={currentData} />;
-      case 5:
-        return <SchedulePreview data={currentData} />;
-      case 6:
-        return <CalculatorPreview data={currentData} />;
-      case 7:
-        return <SchedulePreview data={currentData} />;
-      case 8:
-        return <DashboardPreview data={currentData} />;
-      default:
-        return <DashboardPreview data={currentData} />;
-    }
+    // Simple color-coded cards representing each tool
+    return (
+      <motion.div
+        key={currentData.id}
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -10 }}
+        transition={{ duration: 0.4 }}
+        className="w-full h-full flex flex-col items-center justify-center p-8"
+      >
+        <div className={`w-24 h-24 rounded-2xl bg-gradient-to-br ${currentData.color} flex items-center justify-center mb-6 shadow-xl`}>
+          <currentData.icon className="w-12 h-12 text-white" />
+        </div>
+        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white text-center">
+          {currentData.title}
+        </h2>
+      </motion.div>
+    );
   };
 
   return (
     <div className="relative flex flex-col">
-      {/* Category Badge — outside slider */}
-      <motion.div
-        key={`category-${currentData.id}`}
-        initial={{ opacity: 0, x: -10 }}
-        animate={{ opacity: 1, x: 0 }}
-        exit={{ opacity: 0, x: -10 }}
-        transition={{ duration: 0.3 }}
-        className="mb-2"
-      >
-        <span className={`inline-flex items-center gap-1.5 px-2.5 py-1 bg-gradient-to-r ${currentData.categoryColor} rounded-lg text-xs font-semibold text-white`}>
-          <div className="w-1.5 h-1.5 rounded-full bg-white/70" />
-          {currentData.category}
-        </span>
-      </motion.div>
-
-      {/* Fixed-height slide area — no slide can grow beyond this */}
-      <div className="relative overflow-hidden" style={{ height: '420px' }}>
+      {/* Fixed-height slide area — tool only, no category */}
+      <div className="relative overflow-hidden bg-gradient-to-br from-white to-gray-50 dark:from-[#1B2D2B] dark:to-[#0D1B1A] rounded-2xl shadow-xl" style={{ height: '420px' }}>
         <AnimatePresence mode="wait">
           {renderPreview()}
         </AnimatePresence>
-
-        {/* Tool Title Overlay — title only, no category */}
-        <motion.div
-          key={`title-${currentData.id}`}
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 10 }}
-          transition={{ duration: 0.3, delay: 0.1 }}
-          className="absolute bottom-4 right-4 z-20 max-w-xs"
-        >
-          <h3 className="text-sm sm:text-base font-bold text-gray-900 dark:text-white mb-1">
-            {currentData.title}
-          </h3>
-          <p className="text-xs text-gray-600 dark:text-gray-300 line-clamp-2">
-            {currentData.description}
-          </p>
-        </motion.div>
       </div>
 
-      {/* Navigation Dots */}
-      <div className="flex justify-center items-center gap-2 mt-4">
+      {/* Navigation Dots — smooth and elegant */}
+      <div className="flex justify-center items-center gap-1.5 mt-6">
         {showcaseImages.map((_, i) => (
-          <button
+          <motion.button
             key={i}
             onClick={() => setCurrentIndex(i)}
+            onHoverStart={() => setIsHovering(true)}
+            onHoverEnd={() => setIsHovering(false)}
             aria-label={`الشريحة ${i + 1}`}
+            whileHover={{ scale: 1.2 }}
+            whileTap={{ scale: 0.9 }}
             className={`transition-all duration-300 rounded-full ${
               i === currentIndex
-                ? 'w-6 h-2 bg-green-primary'
-                : 'w-2 h-2 bg-gray-300 dark:bg-gray-600 hover:bg-green-primary/50'
+                ? 'w-8 h-2.5 bg-gradient-to-r from-green-primary to-green-teal shadow-lg'
+                : 'w-2 h-2 bg-gray-300 dark:bg-gray-600 hover:bg-green-primary/60'
             }`}
           />
         ))}
@@ -908,30 +763,50 @@ export default function Hero() {
 
           {/* Content Side */}
           <div className="w-full lg:flex-1 text-center lg:text-right flex flex-col justify-center">
-            {/* Badge */}
+            {/* 1. Badge */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="mb-6"
+              className="mb-4"
             >
               <motion.span 
-                className="inline-flex items-center gap-2 text-green-primary dark:text-green-light text-sm font-bold"
+                className="inline-flex items-center gap-2 text-green-primary dark:text-green-light text-xs sm:text-sm font-bold tracking-wide"
                 whileHover={{ scale: 1.05 }}
               >
-                <Sparkles className="w-4 h-4" />
-                منصة مِهني - احترافية في كل تفصيلة
+                <Sparkles className="w-3.5 h-3.5" />
+                منصة مِهني — احترافية في كل تفصيلة
               </motion.span>
             </motion.div>
 
-            {/* Main Heading */}
+            {/* 2. Target Audience Pills */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.05 }}
+              className="flex flex-wrap justify-center lg:justify-start gap-1.5 mb-5 text-center lg:text-right"
+            >
+              {['مدارس', 'جهات', 'شركات', 'أفراد', 'استخدام مخصص'].map((audience, i) => (
+                <motion.span
+                  key={i}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.1 + i * 0.05 }}
+                  className="px-2.5 py-0.5 bg-green-primary/10 text-green-primary text-xs font-semibold rounded-full border border-green-primary/20"
+                >
+                  {audience}
+                </motion.span>
+              ))}
+            </motion.div>
+
+            {/* 3. Main Heading */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="mb-5"
+              className="mb-4"
             >
-              <h1 className="text-5xl sm:text-5xl lg:text-7xl xl:text-8xl font-extrabold leading-[1.1] tracking-tight">
+              <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-extrabold leading-[1.15] tracking-tight">
                 <span className="text-green-dark dark:text-white lg:inline block">
                   منصة{' '}
                 </span>
@@ -941,57 +816,52 @@ export default function Hero() {
               </h1>
             </motion.div>
 
-            {/* Marketing Subtitle */}
+            {/* 4. Description */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.15 }}
+              className="mb-6"
+            >
+              <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed max-w-lg mx-auto lg:mx-0">
+                منصة رقمية تساعد المجتمع على إنجاز الأعمال بسرعة واحترافية باستخدام قوالب جاهزة وأدوات ذكية سهلة الاستخدام.
+              </p>
+            </motion.div>
+
+            {/* 5. Features */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="mb-7"
+              className="mb-7 text-sm text-gray-600 dark:text-gray-300 flex flex-wrap justify-center lg:justify-start gap-4"
             >
-              <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300 leading-[1.7]">
-                <span className="text-green-primary font-bold">وفّر وقتك</span> وأنجز عملك باحترافية
-                <br className="hidden sm:block" />
-                مع <span className="font-semibold">قوالب جاهزة</span> وأدوات تنفيذية متكاملة
-              </p>
+              <span className="flex items-center gap-1">
+                <span className="text-green-primary font-bold">•</span> تخصيص سهل
+              </span>
+              <span className="flex items-center gap-1">
+                <span className="text-green-primary font-bold">•</span> تصدير فوري
+              </span>
+              <span className="flex items-center gap-1">
+                <span className="text-green-primary font-bold">•</span> وفر الوقت
+              </span>
             </motion.div>
 
-            {/* Features List */}
+            {/* 6. CTA Buttons */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.25 }}
-              className="flex flex-wrap justify-center lg:justify-start gap-2.5 mb-8"
+              className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3"
             >
-              {[
-                { icon: Palette, text: 'تخصيص سهل' },
-                { icon: Download, text: 'تصدير فوري' },
-                { icon: Clock, text: 'توفر الوقت' },
-              ].map((feature, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.3 + i * 0.1 }}
-                  className="flex items-center gap-2 px-3.5 py-2 bg-white/60 dark:bg-[#1B2D2B]/60 rounded-full border border-green-primary/10 hover:border-green-primary/30 transition-colors"
-                >
-                  <feature.icon className="w-3.5 h-3.5 text-green-primary" />
-                  <span className="text-sm text-gray-700 dark:text-gray-300">{feature.text}</span>
-                </motion.div>
-              ))}
-            </motion.div>
-
-            {/* CTA Buttons */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4"
-            >
-              <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>
+              <motion.div 
+                whileHover={{ y: -3, scale: 1.02 }} 
+                whileTap={{ scale: 0.97 }}
+                transition={{ type: 'spring', stiffness: 300 }}
+              >
                 <Link href={ROUTES.START}>
                   <Button
                     size="lg"
-                    className="bg-gradient-to-r from-green-primary to-green-teal text-white px-8 py-3.5 sm:py-3 text-base sm:text-lg rounded-xl shadow-lg hover:shadow-[0_12px_32px_rgba(45,106,79,0.25)] dark:hover:shadow-[0_12px_32px_rgba(45,106,79,0.4)] transition-all duration-300 group font-semibold h-12 sm:h-12"
+                    className="bg-gradient-to-r from-green-primary to-green-teal text-white px-7 py-2.5 text-base rounded-xl shadow-md hover:shadow-xl transition-all duration-300 group font-semibold h-auto"
                   >
                     ابدأ مجاناً
                     <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" />
@@ -999,12 +869,16 @@ export default function Hero() {
                 </Link>
               </motion.div>
               
-              <motion.div whileHover={{ y: -2 }} whileTap={{ scale: 0.98 }}>
+              <motion.div 
+                whileHover={{ y: -3, scale: 1.02 }} 
+                whileTap={{ scale: 0.97 }}
+                transition={{ type: 'spring', stiffness: 300 }}
+              >
                 <Link href={getHomeSectionUrl('templates')}>
                   <Button
                     size="lg"
                     variant="outline"
-                    className="border-2 border-green-primary text-green-dark dark:text-green-light bg-white/70 dark:bg-[#1B2D2B]/40 hover:bg-green-primary hover:text-white dark:hover:bg-green-primary dark:hover:text-white px-8 py-3.5 sm:py-3 text-base sm:text-lg rounded-xl transition-all duration-300 font-semibold h-12 sm:h-12 backdrop-blur-sm hover:shadow-lg"
+                    className="border-2 border-green-primary/40 text-green-dark dark:text-green-light bg-white/60 dark:bg-[#1B2D2B]/50 hover:bg-green-primary/10 hover:border-green-primary px-7 py-2.5 text-base rounded-xl transition-all duration-300 font-semibold h-auto backdrop-blur-sm hover:shadow-lg"
                   >
                     <Play className="w-4 h-4 mr-2" />
                     استكشف القوالب
@@ -1012,16 +886,6 @@ export default function Hero() {
                 </Link>
               </motion.div>
             </motion.div>
-
-            {/* Usage line */}
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-              className="mt-5 text-xs text-gray-400 dark:text-gray-500 text-center lg:text-right"
-            >
-              للمدارس • الجهات • الشركات • الأفراد • الاستخدام المخصص
-            </motion.p>
           </div>
 
           {/* Slider Side */}
