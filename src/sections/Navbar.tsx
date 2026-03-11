@@ -112,36 +112,46 @@ export default function Navbar() {
 
           {/* Right Side Actions */}
           <div className="flex items-center gap-3">
-            {/* Theme Toggle */}
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  variant="ghost"
-                  size="icon"
-                  className="rounded-full w-11 h-11 border border-green-primary/20 hover:bg-green-primary/10 transition-all"
-                >
-                  {mounted && resolvedTheme === 'dark' ? (
-                    <Moon className="w-5 h-5 text-amber-400" />
-                  ) : (
-                    <Sun className="w-5 h-5 text-amber-500" />
-                  )}
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="min-w-[140px]">
-                <DropdownMenuItem onClick={() => setTheme('light')} className="gap-2">
-                  <Sun className="w-4 h-4" />
-                  <span>فاتح</span>
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setTheme('dark')} className="gap-2">
-                  <Moon className="w-4 h-4" />
-                  <span>داكن</span>
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setTheme('system')} className="gap-2">
-                  <Monitor className="w-4 h-4" />
-                  <span>النظام</span>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+            {/* Theme Toggle - Only render DropdownMenu after mount to avoid hydration mismatch */}
+            {mounted ? (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    size="icon"
+                    className="rounded-full w-11 h-11 border border-green-primary/20 hover:bg-green-primary/10 transition-all"
+                  >
+                    {resolvedTheme === 'dark' ? (
+                      <Moon className="w-5 h-5 text-amber-400" />
+                    ) : (
+                      <Sun className="w-5 h-5 text-amber-500" />
+                    )}
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="min-w-[140px]">
+                  <DropdownMenuItem onClick={() => setTheme('light')} className="gap-2">
+                    <Sun className="w-4 h-4" />
+                    <span>فاتح</span>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => setTheme('dark')} className="gap-2">
+                    <Moon className="w-4 h-4" />
+                    <span>داكن</span>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => setTheme('system')} className="gap-2">
+                    <Monitor className="w-4 h-4" />
+                    <span>النظام</span>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <Button
+                variant="ghost"
+                size="icon"
+                className="rounded-full w-11 h-11 border border-green-primary/20 hover:bg-green-primary/10 transition-all"
+              >
+                <Sun className="w-5 h-5 text-amber-500" />
+              </Button>
+            )}
 
             {/* Login Button - Show only when not authenticated */}
             {!authenticated && (
