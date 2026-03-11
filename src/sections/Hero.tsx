@@ -26,9 +26,8 @@ import {
 const showcaseImages = [
   {
     id: 1,
-    title: 'لوحة التحكم الذكية',
-    description: 'تابع إنجازاتك وإحصائياتك في مكان واحد',
-    color: 'from-green-500 to-emerald-600',
+    title: 'لوحة التحكم',
+    type: 'dashboard',
     icon: TrendingUp,
     stats: [
       { label: 'قالب مستخدم', value: '24', color: 'bg-blue-100 text-blue-600' },
@@ -36,43 +35,26 @@ const showcaseImages = [
       { label: 'معدل الاستخدام', value: '89%', color: 'bg-green-100 text-green-600' },
     ],
     activities: [
-      { name: 'شهادة تقدير', time: 'منذ ساعة', icon: Award },
+      { name: 'شهادة تقدير جديدة', time: 'منذ ساعة', icon: Award },
       { name: 'تقرير تقييم', time: 'منذ 3 ساعات', icon: FileText },
     ]
   },
   {
     id: 2,
-    title: 'منشئ الشهادات الاحترافي',
-    description: 'صمم شهاداتك بخطوات بسيطة وسهلة',
-    color: 'from-amber-500 to-orange-600',
+    title: 'منشئ الشهادات',
+    type: 'certificate',
     icon: Award,
     preview: {
       title: 'شهادة تقدير',
       subtitle: 'تقديراً للجهود المتميزة',
-      recipient: 'اسم المكرم',
-      date: '2026-02-20'
+      recipient: 'أحمد محمد العلي',
+      date: '2026-03-10'
     }
   },
   {
     id: 3,
-    title: 'حاسبة الدرجات الذكية',
-    description: 'احسب درجات طلابك بسرعة ودقة',
-    color: 'from-blue-500 to-cyan-600',
-    icon: Calculator,
-    preview: {
-      subjects: [
-        { name: 'الرياضيات', score: 95, total: 100 },
-        { name: 'العلوم', score: 88, total: 100 },
-        { name: 'اللغة العربية', score: 92, total: 100 },
-      ],
-      average: '91.7%'
-    }
-  },
-  {
-    id: 4,
     title: 'مولد الاختبارات',
-    description: 'أنشئ اختبارات متنوعة في ثوانٍ',
-    color: 'from-purple-500 to-pink-600',
+    type: 'quiz',
     icon: FileText,
     preview: {
       questions: [
@@ -84,28 +66,73 @@ const showcaseImages = [
     }
   },
   {
+    id: 4,
+    title: 'حاسبة الدرجات',
+    type: 'calculator',
+    icon: Calculator,
+    preview: {
+      subjects: [
+        { name: 'الرياضيات', score: 95, total: 100 },
+        { name: 'العلوم', score: 88, total: 100 },
+        { name: 'اللغة العربية', score: 92, total: 100 },
+      ],
+      average: '91.7%'
+    }
+  },
+  {
     id: 5,
-    title: 'بناء الجداول الدراسية',
-    description: 'نظم جداولك الأسبوعية بسهولة',
-    color: 'from-teal-500 to-emerald-600',
+    title: 'الجدول الدراسي',
+    type: 'schedule',
     icon: Calendar,
     preview: {
       days: ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس'],
       classes: ['رياضيات', 'علوم', 'عربي', 'إنجليزي', 'فنية']
     }
-  }
+  },
+  {
+    id: 6,
+    title: 'منشئ الاستبانات',
+    type: 'survey',
+    icon: FileText,
+    preview: {
+      questions: [
+        { type: 'اختيار متعدد', count: 8 },
+        { type: 'مقياس تقييم', count: 5 },
+        { type: 'نص مفتوح', count: 2 },
+      ],
+      total: '15 سؤال'
+    }
+  },
 ];
 
-// Floating particles
+// Floating particles - using fixed positions to avoid hydration mismatch
+const particlePositions = [
+  { x: 5, duration: 12, delay: 0.5 },
+  { x: 15, duration: 14, delay: 1.2 },
+  { x: 25, duration: 10, delay: 2.1 },
+  { x: 35, duration: 16, delay: 0.8 },
+  { x: 45, duration: 11, delay: 3.2 },
+  { x: 55, duration: 13, delay: 1.5 },
+  { x: 65, duration: 15, delay: 2.8 },
+  { x: 75, duration: 9, delay: 0.3 },
+  { x: 85, duration: 12, delay: 4.1 },
+  { x: 95, duration: 14, delay: 1.9 },
+  { x: 10, duration: 11, delay: 3.5 },
+  { x: 30, duration: 13, delay: 2.4 },
+  { x: 50, duration: 15, delay: 0.7 },
+  { x: 70, duration: 10, delay: 4.8 },
+  { x: 90, duration: 12, delay: 1.1 },
+];
+
 const FloatingParticles = () => {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {[...Array(15)].map((_, i) => (
+      {particlePositions.map((particle, i) => (
         <motion.div
           key={i}
           className="absolute w-1.5 h-1.5 rounded-full bg-green-primary/30"
           initial={{ 
-            x: Math.random() * 100 + '%', 
+            x: `${particle.x}%`, 
             y: '110%',
             opacity: 0 
           }}
@@ -114,9 +141,9 @@ const FloatingParticles = () => {
             opacity: [0, 1, 0]
           }}
           transition={{ 
-            duration: Math.random() * 8 + 8,
+            duration: particle.duration,
             repeat: Infinity,
-            delay: Math.random() * 5,
+            delay: particle.delay,
             ease: 'linear'
           }}
         />
@@ -725,53 +752,80 @@ const SliderFloatingElements = () => {
 // Main Showcase Component
 const ImageShowcase = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isHovering, setIsHovering] = useState(false);
 
   useEffect(() => {
+    if (isHovering) return;
+    
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % showcaseImages.length);
-    }, 4000); // Slightly longer to let users read content
+    }, 5000);
     return () => clearInterval(interval);
-  }, []);
+  }, [isHovering]);
 
   const currentData = showcaseImages[currentIndex];
 
   const renderPreview = () => {
-    switch (currentData.id) {
-      case 1:
-        return <DashboardPreview data={currentData} />;
-      case 2:
-        return <CertificatePreview data={currentData} />;
-      case 3:
-        return <CalculatorPreview data={currentData} />;
-      case 4:
-        return <QuizPreview data={currentData} />;
-      case 5:
-        return <SchedulePreview data={currentData} />;
+    let PreviewComponent;
+    switch (currentData.type) {
+      case 'dashboard':
+        PreviewComponent = <DashboardPreview data={currentData} />;
+        break;
+      case 'certificate':
+        PreviewComponent = <CertificatePreview data={currentData} />;
+        break;
+      case 'quiz':
+      case 'survey':
+        PreviewComponent = <QuizPreview data={currentData} />;
+        break;
+      case 'calculator':
+        PreviewComponent = <CalculatorPreview data={currentData} />;
+        break;
+      case 'schedule':
+        PreviewComponent = <SchedulePreview data={currentData} />;
+        break;
       default:
-        return <DashboardPreview data={currentData} />;
+        PreviewComponent = <DashboardPreview data={currentData} />;
     }
+    
+    return (
+      <motion.div
+        key={currentData.id}
+        initial={{ opacity: 0, x: 20 }}
+        animate={{ opacity: 1, x: 0 }}
+        exit={{ opacity: 0, x: -20 }}
+        transition={{ duration: 0.4 }}
+        className="w-full h-full"
+      >
+        {PreviewComponent}
+      </motion.div>
+    );
   };
 
   return (
     <div className="relative flex flex-col">
-      {/* Fixed-height slide area — no slide can grow beyond this */}
-      <div className="relative overflow-hidden" style={{ height: '420px' }}>
+      {/* Fixed-height slide area — real tool previews */}
+      <div className="relative overflow-hidden" style={{ height: '450px' }}>
         <AnimatePresence mode="wait">
           {renderPreview()}
         </AnimatePresence>
       </div>
 
-      {/* Navigation Dots */}
-      <div className="flex justify-center items-center gap-2 mt-4">
+      {/* Navigation Dots — smooth and elegant */}
+      <div className="flex justify-center items-center gap-1.5 mt-6">
         {showcaseImages.map((_, i) => (
-          <button
+          <motion.button
             key={i}
             onClick={() => setCurrentIndex(i)}
+            onHoverStart={() => setIsHovering(true)}
+            onHoverEnd={() => setIsHovering(false)}
             aria-label={`الشريحة ${i + 1}`}
+            whileHover={{ scale: 1.2 }}
+            whileTap={{ scale: 0.9 }}
             className={`transition-all duration-300 rounded-full ${
               i === currentIndex
-                ? 'w-6 h-2 bg-green-primary'
-                : 'w-2 h-2 bg-gray-300 dark:bg-gray-600 hover:bg-green-primary/50'
+                ? 'w-8 h-2.5 bg-gradient-to-r from-green-primary to-green-teal shadow-lg'
+                : 'w-2 h-2 bg-gray-300 dark:bg-gray-600 hover:bg-green-primary/60'
             }`}
           />
         ))}
@@ -812,7 +866,7 @@ export default function Hero() {
 
           {/* Content Side */}
           <div className="w-full lg:flex-1 text-center lg:text-right flex flex-col justify-center">
-            {/* Badge */}
+            {/* 1. Badge */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -820,22 +874,42 @@ export default function Hero() {
               className="mb-4"
             >
               <motion.span 
-                className="inline-flex items-center gap-2 text-green-primary dark:text-green-light text-sm font-bold"
+                className="inline-flex items-center gap-2 text-green-primary dark:text-green-light text-xs sm:text-sm font-bold tracking-wide"
                 whileHover={{ scale: 1.05 }}
               >
-                <Sparkles className="w-4 h-4" />
-                منصة مِهني - احترافية في كل تفصيلة
+                <Sparkles className="w-3.5 h-3.5" />
+                منصة مِهني — احترافية في كل تفصيلة
               </motion.span>
             </motion.div>
 
-            {/* Main Heading */}
+            {/* 2. Target Audience Pills */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.05 }}
+              className="flex flex-wrap justify-center lg:justify-start gap-1.5 mb-5 text-center lg:text-right"
+            >
+              {['مدارس', 'جهات', 'شركات', 'أفراد', 'استخدام مخصص'].map((audience, i) => (
+                <motion.span
+                  key={i}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.1 + i * 0.05 }}
+                  className="px-2.5 py-0.5 bg-green-primary/10 text-green-primary text-xs font-semibold rounded-full border border-green-primary/20"
+                >
+                  {audience}
+                </motion.span>
+              ))}
+            </motion.div>
+
+            {/* 3. Main Heading */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
               className="mb-4"
             >
-              <h1 className="text-5xl sm:text-5xl lg:text-7xl xl:text-8xl font-extrabold leading-tight">
+              <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-extrabold leading-[1.15] tracking-tight">
                 <span className="text-green-dark dark:text-white lg:inline block">
                   منصة{' '}
                 </span>
@@ -845,82 +919,76 @@ export default function Hero() {
               </h1>
             </motion.div>
 
-            {/* Marketing Subtitle */}
+            {/* 4. Description */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.15 }}
+              className="mb-6"
+            >
+              <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed max-w-lg mx-auto lg:mx-0">
+                منصة رقمية تساعد المجتمع على إنجاز الأعمال بسرعة واحترافية باستخدام قوالب جاهزة وأدوات ذكية سهلة الاستخدام.
+              </p>
+            </motion.div>
+
+            {/* 5. Features */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="mb-6"
+              className="mb-7 text-sm text-gray-600 dark:text-gray-300 flex flex-wrap justify-center lg:justify-start gap-4"
             >
-              <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
-                <span className="text-green-primary font-bold">وفّر وقتك</span> وأنجز عملك باحترافية
-                <br className="hidden sm:block" />
-                مع <span className="font-semibold">قوالب جاهزة</span> وأدوات تنفيذية متكاملة
-              </p>
-              <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
-                شهادات • تقييمات • خطط • تقارير • اختبارات • جداول
-              </p>
+              <span className="flex items-center gap-1">
+                <span className="text-green-primary font-bold">•</span> تخصيص سهل
+              </span>
+              <span className="flex items-center gap-1">
+                <span className="text-green-primary font-bold">•</span> تصدير فوري
+              </span>
+              <span className="flex items-center gap-1">
+                <span className="text-green-primary font-bold">•</span> وفر الوقت
+              </span>
             </motion.div>
 
-            {/* Features List */}
+            {/* 6. CTA Buttons */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.25 }}
-              className="flex flex-wrap justify-center lg:justify-start gap-2.5 mb-7"
+              className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3"
             >
-              {[
-                { icon: Palette, text: 'تخصيص سهل' },
-                { icon: Download, text: 'تصدير فوري' },
-                { icon: Clock, text: 'توفر الوقت' },
-              ].map((feature, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.3 + i * 0.1 }}
-                  className="flex items-center gap-2 px-3.5 py-1.5 bg-white/60 dark:bg-[#1B2D2B]/60 rounded-full border border-green-primary/10"
-                >
-                  <feature.icon className="w-3.5 h-3.5 text-green-primary" />
-                  <span className="text-sm text-gray-700 dark:text-gray-300">{feature.text}</span>
-                </motion.div>
-              ))}
-            </motion.div>
-
-            {/* CTA Buttons */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4"
-            >
-              <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
+              <motion.div 
+                whileHover={{ y: -3, scale: 1.02 }} 
+                whileTap={{ scale: 0.97 }}
+                transition={{ type: 'spring', stiffness: 300 }}
+              >
                 <Link href={ROUTES.START}>
                   <Button
                     size="lg"
-                    className="bg-gradient-to-r from-green-primary to-green-teal text-white px-10 py-7 text-xl rounded-2xl shadow-xl hover:shadow-2xl transition-all group font-bold"
+                    className="bg-gradient-to-r from-green-primary to-green-teal text-white px-7 py-2.5 text-base rounded-xl shadow-md hover:shadow-xl transition-all duration-300 group font-semibold h-auto"
                   >
                     ابدأ مجاناً
-                    <ArrowLeft className="w-5 h-5 mr-2 group-hover:-translate-x-1 transition-transform" />
+                    <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" />
                   </Button>
                 </Link>
               </motion.div>
               
-              <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
+              <motion.div 
+                whileHover={{ y: -3, scale: 1.02 }} 
+                whileTap={{ scale: 0.97 }}
+                transition={{ type: 'spring', stiffness: 300 }}
+              >
                 <Link href={getHomeSectionUrl('templates')}>
                   <Button
                     size="lg"
                     variant="outline"
-                    className="border-2 border-green-primary/30 text-green-primary hover:bg-green-primary/10 hover:border-green-primary px-8 py-6 text-lg rounded-2xl transition-all font-bold bg-white/50 backdrop-blur-sm"
+                    className="border-2 border-green-primary/40 text-green-dark dark:text-green-light bg-white/60 dark:bg-[#1B2D2B]/50 hover:bg-green-primary/10 hover:border-green-primary px-7 py-2.5 text-base rounded-xl transition-all duration-300 font-semibold h-auto backdrop-blur-sm hover:shadow-lg"
                   >
-                    <Play className="w-5 h-5 mr-2" />
+                    <Play className="w-4 h-4 mr-2" />
                     استكشف القوالب
                   </Button>
                 </Link>
               </motion.div>
             </motion.div>
-
-
           </div>
 
           {/* Slider Side */}
@@ -991,7 +1059,7 @@ export default function Hero() {
         </motion.div>
 
       </div>
-
     </section>
   );
 }
+
