@@ -151,7 +151,7 @@ export default function PerformanceAnalyzerPage() {
           return
         }
 
-        const rawContent = project.content as SavedPerformanceAnalyzerData | string | null
+        const rawContent = project.data as SavedPerformanceAnalyzerData | string | null
         const content: SavedPerformanceAnalyzerData =
           typeof rawContent === "string"
             ? JSON.parse(rawContent)
@@ -195,15 +195,10 @@ export default function PerformanceAnalyzerPage() {
       }
 
       if (loadedProjectId) {
-        const updated = await updateProject(loadedProjectId, {
+        const updated = await updateProject({
+          id: loadedProjectId,
           name: buildProjectName(),
-          type: "performance-analyzer",
-          content,
-          metadata: {
-            subject,
-            className,
-            studentsCount: students.length,
-          },
+          data: content,
         })
 
         if (!updated) throw new Error("Update failed")
