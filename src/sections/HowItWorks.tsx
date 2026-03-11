@@ -160,40 +160,26 @@ export default function HowItWorks() {
                       </AnimatePresence>
                       
                       <motion.div 
-                        className="relative w-10 h-10 rounded-full border-[3px] border-white dark:border-[#0F1F1D] flex items-center justify-center z-10"
+                        className="relative w-10 h-10 rounded-full border border-gray-300 dark:border-gray-600 flex items-center justify-center z-10"
                         animate={{
-                          backgroundColor: isActive ? 'rgb(45, 106, 79)' : 'rgb(229, 231, 235)',
+                          backgroundColor: isActive ? 'rgb(45, 106, 79)' : 'rgb(243, 244, 246)',
+                          borderColor: isActive ? 'rgb(45, 106, 79)' : 'rgb(209, 213, 219)',
                         }}
                         transition={{ duration: 0.4, ease: 'easeOut' }}
                       >
-                        <AnimatePresence mode="wait">
-                          {isActive ? (
-                            <motion.div
-                              key="check"
-                              initial={{ scale: 0, rotate: -180 }}
-                              animate={{ scale: 1, rotate: 0 }}
-                              exit={{ scale: 0 }}
-                              transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-                            >
-                              <Check className="w-5 h-5 text-white" strokeWidth={3} />
-                            </motion.div>
-                          ) : (
-                            <motion.span
-                              key="number"
-                              initial={{ opacity: 0 }}
-                              animate={{ opacity: 1 }}
-                              className="text-3xl font-bold text-gray-500"
-                            >
-                              {step.number}
-                            </motion.span>
-                          )}
-                        </AnimatePresence>
+                        <motion.div
+                          initial={{ scale: 0, rotate: -180 }}
+                          animate={{ scale: isActive ? 1 : 0, rotate: isActive ? 0 : -180 }}
+                          transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                        >
+                          <Check className="w-5 h-5 text-white" strokeWidth={2.5} />
+                        </motion.div>
                       </motion.div>
                     </motion.div>
 
-                    {/* Step number label - Larger size */}
+                    {/* Step number label - Large size */}
                     <motion.span
-                      className="mt-4 text-xl font-bold tracking-wider text-gray-500 dark:text-gray-400"
+                      className="mt-4 text-4xl font-bold tracking-wider text-gray-500 dark:text-gray-400"
                       animate={{ 
                         color: isActive ? 'rgb(45, 106, 79)' : 'rgb(107, 114, 128)',
                       }}
