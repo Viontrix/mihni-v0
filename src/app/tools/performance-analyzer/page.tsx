@@ -195,15 +195,10 @@ export default function PerformanceAnalyzerPage() {
       }
 
       if (loadedProjectId) {
-        const updated = await updateProject(loadedProjectId, {
+        const updated = await updateProject({
+          id: loadedProjectId,
           name: buildProjectName(),
-          type: "performance-analyzer",
-          content,
-          metadata: {
-            subject,
-            className,
-            studentsCount: students.length,
-          },
+          data: content,
         })
 
         if (!updated) throw new Error("Update failed")
