@@ -20,8 +20,7 @@ import {
   Calendar,
   Clock,
   Users,
-  ChevronRight,
-  CheckCircle
+  ChevronRight
 } from 'lucide-react';
 
 // صور العرض المتغيرة (محاكاة للوحة التحكم والأدوات) - 10 شرائح
@@ -1281,25 +1280,16 @@ export default function Hero() {
               </p>
             </motion.div>
 
-            {/* 5. Feature Points */}
+            {/* 5. Feature Line */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="mb-12 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 sm:gap-6"
+              className="mb-14"
             >
-              <div className="flex items-center gap-2">
-                <CheckCircle className="w-4 h-4 text-green-primary flex-shrink-0" />
-                <span className="text-sm text-gray-700 dark:text-gray-300 font-medium">تخصيص سهل</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle className="w-4 h-4 text-green-primary flex-shrink-0" />
-                <span className="text-sm text-gray-700 dark:text-gray-300 font-medium">تصدير فوري</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle className="w-4 h-4 text-green-primary flex-shrink-0" />
-                <span className="text-sm text-gray-700 dark:text-gray-300 font-medium">وفر الوقت</span>
-              </div>
+              <p className="text-xs text-gray-500 dark:text-gray-400 font-normal tracking-normal">
+                تخصيص سهل • تصدير فوري • وفر الوقت
+              </p>
             </motion.div>
 
             {/* 6. CTA Buttons */}
