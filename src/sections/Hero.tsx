@@ -423,7 +423,7 @@ const DashboardPreview = ({ data }: { data: typeof showcaseImages[0] }) => {
 // Certificate Preview Component
 const CertificatePreview = ({ data }: { data: typeof showcaseImages[1] }) => {
   return (
-    <AppFrame title="منشئ ال����هادات" icon={Award} iconColor="text-amber-500">
+    <AppFrame title="منشئ ال������هادات" icon={Award} iconColor="text-amber-500">
       <div className="p-4 sm:p-5">
         {/* Toolbar */}
         <div className="flex items-center justify-between mb-3">
@@ -1219,48 +1219,28 @@ export default function Hero() {
 
           {/* Content Side */}
           <div className="w-full lg:flex-1 text-center lg:text-right flex flex-col justify-center">
-            {/* 1. Badge */}
+            {/* 1. Eyebrow Text */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="mb-4"
+              className="mb-6"
             >
               <motion.span 
                 className="inline-flex items-center gap-2 text-green-primary dark:text-green-light text-xs sm:text-sm font-bold tracking-wide"
                 whileHover={{ scale: 1.05 }}
               >
                 <Sparkles className="w-3.5 h-3.5" />
-                منصة مِهني — احترافية في كل تفصيلة
+                منصة مهني — احترافية في كل تفصيلة
               </motion.span>
             </motion.div>
 
-            {/* 2. Target Audience Pills */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.05 }}
-              className="flex flex-wrap justify-center lg:justify-start gap-1.5 mb-5 text-center lg:text-right"
-            >
-              {['مدارس', 'جهات', 'شركات', 'أفراد', 'استخدام مخصص'].map((audience, i) => (
-                <motion.span
-                  key={i}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.1 + i * 0.05 }}
-                  className="px-2.5 py-0.5 bg-green-primary/10 text-green-primary text-xs font-semibold rounded-full border border-green-primary/20"
-                >
-                  {audience}
-                </motion.span>
-              ))}
-            </motion.div>
-
-            {/* 3. Main Heading */}
+            {/* 2. Main Title */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="mb-4"
+              transition={{ duration: 0.6, delay: 0.08 }}
+              className="mb-8"
             >
               <h1 className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-extrabold leading-[1.15] tracking-tight">
                 <span className="text-green-dark dark:text-white lg:inline block">
@@ -1272,43 +1252,51 @@ export default function Hero() {
               </h1>
             </motion.div>
 
-            {/* 4. Description */}
+            {/* 3. Description */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.15 }}
-              className="mb-6"
+              transition={{ duration: 0.6, delay: 0.12 }}
+              className="mb-8"
             >
               <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed max-w-lg mx-auto lg:mx-0">
                 منصة رقمية سعودية تمكّنك من إنجاز أعمالك بسرعة واحترافية
-                <br className="hidden sm:block" />
-                باستخدام قوالب جاهز�� وأدوات ذكية سهلة الاستخدام.
+                <br />
+                باستخدام قوالب جاهزة
+                <br />
+                وأدوات ذكية سهلة الاستخدام.
               </p>
             </motion.div>
 
-            {/* 5. Features */}
+            {/* 4. Audience Line */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.16 }}
+              className="mb-7"
+            >
+              <p className="text-sm text-gray-500 dark:text-gray-400 font-medium">
+                مدارس • جهات • شركات • أفراد • استخدام مخصص
+              </p>
+            </motion.div>
+
+            {/* 5. Feature Line */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="mb-7 text-sm text-gray-600 dark:text-gray-300 flex flex-wrap justify-center lg:justify-start gap-4"
+              className="mb-10 text-xs text-gray-500 dark:text-gray-400"
             >
-              <span className="flex items-center gap-1">
-                <span className="text-green-primary font-bold">•</span> تخصيص سهل
-              </span>
-              <span className="flex items-center gap-1">
-                <span className="text-green-primary font-bold">•</span> تصدير فوري
-              </span>
-              <span className="flex items-center gap-1">
-                <span className="text-green-primary font-bold">•</span> وفر الوقت
-              </span>
+              <p>
+                تخصيص سهل • تصدير فوري • وفر الوقت
+              </p>
             </motion.div>
 
             {/* 6. CTA Buttons */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.25 }}
+              transition={{ duration: 0.6, delay: 0.24 }}
               className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 sm:gap-4"
             >
               {/* Primary Button */}
@@ -1322,7 +1310,7 @@ export default function Hero() {
                     size="lg"
                     className="bg-gradient-to-r from-green-primary to-green-teal text-white px-8 py-3 sm:py-2.5 text-base font-semibold rounded-lg shadow-[0_4px_12px_rgba(45,106,79,0.2)] dark:shadow-[0_4px_12px_rgba(45,106,79,0.3)] hover:shadow-[0_8px_20px_rgba(45,106,79,0.3)] dark:hover:shadow-[0_8px_20px_rgba(45,106,79,0.4)] transition-all duration-300 group h-auto"
                   >
-                    ابدأ مجاناً
+                    ابدأ مجانًا
                     <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform duration-300" />
                   </Button>
                 </Link>
