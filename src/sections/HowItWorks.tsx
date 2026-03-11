@@ -2,7 +2,7 @@
 
 import { useRef, useState, useEffect } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
-import { UserPlus, FileText, Share2, BarChart3, Check, ArrowLeft, Sparkles } from 'lucide-react';
+import { UserPlus, FileText, Share2, PenTool, Check, ArrowLeft, Sparkles } from 'lucide-react';
 
 const steps = [
   {
@@ -25,7 +25,7 @@ const steps = [
   },
   {
     number: '03',
-    icon: Share2,
+    icon: PenTool,
     title: 'خصص وأنشئ',
     description: 'خصص القالب أو استخدم الأداة الذكية لإنشاء محتواك',
     color: 'from-fuchsia-500 to-purple-600',
@@ -34,7 +34,7 @@ const steps = [
   },
   {
     number: '04',
-    icon: BarChart3,
+    icon: Share2,
     title: 'صدّر وشارك',
     description: 'صدّر بصيغ متعددة وشارك مع فريقك أو عملائك',
     color: 'from-amber-400 to-orange-500',
