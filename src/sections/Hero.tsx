@@ -423,7 +423,7 @@ const DashboardPreview = ({ data }: { data: typeof showcaseImages[0] }) => {
 // Certificate Preview Component
 const CertificatePreview = ({ data }: { data: typeof showcaseImages[1] }) => {
   return (
-    <AppFrame title="منشئ ال��������هادات" icon={Award} iconColor="text-amber-500">
+    <AppFrame title="منشئ ال����������هادات" icon={Award} iconColor="text-amber-500">
       <div className="p-4 sm:p-5">
         {/* Toolbar */}
         <div className="flex items-center justify-between mb-3">
@@ -1260,11 +1260,8 @@ export default function Hero() {
               className="mb-10"
             >
               <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-[1.8] max-w-2xl mx-auto lg:mx-0">
-                منصة رقمية سعودية تمكّنك من إنجاز أعمالك
-                <br />
-                بسرعة واحترافية باستخدام قوالب جاهزة
-                <br />
-                وأدوات ذكية سهلة الاستخدام.
+                <strong className="text-green-dark dark:text-white font-bold">وفّر وقتك</strong> وأنجز عملك باحترافية مع{' '}
+                <strong className="text-green-dark dark:text-white font-bold">قوالب جاهزة</strong> وأدوات تنفيذية متكاملة
               </p>
             </motion.div>
 
@@ -1280,16 +1277,25 @@ export default function Hero() {
               </p>
             </motion.div>
 
-            {/* 5. Feature Line */}
+            {/* 5. Feature Pills with Icons */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="mb-14"
+              className="mb-12 flex flex-wrap items-center justify-center lg:justify-start gap-2"
             >
-              <p className="text-xs text-gray-500 dark:text-gray-400 font-normal tracking-normal">
-                تخصيص سهل • تصدير فوري • وفر الوقت
-              </p>
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gray-100 dark:bg-white/8 text-gray-600 dark:text-gray-300 text-xs font-medium">
+                <Palette className="w-3.5 h-3.5 text-green-primary" />
+                تخصيص سهل
+              </span>
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gray-100 dark:bg-white/8 text-gray-600 dark:text-gray-300 text-xs font-medium">
+                <Download className="w-3.5 h-3.5 text-green-primary" />
+                تصدير فوري
+              </span>
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-gray-100 dark:bg-white/8 text-gray-600 dark:text-gray-300 text-xs font-medium">
+                <Clock className="w-3.5 h-3.5 text-green-primary" />
+                توفير الوقت
+              </span>
             </motion.div>
 
             {/* 6. CTA Buttons */}
@@ -1301,24 +1307,24 @@ export default function Hero() {
             >
               {/* Primary Button */}
               <motion.div 
-                whileHover={{ y: -3 }} 
+                whileHover={{ y: -2, scale: 1.02 }} 
                 whileTap={{ scale: 0.97 }}
                 transition={{ type: 'spring', stiffness: 400, damping: 17 }}
               >
                 <Link href={ROUTES.START}>
                   <Button
                     size="lg"
-                    className="bg-gradient-to-r from-green-primary to-green-teal text-white px-8 py-3 sm:py-3 text-base font-semibold rounded-lg shadow-[0_4px_16px_rgba(45,106,79,0.25)] dark:shadow-[0_4px_16px_rgba(45,106,79,0.35)] hover:shadow-[0_12px_28px_rgba(45,106,79,0.35)] dark:hover:shadow-[0_12px_28px_rgba(45,106,79,0.45)] transition-all duration-300 group h-auto"
+                    className="bg-gradient-to-l from-green-primary to-green-teal text-white px-7 py-3 text-base font-bold rounded-xl shadow-[0_4px_20px_rgba(45,106,79,0.3)] hover:shadow-[0_8px_28px_rgba(45,106,79,0.4)] transition-all duration-300 group h-auto"
                   >
                     ابدأ مجانًا
-                    <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1.5 transition-transform duration-300" />
+                    <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform duration-300" />
                   </Button>
                 </Link>
               </motion.div>
               
               {/* Secondary Button */}
               <motion.div 
-                whileHover={{ y: -3 }} 
+                whileHover={{ y: -2 }} 
                 whileTap={{ scale: 0.97 }}
                 transition={{ type: 'spring', stiffness: 400, damping: 17 }}
               >
@@ -1326,7 +1332,7 @@ export default function Hero() {
                   <Button
                     size="lg"
                     variant="outline"
-                    className="border-2 border-green-primary/40 text-green-dark dark:text-green-light bg-white/50 dark:bg-[#1B2D2B]/40 hover:bg-green-primary/10 hover:border-green-primary/80 px-8 py-3 sm:py-3 text-base font-semibold rounded-lg transition-all duration-300 group h-auto backdrop-blur-sm"
+                    className="border border-green-primary/40 text-green-dark dark:text-green-light bg-transparent hover:bg-green-primary/8 hover:border-green-primary px-7 py-3 text-base font-semibold rounded-xl transition-all duration-300 group h-auto"
                   >
                     <Play className="w-4 h-4 mr-2" />
                     استكشف القوالب
