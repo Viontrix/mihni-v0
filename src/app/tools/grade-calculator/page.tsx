@@ -256,7 +256,7 @@ const RECIPIENT_BOX_STYLES = [
   { value: "sharp", label: "زوايا حادة" },
   { value: "dotted", label: "خط منقط" },
   { value: "solid", label: "حدود كاملة" },
-  { value: "thin-border", label: "حد نحيف" },
+  { value: "thin-border", label: "حد ��حيف" },
   { value: "none", label: "بدون مستطيل" },
 ] as const
 
@@ -708,7 +708,6 @@ export default function CertificateMakerPage() {
         setGeneratorType((payload.generatorType as any) ?? "school")
         setCustomTitle(payload.customTitle ?? "")
         setUploadedFile(null)
-        setStudentName(payload.studentName ?? "")
         setGradeSystem((payload.gradeSystem as GradingSystem) ?? "saudi")
         setUniSystem((payload.uniSystem as GradingSystem) ?? "gpa4")
         setSubjects(Array.isArray(payload.subjects) && payload.subjects.length > 0 ? payload.subjects : [{ id: "1", name: "الرياضيات", score: 85, maxScore: 100, weight: 1 }])
