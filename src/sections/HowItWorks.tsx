@@ -143,7 +143,7 @@ export default function HowItWorks() {
                   >
                     {/* Connector circle */}
                     <motion.div 
-                  className="relative mt-8"
+                      className="relative"
                       animate={{ scale: isCurrent ? 1.1 : 1 }}
                       transition={{ duration: 0.3 }}
                     >
@@ -193,7 +193,7 @@ export default function HowItWorks() {
           </div>
 
           {/* Steps Grid - RTL: step 01 on the right, 04 on the left */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5 lg:pt-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5 lg:pt-28 lg:mt-4">
             {steps.map((step, index) => {
               const Icon = step.icon;
               const isActive = index <= activeStep;
