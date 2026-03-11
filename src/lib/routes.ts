@@ -75,7 +75,7 @@ export function getSectionFromSearch(search: string): HomeSection | null {
 
 export type PlanId = 'free' | 'pro' | 'business' | 'enterprise';
 export type BillingCycle = 'monthly' | 'yearly';
-export type PaymentSource = 'pricing' | 'dashboard' | 'dashboard-limit' | 'account' | 'tools';
+export type PaymentSource = 'pricing' | 'dashboard' | 'dashboard-limit' | 'dashboard-daily-limit' | 'account' | 'tools';
 
 interface PaymentUrlParams {
   plan?: PlanId;

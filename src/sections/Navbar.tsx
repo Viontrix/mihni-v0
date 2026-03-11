@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Menu, X, Sun, Moon, Monitor, Briefcase, MessageCircle, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
@@ -26,10 +26,15 @@ const navLinks = [
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [authenticated, setAuthenticated] = useState(false);
   const { setTheme, resolvedTheme } = useTheme();
   const pathname = usePathname();
   const router = useRouter();
-  const authenticated = isAuthenticated();
+  
+  // Check authentication on client side only to avoid hydration mismatch
+  useEffect(() => {
+    setAuthenticated(isAuthenticated());
+  }, []);
   
   // Check if we're on the homepage
   const isHomePage = pathname === '/' || pathname === '';
