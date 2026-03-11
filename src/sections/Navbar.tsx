@@ -27,12 +27,14 @@ const navLinks = [
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [authenticated, setAuthenticated] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const { setTheme, resolvedTheme } = useTheme();
   const pathname = usePathname();
   const router = useRouter();
   
-  // Check authentication on client side only to avoid hydration mismatch
+  // Ensure component is mounted before rendering client-specific content to avoid hydration mismatch
   useEffect(() => {
+    setMounted(true);
     setAuthenticated(isAuthenticated());
   }, []);
   
@@ -118,7 +120,7 @@ export default function Navbar() {
                   size="icon"
                   className="rounded-full w-11 h-11 border border-green-primary/20 hover:bg-green-primary/10 transition-all"
                 >
-                  {resolvedTheme === 'dark' ? (
+                  {mounted && resolvedTheme === 'dark' ? (
                     <Moon className="w-5 h-5 text-amber-400" />
                   ) : (
                     <Sun className="w-5 h-5 text-amber-500" />
