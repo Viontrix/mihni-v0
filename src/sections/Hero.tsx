@@ -1043,6 +1043,7 @@ export default function Hero() {
                 </Link>
               </motion.div>
             </motion.div>
+          </div>
 
           {/* Slider Side */}
           <motion.div
