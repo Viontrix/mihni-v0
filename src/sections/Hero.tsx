@@ -423,7 +423,7 @@ const DashboardPreview = ({ data }: { data: typeof showcaseImages[0] }) => {
 // Certificate Preview Component
 const CertificatePreview = ({ data }: { data: typeof showcaseImages[1] }) => {
   return (
-    <AppFrame title="منشئ ال����������������هادات" icon={Award} iconColor="text-amber-500">
+    <AppFrame title="منشئ ال������������������هادات" icon={Award} iconColor="text-amber-500">
       <div className="p-4 sm:p-5">
         {/* Toolbar */}
         <div className="flex items-center justify-between mb-3">
@@ -1219,7 +1219,7 @@ export default function Hero() {
 
           {/* Content Side */}
           <div className="w-full lg:flex-1 text-center lg:text-right flex flex-col justify-center">
-            {/* 1. Eyebrow Text */}
+            {/* 1. Eyebrow Text / Badge */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -1227,10 +1227,21 @@ export default function Hero() {
               className="mb-8"
             >
               <motion.span 
-                className="inline-flex items-center gap-2 text-green-primary dark:text-green-light text-xs sm:text-sm font-bold tracking-wide"
-                whileHover={{ scale: 1.05 }}
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-primary/10 dark:bg-green-primary/20 border border-green-primary/20 text-green-primary dark:text-green-light text-xs sm:text-sm font-bold tracking-wide"
+                whileHover={{ scale: 1.05, boxShadow: '0 4px 20px rgba(45,106,79,0.2)' }}
+                animate={{ 
+                  boxShadow: ['0 0 0 rgba(45,106,79,0)', '0 0 20px rgba(45,106,79,0.15)', '0 0 0 rgba(45,106,79,0)']
+                }}
+                transition={{ 
+                  boxShadow: { duration: 2, repeat: Infinity, ease: 'easeInOut' }
+                }}
               >
-                <Sparkles className="w-3.5 h-3.5" />
+                <motion.span
+                  animate={{ rotate: [0, 15, -15, 0] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+                >
+                  <Sparkles className="w-3.5 h-3.5" />
+                </motion.span>
                 منصة مهني — احترافية في كل تفصيلة
               </motion.span>
             </motion.div>
@@ -1259,7 +1270,7 @@ export default function Hero() {
               transition={{ duration: 0.6, delay: 0.12 }}
               className="mb-10"
             >
-              <p className="text-2xl sm:text-3xl lg:text-4xl text-gray-600 dark:text-gray-300 leading-[1.7] max-w-2xl mx-auto lg:mx-0">
+              <p className="text-xl sm:text-2xl lg:text-3xl text-gray-600 dark:text-gray-300 leading-[1.7] max-w-2xl mx-auto lg:mx-0">
                 <strong className="text-green-dark dark:text-white font-bold">وفّر وقتك</strong> وأنجز عملك باحترافية مع{' '}
                 <strong className="text-green-dark dark:text-white font-bold">قوالب جاهزة</strong> وأدوات تنفيذية متكاملة
               </p>
