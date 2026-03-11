@@ -21,10 +21,11 @@ import {
   Clock,
   Play,
   CheckCircle,
-  Image as ImageIcon
+  Image as ImageIcon,
+  ArrowLeft
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { getHomeSectionUrl, getToolUrl } from '@/lib/routes';
+import { ROUTES, getHomeSectionUrl, getToolUrl } from '@/lib/routes';
 
 // Tool Card with Internal Tabs Preview
 const ToolPreview = ({ tool }: { tool: typeof tools[0] }) => {
@@ -366,7 +367,7 @@ const tools = [
       { text: 'تحليل النتائج الشامل', locked: false },
       { text: 'رسوم بيانية تفاعلية', locked: true },
       { text: 'مقارنة الفصول', locked: true },
-      { text: 'تقارير دورية', locked: true },
+      { text: 'تقارير دو��ية', locked: true },
     ],
     color: 'from-rose-500 to-pink-500',
     bgColor: 'bg-rose-500/10',
@@ -634,13 +635,33 @@ export default function Tools() {
           })}
         </motion.div>
 
-        {/* Plan CTA */}
+        {/* View All Tools CTA */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="mt-12"
+          className="mt-12 text-center"
+        >
+          <Link href={ROUTES.TOOLS}>
+            <Button 
+              variant="outline" 
+              size="lg"
+              className="px-8 py-3 border-2 border-green-primary text-green-primary hover:bg-green-primary hover:text-white transition-all rounded-xl"
+            >
+              استعرض جميع الأدوات
+              <ArrowLeft className="w-4 h-4 mr-2" />
+            </Button>
+          </Link>
+        </motion.div>
+
+        {/* Plan CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.4 }}
+          className="mt-8"
         >
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 p-6 bg-gradient-to-r from-green-primary/5 to-green-teal/5 rounded-2xl border border-green-primary/10">
             <div className="flex items-center gap-3">
