@@ -24,16 +24,85 @@ import {
 
 // صور العرض المتغيرة (محاكاة للوحة التحكم والأدوات)
 const showcaseImages = [
-  { id: 1, title: 'منشئ الشهادات', color: 'from-amber-500 to-orange-600', icon: Award, type: 'certificate' },
-  { id: 2, title: 'مولد الاختبارات', color: 'from-purple-500 to-pink-600', icon: FileText, type: 'quiz' },
-  { id: 3, title: 'منشئ الاستبانات', color: 'from-blue-500 to-cyan-600', icon: FileText, type: 'survey' },
-  { id: 4, title: 'محرر التقارير', color: 'from-green-500 to-emerald-600', icon: FileText, type: 'report' },
-  { id: 5, title: 'منشئ الجداول', color: 'from-indigo-500 to-blue-600', icon: Calendar, type: 'schedule' },
-  { id: 6, title: 'منشئ العروض', color: 'from-rose-500 to-pink-600', icon: Play, type: 'presentation' },
-  { id: 7, title: 'القوالب الجاهزة', color: 'from-teal-500 to-emerald-600', icon: TrendingUp, type: 'templates' },
-  { id: 8, title: 'لوحة التحكم', color: 'from-blue-500 to-purple-600', icon: TrendingUp, type: 'dashboard' },
-  { id: 9, title: 'منشئ الخطط', color: 'from-orange-500 to-red-600', icon: Calendar, type: 'planning' },
-  { id: 10, title: 'مكتبة الأدوات', color: 'from-gray-500 to-slate-600', icon: TrendingUp, type: 'library' },
+  {
+    id: 1,
+    title: 'لوحة التحكم',
+    type: 'dashboard',
+    icon: TrendingUp,
+    stats: [
+      { label: 'قالب مستخدم', value: '24', color: 'bg-blue-100 text-blue-600' },
+      { label: 'شهادة منشأة', value: '156', color: 'bg-amber-100 text-amber-600' },
+      { label: 'معدل الاستخدام', value: '89%', color: 'bg-green-100 text-green-600' },
+    ],
+    activities: [
+      { name: 'شهادة تقدير جديدة', time: 'منذ ساعة', icon: Award },
+      { name: 'تقرير تقييم', time: 'منذ 3 ساعات', icon: FileText },
+    ]
+  },
+  {
+    id: 2,
+    title: 'منشئ الشهادات',
+    type: 'certificate',
+    icon: Award,
+    preview: {
+      title: 'شهادة تقدير',
+      subtitle: 'تقديراً للجهود المتميزة',
+      recipient: 'أحمد محمد العلي',
+      date: '2026-03-10'
+    }
+  },
+  {
+    id: 3,
+    title: 'مولد الاختبارات',
+    type: 'quiz',
+    icon: FileText,
+    preview: {
+      questions: [
+        { type: 'اختيار من متعدد', count: 10 },
+        { type: 'صح أو خطأ', count: 5 },
+        { type: 'مقالي', count: 3 },
+      ],
+      total: '18 سؤال'
+    }
+  },
+  {
+    id: 4,
+    title: 'حاسبة الدرجات',
+    type: 'calculator',
+    icon: Calculator,
+    preview: {
+      subjects: [
+        { name: 'الرياضيات', score: 95, total: 100 },
+        { name: 'العلوم', score: 88, total: 100 },
+        { name: 'اللغة العربية', score: 92, total: 100 },
+      ],
+      average: '91.7%'
+    }
+  },
+  {
+    id: 5,
+    title: 'الجدول الدراسي',
+    type: 'schedule',
+    icon: Calendar,
+    preview: {
+      days: ['الأحد', 'الإثنين', 'الثلاثاء', 'الأربعاء', 'الخميس'],
+      classes: ['رياضيات', 'علوم', 'عربي', 'إنجليزي', 'فنية']
+    }
+  },
+  {
+    id: 6,
+    title: 'منشئ الاستبانات',
+    type: 'survey',
+    icon: FileText,
+    preview: {
+      questions: [
+        { type: 'اختيار متعدد', count: 8 },
+        { type: 'مقياس تقييم', count: 5 },
+        { type: 'نص مفتوح', count: 2 },
+      ],
+      total: '15 سؤال'
+    }
+  },
 ];
 
 // Floating particles
@@ -679,30 +748,27 @@ const ImageShowcase = () => {
   const currentData = showcaseImages[currentIndex];
 
   const renderPreview = () => {
-    // Simple color-coded cards representing each tool
-    return (
-      <motion.div
-        key={currentData.id}
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: -10 }}
-        transition={{ duration: 0.4 }}
-        className="w-full h-full flex flex-col items-center justify-center p-8"
-      >
-        <div className={`w-24 h-24 rounded-2xl bg-gradient-to-br ${currentData.color} flex items-center justify-center mb-6 shadow-xl`}>
-          <currentData.icon className="w-12 h-12 text-white" />
-        </div>
-        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white text-center">
-          {currentData.title}
-        </h2>
-      </motion.div>
-    );
+    switch (currentData.type) {
+      case 'dashboard':
+        return <DashboardPreview data={currentData} />;
+      case 'certificate':
+        return <CertificatePreview data={currentData} />;
+      case 'quiz':
+      case 'survey':
+        return <QuizPreview data={currentData} />;
+      case 'calculator':
+        return <CalculatorPreview data={currentData} />;
+      case 'schedule':
+        return <SchedulePreview data={currentData} />;
+      default:
+        return <DashboardPreview data={currentData} />;
+    }
   };
 
   return (
     <div className="relative flex flex-col">
-      {/* Fixed-height slide area — tool only, no category */}
-      <div className="relative overflow-hidden bg-gradient-to-br from-white to-gray-50 dark:from-[#1B2D2B] dark:to-[#0D1B1A] rounded-2xl shadow-xl" style={{ height: '420px' }}>
+      {/* Fixed-height slide area — real tool previews */}
+      <div className="relative overflow-hidden" style={{ height: '450px' }}>
         <AnimatePresence mode="wait">
           {renderPreview()}
         </AnimatePresence>
