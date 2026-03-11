@@ -423,7 +423,7 @@ const DashboardPreview = ({ data }: { data: typeof showcaseImages[0] }) => {
 // Certificate Preview Component
 const CertificatePreview = ({ data }: { data: typeof showcaseImages[1] }) => {
   return (
-    <AppFrame title="منشئ الشهادات" icon={Award} iconColor="text-amber-500">
+    <AppFrame title="منشئ ال��هادات" icon={Award} iconColor="text-amber-500">
       <div className="p-4 sm:p-5">
         {/* Toolbar */}
         <div className="flex items-center justify-between mb-3">
@@ -1280,7 +1280,9 @@ export default function Hero() {
               className="mb-6"
             >
               <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300 leading-relaxed max-w-lg mx-auto lg:mx-0">
-                منصة رقمية تساعد المجتمع على إنجاز الأعمال بسرعة واحترافية باستخدام قوالب جاهزة وأدوات ذكية سهلة الاستخدام.
+                منصة رقمية سعودية تمكّنك من إنجاز أعمالك بسرعة واحترافية
+                <br className="hidden sm:block" />
+                باستخدام قوالب جاهزة وأدوات ذكية سهلة الاستخدام.
               </p>
             </motion.div>
 
