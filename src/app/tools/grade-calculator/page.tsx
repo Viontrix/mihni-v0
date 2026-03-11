@@ -806,7 +806,7 @@ export default function CertificateMakerPage() {
     generatorType: generatorType as GeneratorType,
     customTitle,
     customDescription,
-    uploadedFile: uploadedFile ?? null,
+    uploadedFile: null, // File objects cannot be serialized to JSON
     orientation,
     templateStyle,
     selectedPaletteId: selectedPalette.id,
@@ -957,7 +957,7 @@ export default function CertificateMakerPage() {
           .join("\n")
         setBatchNames(names)
         setBatchMode(true)
-        alert(`تم استيراد ${names.split("\n").filter(Boolean).length} اسم`)
+        alert(`تم ا��تيراد ${names.split("\n").filter(Boolean).length} اسم`)
       } catch {
         alert("خطأ في قراءة الملف")
       }
