@@ -157,6 +157,22 @@ interface CertificateProjectPayload {
   certificate: CertificateData
 }
 
+interface GradeCalculatorProjectPayload {
+  version: number
+  tool: "grade-calculator"
+  activeTab: string
+  generatorType: string
+  customTitle: string
+  studentName: string
+  gradeSystem: string
+  uniSystem: string
+  subjects: Array<{ id: string; name: string; score: number; maxScore: number; weight: number }>
+  results: Array<{ subject: string; score: number; grade: string; level: string }>
+  uniSubjects: Array<{ id: string; name: string; score: number; maxScore: number; weight: number; credits: number }>
+  targetGoals: Array<{ subject: string; currentScore: number; targetScore: number; maxScore: number }>
+  statsData: Array<{ subject: string; score: number; maxScore: number }>
+}
+
 const CERTIFICATE_TYPES = [
   {
     value: "appreciation",
