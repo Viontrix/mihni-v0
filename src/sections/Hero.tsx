@@ -423,7 +423,7 @@ const DashboardPreview = ({ data }: { data: typeof showcaseImages[0] }) => {
 // Certificate Preview Component
 const CertificatePreview = ({ data }: { data: typeof showcaseImages[1] }) => {
   return (
-    <AppFrame title="منشئ ال��������������هادات" icon={Award} iconColor="text-amber-500">
+    <AppFrame title="منشئ ال����������������هادات" icon={Award} iconColor="text-amber-500">
       <div className="p-4 sm:p-5">
         {/* Toolbar */}
         <div className="flex items-center justify-between mb-3">
@@ -1259,7 +1259,7 @@ export default function Hero() {
               transition={{ duration: 0.6, delay: 0.12 }}
               className="mb-10"
             >
-              <p className="text-xl sm:text-2xl text-gray-600 dark:text-gray-300 leading-[1.8] max-w-2xl mx-auto lg:mx-0">
+              <p className="text-2xl sm:text-3xl lg:text-4xl text-gray-600 dark:text-gray-300 leading-[1.7] max-w-2xl mx-auto lg:mx-0">
                 <strong className="text-green-dark dark:text-white font-bold">وفّر وقتك</strong> وأنجز عملك باحترافية مع{' '}
                 <strong className="text-green-dark dark:text-white font-bold">قوالب جاهزة</strong> وأدوات تنفيذية متكاملة
               </p>
@@ -1293,7 +1293,7 @@ export default function Hero() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="mb-12"
             >
-              <p className="text-base sm:text-lg text-green-dark/70 dark:text-green-light/80 font-semibold tracking-wider">
+              <p className="text-lg sm:text-xl lg:text-2xl text-green-dark/70 dark:text-green-light/80 font-semibold tracking-wider">
                 مدارس • جهات • شركات • أفراد • استخدام مخصص
               </p>
             </motion.div>
