@@ -705,16 +705,6 @@ export default function CertificateMakerPage() {
         const payload = project.data as unknown as Partial<GradeCalculatorProjectPayload>
 
         setActiveTab((payload.activeTab as string) ?? "content")
-        setGeneratorType((payload.generatorType as any) ?? "school")
-        setCustomTitle(payload.customTitle ?? "")
-        setUploadedFile(null)
-        setGradeSystem((payload.gradeSystem as GradingSystem) ?? "saudi")
-        setUniSystem((payload.uniSystem as GradingSystem) ?? "gpa4")
-        setSubjects(Array.isArray(payload.subjects) && payload.subjects.length > 0 ? payload.subjects : [{ id: "1", name: "الرياضيات", score: 85, maxScore: 100, weight: 1 }])
-        setResults(Array.isArray(payload.results) ? payload.results : [])
-        setUniSubjects(Array.isArray(payload.uniSubjects) && payload.uniSubjects.length > 0 ? payload.uniSubjects : [{ id: "1", name: "مادة 1", score: 85, maxScore: 100, weight: 1, credits: 3 }])
-        setTargetGoals(Array.isArray(payload.targetGoals) && payload.targetGoals.length > 0 ? payload.targetGoals : [{ subject: "الرياضيات", currentScore: 75, targetScore: 90, maxScore: 100 }])
-        setStatsData(Array.isArray(payload.statsData) && payload.statsData.length > 0 ? payload.statsData : [{ subject: "الرياضيات", score: 85, maxScore: 100 }])
         setLoadedProjectId(project.id)
       } finally {
         if (!cancelled) setIsLoadingProject(false)
@@ -726,7 +716,7 @@ export default function CertificateMakerPage() {
     return () => {
       cancelled = true
     }
-  }, [projectId, setCustomTitle, setGeneratorType, setUploadedFile])
+  }, [projectId])
 
   useEffect(() => {
     const allFonts = [...ARABIC_FONTS.map((f) => f.value)]
@@ -797,7 +787,7 @@ export default function CertificateMakerPage() {
       setGeneratorType((payload.generatorType ?? "school") as GeneratorType)
       setCustomTitle(payload.customTitle ?? "")
       setCustomDescription(payload.customDescription ?? "")
-      setUploadedFile(payload.uploadedFile ?? null)
+      setUploadedFile(null)
       setLoadedProjectId(project.id)
       setHasLoadedProject(true)
       setIsLoadingProject(false)
