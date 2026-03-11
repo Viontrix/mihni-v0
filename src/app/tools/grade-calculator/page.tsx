@@ -57,6 +57,7 @@ import {
   Star,
   Save,
   Loader2,
+  Calculator,
 } from "lucide-react"
 
 type Orientation = "portrait" | "landscape"
