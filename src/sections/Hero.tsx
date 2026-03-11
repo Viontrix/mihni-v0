@@ -766,21 +766,40 @@ const ImageShowcase = () => {
   const currentData = showcaseImages[currentIndex];
 
   const renderPreview = () => {
+    let PreviewComponent;
     switch (currentData.type) {
       case 'dashboard':
-        return <DashboardPreview data={currentData} />;
+        PreviewComponent = <DashboardPreview data={currentData} />;
+        break;
       case 'certificate':
-        return <CertificatePreview data={currentData} />;
+        PreviewComponent = <CertificatePreview data={currentData} />;
+        break;
       case 'quiz':
       case 'survey':
-        return <QuizPreview data={currentData} />;
+        PreviewComponent = <QuizPreview data={currentData} />;
+        break;
       case 'calculator':
-        return <CalculatorPreview data={currentData} />;
+        PreviewComponent = <CalculatorPreview data={currentData} />;
+        break;
       case 'schedule':
-        return <SchedulePreview data={currentData} />;
+        PreviewComponent = <SchedulePreview data={currentData} />;
+        break;
       default:
-        return <DashboardPreview data={currentData} />;
+        PreviewComponent = <DashboardPreview data={currentData} />;
     }
+    
+    return (
+      <motion.div
+        key={currentData.id}
+        initial={{ opacity: 0, x: 20 }}
+        animate={{ opacity: 1, x: 0 }}
+        exit={{ opacity: 0, x: -20 }}
+        transition={{ duration: 0.4 }}
+        className="w-full h-full"
+      >
+        {PreviewComponent}
+      </motion.div>
+    );
   };
 
   return (
