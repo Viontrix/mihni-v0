@@ -946,52 +946,21 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="mb-6"
+              className="mb-7"
             >
-              <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300 leading-[1.7] tracking-wide">
+              <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300 leading-[1.7]">
                 <span className="text-green-primary font-bold">وفّر وقتك</span> وأنجز عملك باحترافية
                 <br className="hidden sm:block" />
                 مع <span className="font-semibold">قوالب جاهزة</span> وأدوات تنفيذية متكاملة
               </p>
-              
-              {/* Target Audience Description */}
-              <p className="text-sm text-gray-500 dark:text-gray-400 mt-4 leading-relaxed">
-                منصة رقمية تساعد المدارس والجهات والشركات والأفراد على إنجاز أعمالهم بسرعة واحترافية باستخدام قوالب جاهزة وأدوات ذكية.
-              </p>
-            </motion.div>
-
-            {/* Target Audience Chips */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.25 }}
-              className="flex flex-wrap justify-center lg:justify-start gap-2 mb-8"
-            >
-              {[
-                { label: 'المدارس', color: 'from-amber-500 to-amber-600' },
-                { label: 'الجهات', color: 'from-green-500 to-green-600' },
-                { label: 'الشركات', color: 'from-blue-500 to-blue-600' },
-                { label: 'الأفراد', color: 'from-purple-500 to-purple-600' },
-                { label: 'استخدام مخصص', color: 'from-indigo-500 to-indigo-600' },
-              ].map((audience, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, scale: 0.85 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.35 + i * 0.08 }}
-                  className={`px-4 py-2 rounded-full text-sm font-semibold text-white bg-gradient-to-r ${audience.color} shadow-lg hover:shadow-xl transition-all transform hover:scale-105`}
-                >
-                  {audience.label}
-                </motion.div>
-              ))}
             </motion.div>
 
             {/* Features List */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="flex flex-wrap justify-center lg:justify-start gap-2.5 mb-9"
+              transition={{ duration: 0.6, delay: 0.25 }}
+              className="flex flex-wrap justify-center lg:justify-start gap-2.5 mb-8"
             >
               {[
                 { icon: Palette, text: 'تخصيص سهل' },
@@ -1043,6 +1012,16 @@ export default function Hero() {
                 </Link>
               </motion.div>
             </motion.div>
+
+            {/* Usage line */}
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.6, delay: 0.5 }}
+              className="mt-5 text-xs text-gray-400 dark:text-gray-500 text-center lg:text-right"
+            >
+              للمدارس • الجهات • الشركات • الأفراد • الاستخدام المخصص
+            </motion.p>
           </div>
 
           {/* Slider Side */}
