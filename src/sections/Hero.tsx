@@ -423,7 +423,7 @@ const DashboardPreview = ({ data }: { data: typeof showcaseImages[0] }) => {
 // Certificate Preview Component
 const CertificatePreview = ({ data }: { data: typeof showcaseImages[1] }) => {
   return (
-    <AppFrame title="منشئ ال������������هادات" icon={Award} iconColor="text-amber-500">
+    <AppFrame title="منشئ ال��������������هادات" icon={Award} iconColor="text-amber-500">
       <div className="p-4 sm:p-5">
         {/* Toolbar */}
         <div className="flex items-center justify-between mb-3">
@@ -1259,7 +1259,7 @@ export default function Hero() {
               transition={{ duration: 0.6, delay: 0.12 }}
               className="mb-10"
             >
-              <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300 leading-[1.8] max-w-2xl mx-auto lg:mx-0">
+              <p className="text-xl sm:text-2xl text-gray-600 dark:text-gray-300 leading-[1.8] max-w-2xl mx-auto lg:mx-0">
                 <strong className="text-green-dark dark:text-white font-bold">وفّر وقتك</strong> وأنجز عملك باحترافية مع{' '}
                 <strong className="text-green-dark dark:text-white font-bold">قوالب جاهزة</strong> وأدوات تنفيذية متكاملة
               </p>
@@ -1293,7 +1293,7 @@ export default function Hero() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="mb-12"
             >
-              <p className="text-base text-gray-500 dark:text-gray-400 font-medium tracking-wide">
+              <p className="text-base sm:text-lg text-green-dark/70 dark:text-green-light/80 font-semibold tracking-wider">
                 مدارس • جهات • شركات • أفراد • استخدام مخصص
               </p>
             </motion.div>
@@ -1332,7 +1332,7 @@ export default function Hero() {
                   <Button
                     size="lg"
                     variant="outline"
-                    className="border border-green-primary/40 text-green-dark dark:text-green-light bg-transparent hover:bg-green-primary/8 hover:border-green-primary px-7 py-3 text-base font-semibold rounded-xl transition-all duration-300 group h-auto"
+                    className="border border-green-primary/40 text-green-dark dark:text-green-light bg-transparent hover:bg-green-primary/8 hover:border-green-primary hover:text-green-dark dark:hover:text-green-light px-7 py-3 text-base font-semibold rounded-xl transition-all duration-300 group h-auto"
                   >
                     <Play className="w-4 h-4 mr-2" />
                     استكشف القوالب
