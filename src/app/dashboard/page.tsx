@@ -359,7 +359,7 @@ export default function DashboardPage() {
           .eq('user_id', user.id)
           .single<UsageTrackingRow>();
 
-        const subscriptionPlan = normalizePlan(subscriptionData?.plans);
+        const subscriptionPlan = normalizePlan(subscriptionData?.plans ?? null);
 
         const profileName =
           profile?.name ||
