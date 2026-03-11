@@ -704,7 +704,7 @@ export default function CertificateMakerPage() {
 
         const payload = project.data as unknown as Partial<GradeCalculatorProjectPayload>
 
-        setActiveTab((payload.activeTab as CalculatorType) ?? "school")
+        setActiveTab((payload.activeTab as string) ?? "content")
         setGeneratorType((payload.generatorType as any) ?? "school")
         setCustomTitle(payload.customTitle ?? "")
         setUploadedFile(null)
