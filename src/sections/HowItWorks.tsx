@@ -154,13 +154,13 @@ export default function HowItWorks() {
                             initial={{ opacity: 0, scale: 0.5 }}
                             animate={{ opacity: 1, scale: 1 }}
                             exit={{ opacity: 0, scale: 0.5 }}
-                            className="absolute inset-0 w-11 h-11 -top-1 -left-1 rounded-full bg-green-primary/30 blur-md"
+                            className="absolute inset-0 w-32 h-32 -top-12 -left-12 rounded-full bg-green-primary/30 blur-md"
                           />
                         )}
                       </AnimatePresence>
                       
                       <motion.div 
-                        className="relative w-10 h-10 rounded-full border-[3px] border-white dark:border-[#0F1F1D] flex items-center justify-center z-10"
+                        className="relative w-28 h-28 rounded-full border-[4px] border-white dark:border-[#0F1F1D] flex items-center justify-center z-10"
                         animate={{
                           backgroundColor: isActive ? 'rgb(45, 106, 79)' : 'rgb(229, 231, 235)',
                         }}
@@ -175,14 +175,14 @@ export default function HowItWorks() {
                               exit={{ scale: 0 }}
                               transition={{ type: 'spring', stiffness: 300, damping: 20 }}
                             >
-                              <Check className="w-5 h-5 text-white" strokeWidth={3} />
+                              <Check className="w-12 h-12 text-white" strokeWidth={3} />
                             </motion.div>
                           ) : (
                             <motion.span
                               key="number"
                               initial={{ opacity: 0 }}
                               animate={{ opacity: 1 }}
-                              className="text-xs font-bold text-gray-400"
+                              className="text-3xl font-bold text-gray-500"
                             >
                               {step.number}
                             </motion.span>
@@ -193,9 +193,9 @@ export default function HowItWorks() {
 
                     {/* Step number label - Larger size */}
                     <motion.span
-                      className="mt-3 text-sm font-bold tracking-wider text-gray-400 dark:text-gray-500"
+                      className="mt-4 text-xl font-bold tracking-wider text-gray-500 dark:text-gray-400"
                       animate={{ 
-                        color: isActive ? 'rgb(45, 106, 79)' : 'rgb(156, 163, 175)',
+                        color: isActive ? 'rgb(45, 106, 79)' : 'rgb(107, 114, 128)',
                       }}
                     >
                       {step.number}
