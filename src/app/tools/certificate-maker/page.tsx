@@ -742,7 +742,8 @@ export default function CertificateMakerPage() {
       setGeneratorType((payload.generatorType ?? "school") as GeneratorType)
       setCustomTitle(payload.customTitle ?? "")
       setCustomDescription(payload.customDescription ?? "")
-      setUploadedFile(payload.uploadedFile ?? null)
+      // Note: uploadedFile is stored as a URL string, not a File object
+      // The actual image is restored via customTemplateImage
       setLoadedProjectId(project.id)
       setHasLoadedProject(true)
       setIsLoadingProject(false)
@@ -753,7 +754,7 @@ export default function CertificateMakerPage() {
     return () => {
       cancelled = true
     }
-  }, [projectId, router, setCustomDescription, setCustomTitle, setGeneratorType, setUploadedFile])
+  }, [projectId, router, setCustomDescription, setCustomTitle, setGeneratorType])
 
   const projectPayload: CertificateProjectPayload = {
     version: 1,
