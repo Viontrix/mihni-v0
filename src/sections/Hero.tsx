@@ -584,7 +584,7 @@ export default function Hero() {
                 <span className="bg-gradient-to-r from-green-primary via-green-teal to-green-light bg-clip-text text-transparent">
                   منصة مهني
                 </span>
-              </h2>
+              </h1>
               {/* Decorative underline accent */}
               <motion.div
                 initial={{ scaleX: 0, opacity: 0 }}
