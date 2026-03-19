@@ -1,9 +1,8 @@
 "use client";
 
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import {
   LayoutDashboard,
   FileText,
@@ -41,12 +40,6 @@ import { Badge } from '@/components/ui/badge';
 import { getPlanById, formatStorage } from '@/lib/entitlements/plans';
 import { ROUTES, getPaymentUrl } from '@/lib/routes';
 import { useTheme } from '@/contexts/ThemeContext';
-import { supabase } from '@/lib/supabase';
-import {
-  getUserProjects,
-  createProject,
-  deleteProject as deleteSupabaseProject,
-} from '@/lib/supabase/projects';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -56,14 +49,6 @@ import {
 } from '@/components/ui/dropdown-menu';
 
 type UserPlan = 'free' | 'pro' | 'business' | 'enterprise';
-
-interface ProfileRow {
-  id: string;
-  email: string | null;
-  name: string | null;
-  plan: string | null;
-  created_at: string | null;
-}
 
 interface DbProject {
   id: string;
@@ -84,25 +69,42 @@ interface DashboardStats {
   toolsUsed: number;
 }
 
-type SubscriptionPlanRow = {
-  code: UserPlan;
-  name_ar: string;
-  projects_limit: number;
-  daily_limit: number;
-};
-
-type SubscriptionRow = {
-  status: string;
-  billing_cycle: string;
-  plans: SubscriptionPlanRow | SubscriptionPlanRow[] | null;
-};
-
-type UsageTrackingRow = {
-  daily_usage: number | null;
-  projects_count: number | null;
-  storage_used: number | null;
-  last_reset: string | null;
-};
+// Demo data - no authentication required
+const demoProjects: DbProject[] = [
+  {
+    id: '1',
+    user_id: 'demo',
+    name: 'شهادة تقدير - أحمد محمد',
+    tool_id: 'certificate-maker',
+    tool_name: 'منشئ الشهادات',
+    data: { title: 'شهادة تقدير' },
+    thumbnail: null,
+    created_at: new Date(Date.now() - 1000 * 60 * 30).toISOString(),
+    updated_at: new Date(Date.now() - 1000 * 60 * 30).toISOString(),
+  },
+  {
+    id: '2',
+    user_id: 'demo',
+    name: 'اختبار الرياضيات - الفصل الأول',
+    tool_id: 'quiz-generator',
+    tool_name: 'منشئ الاختبارات',
+    data: { title: 'اختبار' },
+    thumbnail: null,
+    created_at: new Date(Date.now() - 1000 * 60 * 60 * 2).toISOString(),
+    updated_at: new Date(Date.now() - 1000 * 60 * 60 * 2).toISOString(),
+  },
+  {
+    id: '3',
+    user_id: 'demo',
+    name: 'جدول الأسبوع الدراسي',
+    tool_id: 'schedule-builder',
+    tool_name: 'منشئ الجداول',
+    data: { title: 'جدول' },
+    thumbnail: null,
+    created_at: new Date(Date.now() - 1000 * 60 * 60 * 24).toISOString(),
+    updated_at: new Date(Date.now() - 1000 * 60 * 60 * 24).toISOString(),
+  },
+];
 
 const quickTools = [
   {
@@ -186,57 +188,45 @@ function formatBytes(bytes: number): string {
   return `${(bytes / (1024 * 1024 * 1024)).toFixed(2)} GB`;
 }
 
-function getGreeting(): string {
-  const hour = new Date().getHours();
-  if (hour < 12) return 'صباح الخير';
-  if (hour < 18) return 'مساء الخير';
-  return 'مساء الخير';
-}
-
-function getInitial(name: string, email: string): string {
-  if (name?.trim()) return name.trim().charAt(0);
-  if (email?.trim()) return email.trim().charAt(0).toUpperCase();
-  return 'م';
-}
-
 function getStorageWarningLevel(percentage: number): 'normal' | 'warning' | 'critical' {
   if (percentage >= 90) return 'critical';
   if (percentage >= 75) return 'warning';
   return 'normal';
 }
 
-function normalizePlan(planData: SubscriptionRow['plans']): SubscriptionPlanRow | null {
-  if (!planData) return null;
-  return Array.isArray(planData) ? planData[0] ?? null : planData;
+function getGreetingText(): string {
+  const hour = new Date().getHours();
+  if (hour < 12) return 'صباح الخير';
+  if (hour < 18) return 'مساء الخير';
+  return 'مساء الخير';
 }
 
 export default function DashboardPage() {
-  const router = useRouter();
   const { setTheme } = useTheme();
 
-  const [authLoading, setAuthLoading] = useState(true);
-  const [projects, setProjects] = useState<DbProject[]>([]);
-  const [sessionError, setSessionError] = useState('');
+  const [projects, setProjects] = useState<DbProject[]>(demoProjects);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedToolFilter, setSelectedToolFilter] = useState<string>('all');
-  const [greeting, setGreeting] = useState('');
   const [showDeleteConfirm, setShowDeleteConfirm] = useState<string | null>(null);
   const [creatingProject, setCreatingProject] = useState(false);
   const [notifications] = useState(3);
-  const [projectLimit, setProjectLimit] = useState<number>(3);
-  const [dailyLimit, setDailyLimit] = useState<number>(20);
-  const [dailyUsage, setDailyUsage] = useState<number>(0);
-  const [subscriptionStatus, setSubscriptionStatus] = useState<string>('active');
-  const [billingCycle, setBillingCycle] = useState<string>('monthly');
 
-  const [userData, setUserData] = useState({
-    id: '',
-    name: 'مستخدم مهني',
-    email: '',
-    plan: 'free' as UserPlan,
-    planNameAr: 'مجاني',
+  // Demo user data - no auth required
+  const projectLimit = 10;
+  const dailyLimit = 50;
+  const dailyUsage = 5;
+  const subscriptionStatus = 'active';
+  const billingCycle = 'monthly';
+  const greeting = getGreetingText();
+
+  const userData = {
+    id: 'demo-user',
+    name: 'مستخدم تجريبي',
+    email: 'demo@mihni.app',
+    plan: 'pro' as UserPlan,
+    planNameAr: 'احترافي',
     avatar: 'م',
-  });
+  };
 
   const userPlan = getPlanById(userData.plan);
 
@@ -300,164 +290,41 @@ export default function DashboardPage() {
   const dailyRemaining = Math.max(dailyLimit - dailyUsage, 0);
   const dailyUsageWarning = dailyUsagePercentage >= 100 ? 'critical' : dailyUsagePercentage >= 75 ? 'warning' : 'normal';
 
-  useEffect(() => {
-    const init = async () => {
-      try {
-        let {
-          data: { session },
-        } = await supabase.auth.getSession();
+  // Demo: Create new project locally
+  const handleCreateDemoProject = () => {
+    setCreatingProject(true);
+    
+    const now = new Date();
+    const projectName = `مشروع تجريبي - ${now.toLocaleDateString('ar-SA')} ${now.toLocaleTimeString('ar-SA', {
+      hour: '2-digit',
+      minute: '2-digit',
+    })}`;
 
-        if (!session) {
-          const raw = typeof window !== 'undefined' ? localStorage.getItem('mihni-manual-session') : null;
-
-          if (raw) {
-            const parsed = JSON.parse(raw);
-            const { data: restored, error: restoreError } = await supabase.auth.setSession({
-              access_token: parsed.access_token,
-              refresh_token: parsed.refresh_token,
-            });
-
-            if (restoreError) {
-              setSessionError(restoreError.message);
-            } else {
-              session = restored.session;
-            }
-          }
-        }
-
-        if (!session) {
-          router.push(ROUTES.LOGIN);
-          return;
-        }
-
-        const user = session.user;
-
-        const { data: profile } = await supabase
-          .from('profiles')
-          .select('id, email, name, plan, created_at')
-          .eq('id', user.id)
-          .single<ProfileRow>();
-
-        const { data: subscriptionData } = await supabase
-          .from('subscriptions')
-          .select(`
-            status,
-            billing_cycle,
-            plans (
-              code,
-              name_ar,
-              projects_limit,
-              daily_limit
-            )
-          `)
-          .eq('user_id', user.id)
-          .single<SubscriptionRow>();
-
-        const { data: usageData } = await supabase
-          .from('usage_tracking')
-          .select('daily_usage, projects_count, storage_used, last_reset')
-          .eq('user_id', user.id)
-          .single<UsageTrackingRow>();
-
-        const subscriptionPlan = normalizePlan(subscriptionData?.plans ?? null);
-
-        const profileName =
-          profile?.name ||
-          (typeof user.user_metadata?.full_name === 'string' ? user.user_metadata.full_name : '') ||
-          'مستخدم مهني';
-
-        const profileEmail = profile?.email || user.email || '';
-        const resolvedPlan = subscriptionPlan?.code || (profile?.plan as UserPlan) || 'free';
-        const resolvedPlanName = subscriptionPlan?.name_ar || 'مجاني';
-
-        setUserData({
-          id: user.id,
-          name: profileName,
-          email: profileEmail,
-          plan: resolvedPlan,
-          planNameAr: resolvedPlanName,
-          avatar: getInitial(profileName, profileEmail),
-        });
-
-        setProjectLimit(subscriptionPlan?.projects_limit ?? 3);
-        setDailyLimit(subscriptionPlan?.daily_limit ?? 20);
-        setDailyUsage(usageData?.daily_usage ?? 0);
-        setSubscriptionStatus(subscriptionData?.status ?? 'active');
-        setBillingCycle(subscriptionData?.billing_cycle ?? 'monthly');
-
-        const dbProjects = (await getUserProjects()) as DbProject[];
-        setProjects(dbProjects || []);
-        setGreeting(getGreeting());
-      } finally {
-        setAuthLoading(false);
-      }
+    const newProject: DbProject = {
+      id: String(Date.now()),
+      user_id: 'demo',
+      name: projectName,
+      tool_id: 'certificate-maker',
+      tool_name: 'منشئ الشهادات',
+      data: { title: 'شهادة تقدير', recipient: userData.name },
+      thumbnail: null,
+      created_at: now.toISOString(),
+      updated_at: now.toISOString(),
     };
 
-    void init();
-  }, [router]);
-
-  const refreshDashboardData = async () => {
-    const dbProjects = (await getUserProjects()) as DbProject[];
-    setProjects(dbProjects || []);
-
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-
-    if (!user) return;
-
-    const { data: usageData } = await supabase
-      .from('usage_tracking')
-      .select('daily_usage, projects_count, storage_used, last_reset')
-      .eq('user_id', user.id)
-      .single<UsageTrackingRow>();
-
-    setDailyUsage(usageData?.daily_usage ?? 0);
+    setProjects((prev) => [newProject, ...prev]);
+    setCreatingProject(false);
   };
 
-  const handleCreateDemoProject = async () => {
-    try {
-      setCreatingProject(true);
-
-      const now = new Date();
-      const projectName = `مشروع تجريبي - ${now.toLocaleDateString('ar-SA')} ${now.toLocaleTimeString('ar-SA', {
-        hour: '2-digit',
-        minute: '2-digit',
-      })}`;
-
-      const newProject = await createProject({
-        name: projectName,
-        toolId: 'certificate-maker',
-        toolName: 'منشئ الشهادات',
-        data: {
-          title: 'شهادة تقدير',
-          recipient: userData.name,
-          createdFrom: 'dashboard-demo',
-          createdAt: now.toISOString(),
-        },
-      });
-
-      if (!newProject) return;
-
-      await refreshDashboardData();
-    } finally {
-      setCreatingProject(false);
-    }
-  };
-
-  const handleDeleteProject = async (projectId: string) => {
-    await deleteSupabaseProject(projectId);
-    await refreshDashboardData();
+  // Demo: Delete project locally
+  const handleDeleteProject = (projectId: string) => {
+    setProjects((prev) => prev.filter((p) => p.id !== projectId));
     setShowDeleteConfirm(null);
   };
 
-  const handleLogout = async () => {
-    await supabase.auth.signOut();
-    if (typeof window !== 'undefined') {
-      localStorage.removeItem('mihni-manual-session');
-    }
-    router.push(ROUTES.HOME);
-    router.refresh();
+  // Demo: Just redirect to home
+  const handleLogout = () => {
+    window.location.href = ROUTES.HOME;
   };
 
   const storageWarning = getStorageWarningLevel(storageInfo.percentage);
@@ -496,17 +363,6 @@ export default function DashboardPage() {
       bgColor: 'bg-purple-50',
     },
   ];
-
-  if (authLoading) {
-    return (
-      <div className="min-h-screen bg-[#F8FAF9] dark:bg-[#0D1B1A] flex items-center justify-center" dir="rtl">
-        <div className="text-center">
-          <Loader2 className="w-10 h-10 animate-spin text-green-primary mx-auto mb-4" />
-          <p className="text-gray-600 dark:text-gray-300">جاري تحميل لوحة التحكم...</p>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-[#F8FAF9] dark:bg-[#0D1B1A]" dir="rtl">
@@ -821,16 +677,6 @@ export default function DashboardPage() {
               </Link>
             </motion.div>
 
-            {sessionError && (
-              <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="mt-6 p-4 rounded-2xl border border-amber-300 bg-amber-50 text-amber-700 text-sm"
-              >
-                تنبيه الجلسة: {sessionError}
-              </motion.div>
-            )}
-
             {userData.plan !== 'enterprise' && (
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -873,7 +719,7 @@ export default function DashboardPage() {
                 </div>
                 <div className="flex gap-3">
                   <Button
-                    onClick={() => void handleCreateDemoProject()}
+                    onClick={handleCreateDemoProject}
                     disabled={creatingProject}
                     className="bg-white text-green-primary hover:bg-white/90 rounded-xl font-bold"
                   >
@@ -989,7 +835,7 @@ export default function DashboardPage() {
                   <h3 className="text-lg font-bold text-gray-700 dark:text-gray-300 mb-2">لا توجد ملفات بعد</h3>
                   <p className="text-gray-500 mb-4">ابدأ بإنشاء مشروعك الأول</p>
                   <Button
-                    onClick={() => void handleCreateDemoProject()}
+                    onClick={handleCreateDemoProject}
                     disabled={creatingProject}
                     className="bg-green-primary hover:bg-green-teal text-white"
                   >
